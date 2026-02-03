@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/platform-reports"
+  ],
+    "additionalReviewers": [
+    "samsara-dev/routing"
+  ],
+  "description": "Changes to Dispatch Routes Report pipeline should be cleared with Routing or Platform Reports."
+}

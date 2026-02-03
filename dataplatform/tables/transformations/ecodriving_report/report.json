@@ -1,0 +1,289 @@
+{
+  "name": "ecodriving_report.report",
+  "owner": "Sustainability",
+  "description": "The final node of the ecodriving report where all parameter nodes are joined together against engine durations.",
+  "sqlite_report_config": {
+    "report_name": "ecodriving_report",
+    "staleness_monitors": [
+      {
+        "hours": 24,
+        "urgency": "HIGH"
+      },
+      {
+        "hours": 13,
+        "urgency": "LOW"
+      }
+    ],
+    "team_runbook_url": "https://samsaradev.atlassian.net/wiki/x/XaMZmQ"
+  },
+  "dependencies": [
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "accel_engine_torque_over_limit_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "anticipation_brake_events_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "brake_events_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "coasting_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "cruise_control_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "limited_accel_engine_torque_over_limit_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "limited_coasting_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "rpm_green_band_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "engine_duration_by_hour_v2",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "engine_state_fuel_by_hour_v3",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "distance_by_hour_v3",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "speed_over_profile_threshold_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "weighted_weight_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "uphill_and_downhill_duration_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "wear_free_braking_duration_ms",
+      "type": "table"
+    },
+    {
+      "dbname": "ecodriving_report",
+      "tablename": "braking_duration_ms",
+      "type": "table"
+    }
+  ],
+  "tags": ["ecodriving"],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2021-03-30",
+  "output": {
+    "dbname": "ecodriving_report",
+    "tablename": "report",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "driver_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of the hourly interval."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Samsara ID of the organization that the data, device and driver belong to."
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Samsara ID of the device that the eco driving data was recorded against."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The Samsara ID of the driver associated with the device at this time."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The timestamp at the beginning of this hourly bucket."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The timestamp at the end of this hourly bucket."
+        }
+      },
+      {
+        "name": "cruise_control_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent in cruise control during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "coasting_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent in limited coasting or coasting during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "green_band_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent in green band during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "accelerator_engine_torque_over_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent with a limited high engine torque or a high engine torque during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "quick_brake_event_count",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the count of anticipation brake events during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "total_brake_event_count",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the count of brake events during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "on_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent with the engine ON during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "idle_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent with the engine IDLE during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "aux_during_idle_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent with the AUX engine ON whilst engine is IDLE during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "over_speed_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent over speeding during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "fuel_consumed_ml",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millilitres of fuel consumed during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "distance_meters_gps",
+        "type": "double",
+        "metadata": {
+          "comment": "Sum of the GPS distance recorded during this hourly interval for a device and driver."
+        }
+      },
+      {
+        "name": "weight_time",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "Sum of the millisecond duration within hourly interval for a device when we had weight reported."
+        }
+      },
+      {
+        "name": "weighted_weight",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "Average weight reported on the interval multiplied by the duration of that interval (weight_time). This value is reported in Kilograms * milliseconds. The average weight can be calculated as weighted_weight/weight_time."
+        }
+      },
+      {
+        "name": "uphill_duration_ms",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent on driving in uphill incline during this hourly interval for a device."
+        }
+      },
+      {
+        "name": "downhill_duration_ms",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent on driving in downhill incline during this hourly interval for a device."
+        }
+      },
+      {
+        "name": "wear_free_braking_duration_ms",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent braking through wear-free means during this hourly interval for a device."
+        }
+      },
+      {
+        "name": "braking_duration_ms",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent braking (through any means) during this hourly interval for a device."
+        }
+      }
+    ]
+  }
+}

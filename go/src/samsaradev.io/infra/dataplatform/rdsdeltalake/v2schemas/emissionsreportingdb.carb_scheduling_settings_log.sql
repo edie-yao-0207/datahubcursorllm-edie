@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`use_automated_scheduling` BYTE,
+`retry_configurations` STRING,
+`created_by` BIGINT,
+`created_at` TIMESTAMP,
+`date` STRING

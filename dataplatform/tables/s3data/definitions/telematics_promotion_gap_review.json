@@ -1,0 +1,57 @@
+{
+  "table": "telematics_promotion_gap_review",
+  "owner": "FirmwareVdp",
+  "description": "Table 'telematics_promotion_gap_review' generated from 'Dataweb Configurations.xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "mmyef_id",
+      "type": "bigint"
+    },
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year",
+      "type": "bigint"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "powertrain",
+      "type": "bigint"
+    },
+    {
+      "name": "fuel_group",
+      "type": "bigint"
+    },
+    {
+      "name": "trim",
+      "type": "string"
+    },
+    {
+      "name": "obd_value",
+      "type": "bigint"
+    },
+    {
+      "name": "notes",
+      "type": "string"
+    },
+    {
+      "name": "is_potential_gap",
+      "type": "boolean"
+    },
+    {
+      "name": "reporter",
+      "type": "string"
+    }
+  ]
+}

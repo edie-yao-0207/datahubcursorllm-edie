@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`data_type` INT,
+`user_id` BIGINT,
+`retain_days` INT,
+`updated_at_ms` BIGINT,
+`partition` STRING

@@ -1,0 +1,19 @@
+{
+  "name": "safety_triage_events_ca",
+  "owner": "DataEngineering",
+  "assets": ["ca-central-1:product_analytics.fct_safety_triage_events"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "5 6 * * *",
+      "backfill_window": 28,
+      "backfill_batch_size": 7
+    },
+    {
+      "name": "weekly",
+      "cron": "35 6 * * 6",
+      "backfill_window": 365,
+      "backfill_batch_size": 7
+    }
+  ]
+}

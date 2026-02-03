@@ -1,0 +1,21 @@
+{
+  "owner": "DataAnalytics",
+  "email_notifications": ["alerts-data-analytics-aaaahjweyoucfacnqyvidp2ccm@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 13 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 5400,
+      "node_type_id": "rd-fleet.2xlarge",
+      "driver_node_type_id": "rd-fleet.2xlarge",
+      "max_workers": 10,
+      "spark_conf_overrides": {
+        "spark.executor.cores": "2",
+        "spark.network.timeout": "500",
+        "spark.databricks.adaptive.autoOptimizeShuffle.enabled": "true"
+      },
+      "spark_version": "default"
+    }
+  ]
+}

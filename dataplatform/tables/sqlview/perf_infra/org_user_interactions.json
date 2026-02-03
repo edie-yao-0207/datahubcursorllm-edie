@@ -1,0 +1,73 @@
+{
+  "view": "org_user_interactions",
+  "owner": "OPX",
+  "description": "Performance data about user interactions performed by non-internal Orgs.",
+  "database": "perf_infra",
+  "schema": [
+    {
+      "name": "team_owner",
+      "type": "string",
+      "description": "Team that owns and maintains this route."
+    },
+    {
+      "name": "slo_grouping",
+      "type": "string",
+      "description": "The SLO grouping that this page rolls up to."
+    },
+    {
+      "name": "org_name",
+      "type": "string",
+      "description": "The name of the org that this route was loaded for."
+    },
+    {
+      "name": "interaction_type",
+      "type": "string",
+      "description": "The type of interaction being measured."
+    },
+    {
+      "name": "timestamp",
+      "type": "timestamp",
+      "description": "The timestamp the query was executed on."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Well-known name of the user interaction."
+    },
+    {
+      "name": "user_id",
+      "type": "long",
+      "description": "The user id of the user who loaded the page."
+    },
+    {
+      "name": "org_id",
+      "type": "long",
+      "description": "The org for this route, joinable with clouddb.organizations."
+    },
+    {
+      "name": "duration_ms",
+      "type": "long",
+      "description": "The duration, in milliseconds, that the route took to load."
+    },
+    {
+      "name": "resource",
+      "type": "string",
+      "description": "Stripped down name of the route minus org and query params."
+    },
+    {
+      "name": "tags",
+      "type": "map<string,string>",
+      "description": "Metadata that is specific to the interaction. I.E. the zoom level on the map."
+    },
+    {
+      "name": "trace_id",
+      "type": "string",
+      "description": "Opentracing trace id of the parent span - can be joined with gql_query_load.route_load_trace_id."
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "description": "The date the interaction occurred on."
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "table": "stg_cloud_routes",
+  "owner": "DataEngineering",
+  "description": "",
+  "database": "datamodel_platform_silver",
+  "schema": [
+    {
+      "name": "date",
+      "type": "date",
+      "nullable": false,
+      "metadata": {
+        "comment": "Date partition of table. Sourced from time of data arrival into mixpanel -> cloud_routes.time."
+      }
+    },
+    {
+      "name": "useremail",
+      "type": "string",
+      "nullable": false,
+      "metadata": {
+        "comment": "The mp_user_id of the user corresponding to the event in mixpanel."
+      }
+    },
+    {
+      "name": "org_id",
+      "type": "long",
+      "nullable": false,
+      "metadata": {
+        "comment": "The organization id that the user was logged into for the mixpanel event."
+      }
+    },
+    {
+      "name": "ip_address",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The ip address recorded for the mixpanel event. Can be null."
+      }
+    },
+    {
+      "name": "mp_lib",
+      "type": "string",
+      "nullable": false,
+      "metadata": {
+        "comment": "The mixpanel library name associated with the event. Always equal to web for cloud dashboard events."
+      }
+    },
+    {
+      "name": "mp_browser_version",
+      "type": "double",
+      "nullable": true,
+      "metadata": {
+        "comment": "The mixpanel browser version associated with the event."
+      }
+    },
+    {
+      "name": "utm_medium",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "The mixpanel utm_medium associated with the event." }
+    },
+    {
+      "name": "mp_keyword",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The mixpanel search keyword associated with the event"
+      }
+    },
+    {
+      "name": "mp_os",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The user's operating system of the event as determined by mixpanel"
+      }
+    },
+    {
+      "name": "mp_initial_referrer",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The user's referrer to the cloud dashboard as determined by mixpanel."
+      }
+    },
+    {
+      "name": "mp_current_url",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "The url of the page viewed by the user." }
+    },
+    {
+      "name": "time",
+      "type": "timestamp",
+      "nullable": false,
+      "metadata": { "comment": "Timestamp of the mixpanel event creation." }
+    },
+    {
+      "name": "utm_term",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "The utm_term recorded by mixpanel." }
+    },
+    {
+      "name": "distinct_id",
+      "type": "string",
+      "nullable": false,
+      "metadata": {
+        "comment": "Unique identifier, user_id or email, recorded by mixpanel."
+      }
+    },
+    {
+      "name": "routename",
+      "type": "string",
+      "nullable": false,
+      "metadata": { "comment": "Name of samsara route of page view." }
+    },
+    {
+      "name": "mp_processing_time_ms",
+      "type": "double",
+      "nullable": false,
+      "metadata": {
+        "comment": "Time that mixpanel processed the event in unix timestamp milliseconds."
+      }
+    },
+    {
+      "name": "mp_region",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "Region of user's location recorded by mixpanel." }
+    },
+    {
+      "name": "mp_event_name",
+      "type": "string",
+      "nullable": false,
+      "metadata": {
+        "comment": "Name of mixpanel analytic event. Always cloud.route for the stg_cloud_routes table."
+      }
+    },
+    {
+      "name": "mp_lib_version",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "Version of mixpanel library in use for logging event."
+      }
+    },
+    {
+      "name": "mp_device_id",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "Device id for the user's web browser assigned by mixpanel."
+      }
+    },
+    {
+      "name": "mp_screen_width",
+      "type": "double",
+      "nullable": true,
+      "metadata": {
+        "comment": "Screen width of the user's web browser determined by mixpanel."
+      }
+    },
+    {
+      "name": "mp_browser",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "Name of user's web browser determined by mixpanel." }
+    },
+    {
+      "name": "mp_initial_referring_domain",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "Name of website initially referring user to cloud dashboard."
+      }
+    },
+    {
+      "name": "mp_country_code",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "Country code of user inferred by mixpanel, ex: US, GB."
+      }
+    },
+    {
+      "name": "mp_screen_height",
+      "type": "double",
+      "nullable": true,
+      "metadata": { "comment": "Height of user's web browser determined by mixpanel." }
+    },
+    {
+      "name": "mp_city",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "City of user determined by mixpanel." }
+    },
+    {
+      "name": "mp_insert_id",
+      "type": "string",
+      "nullable": false,
+      "metadata": {
+        "comment": "Unique id of analytic event logged by mixpanel. Primary key for table."
+      }
+    },
+    {
+      "name": "mp_search_engine",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "Search engine used by user preceeding page view determined by mixpanel."
+      }
+    },
+    {
+      "name": "utm_content",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The utm_content preceeding the page view determined by mixpanel."
+      }
+    },
+    {
+      "name": "utm_campaign",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The utm_campaign preceeding the page view determined by mixpanel."
+      }
+    },
+    {
+      "name": "utm_source",
+      "type": "string",
+      "nullable": true,
+      "metadata": {
+        "comment": "The utm_source preceeding the page view determined by mixpanel."
+      }
+    },
+    {
+      "name": "is_customer_email",
+      "type": "boolean",
+      "nullable": false,
+      "metadata": {
+        "comment": "true if the customer's email does not end with samsara.com, otherwise false."
+      }
+    },
+    {
+      "name": "is_customer_org",
+      "type": "boolean",
+      "nullable": false,
+      "metadata": { "comment": "true if organization has internal_type = 0." }
+    },
+    {
+      "name": "is_customer_event",
+      "type": "boolean",
+      "nullable": false,
+      "metadata": {
+        "comment": "true if both is_customer_org and is_customer_email are true."
+      }
+    },
+    {
+      "name": "user_id",
+      "type": "long",
+      "nullable": true,
+      "metadata": {
+        "comment": "Samsara user id inferred from combination of useremail and organization. NULL if user was deleted from"
+      }
+    }
+  ]
+}

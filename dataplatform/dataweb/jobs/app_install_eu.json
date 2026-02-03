@@ -1,0 +1,17 @@
+{
+  "name": "app_install_eu",
+  "owner": "DataEngineering",
+  "assets": [
+    "eu-west-1:product_analytics_staging.stg_developer_apps",
+    "eu-west-1:product_analytics_staging.stg_app_installs",
+    "eu-west-1:product_analytics.dim_app_installs"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "5 6 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ]
+}

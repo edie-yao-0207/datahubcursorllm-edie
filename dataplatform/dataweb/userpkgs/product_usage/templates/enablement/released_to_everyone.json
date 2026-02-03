@@ -1,0 +1,30 @@
+{
+  "feature_name": "ACR",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17787157/Advanced+Custom+Reports",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "serves_all": true
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "acr.sql",
+        "eu_sql_file": "acr_eu.sql",
+        "filter_internal_usage": true,
+        "has_user_id_field": true,
+        "usage_field": "usage_id"
+      }
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["custom_reports.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

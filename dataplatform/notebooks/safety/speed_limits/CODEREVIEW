@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/safetygeodetection"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/safetyeventdetection"
+  ],
+  "description": "Changes to speed limits trusted notebooks should be approved by Safety Geo Detection or Safety Event Detection."
+}

@@ -1,0 +1,2442 @@
+{
+  "test_cases": [
+    {
+      "label": "makes location segments from location points in different eighth hour buckets",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 24
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG34",
+            "product_id": 24
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607521800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607521800000,
+          "end_ms": 1607522340000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522340000,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        }
+      ]
+    },
+    {
+      "label": "only uses the first point per eighth hour bucket to make segments",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000100,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521900000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 35
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG34-EU",
+            "product_id": 35
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607521800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607521800000,
+          "end_ms": 1607522340000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522340000,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        }
+      ]
+    },
+    {
+      "label": "always keeps points that change the jurisdiction or toll",
+      "parameters": {
+        "start_date": "'2020-12-08'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "revgeo_state": "Georgia",
+              "has_fix": true
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000100,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "California"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000200,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "California",
+              "toll": true
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000300,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "California",
+              "toll": false
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000400,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "California",
+              "toll": false
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 89
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG54-EU",
+            "product_id": 89
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607520000100,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000100,
+          "end_ms": 1607520000200,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000200,
+          "end_ms": 1607520000300,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": true
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000300,
+          "end_ms": 1607520000400,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000400,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "CA",
+            "revgeo_state": "California",
+            "toll": false
+          }
+        }
+      ]
+    },
+    {
+      "label": "always keeps the last point and makes a segment stretching from the last point to the end",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000100,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521900000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607522340002,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 90
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG34-FN",
+            "product_id": 90
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607521800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607521800000,
+          "end_ms": 1607522340000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522340000,
+          "end_ms": 1607522340002,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522340002,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        }
+      ]
+    },
+    {
+      "label": "trims segments that partially overlap the report period and splits long segments by hour",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-11'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-08",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607400340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000005,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-10",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607635340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-11",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607652340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 24
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG34",
+            "product_id": 24
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607472000000,
+          "end_ms": 1607475600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607475600000,
+          "end_ms": 1607479200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607479200000,
+          "end_ms": 1607482800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607482800000,
+          "end_ms": 1607486400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607486400000,
+          "end_ms": 1607490000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607490000000,
+          "end_ms": 1607493600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607493600000,
+          "end_ms": 1607497200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607497200000,
+          "end_ms": 1607500800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607500800000,
+          "end_ms": 1607504400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607504400000,
+          "end_ms": 1607508000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607508000000,
+          "end_ms": 1607511600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607511600000,
+          "end_ms": 1607515200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607515200000,
+          "end_ms": 1607518800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607518800000,
+          "end_ms": 1607520000005,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000005,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607558400000,
+          "end_ms": 1607562000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607562000000,
+          "end_ms": 1607565600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607565600000,
+          "end_ms": 1607569200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607569200000,
+          "end_ms": 1607572800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607572800000,
+          "end_ms": 1607576400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607576400000,
+          "end_ms": 1607580000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607580000000,
+          "end_ms": 1607583600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607583600000,
+          "end_ms": 1607587200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607587200000,
+          "end_ms": 1607590800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607590800000,
+          "end_ms": 1607594400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607594400000,
+          "end_ms": 1607598000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607598000000,
+          "end_ms": 1607601600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607601600000,
+          "end_ms": 1607605200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607605200000,
+          "end_ms": 1607608800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607608800000,
+          "end_ms": 1607612400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607612400000,
+          "end_ms": 1607616000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607616000000,
+          "end_ms": 1607619600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607619600000,
+          "end_ms": 1607623200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607623200000,
+          "end_ms": 1607626800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607626800000,
+          "end_ms": 1607630400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607630400000,
+          "end_ms": 1607634000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607634000000,
+          "end_ms": 1607635340000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607635340000,
+          "end_ms": 1607637600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607637600000,
+          "end_ms": 1607641200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-10",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607641200000,
+          "end_ms": 1607644800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        }
+      ]
+    },
+    {
+      "label": "removes state from city field only if state matches state field",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_city": "Just Some City",
+              "revgeo_state": "GA"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_city": "Hockessin, Delaware",
+              "revgeo_state": "CA"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_city": "Hockessin, Delaware",
+              "revgeo_state": "DE"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 24
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG34",
+            "product_id": 24
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607521800000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Just Some City",
+            "revgeo_state": "GA",
+            "jurisdiction": "GA"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607521800000,
+          "end_ms": 1607522340000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin, Delaware",
+            "revgeo_state": "CA",
+            "jurisdiction": "CA"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522340000,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "revgeo_city": "Hockessin",
+            "revgeo_state": "DE",
+            "jurisdiction": "DE"
+          }
+        }
+      ]
+    },
+    {
+      "label": "exclude non-vehicles",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 2,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 2,
+            "time": 1607522440000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 1
+          },
+          {
+            "org_id": 2,
+            "id": 2,
+            "product_id": 2
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "AG22",
+            "product_id": 1
+          },
+          {
+            "name": "CM23",
+            "product_id": 2
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "should include driver assigned for segments within the assignment window",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 64368,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 64368,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 64368,
+            "device_id": 1,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 64368,
+            "id": 1,
+            "product_id": 24
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "VG34",
+            "product_id": 24
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 64368
+          }
+        ],
+        "fuel_energy_efficiency_report.driver_assignments": [
+          {
+            "date": "2020-12-09",
+            "driver_id": 5,
+            "org_id": 64368,
+            "device_id": 1,
+            "start_time": 1607510000000,
+            "end_time": 1607521900000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607521800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia",
+            "driver_id": 5
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607521800000,
+          "end_ms": 1607522340000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia",
+            "driver_id": 5
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607522340000,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 64368,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        }
+      ]
+    },
+    {
+      "label": "makes location segments from location points in different eighth hour buckets, even for OEMV products (OEM Vehicles)",
+      "parameters": {
+        "start_date": "'2020-12-09'",
+        "end_date": "'2020-12-10'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607520000000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607521800000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          },
+          {
+            "date": "2020-12-09",
+            "org_id": 2,
+            "device_id": 1,
+            "time": 1607522340000,
+            "value": {
+              "has_fix": true,
+              "revgeo_state": "Georgia"
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "org_id": 2,
+            "id": 1,
+            "product_id": 58
+          }
+        ],
+        "definitions.products": [
+          {
+            "name": "OEMV",
+            "product_id": 58
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "id": 1,
+            "organization_id": 2
+          }
+        ],
+        "fuel_energy_efficiency_report.driver_assignments": [
+          {
+            "date": "2020-12-09",
+            "driver_id": 5,
+            "org_id": 2,
+            "device_id": 1,
+            "start_time": 1607510000000,
+            "end_time": 1607521900000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607520000000,
+          "end_ms": 1607521800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607521800000,
+          "end_ms": 1607522340000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522340000,
+          "end_ms": 1607522400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607522400000,
+          "end_ms": 1607526000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607526000000,
+          "end_ms": 1607529600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607529600000,
+          "end_ms": 1607533200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607533200000,
+          "end_ms": 1607536800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607536800000,
+          "end_ms": 1607540400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607540400000,
+          "end_ms": 1607544000000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607544000000,
+          "end_ms": 1607547600000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607547600000,
+          "end_ms": 1607551200000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607551200000,
+          "end_ms": 1607554800000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        },
+        {
+          "date": "2020-12-09",
+          "org_id": 2,
+          "device_id": 1,
+          "start_ms": 1607554800000,
+          "end_ms": 1607558400000,
+          "value": {
+            "has_fix": true,
+            "jurisdiction": "GA",
+            "revgeo_state": "Georgia"
+          }
+        }
+      ]
+    }
+  ]
+}

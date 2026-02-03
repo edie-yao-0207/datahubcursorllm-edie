@@ -1,0 +1,36 @@
+{
+  "feature_name": "Satellite Connectivity",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17895072/Satellite+Connectivity+HW-SAT11",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": ["LIC-VG-ASAT"],
+        "license_required": false
+      },
+      "feature_flag_name": ["satellite-connectivity-license"],
+      "release_phase": "Closed Beta"
+    },
+    {
+      "effective_date": "2025-05-05",
+      "licenses": {
+        "skus": ["LIC-VG-ASAT"],
+        "license_required": true
+      },
+      "feature_flag_name": ["satellite-connectivity-license"],
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "satellite_connectivity.sql",
+        "eu_sql_file": "satellite_connectivity_eu.sql",
+        "usage_field": "usage_id",
+        "has_user_id_field": false,
+        "filter_internal_usage": false
+      }
+    }
+  ]
+}

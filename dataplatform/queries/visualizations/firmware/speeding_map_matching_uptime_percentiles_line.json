@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "map matching uptime"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "p1": {
+      "name": "p1",
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p5": {
+      "name": "p5",
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p10": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p10"
+    },
+    "median": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "median"
+    },
+    "p90": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p90"
+    },
+    "p99": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p99"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date"
+    },
+    "y": [
+      {
+        "column": "p1",
+        "transform": "SUM",
+        "seriesName": "p1"
+      },
+      {
+        "column": "p5",
+        "transform": "SUM",
+        "seriesName": "p5"
+      },
+      {
+        "column": "p10",
+        "transform": "SUM",
+        "seriesName": "p10"
+      },
+      {
+        "column": "median",
+        "transform": "SUM",
+        "seriesName": "median"
+      },
+      {
+        "column": "p90",
+        "transform": "SUM",
+        "seriesName": "p90"
+      },
+      {
+        "column": "p99",
+        "transform": "SUM",
+        "seriesName": "p99"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

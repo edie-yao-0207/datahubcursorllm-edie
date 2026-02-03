@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`session_id` STRING,
+`title` STRING,
+`created_by` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`deleted_at` TIMESTAMP,
+`date` STRING

@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`vehicle_id` BIGINT,
+`version` BYTE,
+`processed_until` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

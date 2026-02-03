@@ -1,0 +1,16 @@
+{
+  "owner": "DataPlatform",
+  "jobs": [
+    {
+      "name": "driver messages hashed",
+      "cron": "0 30 1 * * ?",
+      "timeout_seconds": 10800,
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default",
+      "driver_node_type_id": "rd-fleet.xlarge",
+      "node_type_id": "rd-fleet.xlarge",
+      "max_workers": 2,
+      "rnd_allocation": 1
+    }
+  ]
+}

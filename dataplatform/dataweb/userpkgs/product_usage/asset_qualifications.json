@@ -1,0 +1,64 @@
+{
+  "feature_name": "Asset Qualifications",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17754455/Qualifications+Management",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": [
+          "LIC-FL-APPS",
+          "LIC-QUALS",
+          "LIC-QUALS-PROMO",
+          "LIC-AG-PWR-BASIC-PLTFM-ESS",
+          "LIC-AG-PWR-BASIC-PLTFM-PREM",
+          "LIC-AG-PWR-PLUS-PLTFM-ESS",
+          "LIC-AG-PWR-PLUS-PLTFM-PREM",
+          "LIC-AG-PWR-REEFER-KIT-PLTFM-ESS",
+          "LIC-AG-PWR-REEFER-KIT-PLTFM-PREM",
+          "LIC-AG-PWR-REEFER-PLTFM-ESS",
+          "LIC-AG-PWR-REEFER-PLTFM-PREM",
+          "LIC-AG-TRLR-ESS-PLTFM-ESS",
+          "LIC-AG-TRLR-ESS-PLTFM-PREM",
+          "LIC-AG-TRLR-PREM-KIT-PLTFM-ESS",
+          "LIC-AG-TRLR-PREM-KIT-PLTFM-PREM",
+          "LIC-AG-TRLR-PREM-PLTFM-ESS",
+          "LIC-AG-TRLR-PREM-PLTFM-PREM",
+          "LIC-AG-UNPWR-PLTFM-ESS",
+          "LIC-AG-UNPWR-PLTFM-PREM",
+          "LIC-AG2-ENT-PLTFM-ESS",
+          "LIC-AG2-ENT-PLTFM-PREM",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-ENTERPRISE",
+          "LIC-VG-PREM-PLTFM-PREM",
+          "LIC-VG-PREMIER-PLTFM-ESS",
+          "LIC-VG-ENT"
+        ],
+        "license_required": true
+      },
+      "release_types": ["Early Adopter", "Phase 1"],
+      "feature_flag_name": ["qualifications-product-enabled"],
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "asset_qualifications.sql",
+        "eu_sql_file": "asset_qualifications_eu.sql",
+        "filter_internal_usage": true,
+        "has_user_id_field": true,
+        "usage_field": "uuid"
+      }
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["asset_qualification_submission.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "material_usage_report.spreader_event_intervals",
+  "owner": "DiagnosticsTools",
+  "description": "Calculate time intervals when material spreader is on and when it was in burst mode",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdsaltspreaderstateactivelyspreading",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "material_usage_report",
+    "tablename": "spreader_event_intervals",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "spreader_start_ms"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "spreader_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "spreader_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "mode",
+        "type": "integer",
+        "metadata": {
+          "comment": "Denotes the mode spreader was in for this event interval. 0 = spreader on, 1 = burst mode"
+        },
+        "nullable": false
+      }
+    ],
+    "write_mode": "overwrite"
+  },
+  "expectation": {
+    "batch_mode": "KEEP_ALL"
+  },
+  "backfill_start_date": "2021-12-01"
+}

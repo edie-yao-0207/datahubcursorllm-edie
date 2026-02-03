@@ -1,0 +1,37 @@
+{
+  "view": "weekly_cost_rollup",
+  "owner": "DataPlatform",
+  "description": "This view contains weekly rollups by service/team",
+  "database": "billing",
+  "regions": ["us-west-2"],
+  "schema": [
+    {
+      "name": "week",
+      "type": "date",
+      "description": "The start of the week in 'YYYY-mm-dd' format"
+    },
+    {
+      "name": "team",
+      "type": "string",
+      "description": "The internal ID of the Samsara product"
+    },
+    {
+      "name": "service",
+      "type": "string",
+      "description": "An identifier for the type of usage this is. This helps identify what kind of job this is and where it comes from."
+    },
+    {
+      "name": "total_cost",
+      "type": "double",
+      "description": "The total cost for this service over the week."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "billing",
+      "tablename": "dataplatform_costs",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

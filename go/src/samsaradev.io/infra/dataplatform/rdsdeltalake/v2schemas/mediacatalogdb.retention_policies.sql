@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`uuid` STRING,
+`media_source_uuid` STRING,
+`media_type` BIGINT,
+`duration_days` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`deleted_at` TIMESTAMP,
+`partition` STRING

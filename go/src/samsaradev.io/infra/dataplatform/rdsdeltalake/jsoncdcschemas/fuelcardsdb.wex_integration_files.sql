@@ -1,0 +1,12 @@
+`_op` STRING,
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` BIGINT,
+`org_id` STRING,
+`name` STRING,
+`status` STRING,
+`s3_key` STRING,
+`message` STRING,
+`upload_event_uuid` STRING,
+`created_at` STRING,
+`updated_at` STRING

@@ -1,0 +1,18 @@
+{
+  "name": "product_adoption",
+  "owner": "DataEngineering",
+  "max_concurrent": 3,
+  "assets": [
+    "us-west-2:product_analytics_staging.product_adoption_thresholds",
+    "eu-west-1:product_analytics_staging.product_adoption_thresholds",
+    "ca-central-1:product_analytics_staging.product_adoption_thresholds"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 10 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "owner": "OPX",
+  "email_notifications": ["alerts-opx-aaaajxmy2cqynogqum24y6p4eq@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "awsbilluploader-device-counts-csv",
+      "cron": "0 0 * * * ?",
+      "regions": ["us-west-2"],
+      "timeout_seconds": 86400,
+      "spark_version": "default"
+    }
+  ]
+}

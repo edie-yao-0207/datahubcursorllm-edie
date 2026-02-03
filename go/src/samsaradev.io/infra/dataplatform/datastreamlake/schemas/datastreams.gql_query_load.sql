@@ -1,0 +1,11 @@
+`timestamp` TIMESTAMP,
+`route_load_trace_id` STRING,
+`query_name` STRING,
+`protocol` STRING,
+`duration_ms` BIGINT,
+`gql_error_code` STRING,
+`raw_url` STRING,
+`resource` STRING,
+`variables` MAP<STRING, STRING>,
+`org_id` BIGINT,
+`date` DATE

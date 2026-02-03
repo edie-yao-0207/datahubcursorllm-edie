@@ -1,0 +1,10 @@
+{
+  "feature_configs": [
+    {
+      "key": "enable-emr-sqs-worker-query-emr-data",
+      "type": "bool",
+      "default": "false",
+      "description": "You can use this to enable the EMR Replication SQS worker to query the EMR entity data."
+    }
+  ]
+}

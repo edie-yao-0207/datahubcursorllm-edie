@@ -1,0 +1,13 @@
+{
+  "name": "driver_risk_metrics",
+  "owner": "DataEngineering",
+  "assets": ["us-west-2:product_analytics_staging.stg_driver_risk_metrics"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 20 * * *",
+      "backfill_window": 2,
+      "backfill_batch_size": 1
+    }
+  ]
+}

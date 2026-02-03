@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`uuid` STRING,
+`name` STRING,
+`address_id` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`deleted_at` TIMESTAMP,
+`default_camera_device_id` BIGINT,
+`partition` STRING

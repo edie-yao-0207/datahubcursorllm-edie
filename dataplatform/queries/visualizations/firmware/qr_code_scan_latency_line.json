@@ -1,0 +1,98 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "latency (sec)"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "median": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p90": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p99": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p999": {
+      "yAxis": 0,
+      "type": "line"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_ac237d38951675"
+    },
+    "y": [
+      {
+        "id": "column_ac237d38951678",
+        "column": "median"
+      },
+      {
+        "id": "column_ac237d38952228",
+        "column": "p90"
+      },
+      {
+        "id": "column_ac237d38952230",
+        "column": "p99"
+      },
+      {
+        "id": "column_ac237d38952232",
+        "column": "p999"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

@@ -1,0 +1,97 @@
+{
+  "view": "agg_product_usage",
+  "owner": "DataEngineering",
+  "description": "This view contains daily aggregations on feature usage for key features within the organization",
+  "database": "product_analytics",
+  "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+  "use_regional_values": true,
+  "schema": [
+    { "name": "date", "type": "string", "description": "Date partition" },
+    { "name": "org_id", "type": "long", "description": "The Samsara cloud dashboard ID that the data belongs to" },
+    { "name": "org_name", "type": "string", "description": "Name of the organization" },
+    { "name": "org_category", "type": "string", "description": "Classification of org" },
+    { "name": "account_arr_segment", "type": "string", "description": "ARR for the account of the organization" },
+    {
+      "name": "account_size_segment_name",
+      "type": "string",
+      "description": "Size of the account for the organization"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string",
+      "description": "Billing country associated with the organization"
+    },
+    { "name": "region", "type": "string", "description": "Cloud region of the organization" },
+    {
+      "name": "sam_number",
+      "type": "string",
+      "description": "Samnumber is a unique id that ties customer accounts together in Netsuite, Salesforce, and Samsara cloud dashboard."
+    },
+    { "name": "account_id", "type": "string", "description": "ID of account" },
+    { "name": "account_name", "type": "string", "description": "Name of account" },
+    { "name": "feature", "type": "string", "description": "Name of the feature being tracked" },
+    { "name": "enabled", "type": "integer", "description": "Whether the org is enabled for the given feature or not" },
+    { "name": "usage_weekly", "type": "long", "description": "Usage stats in last 7 days" },
+    { "name": "usage_monthly", "type": "long", "description": "Usage stats in last 28 days" },
+    { "name": "usage_prior_month", "type": "long", "description": "Usage stats in prior 28 days" },
+    {
+      "name": "usage_weekly_prior_month",
+      "type": "long",
+      "description": "Usage stats in the 7 days prior to the last 28 days"
+    },
+    { "name": "daily_active_user", "type": "long", "description": "Active users in last day of feature" },
+    { "name": "daily_enabled_users", "type": "long", "description": "Users who had access in last day of feature" },
+    { "name": "weekly_active_users", "type": "long", "description": "Active users in last 7 days of feature" },
+    { "name": "weekly_enabled_users", "type": "long", "description": "Users who had access in last 7 days of feature" },
+    { "name": "monthly_active_users", "type": "long", "description": "Active users in last 28 days of feature" },
+    {
+      "name": "monthly_enabled_users",
+      "type": "long",
+      "description": "Users who had access in last 28 days of feature"
+    },
+    {
+      "name": "org_active_day",
+      "type": "integer",
+      "description": "Whether org has used feature on the day or not"
+    },
+    {
+      "name": "org_active_week",
+      "type": "integer",
+      "description": "Whether org has used feature in last 7 days or not"
+    },
+    {
+      "name": "org_active_week_prior_month",
+      "type": "integer",
+      "description": "Whether org has used feature in the week 28 days ago or not"
+    },
+    {
+      "name": "org_active_month",
+      "type": "integer",
+      "description": "Whether org has used feature in last 28 days or not"
+    },
+    {
+      "name": "org_active_prior_month",
+      "type": "integer",
+      "description": "Whether org has used feature in 28 days prior to the last 28 days or not"
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp",
+      "description": "Time at which product usage record was last updated"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_usage_global",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datamodel_core",
+      "tablename": "dim_organizations",
+      "type": "table"
+    }
+  ]
+}

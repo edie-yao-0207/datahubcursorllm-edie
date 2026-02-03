@@ -1,0 +1,88 @@
+import { Empty } from 'antd';
+import styled from 'styled-components';
+import { useEntityData } from '../../EntityContext';
+import { ANTD_GRAY } from '../../constants';
+
+const EmbedContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: white;
+  font-family: monospace;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 0.9em;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+`;
+
+const StyledEmpty = styled(Empty)`
+  margin-top: 28px;
+  font-size: 16px;
+  color: ${ANTD_GRAY[8]};
+`;
+
+const markdownToReactTable = (markdown) => {
+  const rows = markdown.split('\n').map(row => row.split('|').slice(1, -1));
+  return (
+    <table>
+      {rows.map((cells, idx) => (
+        <tr key={idx}>
+          {cells.map((cell, cellIdx) => (
+            idx === 0 ? <th key={cellIdx}>{cell.trim()}</th> : <td key={cellIdx}>{cell.trim()}</td>
+          ))}
+        </tr>
+      ))}
+    </table>
+  );
+};
+
+const convertHtmlTableToMarkdown = (htmlString) => {
+  const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+  const rows = Array.from(doc.querySelectorAll('tr'));
+  const markdownRows = rows.map(row => {
+    const cells = Array.from(row.querySelectorAll('th, td')).map(cell => cell.textContent.trim());
+    return `| ${cells.join(' | ')} |`;
+  });
+
+  if (markdownRows.length > 1) {
+    const headerCells = markdownRows[0].split('|').map(() => ' --- ');
+    markdownRows.splice(1, 0, headerCells.join('|'));
+  }
+
+  return markdownRows.join('\n');
+};
+
+
+export const EmbedTab = () => {
+  const { entityData } = useEntityData();
+  let htmlContent = entityData?.embed?.renderUrl;
+
+  // Convert the HTML content to a markdown table string
+  const markdownContent = htmlContent ? convertHtmlTableToMarkdown(htmlContent) : null;
+
+  // Convert the markdown string to React components
+  const reactTable = markdownContent ? markdownToReactTable(markdownContent) : null;
+
+  return (
+    <EmbedContainer>
+      {reactTable ? reactTable : <StyledEmpty description="No preview was found." />}
+    </EmbedContainer>
+  );
+};

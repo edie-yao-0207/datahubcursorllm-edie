@@ -1,0 +1,46 @@
+{
+  "test_cases": [
+    {
+      "label": "When a transition spans multiple days, then intervals are created split on days.",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-03'"
+      },
+      "input_data": {
+        "pto_input.transitions": [
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "device_id": 1,
+            "port": 1,
+            "time": 1577913392960,
+            "input_type": 1,
+            "source": "source",
+            "value": 1,
+            "is_productive": true
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "device_id": 1,
+          "end_ms": 1577923200000,
+          "org_id": 5,
+          "original_interval_duration_ms": 96207040,
+          "start_ms": 1577913392960,
+          "value": 1
+        },
+        {
+          "date": "2020-01-02",
+          "device_id": 1,
+          "end_ms": 1578009600000,
+          "org_id": 5,
+          "original_interval_duration_ms": 96207040,
+          "start_ms": 1577923200000,
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

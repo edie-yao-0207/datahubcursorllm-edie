@@ -1,0 +1,98 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "percentile avg device ir led disabled count per trip"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "median": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p90": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p99": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "p999": {
+      "yAxis": 0,
+      "type": "line"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_545b49e269833"
+    },
+    "y": [
+      {
+        "id": "column_545b49e269835",
+        "column": "median"
+      },
+      {
+        "id": "column_545b49e269837",
+        "column": "p90"
+      },
+      {
+        "id": "column_545b49e270252",
+        "column": "p99"
+      },
+      {
+        "id": "column_545b49e270253",
+        "column": "p999"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

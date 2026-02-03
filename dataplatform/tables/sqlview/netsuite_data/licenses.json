@@ -1,0 +1,55 @@
+{
+  "view": "licenses",
+  "owner": "PlatformOperations",
+  "description": "This view gathers license and return data from netsuite",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "sku", "type": "string" },
+    { "name": "sam_number", "type": "string" },
+    { "name": "netsuite_transaction_id", "type": "long" },
+    { "name": "netsuite_transaction_line_id", "type": "integer" },
+    { "name": "return_number", "type": "string" },
+    { "name": "order_number", "type": "string" },
+    { "name": "quantity", "type": "double" },
+    { "name": "transaction_type", "type": "string" },
+    { "name": "_fivetran_synced", "type": "timestamp" },
+    { "name": "_fivetran_deleted", "type": "boolean" },
+    { "name": "sfdc_product_line_id", "type": "string" },
+    { "name": "status", "type": "string" },
+    { "name": "order_created_at", "type": "timestamp" },
+    { "name": "return_type_id", "type": "integer" },
+    { "name": "return_subtype_id", "type": "integer" },
+    { "name": "created_from_id", "type": "long" },
+    { "name": "created_from_status", "type": "string" },
+    { "name": "start_date", "type": "timestamp" },
+    { "name": "end_date", "type": "timestamp" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transactions",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transaction_line",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "netsuite_customer",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "item_product_group",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

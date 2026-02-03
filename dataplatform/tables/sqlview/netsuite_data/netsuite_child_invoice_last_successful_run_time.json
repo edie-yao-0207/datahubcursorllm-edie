@@ -1,0 +1,15 @@
+{
+  "view": "netsuite_child_invoice_last_successful_run_time",
+  "owner": "PlatformOperations",
+  "description": "This view grabs the most recent time that a successful job finished",
+  "database": "netsuite_data",
+  "schema": [{ "name": "most_recent", "type": "timestamp" }],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "netsuite_data",
+      "tablename": "netsuite_child_invoice_last_successful_run",
+      "type": "table"
+    }
+  ]
+}

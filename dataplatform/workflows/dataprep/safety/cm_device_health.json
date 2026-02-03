@@ -1,0 +1,868 @@
+{
+  "name": "cm_device_health",
+  "email_notifications": {
+    "no_alert_for_skipped_runs": false
+  },
+  "timeout_seconds": 0,
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "cm_linked_vgs",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/dataprep_cm_linked_vgs",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_vg_intervals",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/dataprep_cm_vg_intervals",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_vg_build_and_bootcount",
+      "depends_on": [
+        {
+          "task_key": "cm_vg_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_vg_build_and_bootcount",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_device_health_intervals",
+      "depends_on": [
+        {
+          "task_key": "cm_anomalies"
+        },
+        {
+          "task_key": "cm_vg_intervals"
+        },
+        {
+          "task_key": "cm_temp"
+        },
+        {
+          "task_key": "cm_vg_build_and_bootcount"
+        },
+        {
+          "task_key": "cm_recording_durations"
+        },
+        {
+          "task_key": "vg_air_temp"
+        },
+        {
+          "task_key": "safety_harsh_events_intervals"
+        },
+        {
+          "task_key": "cm_speed_limit_available_durations"
+        },
+        {
+          "task_key": "cm_safe_mode_durations"
+        },
+        {
+          "task_key": "cm_overheating_durations"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_device_health_intervals",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_anomalies",
+      "depends_on": [
+        {
+          "task_key": "cm_vg_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_anomalies",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_temp",
+      "depends_on": [
+        {
+          "task_key": "cm_vg_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_temp",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_recording_durations",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        },
+        {
+          "task_key": "cm_vg_intervals"
+        },
+        {
+          "task_key": "cm_physically_disconnected_ranges"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_recording_intervals",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "safety_harsh_events_intervals",
+      "depends_on": [
+        {
+          "task_key": "cm_vg_intervals"
+        },
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/harsh_events_intervals",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg_air_temp",
+      "depends_on": [
+        {
+          "task_key": "cm_vg_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/vg_temp",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_overheating_durations",
+      "depends_on": [
+        {
+          "task_key": "cm_vg_intervals"
+        },
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/thermal_limiter_overheated",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_safe_mode_durations",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        },
+        {
+          "task_key": "cm_vg_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/thermal_limiter_safe_mode",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_speed_limit_available_durations",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        },
+        {
+          "task_key": "cm_vg_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/speed_limit_available",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "device_adas_settings_tracking",
+      "depends_on": [
+        {
+          "task_key": "org_adas_settings_tracking"
+        },
+        {
+          "task_key": "cm_linked_vgs"
+        },
+        {
+          "task_key": "device_settings_tracking"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/device_ADAS_tracking",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_device_health_daily",
+      "depends_on": [
+        {
+          "task_key": "cm_device_health_intervals"
+        },
+        {
+          "task_key": "device_adas_settings_tracking"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_device_health_daily",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_physically_disconnected_ranges",
+      "depends_on": [
+        {
+          "task_key": "cm_power_ranges"
+        },
+        {
+          "task_key": "cm_attached_ranges"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_physically_disconnected_ranges",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_power_ranges",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_power_ranges",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_attached_ranges",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_attached_ranges",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "org_adas_settings_tracking",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/ADAS_settings_tracking",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "safety_harsh_events_upload_events",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/harsh_events_by_type",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "video_request_data",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/video_requests",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "anomalies_by_service",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/dataprep_anomaly_events_by_service",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cm_daily_data_usage",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/cm_jasper_data_usage",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "device_settings_tracking",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/device_settings_tracking",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "thermal_limiter_safe_mode_intervals",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/thermal_limiter_safe_mode_intervals",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "thermal_limiter_overheated_intervals",
+      "depends_on": [
+        {
+          "task_key": "cm_linked_vgs"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/thermal_limiter_overheated_intervals",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "video_fps",
+      "depends_on": [
+        {
+          "task_key": "thermal_limiter_safe_mode_intervals"
+        },
+        {
+          "task_key": "thermal_limiter_overheated_intervals"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/video_fps",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "video_fps_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "livestreams",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataprep/safety/livestreams",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "cm_device_health_job_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/dataengineering-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.4xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "aianddata",
+          "samsara:team": "dataengineering",
+          "samsara:service": "databricksjobcluster-dataengineering",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/dataengineering",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F00015B",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 32
+        }
+      }
+    },
+    {
+      "job_cluster_key": "video_fps_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/dataengineering-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.8xlarge",
+        "driver_node_type_id": "rd-fleet.2xlarge",
+        "custom_tags": {
+          "samsara:product-group": "aianddata",
+          "samsara:team": "dataengineering",
+          "samsara:service": "databricksjobcluster-dataengineering",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/dataengineering",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F00015B",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 32
+        }
+      }
+    }
+  ],
+  "format": "MULTI_TASK"
+}

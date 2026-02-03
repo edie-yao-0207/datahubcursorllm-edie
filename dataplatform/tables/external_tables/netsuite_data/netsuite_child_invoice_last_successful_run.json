@@ -1,0 +1,12 @@
+{
+  "table": "netsuite_child_invoice_last_successful_run",
+  "owner": "PlatformOperations",
+  "description": "This os the last successful run for the Plat Ops invoice generation notebook.",
+  "database": "netsuite_data",
+  "schema": [
+    {
+      "name": "last_run",
+      "type": "timestamp"
+    }
+  ]
+}

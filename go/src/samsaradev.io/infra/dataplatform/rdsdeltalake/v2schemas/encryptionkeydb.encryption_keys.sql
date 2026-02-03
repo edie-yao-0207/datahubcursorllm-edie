@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`uuid` STRING,
+`cmk` STRING,
+`latest_datakey` STRING,
+`last_updated` TIMESTAMP,
+`last_updated_by` STRING,
+`partition` STRING

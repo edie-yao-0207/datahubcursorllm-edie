@@ -1,0 +1,263 @@
+{
+  "test_cases": [
+    {
+      "label": "When there is an engine state fuel interval that matches exactly with a gaseous interval, then produce a row with the engine state and fuel data.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.gaseous_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1500,
+            "end_ms": 2500,
+            "org_id": 1,
+            "object_id": 1,
+            "gaseous_fuel_consumed_grams": 200,
+            "original_interval_duration_ms": 2500
+          }
+        ],
+        "engine_state_report.engine_state_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1500,
+            "end_ms": 2500,
+            "object_id": 1,
+            "org_id": 1,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 100.0,
+            "original_engine_state_interval_duration_ms": 1000,
+            "original_fuel_interval_duration_ms": 2000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "start_ms": 1500,
+          "end_ms": 2500,
+          "object_id": 1,
+          "org_id": 1,
+          "engine_state": "IDLE",
+          "gaseous_fuel_consumed_grams": 200,
+          "fuel_consumed_ml": 100.0,
+          "original_engine_state_interval_duration_ms": 1000,
+          "original_fuel_interval_duration_ms": 2000,
+          "original_gaseous_consumption_interval_duration_ms": 2500
+        }
+      ]
+    },
+    {
+      "label": "When there is an engine state interval that is 50% the duration of a gaseous interval but it is the only intemediary interval, then produce a row with the engine state and all the gaseous fuel used.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.gaseous_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1000,
+            "end_ms": 3000,
+            "org_id": 1,
+            "object_id": 1,
+            "gaseous_fuel_consumed_grams": 200,
+            "original_interval_duration_ms": 2000
+          }
+        ],
+        "engine_state_report.engine_state_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1500,
+            "end_ms": 2500,
+            "object_id": 1,
+            "org_id": 1,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 100.0,
+            "original_engine_state_interval_duration_ms": 1000,
+            "original_fuel_interval_duration_ms": 2000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "start_ms": 1500,
+          "end_ms": 2500,
+          "object_id": 1,
+          "org_id": 1,
+          "engine_state": "IDLE",
+          "gaseous_fuel_consumed_grams": 200,
+          "fuel_consumed_ml": 100.0,
+          "original_engine_state_interval_duration_ms": 1000,
+          "original_fuel_interval_duration_ms": 2000,
+          "original_gaseous_consumption_interval_duration_ms": 2000
+        }
+      ]
+    },
+    {
+      "label": "When there are two engine state intervals that each occupy 50% the duration of a gaseous interval, then produce two row with the engine state and half the gaseous fuel used distributed over both.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.gaseous_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1000,
+            "end_ms": 3000,
+            "org_id": 1,
+            "object_id": 1,
+            "gaseous_fuel_consumed_grams": 100,
+            "original_interval_duration_ms": 2000
+          }
+        ],
+        "engine_state_report.engine_state_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1000,
+            "end_ms": 2000,
+            "object_id": 1,
+            "org_id": 1,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 100.0,
+            "original_engine_state_interval_duration_ms": 1000,
+            "original_fuel_interval_duration_ms": 1000
+          },
+          {
+            "date": "2024-03-08",
+            "start_ms": 2000,
+            "end_ms": 3000,
+            "object_id": 1,
+            "org_id": 1,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 100.0,
+            "original_engine_state_interval_duration_ms": 1000,
+            "original_fuel_interval_duration_ms": 1000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "start_ms": 1000,
+          "end_ms": 2000,
+          "object_id": 1,
+          "org_id": 1,
+          "engine_state": "IDLE",
+          "fuel_consumed_ml": 100.0,
+          "gaseous_fuel_consumed_grams": 50,
+          "original_engine_state_interval_duration_ms": 1000,
+          "original_fuel_interval_duration_ms": 1000,
+          "original_gaseous_consumption_interval_duration_ms": 2000
+        },
+        {
+          "date": "2024-03-08",
+          "start_ms": 2000,
+          "end_ms": 3000,
+          "object_id": 1,
+          "org_id": 1,
+          "engine_state": "IDLE",
+          "fuel_consumed_ml": 100.0,
+          "gaseous_fuel_consumed_grams": 50,
+          "original_engine_state_interval_duration_ms": 1000,
+          "original_fuel_interval_duration_ms": 1000,
+          "original_gaseous_consumption_interval_duration_ms": 2000
+        }
+      ]
+    },
+    {
+      "label": "When there are multiple gaseous intervals within an engine state fuel interval, then only produce one engine state interval with the summed gaseous consumption from all gaseous intervals.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.gaseous_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1000,
+            "end_ms": 2000,
+            "org_id": 1,
+            "object_id": 1,
+            "gaseous_fuel_consumed_grams": 100,
+            "original_interval_duration_ms": 1000
+          },
+          {
+            "date": "2024-03-08",
+            "start_ms": 2000,
+            "end_ms": 3000,
+            "org_id": 1,
+            "object_id": 1,
+            "gaseous_fuel_consumed_grams": 100,
+            "original_interval_duration_ms": 1000
+          }
+        ],
+        "engine_state_report.engine_state_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1000,
+            "end_ms": 3000,
+            "object_id": 1,
+            "org_id": 1,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 100.0,
+            "original_engine_state_interval_duration_ms": 1000,
+            "original_fuel_interval_duration_ms": 2000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "object_id": 1,
+          "org_id": 1,
+          "engine_state": "IDLE",
+          "gaseous_fuel_consumed_grams": 200,
+          "fuel_consumed_ml": 100.0,
+          "original_engine_state_interval_duration_ms": 1000,
+          "original_fuel_interval_duration_ms": 2000,
+          "original_gaseous_consumption_interval_duration_ms": 1000
+        }
+      ]
+    },
+    {
+      "label": "When there are no engine state fuel intervals for a gaseous consumption interval to match to, then produce a new engine state interval with the gaseous consumption and engine state of OFF.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.gaseous_fuel_intervals": [
+          {
+            "date": "2024-03-08",
+            "start_ms": 1000,
+            "end_ms": 2000,
+            "org_id": 1,
+            "object_id": 1,
+            "gaseous_fuel_consumed_grams": 100,
+            "original_interval_duration_ms": 1000
+          }
+        ],
+        "engine_state_report.engine_state_fuel_intervals": []
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "start_ms": 1000,
+          "end_ms": 2000,
+          "object_id": 1,
+          "org_id": 1,
+          "engine_state": "OFF",
+          "gaseous_fuel_consumed_grams": 100,
+          "fuel_consumed_ml": 0.0,
+          "original_gaseous_consumption_interval_duration_ms": 1000
+        }
+      ]
+    }
+  ]
+}

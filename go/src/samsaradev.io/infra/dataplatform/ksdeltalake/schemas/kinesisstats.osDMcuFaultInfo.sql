@@ -1,0 +1,43 @@
+`date` STRING,
+`stat_type` INT,
+`org_id` BIGINT,
+`object_type` INT,
+`object_id` BIGINT,
+`time` BIGINT,
+`value` STRUCT<
+  `date`: STRING,
+  `time`: BIGINT,
+  `received_delta_seconds`: BIGINT,
+  `is_start`: BOOLEAN,
+  `is_end`: BOOLEAN,
+  `is_databreak`: BOOLEAN,
+  `int_value`: BIGINT,
+  `double_value`: DOUBLE,
+  `proto_value`: STRUCT<
+    `vulcan_mcu_fault_info`: STRUCT<
+      `r0`: BIGINT,
+      `r1`: BIGINT,
+      `r2`: BIGINT,
+      `r3`: BIGINT,
+      `r4`: BIGINT,
+      `r5`: BIGINT,
+      `r6`: BIGINT,
+      `r7`: BIGINT,
+      `r8`: BIGINT,
+      `r9`: BIGINT,
+      `r10`: BIGINT,
+      `r11`: BIGINT,
+      `r12`: BIGINT,
+      `lr`: BIGINT,
+      `pc`: BIGINT,
+      `sp`: BIGINT,
+      `xpsr`: BIGINT,
+      `thread_id`: BIGINT,
+      `mcu_firmware_version`: STRING,
+      `build_string`: STRING,
+      `timestamp_utc_ms`: BIGINT
+    >
+  >
+>,
+`_filename` STRING,
+`_sort_key` STRING

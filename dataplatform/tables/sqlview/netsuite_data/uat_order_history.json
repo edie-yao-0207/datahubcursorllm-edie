@@ -1,0 +1,88 @@
+{
+  "view": "uat_order_history",
+  "owner": "PlatformOperations",
+  "description": "This view is only accessible by PlatOps. Please use finopsdb.order_details. This view gathers order history data from netsuite that is processed and ingested into finopsdb.order_details",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "schema": [
+    { "name": "sales_order_transaction_id", "type": "long" },
+    { "name": "item_fulfillment_transaction_id", "type": "long" },
+    { "name": "item_fulfillment_transaction_line_id", "type": "integer" },
+    { "name": "order_number", "type": "string" },
+    { "name": "sam_number", "type": "string" },
+    { "name": "is_transfer_order", "type": "boolean" },
+    { "name": "item_sku", "type": "string" },
+    { "name": "item_name", "type": "string" },
+    { "name": "item_quantity", "type": "integer" },
+    { "name": "serial_number", "type": "string" },
+    { "name": "sales_order_status", "type": "string" },
+    { "name": "item_fulfillment_status", "type": "string" },
+    { "name": "tracking_number", "type": "string" },
+    { "name": "shipping_contact", "type": "string" },
+    { "name": "shipping_contact_email_address", "type": "string" },
+    { "name": "delivery_carrier", "type": "string" },
+    { "name": "purchased_by_email", "type": "string" },
+    { "name": "order_created_at", "type": "timestamp" },
+    { "name": "shipped_at", "type": "timestamp" },
+    { "name": "ship_city", "type": "string" },
+    { "name": "ship_country", "type": "string" },
+    { "name": "ship_state", "type": "string" },
+    { "name": "ship_zip", "type": "string" },
+    { "name": "ship_address_line_1", "type": "string" },
+    { "name": "ship_address_line_2", "type": "string" },
+    { "name": "ship_address_line_3", "type": "string" },
+    { "name": "bill_city", "type": "string" },
+    { "name": "bill_country", "type": "string" },
+    { "name": "bill_state", "type": "string" },
+    { "name": "bill_zip", "type": "string" },
+    { "name": "bill_address_line_1", "type": "string" },
+    { "name": "bill_address_line_2", "type": "string" },
+    { "name": "bill_address_line_3", "type": "string" },
+    { "name": "_fivetran_synced", "type": "timestamp" },
+    { "name": "_fivetran_deleted", "type": "boolean" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transactions",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transaction_inventory_numbers",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "customers",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transaction_address",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transaction_tracking_numbers",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transaction_lines",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "items",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

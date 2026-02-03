@@ -1,0 +1,731 @@
+{
+  "test_cases": [
+    {
+      "label": "idle intervals are filtered by min idle duration",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 60
+          }
+        ],
+        "pto_input.productive_pto": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709856060000,
+            "value": 0
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856060000,
+            "end_ms": 1709859480000,
+            "value": 1
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709859480000,
+            "end_ms": 1709859600000,
+            "value": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856060000,
+          "end_ms": 1709859480000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 57
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709859480000,
+          "end_ms": 1709859600000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 2
+        }
+      ]
+    },
+    {
+      "label": "idle intervals are filtered by min idle duration config after the interval",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 60
+          }
+        ],
+        "pto_input.productive_pto": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709856060000,
+            "value": 0
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856060000,
+            "end_ms": 1709859480000,
+            "value": 1
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709859480000,
+            "end_ms": 1709859600000,
+            "value": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-09",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709942400000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856060000,
+          "end_ms": 1709859480000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 57
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709859480000,
+          "end_ms": 1709859600000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 2
+        }
+      ]
+    },
+    {
+      "label": "idle intervals are not filtered by min idle duration config before the interval",
+      "parameters": {
+        "start_date": "'2024-03-07'",
+        "end_date": "'2024-03-10'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 60
+          }
+        ],
+        "pto_input.productive_pto": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709856060000,
+            "value": 0
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856060000,
+            "end_ms": 1709859480000,
+            "value": 1
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709859480000,
+            "end_ms": 1709859600000,
+            "value": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-07",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709769600000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856000000,
+          "end_ms": 1709856060000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 1
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856060000,
+          "end_ms": 1709859480000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 57
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709859480000,
+          "end_ms": 1709859600000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 2
+        }
+      ]
+    },
+    {
+      "label": "idle intervals are not filtered by min idle duration config for other organisation",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 60
+          }
+        ],
+        "pto_input.productive_pto": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709856060000,
+            "value": 0
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856060000,
+            "end_ms": 1709859480000,
+            "value": 1
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709859480000,
+            "end_ms": 1709859600000,
+            "value": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-08",
+            "org_id": 2,
+            "object_id": 1,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856000000,
+          "end_ms": 1709856060000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 1
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856060000,
+          "end_ms": 1709859480000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 57
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709859480000,
+          "end_ms": 1709859600000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 2
+        }
+      ]
+    },
+    {
+      "label": "idle intervals are not filtered by min idle duration config for other device",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "engine_state": "IDLE",
+            "fuel_consumed_ml": 60
+          }
+        ],
+        "pto_input.productive_pto": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709856060000,
+            "value": 0
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709856060000,
+            "end_ms": 1709859480000,
+            "value": 1
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1709859480000,
+            "end_ms": 1709859600000,
+            "value": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 2,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856000000,
+          "end_ms": 1709856060000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 1
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856060000,
+          "end_ms": 1709859480000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 57
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709859480000,
+          "end_ms": 1709859600000,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 2
+        }
+      ]
+    },
+    {
+      "label": "non-idle intervals are not filtered by min idle duration",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709856300000,
+            "engine_state": "OFF",
+            "fuel_consumed_ml": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 600000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856000000,
+          "end_ms": 1709856300000,
+          "engine_state": "OFF",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 0
+        }
+      ]
+    },
+    {
+      "label": "When idle intervals are split from a larger original engine state interval, all of them should be filtered out.",
+      "parameters": {
+        "start_date": "'2024-03-06'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-07",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709855000000,
+            "end_ms": 1709856000000,
+            "engine_state": "IDLE",
+            "original_engine_state_interval_duration_ms": 96400000
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "engine_state": "IDLE",
+            "original_engine_state_interval_duration_ms": 96400000
+          },
+          {
+            "date": "2024-03-09",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709859600000,
+            "end_ms": 1709859700000,
+            "engine_state": "IDLE",
+            "original_engine_state_interval_duration_ms": 96400000
+          }
+        ],
+        "pto_input.productive_pto": [],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-07",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "When there are no PTO intervals and min idle duration config is exceeded, then the original engine state fuel/gaseous intervals should be returned as is.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "fuel_consumed_ml": 60,
+            "gaseous_fuel_consumed_grams": 100,
+            "engine_state": "IDLE",
+            "original_fuel_interval_duration_ms": 120000,
+            "original_engine_state_interval_duration_ms": 120000,
+            "original_gaseous_fuel_interval_duration_ms": 120000
+          }
+        ],
+        "pto_input.productive_pto": [],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856000000,
+          "end_ms": 1709859600000,
+          "fuel_consumed_ml": 60,
+          "gaseous_fuel_consumed_grams": 100,
+          "productive_pto_state": 0,
+          "engine_state": "IDLE",
+          "original_fuel_interval_duration_ms": 120000,
+          "original_engine_state_interval_duration_ms": 120000,
+          "original_gaseous_fuel_interval_duration_ms": 120000
+        }
+      ]
+    },
+    {
+      "label": "When there are PTO intervals intersecting a engine state fuel/gaseous interval, then the interval should be split and the fuel/gaseous fuel distributed across both.",
+      "parameters": {
+        "start_date": "'2024-03-08'",
+        "end_date": "'2024-03-11'"
+      },
+      "input_data": {
+        "engine_state_report.engine_state_fuel_gaseous_intervals": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "start_timestamp": "Friday, 8 March 2024 00:00:00",
+            "end_timestamp": "Friday, 8 March 2024 01:00:00",
+            "start_ms": 1709856000000,
+            "end_ms": 1709859600000,
+            "fuel_consumed_ml": 60,
+            "gaseous_fuel_consumed_grams": 100,
+            "engine_state": "IDLE",
+            "original_fuel_interval_duration_ms": 120000,
+            "original_engine_state_interval_duration_ms": 120000,
+            "original_gaseous_fuel_interval_duration_ms": 120000
+          }
+        ],
+        "pto_input.productive_pto": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_timestamp": "Friday, 8 March 2024 00:00:00",
+            "end_timestamp": "Friday, 8 March 2024 00:30:00",
+            "start_ms": 1709856000000,
+            "end_ms": 1709857800000,
+            "original_interval_duration_ms": 180000,
+            "value": 1
+          },
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "device_id": 1,
+            "start_timestamp": "Friday, 8 March 2024 00:30:00",
+            "end_timestamp": "Friday, 8 March 2024 01:00:00",
+            "start_ms": 1709857800000,
+            "end_ms": 1709859600000,
+            "original_interval_duration_ms": 180000,
+            "value": 0
+          }
+        ],
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2024-03-08",
+            "org_id": 1,
+            "object_id": 1,
+            "time": 1709856120000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 120000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709856000000,
+          "end_ms": 1709857800000,
+          "fuel_consumed_ml": 30,
+          "gaseous_fuel_consumed_grams": 50,
+          "productive_pto_state": 1,
+          "engine_state": "IDLE",
+          "original_fuel_interval_duration_ms": 120000,
+          "original_engine_state_interval_duration_ms": 120000,
+          "original_gaseous_fuel_interval_duration_ms": 120000,
+          "original_pto_interval_duration_ms": 180000
+        },
+        {
+          "date": "2024-03-08",
+          "org_id": 1,
+          "object_id": 1,
+          "start_ms": 1709857800000,
+          "end_ms": 1709859600000,
+          "fuel_consumed_ml": 30,
+          "gaseous_fuel_consumed_grams": 50,
+          "productive_pto_state": 0,
+          "engine_state": "IDLE",
+          "original_fuel_interval_duration_ms": 120000,
+          "original_engine_state_interval_duration_ms": 120000,
+          "original_gaseous_fuel_interval_duration_ms": 120000,
+          "original_pto_interval_duration_ms": 180000
+        }
+      ]
+    }
+  ]
+}

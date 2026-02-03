@@ -1,0 +1,19 @@
+{
+  "table": "customer_success_value_area",
+  "owner": "DataEngineering",
+  "description": "Maps routeload names to the Customer Success valuea area /n/n[Customer Success Value Areas](https://docs.google.com/spreadsheets/d/1y7n8oliApNJmny7C2EmC3eNsa5_T2v0z_54Nv6u8UMk/edit#gid=2097464545)",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "route",
+      "type": "string",
+      "description": "The URI path of an endpoint"
+    },
+    {
+      "name": "value_area",
+      "type": "string",
+      "description": "The name of the mapped customer success value area"
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "table": "dim_organizations_safety_settings",
+  "owner": "DataEngineering",
+  "description": "Organization level safety settings with logic applied to limit safety settings to those organizations with compatible hardware.",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date",
+      "type": "string"
+    },
+    {
+      "name": "org_id",
+      "type": "bigint"
+    },
+    {
+      "name": "n_cm_devices",
+      "type": "bigint"
+    },
+    {
+      "name": "n_inward_cm_devices",
+      "type": "bigint"
+    },
+    {
+      "name": "n_outward_only_cm_devices",
+      "type": "bigint"
+    },
+    {
+      "name": "adas_all_features_allowed",
+      "type": "boolean"
+    },
+    {
+      "name": "severe_speeding_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "speeding_in_cab_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "severe_speeding_speed_over_limit_threshold",
+      "type": "float"
+    },
+    {
+      "name": "severe_speeding_time_before_alert_ms",
+      "type": "bigint"
+    },
+    {
+      "name": "severe_speeding_send_to_safety_inbox",
+      "type": "boolean"
+    },
+    {
+      "name": "severe_speeding_auto_add_to_coaching",
+      "type": "boolean"
+    },
+    {
+      "name": "distracted_driving_detection_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "distracted_driving_detection_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "policy_violations_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "policy_violations_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "policy_violations_minimum_speed",
+      "type": "boolean"
+    },
+    {
+      "name": "mobile_usage_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "mobile_usage_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "seatbelt_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "seatbelt_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "rolling_stop_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "rolling_stop_threshold_milliknots",
+      "type": "bigint"
+    },
+    {
+      "name": "in_cab_stop_sign_violation_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "following_distance_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "following_distance_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "forward_collision_warning_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "forward_collision_warning_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "lane_departure_warning_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "lane_departure_warning_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inward_obstruction_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inward_obstruction_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "drowsiness_detection_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "drowsiness_detection_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "severity_settings_speed_over_limit_unit_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "severity_settings_speed_over_limit_unit",
+      "type": "string"
+    },
+    {
+      "name": "distracted_driving_detection_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "policy_violations_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "policy_violations_minimum_speed_mph",
+      "type": "bigint"
+    },
+    {
+      "name": "mobile_usage_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "mobile_usage_minimum_speed_mph",
+      "type": "bigint"
+    },
+    {
+      "name": "seatbelt_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "following_distance_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "lane_departure_warning_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "inward_obstruction_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "mobile_usage_audio_alert_promotion_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "mobile_usage_audio_alert_count_threshold",
+      "type": "bigint"
+    },
+    {
+      "name": "mobile_usage_audio_alert_duration_ms",
+      "type": "bigint"
+    },
+    {
+      "name": "mobile_usage_per_trip_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inattentive_driving_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inattentive_driving_audio_alerts_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inattentive_driving_minimum_speed_enum",
+      "type": "bigint"
+    },
+    {
+      "name": "inattentive_driving_audio_alert_promotion_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "seatbelt_audio_alert_promotion_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "following_distance_audio_alert_promotion_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "lane_departure_warning_audio_alert_promotion_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inward_obstruction_audio_alert_promotion_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "max_speed_enabled",
+      "type": "boolean"
+    }
+  ]
+}

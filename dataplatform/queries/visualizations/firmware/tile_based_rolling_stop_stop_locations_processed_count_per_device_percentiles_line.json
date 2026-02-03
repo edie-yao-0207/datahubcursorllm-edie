@@ -1,0 +1,146 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "count per device"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "column_156f9f3591706": {
+      "name": "median",
+      "yAxis": 0,
+      "type": "line"
+    },
+    "column_fc6ff30f201372": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p90"
+    },
+    "column_fc6ff30f201374": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p99"
+    },
+    "column_a99f9606136704": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p1"
+    },
+    "column_a99f9606136706": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p10"
+    },
+    "column_a99f9606137561": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "median"
+    },
+    "column_a99f9606137563": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p90"
+    },
+    "column_a99f9606138133": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p99"
+    },
+    "column_35c25833137751": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "median"
+    },
+    "column_35c25833137753": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p75"
+    },
+    "column_35c25833137755": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p90"
+    },
+    "column_35c25833137757": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p99"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_156f9f3591704"
+    },
+    "y": [
+      {
+        "id": "column_35c25833137751",
+        "column": "median",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_35c25833137753",
+        "column": "p75",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_35c25833137755",
+        "column": "p90",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_35c25833137757",
+        "column": "p99",
+        "transform": "SUM"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

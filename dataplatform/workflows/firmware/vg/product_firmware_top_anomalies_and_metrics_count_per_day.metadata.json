@@ -1,0 +1,13 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "description": "Daily Anomalies and Metrics Counts Pipeline",
+  "admin_teams": ["FirmwareTelematicsApps", "FirmwareCore"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "0 0 17 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 43200
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "view": "org_name_to_samnumber",
+  "owner": "PlatformOperations",
+  "description": "This view connects org name to related samnumber",
+  "database": "platops",
+  "schema": [
+    { "name": "id", "type": "long", "description": "Organization's id" },
+    { "name": "name", "type": "string", "description": "Organization's name" },
+    { "name": "internal_type", "type": "long", "description": "Is this an internal organization?" },
+    {
+      "name": "sam_number",
+      "type": "string",
+      "description": "Samnumber for the account associated with this organization"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "org_sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "sfdc_accounts",
+      "type": "table"
+    }
+  ]
+}

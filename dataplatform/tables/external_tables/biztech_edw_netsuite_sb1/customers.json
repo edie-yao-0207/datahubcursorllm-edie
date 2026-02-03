@@ -1,0 +1,1564 @@
+{
+  "table": "customers",
+  "owner": "PlatformOperations",
+  "description": "customers table from database biztech_edw_netsuite_sb1 in s3bucket biztech-edw-uat",
+  "database": "biztech_edw_netsuite_sb1",
+  "schema": [
+    {
+      "name": "customer_id",
+      "type": "double"
+    },
+    {
+      "name": "accountnumber",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment_id",
+      "type": "double"
+    },
+    {
+      "name": "acs_future_billing_temp_enabl",
+      "type": "string"
+    },
+    {
+      "name": "acs_future_billing_temp_enab_0",
+      "type": "string"
+    },
+    {
+      "name": "acs_future_billing_temp_enab_1",
+      "type": "string"
+    },
+    {
+      "name": "additional_billing_emails",
+      "type": "string"
+    },
+    {
+      "name": "adp_id",
+      "type": "string"
+    },
+    {
+      "name": "alcohol_recipient_type",
+      "type": "string"
+    },
+    {
+      "name": "alias_email_executives_only",
+      "type": "string"
+    },
+    {
+      "name": "allocation_id",
+      "type": "double"
+    },
+    {
+      "name": "allow_task_time_for_allocation",
+      "type": "string"
+    },
+    {
+      "name": "altemail",
+      "type": "string"
+    },
+    {
+      "name": "alternate_contact_id",
+      "type": "double"
+    },
+    {
+      "name": "altphone",
+      "type": "string"
+    },
+    {
+      "name": "amount_complete",
+      "type": "double"
+    },
+    {
+      "name": "amount_written_off",
+      "type": "double"
+    },
+    {
+      "name": "annual_revenue",
+      "type": "double"
+    },
+    {
+      "name": "annual_revenue_2_id",
+      "type": "double"
+    },
+    {
+      "name": "approval_delegate_id",
+      "type": "double"
+    },
+    {
+      "name": "ar_follow_up_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "ar_specialist_id",
+      "type": "double"
+    },
+    {
+      "name": "ar_specialist_override",
+      "type": "string"
+    },
+    {
+      "name": "banner_approval_status_id",
+      "type": "double"
+    },
+    {
+      "name": "beta_testing",
+      "type": "string"
+    },
+    {
+      "name": "billaddress",
+      "type": "string"
+    },
+    {
+      "name": "billing_rate_card_id",
+      "type": "double"
+    },
+    {
+      "name": "billing_schedule_id",
+      "type": "double"
+    },
+    {
+      "name": "billing_schedule_type",
+      "type": "string"
+    },
+    {
+      "name": "billing_transaction_type",
+      "type": "string"
+    },
+    {
+      "name": "brn",
+      "type": "string"
+    },
+    {
+      "name": "budget_approved",
+      "type": "string"
+    },
+    {
+      "name": "business_style_id",
+      "type": "double"
+    },
+    {
+      "name": "buying_time_frame_id",
+      "type": "double"
+    },
+    {
+      "name": "calculated_end",
+      "type": "timestamp"
+    },
+    {
+      "name": "cases_enabled",
+      "type": "string"
+    },
+    {
+      "name": "case_exists",
+      "type": "string"
+    },
+    {
+      "name": "category_0",
+      "type": "string"
+    },
+    {
+      "name": "cem",
+      "type": "string"
+    },
+    {
+      "name": "channel_tier_id",
+      "type": "double"
+    },
+    {
+      "name": "city",
+      "type": "string"
+    },
+    {
+      "name": "ci_do_not_consolidate_invoice",
+      "type": "string"
+    },
+    {
+      "name": "ci_email_sender_id",
+      "type": "double"
+    },
+    {
+      "name": "ci_email_template_id",
+      "type": "double"
+    },
+    {
+      "name": "ci_fax_sender_id",
+      "type": "double"
+    },
+    {
+      "name": "ci_fax_template_id",
+      "type": "double"
+    },
+    {
+      "name": "ci_last_run_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "ci_payment_terms_id",
+      "type": "double"
+    },
+    {
+      "name": "ci_via_email",
+      "type": "string"
+    },
+    {
+      "name": "ci_via_fax",
+      "type": "string"
+    },
+    {
+      "name": "clean_shelf_vendor",
+      "type": "string"
+    },
+    {
+      "name": "cloud_dashboard_status_id",
+      "type": "double"
+    },
+    {
+      "name": "cm_only",
+      "type": "string"
+    },
+    {
+      "name": "collection_notes",
+      "type": "string"
+    },
+    {
+      "name": "collection_status_id",
+      "type": "double"
+    },
+    {
+      "name": "collector_id",
+      "type": "double"
+    },
+    {
+      "name": "comments",
+      "type": "string"
+    },
+    {
+      "name": "companyname",
+      "type": "string"
+    },
+    {
+      "name": "company_id",
+      "type": "double"
+    },
+    {
+      "name": "company_size_id",
+      "type": "double"
+    },
+    {
+      "name": "consolidated_invoice_billin_id",
+      "type": "double"
+    },
+    {
+      "name": "consolidated_invoice_day_of_b",
+      "type": "double"
+    },
+    {
+      "name": "consolidated_invoice_email_ov",
+      "type": "string"
+    },
+    {
+      "name": "consolidated_invoicing_enable",
+      "type": "string"
+    },
+    {
+      "name": "consolidate_by_invoice_date",
+      "type": "string"
+    },
+    {
+      "name": "consol_days_overdue",
+      "type": "double"
+    },
+    {
+      "name": "consol_deposit_balance",
+      "type": "double"
+    },
+    {
+      "name": "consol_deposit_balance_foreign",
+      "type": "double"
+    },
+    {
+      "name": "consol_openbalance",
+      "type": "double"
+    },
+    {
+      "name": "consol_openbalance_foreign",
+      "type": "double"
+    },
+    {
+      "name": "consol_unbilled_orders",
+      "type": "double"
+    },
+    {
+      "name": "consol_unbilled_orders_foreign",
+      "type": "double"
+    },
+    {
+      "name": "contains_renewal_invoices",
+      "type": "string"
+    },
+    {
+      "name": "contains_renewal_invoice_deli",
+      "type": "string"
+    },
+    {
+      "name": "contingent_worker_type",
+      "type": "string"
+    },
+    {
+      "name": "converted_to_contact_id",
+      "type": "double"
+    },
+    {
+      "name": "converted_to_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_copy",
+      "type": "string"
+    },
+    {
+      "name": "cost_center_hierarchy_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_parent_copy",
+      "type": "string"
+    },
+    {
+      "name": "cost_center_parent_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_estimate",
+      "type": "double"
+    },
+    {
+      "name": "country",
+      "type": "string"
+    },
+    {
+      "name": "create_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "credithold",
+      "type": "string"
+    },
+    {
+      "name": "creditlimit",
+      "type": "double"
+    },
+    {
+      "name": "csm",
+      "type": "string"
+    },
+    {
+      "name": "csm_health_notes",
+      "type": "string"
+    },
+    {
+      "name": "csm_health_rating",
+      "type": "string"
+    },
+    {
+      "name": "ctc",
+      "type": "string"
+    },
+    {
+      "name": "currency_id",
+      "type": "double"
+    },
+    {
+      "name": "current_access",
+      "type": "string"
+    },
+    {
+      "name": "customer_arr",
+      "type": "double"
+    },
+    {
+      "name": "customer_dd_entity_bank_for_id",
+      "type": "double"
+    },
+    {
+      "name": "customer_dd_entity_bank_sub_id",
+      "type": "double"
+    },
+    {
+      "name": "customer_discount",
+      "type": "double"
+    },
+    {
+      "name": "customer_extid",
+      "type": "string"
+    },
+    {
+      "name": "customer_lookup_to_usmexico_id",
+      "type": "double"
+    },
+    {
+      "name": "customer_refund_entity_bank_id",
+      "type": "double"
+    },
+    {
+      "name": "customer_refund_entity_bank__0",
+      "type": "double"
+    },
+    {
+      "name": "customer_since",
+      "type": "timestamp"
+    },
+    {
+      "name": "customer_statement_enrollment",
+      "type": "string"
+    },
+    {
+      "name": "customer_type_id",
+      "type": "double"
+    },
+    {
+      "name": "customer_update_error_delinqu",
+      "type": "string"
+    },
+    {
+      "name": "cust_ref_file_format_id",
+      "type": "double"
+    },
+    {
+      "name": "databricks_invoice_validation",
+      "type": "string"
+    },
+    {
+      "name": "date_banner_approved",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_calculated_start",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_closed",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_convsersion",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_deactivation_approved",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_first_order",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_first_sale",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_gross_lead",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_last_modified",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_last_order",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_last_sale",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_lead",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_prospect",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_scheduled_end",
+      "type": "timestamp"
+    },
+    {
+      "name": "days_overdue",
+      "type": "double"
+    },
+    {
+      "name": "dd_file_format_id",
+      "type": "double"
+    },
+    {
+      "name": "deactivated",
+      "type": "string"
+    },
+    {
+      "name": "deactivation_approval_statu_id",
+      "type": "double"
+    },
+    {
+      "name": "decision_maker_identified",
+      "type": "string"
+    },
+    {
+      "name": "default_order_priority",
+      "type": "double"
+    },
+    {
+      "name": "default_payment_type_id",
+      "type": "double"
+    },
+    {
+      "name": "default_receivables_account_id",
+      "type": "double"
+    },
+    {
+      "name": "default_wt_code_id",
+      "type": "double"
+    },
+    {
+      "name": "delegate_from",
+      "type": "timestamp"
+    },
+    {
+      "name": "delegate_to",
+      "type": "timestamp"
+    },
+    {
+      "name": "delinquency_override",
+      "type": "string"
+    },
+    {
+      "name": "delinquency_override_reason_id",
+      "type": "double"
+    },
+    {
+      "name": "delinquency_status_id",
+      "type": "double"
+    },
+    {
+      "name": "delinquent_checkbox",
+      "type": "string"
+    },
+    {
+      "name": "department_okta",
+      "type": "string"
+    },
+    {
+      "name": "deposit_balance",
+      "type": "double"
+    },
+    {
+      "name": "deposit_balance_foreign",
+      "type": "double"
+    },
+    {
+      "name": "dic",
+      "type": "string"
+    },
+    {
+      "name": "direct_debit",
+      "type": "string"
+    },
+    {
+      "name": "direct_debit_file_format_id",
+      "type": "double"
+    },
+    {
+      "name": "do_not_email",
+      "type": "string"
+    },
+    {
+      "name": "do_not_email_reason",
+      "type": "string"
+    },
+    {
+      "name": "edocument_package_id",
+      "type": "double"
+    },
+    {
+      "name": "eft_bill_payment",
+      "type": "string"
+    },
+    {
+      "name": "eft_customer_refund_payment",
+      "type": "string"
+    },
+    {
+      "name": "eft_file_format_id",
+      "type": "double"
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "email_address_for_payment_not",
+      "type": "string"
+    },
+    {
+      "name": "employee_type",
+      "type": "string"
+    },
+    {
+      "name": "estimated_budget",
+      "type": "string"
+    },
+    {
+      "name": "executive_alert_summary",
+      "type": "string"
+    },
+    {
+      "name": "expected_close",
+      "type": "timestamp"
+    },
+    {
+      "name": "fax",
+      "type": "string"
+    },
+    {
+      "name": "financial_subteam_copy",
+      "type": "string"
+    },
+    {
+      "name": "firstname",
+      "type": "string"
+    },
+    {
+      "name": "first_purchase_date",
+      "type": "string"
+    },
+    {
+      "name": "first_sale_period_id",
+      "type": "double"
+    },
+    {
+      "name": "first_visit",
+      "type": "timestamp"
+    },
+    {
+      "name": "forecast_based_on_allocations",
+      "type": "string"
+    },
+    {
+      "name": "forecast_charge_run_on_demand",
+      "type": "string"
+    },
+    {
+      "name": "forecast_deactivation_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "forecast_writeoff_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "full_name",
+      "type": "string"
+    },
+    {
+      "name": "generate_pdf",
+      "type": "string"
+    },
+    {
+      "name": "home_phone",
+      "type": "string"
+    },
+    {
+      "name": "ico",
+      "type": "string"
+    },
+    {
+      "name": "id_number_in_the_country_of_r",
+      "type": "string"
+    },
+    {
+      "name": "id_type_in_the_country_of_r_id",
+      "type": "double"
+    },
+    {
+      "name": "implementation_consultant",
+      "type": "string"
+    },
+    {
+      "name": "industry_id",
+      "type": "double"
+    },
+    {
+      "name": "ingenico_payment_input_type__",
+      "type": "string"
+    },
+    {
+      "name": "ingenico_payment_product_id__",
+      "type": "double"
+    },
+    {
+      "name": "ingenico_payment_token__curre",
+      "type": "string"
+    },
+    {
+      "name": "ingenico_payment_token__old",
+      "type": "string"
+    },
+    {
+      "name": "invoice_push_to_cloud_overrid",
+      "type": "string"
+    },
+    {
+      "name": "isemailhtml",
+      "type": "string"
+    },
+    {
+      "name": "isemailpdf",
+      "type": "string"
+    },
+    {
+      "name": "isinactive",
+      "type": "string"
+    },
+    {
+      "name": "istaxable",
+      "type": "string"
+    },
+    {
+      "name": "is_ar_specialist",
+      "type": "string"
+    },
+    {
+      "name": "is_exempt_time",
+      "type": "string"
+    },
+    {
+      "name": "is_explicit_conversion",
+      "type": "string"
+    },
+    {
+      "name": "is_ingenico__current",
+      "type": "string"
+    },
+    {
+      "name": "is_job",
+      "type": "string"
+    },
+    {
+      "name": "is_limit_time_to_assignees",
+      "type": "string"
+    },
+    {
+      "name": "is_person",
+      "type": "string"
+    },
+    {
+      "name": "is_productive_time",
+      "type": "string"
+    },
+    {
+      "name": "is_project_completely_billed",
+      "type": "string"
+    },
+    {
+      "name": "is_source_item_from_brc",
+      "type": "string"
+    },
+    {
+      "name": "is_utilized_time",
+      "type": "string"
+    },
+    {
+      "name": "job_end",
+      "type": "timestamp"
+    },
+    {
+      "name": "job_start",
+      "type": "timestamp"
+    },
+    {
+      "name": "job_type_id",
+      "type": "double"
+    },
+    {
+      "name": "j_p__morgan_default_payment_id",
+      "type": "double"
+    },
+    {
+      "name": "j_p__morgan_group_bills_for_p",
+      "type": "string"
+    },
+    {
+      "name": "j_p__morgan_payables_email_ad",
+      "type": "string"
+    },
+    {
+      "name": "labor_budget_from_allocations",
+      "type": "string"
+    },
+    {
+      "name": "language_id",
+      "type": "string"
+    },
+    {
+      "name": "lastname",
+      "type": "string"
+    },
+    {
+      "name": "last_accelerated_amortization",
+      "type": "timestamp"
+    },
+    {
+      "name": "last_modified_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "last_sales_activity",
+      "type": "timestamp"
+    },
+    {
+      "name": "last_sale_period_id",
+      "type": "double"
+    },
+    {
+      "name": "last_statement_sent",
+      "type": "timestamp"
+    },
+    {
+      "name": "last_visit",
+      "type": "timestamp"
+    },
+    {
+      "name": "lead_source_id",
+      "type": "double"
+    },
+    {
+      "name": "line1",
+      "type": "string"
+    },
+    {
+      "name": "line2",
+      "type": "string"
+    },
+    {
+      "name": "line3",
+      "type": "string"
+    },
+    {
+      "name": "lockout_notice_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "loginaccess",
+      "type": "string"
+    },
+    {
+      "name": "lsa_link",
+      "type": "string"
+    },
+    {
+      "name": "lsa_link_name",
+      "type": "string"
+    },
+    {
+      "name": "management_id",
+      "type": "string"
+    },
+    {
+      "name": "manager_last_updated",
+      "type": "string"
+    },
+    {
+      "name": "marked_delinquent_as_of",
+      "type": "timestamp"
+    },
+    {
+      "name": "marquee_customer",
+      "type": "string"
+    },
+    {
+      "name": "middlename",
+      "type": "string"
+    },
+    {
+      "name": "mobile_phone",
+      "type": "string"
+    },
+    {
+      "name": "ms_active",
+      "type": "string"
+    },
+    {
+      "name": "ms_active_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "ms_inactive_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "multiple_locations",
+      "type": "string"
+    },
+    {
+      "name": "multiple_price_id",
+      "type": "double"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "new_billing_process_approved",
+      "type": "string"
+    },
+    {
+      "name": "no__of_employees",
+      "type": "double"
+    },
+    {
+      "name": "ns_acs__blank",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs__engineer",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs__ga",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs__marketing",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs__operations",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs__sales",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs__support",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs___secondary_approver_l",
+      "type": "double"
+    },
+    {
+      "name": "number_of_vehicles",
+      "type": "double"
+    },
+    {
+      "name": "n_1099_memo",
+      "type": "string"
+    },
+    {
+      "name": "office_location_copy",
+      "type": "string"
+    },
+    {
+      "name": "office_location_id",
+      "type": "double"
+    },
+    {
+      "name": "openbalance",
+      "type": "double"
+    },
+    {
+      "name": "openbalance_foreign",
+      "type": "double"
+    },
+    {
+      "name": "other_software_considered_id",
+      "type": "double"
+    },
+    {
+      "name": "override_autobilling",
+      "type": "string"
+    },
+    {
+      "name": "over_due_amount",
+      "type": "double"
+    },
+    {
+      "name": "parent_account_id",
+      "type": "double"
+    },
+    {
+      "name": "parent_id",
+      "type": "double"
+    },
+    {
+      "name": "partner_id",
+      "type": "double"
+    },
+    {
+      "name": "party_id",
+      "type": "double"
+    },
+    {
+      "name": "payment_day",
+      "type": "double"
+    },
+    {
+      "name": "payment_description",
+      "type": "string"
+    },
+    {
+      "name": "payment_plan",
+      "type": "string"
+    },
+    {
+      "name": "payment_terms_id",
+      "type": "double"
+    },
+    {
+      "name": "permissions",
+      "type": "string"
+    },
+    {
+      "name": "philhealth",
+      "type": "string"
+    },
+    {
+      "name": "phone",
+      "type": "string"
+    },
+    {
+      "name": "portal_invoicing",
+      "type": "string"
+    },
+    {
+      "name": "position_id",
+      "type": "string"
+    },
+    {
+      "name": "pp_pilot_customer",
+      "type": "string"
+    },
+    {
+      "name": "preferred_payment_method_id",
+      "type": "double"
+    },
+    {
+      "name": "primary_contact_id",
+      "type": "double"
+    },
+    {
+      "name": "print_on_check_as",
+      "type": "string"
+    },
+    {
+      "name": "probability",
+      "type": "double"
+    },
+    {
+      "name": "product_group_copy",
+      "type": "string"
+    },
+    {
+      "name": "product_group_id",
+      "type": "double"
+    },
+    {
+      "name": "projected_end",
+      "type": "timestamp"
+    },
+    {
+      "name": "project_expense_type_id",
+      "type": "double"
+    },
+    {
+      "name": "project_manager_id",
+      "type": "double"
+    },
+    {
+      "name": "push_account_update_to_sfdc",
+      "type": "string"
+    },
+    {
+      "name": "razon_social_legal_company_na",
+      "type": "string"
+    },
+    {
+      "name": "reason_removed_from_auto_invo",
+      "type": "string"
+    },
+    {
+      "name": "reference_classification_id",
+      "type": "double"
+    },
+    {
+      "name": "reference_notes",
+      "type": "string"
+    },
+    {
+      "name": "reference_status_id",
+      "type": "double"
+    },
+    {
+      "name": "referrer",
+      "type": "string"
+    },
+    {
+      "name": "regimen_capital_id",
+      "type": "double"
+    },
+    {
+      "name": "regimen_fiscal_receptor_id",
+      "type": "double"
+    },
+    {
+      "name": "reminderdays",
+      "type": "double"
+    },
+    {
+      "name": "renewal",
+      "type": "timestamp"
+    },
+    {
+      "name": "represents_subsidiary_id",
+      "type": "double"
+    },
+    {
+      "name": "resalenumber",
+      "type": "string"
+    },
+    {
+      "name": "restrict_access_to_expensify",
+      "type": "string"
+    },
+    {
+      "name": "retained_until",
+      "type": "timestamp"
+    },
+    {
+      "name": "revenue_estimate",
+      "type": "double"
+    },
+    {
+      "name": "revenue_recognition_approval_",
+      "type": "double"
+    },
+    {
+      "name": "revenue_recognition_approve_id",
+      "type": "double"
+    },
+    {
+      "name": "revenue_recognition_limit",
+      "type": "double"
+    },
+    {
+      "name": "rev_rec_forecast_rule_id",
+      "type": "double"
+    },
+    {
+      "name": "rev_rec_forecast_template",
+      "type": "double"
+    },
+    {
+      "name": "rfc",
+      "type": "string"
+    },
+    {
+      "name": "saas_vendor",
+      "type": "string"
+    },
+    {
+      "name": "safety_tier_id",
+      "type": "double"
+    },
+    {
+      "name": "salesforce_id",
+      "type": "string"
+    },
+    {
+      "name": "salesforce_id_2",
+      "type": "string"
+    },
+    {
+      "name": "sales_rep_id",
+      "type": "double"
+    },
+    {
+      "name": "sales_rep_territory_copy",
+      "type": "string"
+    },
+    {
+      "name": "sales_rep_territory_id",
+      "type": "double"
+    },
+    {
+      "name": "sales_segment_copy",
+      "type": "string"
+    },
+    {
+      "name": "sales_territory_id",
+      "type": "double"
+    },
+    {
+      "name": "salutation",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "sat_industry_type_id",
+      "type": "double"
+    },
+    {
+      "name": "sat_registered_name",
+      "type": "string"
+    },
+    {
+      "name": "scheduling_method_id",
+      "type": "string"
+    },
+    {
+      "name": "scs___ci_layout_id",
+      "type": "double"
+    },
+    {
+      "name": "segment_acct_owner_role_id",
+      "type": "double"
+    },
+    {
+      "name": "segment_id",
+      "type": "double"
+    },
+    {
+      "name": "sender_email_domain",
+      "type": "string"
+    },
+    {
+      "name": "sentiment_root_cause",
+      "type": "string"
+    },
+    {
+      "name": "sfdc_id_user",
+      "type": "string"
+    },
+    {
+      "name": "shipaddress",
+      "type": "string"
+    },
+    {
+      "name": "shipping_emails",
+      "type": "string"
+    },
+    {
+      "name": "ship_complete",
+      "type": "string"
+    },
+    {
+      "name": "sled_account",
+      "type": "string"
+    },
+    {
+      "name": "sn_is_alias_employee",
+      "type": "string"
+    },
+    {
+      "name": "sn_substitution_billing_delay",
+      "type": "string"
+    },
+    {
+      "name": "sn_substitution_billing_dela_0",
+      "type": "timestamp"
+    },
+    {
+      "name": "sod_approval_request_for_new_",
+      "type": "string"
+    },
+    {
+      "name": "sod_employee_processing_sta_id",
+      "type": "double"
+    },
+    {
+      "name": "sod_status",
+      "type": "string"
+    },
+    {
+      "name": "sod_violation_file",
+      "type": "string"
+    },
+    {
+      "name": "software_switched_from_id",
+      "type": "double"
+    },
+    {
+      "name": "ssr_temp_not_processed",
+      "type": "string"
+    },
+    {
+      "name": "state",
+      "type": "string"
+    },
+    {
+      "name": "statement_language_id",
+      "type": "double"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "status_descr",
+      "type": "string"
+    },
+    {
+      "name": "status_probability",
+      "type": "double"
+    },
+    {
+      "name": "status_read_only",
+      "type": "string"
+    },
+    {
+      "name": "stripe_account_currency",
+      "type": "string"
+    },
+    {
+      "name": "stripe_customer_id",
+      "type": "string"
+    },
+    {
+      "name": "subsidiary_id",
+      "type": "double"
+    },
+    {
+      "name": "support_level_id",
+      "type": "double"
+    },
+    {
+      "name": "sync_address_to_sdfc",
+      "type": "string"
+    },
+    {
+      "name": "tax_contact_first_name",
+      "type": "string"
+    },
+    {
+      "name": "tax_contact_id",
+      "type": "double"
+    },
+    {
+      "name": "tax_contact_last_name",
+      "type": "string"
+    },
+    {
+      "name": "tax_contact_middle_name",
+      "type": "string"
+    },
+    {
+      "name": "tax_item_id",
+      "type": "double"
+    },
+    {
+      "name": "tax_number",
+      "type": "string"
+    },
+    {
+      "name": "telematics_tier_id",
+      "type": "double"
+    },
+    {
+      "name": "template_and_sending_method_a",
+      "type": "string"
+    },
+    {
+      "name": "temp_field",
+      "type": "string"
+    },
+    {
+      "name": "third_party_acct",
+      "type": "string"
+    },
+    {
+      "name": "third_party_carrier",
+      "type": "string"
+    },
+    {
+      "name": "third_party_country",
+      "type": "string"
+    },
+    {
+      "name": "third_party_integration_user",
+      "type": "string"
+    },
+    {
+      "name": "third_party_zip_code",
+      "type": "string"
+    },
+    {
+      "name": "time_approval_type_id",
+      "type": "double"
+    },
+    {
+      "name": "tin",
+      "type": "string"
+    },
+    {
+      "name": "tipo_de_rfc_id",
+      "type": "double"
+    },
+    {
+      "name": "top_level_parent_id",
+      "type": "double"
+    },
+    {
+      "name": "transactions_need_approval",
+      "type": "string"
+    },
+    {
+      "name": "uen",
+      "type": "string"
+    },
+    {
+      "name": "unapplied_amount",
+      "type": "double"
+    },
+    {
+      "name": "unbilled_orders",
+      "type": "double"
+    },
+    {
+      "name": "unbilled_orders_foreign",
+      "type": "double"
+    },
+    {
+      "name": "uplift",
+      "type": "double"
+    },
+    {
+      "name": "uplift_cap_hidden",
+      "type": "double"
+    },
+    {
+      "name": "uplift_cap_type_hidden_id",
+      "type": "double"
+    },
+    {
+      "name": "uplift_type_id",
+      "type": "double"
+    },
+    {
+      "name": "url",
+      "type": "string"
+    },
+    {
+      "name": "uses_fp_or_reseller",
+      "type": "string"
+    },
+    {
+      "name": "use_calculated_billing_budget",
+      "type": "string"
+    },
+    {
+      "name": "use_calculated_cost_budget",
+      "type": "string"
+    },
+    {
+      "name": "use_percent_complete_override",
+      "type": "string"
+    },
+    {
+      "name": "use_sender_email_list",
+      "type": "string"
+    },
+    {
+      "name": "vat_registration_no",
+      "type": "string"
+    },
+    {
+      "name": "vat_reg_number",
+      "type": "string"
+    },
+    {
+      "name": "vendor_bank_fees",
+      "type": "string"
+    },
+    {
+      "name": "vendor_entity_bank_format_id",
+      "type": "double"
+    },
+    {
+      "name": "vendor_entity_bank_subsidia_id",
+      "type": "double"
+    },
+    {
+      "name": "vertex_customer_class_id",
+      "type": "double"
+    },
+    {
+      "name": "vertex_customer_id",
+      "type": "string"
+    },
+    {
+      "name": "web_lead",
+      "type": "string"
+    },
+    {
+      "name": "web_service_id",
+      "type": "string"
+    },
+    {
+      "name": "web_service_sender_id",
+      "type": "double"
+    },
+    {
+      "name": "which_written_language",
+      "type": "string"
+    },
+    {
+      "name": "workday_id",
+      "type": "string"
+    },
+    {
+      "name": "worker_type",
+      "type": "string"
+    },
+    {
+      "name": "year_established",
+      "type": "string"
+    },
+    {
+      "name": "zipcode",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_deleted",
+      "type": "boolean"
+    },
+    {
+      "name": "date_deleted",
+      "type": "timestamp"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    },
+    {
+      "name": "graphiteconnect_ready_to_tra_0",
+      "type": "string"
+    },
+    {
+      "name": "graphiteconnect_ready_to_tran",
+      "type": "string"
+    },
+    {
+      "name": "graphiteconnect_company_profi",
+      "type": "string"
+    }
+  ]
+}

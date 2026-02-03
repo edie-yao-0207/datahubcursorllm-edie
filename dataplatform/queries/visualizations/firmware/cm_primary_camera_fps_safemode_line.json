@@ -1,0 +1,114 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "Primary FPS"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "primary_safe_mode_p001": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "primary_safe_mode_p01": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "primary_safe_mode_p05": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "primary_safe_mode_p10": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "primary_safe_mode_p25": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "primary_safe_mode_p50": {
+      "yAxis": 0,
+      "type": "line"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_26b5f4a76901"
+    },
+    "y": [
+      {
+        "id": "column_26b5f4a76903",
+        "column": "primary_safe_mode_p001"
+      },
+      {
+        "id": "column_26b5f4a76906",
+        "column": "primary_safe_mode_p01"
+      },
+      {
+        "id": "column_26b5f4a76909",
+        "column": "primary_safe_mode_p05"
+      },
+      {
+        "id": "column_26b5f4a76912",
+        "column": "primary_safe_mode_p10"
+      },
+      {
+        "id": "column_26b5f4a76915",
+        "column": "primary_safe_mode_p25"
+      },
+      {
+        "id": "column_26b5f4a76918",
+        "column": "primary_safe_mode_p50"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

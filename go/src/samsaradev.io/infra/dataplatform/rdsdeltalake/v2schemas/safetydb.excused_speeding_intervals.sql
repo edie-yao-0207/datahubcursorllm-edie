@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`start_ms` BIGINT,
+`end_ms` BIGINT,
+`created_at_ms` BIGINT,
+`updated_at_ms` BIGINT,
+`is_deleted` BYTE,
+`trip_start_ms` BIGINT,
+`date` STRING

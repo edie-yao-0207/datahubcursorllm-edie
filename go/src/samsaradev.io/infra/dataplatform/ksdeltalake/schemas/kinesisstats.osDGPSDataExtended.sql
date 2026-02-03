@@ -1,0 +1,82 @@
+`date` STRING,
+`stat_type` INT,
+`org_id` BIGINT,
+`object_type` INT,
+`object_id` BIGINT,
+`time` BIGINT,
+`value` STRUCT<
+  `date`: STRING,
+  `time`: BIGINT,
+  `received_delta_seconds`: BIGINT,
+  `is_start`: BOOLEAN,
+  `is_end`: BOOLEAN,
+  `is_databreak`: BOOLEAN,
+  `int_value`: BIGINT,
+  `double_value`: DOUBLE,
+  `proto_value`: STRUCT<
+    `gps_fix_log_extended`: STRUCT<
+      `latitude_nd`: BIGINT,
+      `longitude_nd`: BIGINT,
+      `session_id`: BIGINT,
+      `hor_unc_circ_mm`: BIGINT,
+      `hor_unc_ellipse_semi_minor_mm`: BIGINT,
+      `hor_unc_ellipse_semi_major_mm`: BIGINT,
+      `hor_unc_ellipse_orient_azimuth_d`: FLOAT,
+      `hor_confidence_percent`: BIGINT,
+      `hor_reliability`: INT,
+      `speed_horizontal_mmpers`: BIGINT,
+      `speed_unc_mmpers`: BIGINT,
+      `altitude_wrt_ellipsoid_mm`: BIGINT,
+      `altitude_wrt_mean_sea_level_mm`: BIGINT,
+      `vert_unc_mm`: BIGINT,
+      `vert_confidence_percent`: BIGINT,
+      `vert_reliability`: INT,
+      `speed_vertical_mmpers`: BIGINT,
+      `heading_d`: FLOAT,
+      `heading_unc_d`: FLOAT,
+      `magnetic_deviation_d`: FLOAT,
+      `technology_mask`: INT,
+      `pdop`: BIGINT,
+      `hdop`: BIGINT,
+      `vdop`: BIGINT,
+      `timestamp_utc_ms`: BIGINT,
+      `leap_seconds`: BIGINT,
+      `gps_week`: BIGINT,
+      `gps_time_week_ms`: BIGINT,
+      `time_unc_us`: BIGINT,
+      `time_src`: INT,
+      `usage_mask`: INT,
+      `aiding_indicator_mask`: INT,
+      `fix_id`: BIGINT,
+      `gnss_sv_used_list_count`: BIGINT,
+      `altitude_assumed_bool`: BOOLEAN,
+      `satellite_info`: STRUCT<
+        `satellites_seen`: ARRAY<
+          STRUCT<
+            `valid_mask`: STRUCT<
+              `valid_system`: BOOLEAN,
+              `valid_gnss_svid`: BOOLEAN,
+              `valid_health_status`: BOOLEAN,
+              `valid_process_status`: BOOLEAN,
+              `valid_svinfo_mask`: BOOLEAN,
+              `valid_elivation`: BOOLEAN,
+              `valid_azimuth`: BOOLEAN,
+              `valid_snr`: BOOLEAN
+            >,
+            `system`: INT,
+            `gnss_sv_id`: BIGINT,
+            `health_status`: INT,
+            `sv_status`: INT,
+            `sv_info_mask`: INT,
+            `elevation`: FLOAT,
+            `azimuth`: FLOAT,
+            `snr`: FLOAT
+          >
+        >,
+        `unseen_satellite_count`: BIGINT
+      >
+    >
+  >
+>,
+`_filename` STRING,
+`_sort_key` STRING

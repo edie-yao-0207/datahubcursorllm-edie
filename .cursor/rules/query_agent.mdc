@@ -1,0 +1,200 @@
+---
+description: Query Agent - SQL queries and data analysis for DataHub tables. Use @query_agent to include these rules when writing SQL queries or analyzing data.
+globs:
+  - "go/src/samsaradev.io/infra/dataplatform/datahub/llm/**/*"
+  - "**/datahub.json"
+  - "**/sql_runner.py"
+  - "**/lineage.py"
+  - "**/datahub_lineage.json"
+  - "**/*query*.sql"
+  - "**/*query*.py"
+  - "**/example_queries/**"
+alwaysApply: true
+---
+
+# Query Agent Rules
+
+Please write a SQL query using the following rules and available MCP tools. If MCP tools are available (e.g., `mcp_datahub_local_sse_get_tables`, `mcp_datahub_local_sse_run_sql_query`, etc.), use them. If no MCP tools are available, you can use datahub.json (a JSON file with all of the tables in the database. It includes table descriptions and all of the columns and available column descriptions).
+
+⚠️ CRITICAL RULES ⚠️
+
+0a. **ALWAYS RUN AGENT SETUP**: At the start of each query, run .init_agent.py:
+
+**Preferred**: If MCP tools are available, call:
+- `mcp_datahub_local_sse_init_agent(input_query=...)`
+
+**Fallback (Cursor sandbox)**: If MCP tools are not available, run the shell command below with `required_permissions: ["all"]` on the **first** attempt (do not try sandbox first, do not retry).
+
+```bash
+$HOME/co/venvs/cursordatahub/bin/python $HOME/co/backend/go/src/samsaradev.io/infra/dataplatform/dagster/projects/datamodel/datamodel/common/llm/.init_agent.py -i "INPUT_QUERY_STR"
+```
+where INPUT_QUERY_STR is whatever the user typed into Cursor agent input box.
+**This should run regardless of whether MCP tools are available**
+**Note: DATABRICKS_TOKEN should already be available in the environment for S3-based logging.**
+
+0b. **ONLY IF MCP TOOLS ARE NOT AVAILABLE**: Before running anything, also initialize the environment by:
+source .envrc
+**If MCP tools are available (e.g., get_tables, get_table_metadata, run_sql_query), skip the environment initialization step as the environment is already set up. However, still run .init_agent.py for analytics tracking.**
+
+1. If searching datahub.json, don't search line by line. Search for the table name or column name in the JSON file, e.g. grep "safety" datahub.json
+2. Only present the user with one output query output at a time, before generating the next query. You can run intermediate queries to get more information if needed, but once you have an answer, present it to the user, and wait before generating the next query. If you want to do a drill down, ask the user for more information on what they want to drill down on.
+
+⚠️ ONE QUERY AT A TIME RULE ⚠️
+
+3. NEVER generate multiple queries in succession without user input. After generating and running ONE SQL query, STOP and wait for the user to request another query or provide further instructions. This is MANDATORY - do not continue refining or generating new queries on your own.
+
+4. Prefer finding table schemas via get_table_metadata tool or from datahub.json. You should not need to DESCRIBE a table since that is already provided in get_table_metadata or datahub.json. If asked for a table not available in those sources, you can use DESCRIBE. If you find it useful, you can also run a select \* limit 10 query to explore sample rows.
+5. Run the query immediately after generating it.
+   After you generate the SQL query, **immediately** output it in composer, and then **run the query** using the following command:
+
+```bash
+$HOME/co/venvs/cursordatahub/bin/python $HOME/co/backend/go/src/samsaradev.io/infra/dataplatform/dagster/projects/datamodel/datamodel/common/llm/sql_runner.py --query "QUERY"
+```
+
+5a. A note about US vs EU
+If the user asks to run their query in EU Databricks (or EMEA), or specifically on EU orgs, then pass in --region "eu". Note that some tables are "global" tables (the table suffix is "_global") which means they exist in US region but contain data across all regions. So if you determine that using a "global" table, it's okay to still query US region. Otherwise if you need data from EU, pass in --region "eu" into the sql_runner.py command
+
+5b. If asked to save the query as a dataframe, use the following command from python: sql_to_df("QUERY")
+
+**IMPORTANT: Always display formatted SQL query**
+- When using `run_sql_query` MCP tool: **ALWAYS** display the formatted SQL query (using sql-formatter) before or alongside the query results. This provides transparency and allows users to see exactly what query was executed.
+- When using `sql_runner.py`: The script automatically prints the formatted query, but you should also display it in your response for clarity.
+- Whenever you print a SQL query, please format it first using sql-formatter.
+
+**Do not wait for confirmation** to run the query. This step is mandatory for every SQL query generated.
+
+6. After generating the SQL query, pause for the user to look. Don't just jump to another query without being asked to. Only run one successful query at a time until asked for another.
+
+7. You can search the example_queries directory if helpful
+
+8. You can use format_number(count(\*), '#,###') as total_xxxx for results with large numbers (e.g. trips, miles)
+
+9. Any query on dim_devices, dim_organizations or any other dim_X table should generally either join or filter on date. Scanning many dates is expensive and will often lead to incorrect results.
+
+```
+
+Do not guess at adding filters if you don't know sample values of columns. If you need information on column values, you can run a SQL query like "select column_name, count(1) from table_name group by 1 order by 2 desc limit 10" to get the possible values, and then use that information in the step of the query generation.
+
+IMPORTANT: When referencing a table, ALWAYS include the database.table reference, as indicated in datahub.json. E.g. datamodel_core.dim_organizations, not just dim_organizations. datamodel_core.dim_devices, not just dim_devices. Only query from tables that are keys in the dictionary in datahub.json. Always include the database name.
+
+**IMPORTANT**
+Active or paid customers must equal is_paid_customer = true from dim_organizations. You should count distinct sam_number to calculate active or paid customers
+
+When outputting values, always include the date of the value. E.g. "2024-01-01". So if I ask for data as of the most recent date, it should show the value and which date that came from. For example:
+
+paying_customers_with_active_devices most_recent_date
+0 43010 2025-03-11
+
+More details below:
+
+For tables with dim in the name ALWAYS apply filter `date = (select max(date) from table)`
+
+If you can't figure out what values are possible for a column, you can first
+run a SQL query like "select distinct column_name from table_name" to get the
+possible values, and then use that information in the step of the query generation.
+
+You can join dim_devices to to definitions.products to get product names.
+
+Logged in users have fct_user_activity.source=login
+
+fct_trips ALWAYS joins with dim_devices on org_id, device_id, date
+fct_trips ALWAYS joins with dim_organizations on org_id, date
+primary key of fct_trips: date, device_id, org_id, start_time_ms, trip_type
+
+Join products tables for device analysis using product_id with dim_devices.
+
+If no trip type specified in calculations from fct_trips, filter device_type = 'VG - Vehicle Gateway' from dim_devices and join dim_organizations and filter is_paid_customer = true. You should note in your answers that you filtered on paid customers.
+
+If calculating VG trips, VGs, or vehicles: join to datamodel_core.dim_devices and filter for device_type = 'VG - Vehicle Gateway', join dim_organizations and filter is_paid_customer = true
+
+CM Trips = device_type = 'VG - Vehicle Gateway' AND [associated_devices].[camera_device_id] IS NOT NULL from dim_devices
+
+If asked for licenses or active licenses use edw.silver.fct_license_orders, active customers are available in datamodel_core.dim_organizations in the is_paid_customer field. Filter out trial licenses using is_trial = FALSE and add to notes of what you implemented. Get license type from product family in edw.silver.license_hw_sku_xref. Licenses are can have multiple instances within the same sam_number based on contract start/end date, so you need to sum all the product_net_qty for a given SAM/product_sku where the contract is currently active. To get this at the org level, join with datamodel_core.dim_organizations by joining the SAM from fct_license_orders with a coalesce of salesforce_sam_number/sam_number from dim_organizations. If asked for device licenses or licensed devices,  provide background context to user that licenses for common types of devices including VG (Vehicle Gateway) devices are fungible, and instead they must compare the number of licenses by sam_number in fct_license_orders to the number of active devices in datamodel_core.lifetime_device_activity. Report licenses by product_sku (from fct_license_orders). Few devices or forms products are licensed by device and are available in datamodel_platform.dim_license_assignment (seeing rows in the table for the org_id would indicate that the customer is under licensed device program, otherwise provide background context to user on comparing active devices to active licenses). Some customers have "CM (Camera) Only" licenses, meaning a VG is used as a connection point between the vehicle and the camera but the customer only has safety licenses. CM only licenses can explain a gap between VG licenses (ex: LIC-VG% skus) and safety licenses (LIC-CM skus) . Licenses are active if there is a non zero quantity and the contract_end_date is null or after the requested date.
+
+Get active device status or device activity based on l1 field in lifetime_device_activity table and join on device_id, org_id and date. When querying for active devices in the last N days, use latest_date to determine the last time a device was active.
+
+If asked for data "yesterday" use date = date_sub(current_date, 1)
+If asked for data "last week" use date >= date_sub(current_date(), 7)
+If asked for data "last month" use date >= date_trunc('month', current_date) - INTERVAL '1' MONTH AND date < date_trunc('month', current_date)
+If asked for data "today" use MAX(date)
+
+If no date range is specified for a fct table, use last year as range. For tables in the kinesisstats, kinesisstats_window, or kinesisstats_history databases, use yesterday's date  = date_sub(current_date, 1) unless specified by the user. Warn the user that long lookback ranges on these tables will result in longrunning queries due to large table size.
+
+To get AGs: join to datamodel_core.dim_devices and filter for device_type = "AG - Asset Gateway" and join dim_organizations and filter is_paid_customer = true
+
+Apply DISTINCT when counting devices or VGs if unspecified. The same device_id can exist in multiple orgs, so the true semantic way to count distinct devices is to count distinct org_id + device_id
+
+If asked for total of organizations "using SAM", it means COUNT(DISTINCT sam_number) if sam_number is an available column
+
+Active or Assigned Drivers means driver_id != 0
+
+Vehicles are tracked using device_id
+
+Organizations: org_id in dim_organizations
+SAM numbers: sam_number in dim_organizations
+Devices: device_id in dim_devices
+
+ELD: Electronic Logging Device
+HOS: Hours of Service
+DVIR: driver vehicle inspection record
+
+When calculating mpg filter for fuel_consumed_ml > 0 or total_fuel_consumed_ml > 0
+
+Industry = account_industry
+Industry Vertical = industry_vertical
+```
+
+
+## Lineage
+If asked for downstream lineage, run: ./lineage.py -t TABLE_NAME -d
+If asked for upstream lineage, run: ./lineage.py -t TABLE_NAME -u
+
+Lineage information can be found in datahub_lineage.json. It is a dictionary mapping a table to all its direct upstream tables.
+
+## SQL Query Formatting Rules
+
+1. **ALWAYS display formatted SQL query**: When running any SQL query (via `run_sql_query` MCP tool or `sql_runner.py`), you MUST display the formatted SQL query using sql-formatter so users can see exactly what was executed. This provides transparency and helps with debugging.
+
+2. When running SQL queries through sql_runner.py, all queries MUST be formatted on a single line in the command:
+   - Remove all newlines
+   - Remove extra spaces between SQL keywords
+   - Keep the query as a single continuous line
+   - Escape any quotes properly
+   - **However, still display the nicely formatted version in your response**
+
+3. When using `run_sql_query` MCP tool:
+   - Format the query using sql-formatter before displaying it
+   - Show the formatted query in a code block in your response
+   - Then execute the query via the MCP tool
+
+Example for sql_runner.py:
+❌ DON'T:
+```bash
+sql_runner.py --query "
+SELECT column
+FROM table
+WHERE condition"
+```
+
+✅ DO:
+Display formatted query:
+```sql
+SELECT column
+FROM table
+WHERE condition
+```
+
+Then run:
+```bash
+sql_runner.py --query "SELECT column FROM table WHERE condition"
+```
+
+Example for run_sql_query MCP tool:
+Display formatted query:
+```sql
+SELECT column
+FROM table
+WHERE condition
+```
+
+Then call the MCP tool with the query.

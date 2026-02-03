@@ -1,0 +1,74 @@
+{
+  "name": "perf_infra.elite_org_metric_rps",
+  "owner": "OPX",
+  "description": "Performance scores of every route load and user interaction (metric)",
+  "nonproduction": true,
+  "dependencies": [
+    {
+      "dbname": "perf_infra",
+      "tablename": "elite_org_combined_route_loads",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "perf_infra",
+      "tablename": "route_config",
+      "type": "table",
+      "external": true
+    }
+  ],
+  "backfill_start_date": "2022-01-01",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "perf_infra",
+    "tablename": "elite_org_metric_rps",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "resource", "name", "type"],
+    "write_mode": "overwrite",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "$date_default_description"
+        }
+      },
+      {
+        "name": "resource",
+        "type": "string",
+        "description": "The metric's route."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "The metric's name."
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "description": "The metric type, either user_interaction or route_load."
+      },
+      {
+        "name": "score",
+        "type": "double",
+        "description": "The metric's score, computed from its p95 over the past week."
+      },
+      {
+        "name": "score_times_count",
+        "type": "double",
+        "description": "The metric's score, multiplied by its count. This is a helpful column to precompute because custom aggregation functions are disallowed."
+      },
+      {
+        "name": "count",
+        "type": "long",
+        "description": "The number of data points we have for this metric."
+      },
+      {
+        "name": "rolling_p95",
+        "type": "double",
+        "description": "The week-rolling p95 value for this metric."
+      }
+    ]
+  }
+}

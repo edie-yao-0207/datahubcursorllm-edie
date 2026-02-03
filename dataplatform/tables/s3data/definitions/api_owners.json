@@ -1,0 +1,89 @@
+{
+  "table": "api_owners",
+  "owner": "DataEngineering",
+  "description": "Maps API endpoints to their registered owners /n/n[API Owners](https://cloud.samsara.com/internal/api-ownership)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/api/api_endpoint_owners.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/api/api_endpoint_owners.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/api/api_endpoint_owners.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "gql_key",
+      "type": "string",
+      "description": "The GraphQL identifier associated with the api endpoint. Represented as '<method>_<route>_<version>' (e.g., 'GET_addresses_2018.01.01')"
+    },
+    {
+      "name": "team",
+      "type": "string",
+      "description": "The team name registered as the endpoint's owner"
+    },
+    {
+      "name": "method",
+      "type": "string",
+      "description": "The http method name of the api endpoint - (e.g., 'GET', 'POST', 'DELETE')"
+    },
+    {
+      "name": "route",
+      "type": "string",
+      "description": "The path of the api endpoint"
+    },
+    {
+      "name": "version",
+      "type": "string",
+      "description": "The version of the api endpoint. Represented as the release date in 'YYY.mm.dd' format/n/n (e.g., '2018.01.01', '2021.02.16')"
+    },
+    {
+      "name": "slo_group_name",
+      "type": "bigint",
+      "description": "Service Level Objective (SLO) group id /n/n[SLO Groupings](https://paper.dropbox.com/doc/SLO-Platform-Configuration--BTe57wFfJuhZN9xaHuGgaaJ0Ag-9hcG4vpTbAlVuSzTmOsnE#:uid=240644017203544467293836&h2=SLO-Groupings)/n/n[SLO Policy](https://paper.dropbox.com/doc/SLO-Policy--BTfgn3BRW0UpEF0mLNrBrhJ4Ag-nWQqLIwzeaqAc26uGl1MR)/n/n[SLOs at Samsara](https://paper.dropbox.com/doc/SLOs-at-Samsara--BTdmmQfzBBXFsTEJ9qah4y3IAg-kRMwhxmVHkPJ1rzFm04Fp)"
+    },
+    {
+      "name": "rate_limit_per_sec",
+      "type": "bigint",
+      "description": "The default number of requests that the api endpoint will accept per second. (-1) indicates no limit"
+    },
+    {
+      "name": "rate_limit_per_min",
+      "type": "bigint",
+      "description": "The default number of requests that the api endpoint will accept per minute. (-1) indicates no limit"
+    },
+    {
+      "name": "rate_limit_per_hour",
+      "type": "bigint",
+      "description": "The default number of requests that the api endpoint will accept per hour. (-1) indicates no limit"
+    },
+    {
+      "name": "rate_limit_per_day",
+      "type": "bigint",
+      "description": "The default number of requests that the api endpoint will accept per day. (-1) indicates no limit"
+    },
+    {
+      "name": "rate_limit_burst",
+      "type": "bigint",
+      "description": "The number of requests to the api endpoint exceeding the rate limit per second that will be accepted and queued before being rejected"
+    },
+    {
+      "name": "rate_limit_not_enforced",
+      "type": "boolean",
+      "description": "A boolean flag indicating whether the api endpoint's set rate limit is ignored"
+    },
+    {
+      "name": "rate_limit_not_enabled",
+      "type": "boolean",
+      "description": "A boolean flag indicating whether the api endpoint's set rate limit is disabled"
+    },
+    {
+      "name": "visibility",
+      "type": "string",
+      "description": "An ENUM indicating the api endpoint's type of visibility -- (e.g., 'Internal', 'Public')"
+    },
+    {
+      "name": "release_state",
+      "type": "string",
+      "description": "An ENUM indicating the api endpoint's release state -- (e.g., 'Preview', 'Beta', 'Stable') /n/n[API-Release-Process](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5643182/API+Release+Process+84c5)"
+    }
+  ]
+}

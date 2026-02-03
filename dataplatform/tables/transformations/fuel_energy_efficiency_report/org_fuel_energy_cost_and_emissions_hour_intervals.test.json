@@ -1,0 +1,1649 @@
+{
+  "test_cases": [
+    {
+      "label": "One org. Custom fuel cost/emissions override for one fuel type from a time before the start_date results in lots of rows outside the start_date - end_date range.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1707868799000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 5,
+            "emissions_grams_per_unit": 10
+          }
+        ],
+        "clouddb.organizations": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 00:00:00",
+          "interval_end": "2024-02-15 01:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 01:00:00",
+          "interval_end": "2024-02-15 02:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 02:00:00",
+          "interval_end": "2024-02-15 03:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 03:00:00",
+          "interval_end": "2024-02-15 04:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 04:00:00",
+          "interval_end": "2024-02-15 05:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 05:00:00",
+          "interval_end": "2024-02-15 06:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 06:00:00",
+          "interval_end": "2024-02-15 07:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 07:00:00",
+          "interval_end": "2024-02-15 08:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 08:00:00",
+          "interval_end": "2024-02-15 09:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 09:00:00",
+          "interval_end": "2024-02-15 10:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 10:00:00",
+          "interval_end": "2024-02-15 11:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 11:00:00",
+          "interval_end": "2024-02-15 12:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 12:00:00",
+          "interval_end": "2024-02-15 13:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 13:00:00",
+          "interval_end": "2024-02-15 14:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 14:00:00",
+          "interval_end": "2024-02-15 15:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 15:00:00",
+          "interval_end": "2024-02-15 16:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 16:00:00",
+          "interval_end": "2024-02-15 17:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 17:00:00",
+          "interval_end": "2024-02-15 18:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 18:00:00",
+          "interval_end": "2024-02-15 19:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 19:00:00",
+          "interval_end": "2024-02-15 20:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 20:00:00",
+          "interval_end": "2024-02-15 21:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 21:00:00",
+          "interval_end": "2024-02-15 22:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 22:00:00",
+          "interval_end": "2024-02-15 23:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Dynamically fetched fuel cost for one fuel type from a time before the start_date results in lots of rows outside the start_date - end_date range.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 0,
+            "fuel_cost": 5,
+            "updated_at": 1707868799000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 00:00:00",
+          "interval_end": "2024-02-15 01:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 01:00:00",
+          "interval_end": "2024-02-15 02:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 02:00:00",
+          "interval_end": "2024-02-15 03:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 03:00:00",
+          "interval_end": "2024-02-15 04:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 04:00:00",
+          "interval_end": "2024-02-15 05:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 05:00:00",
+          "interval_end": "2024-02-15 06:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 06:00:00",
+          "interval_end": "2024-02-15 07:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 07:00:00",
+          "interval_end": "2024-02-15 08:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 08:00:00",
+          "interval_end": "2024-02-15 09:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 09:00:00",
+          "interval_end": "2024-02-15 10:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 10:00:00",
+          "interval_end": "2024-02-15 11:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 11:00:00",
+          "interval_end": "2024-02-15 12:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 12:00:00",
+          "interval_end": "2024-02-15 13:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 13:00:00",
+          "interval_end": "2024-02-15 14:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 14:00:00",
+          "interval_end": "2024-02-15 15:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 15:00:00",
+          "interval_end": "2024-02-15 16:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 16:00:00",
+          "interval_end": "2024-02-15 17:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 17:00:00",
+          "interval_end": "2024-02-15 18:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 18:00:00",
+          "interval_end": "2024-02-15 19:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 19:00:00",
+          "interval_end": "2024-02-15 20:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 20:00:00",
+          "interval_end": "2024-02-15 21:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 21:00:00",
+          "interval_end": "2024-02-15 22:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 22:00:00",
+          "interval_end": "2024-02-15 23:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "One org. No costs/emissions results in no rows.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "One org. Dynamically fetched fuel cost for one fuel type, but unrecognised locale results in now rows.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "unrecognised",
+            "configurable_fuel_id": 0,
+            "fuel_cost": 5,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "One org. Dynamically fetched fuel cost for one fuel type, results in hourly rows for that type. Default emissions are filled in for diesel.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 1,
+            "fuel_cost": 5,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 1,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10209.25760489378,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10209.25760489378,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Dynamically fetched fuel cost for one fuel type. Multiple updates in same hour, only latest is taken. Default emissions are filled in for gasoline.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 0,
+            "fuel_cost": 10,
+            "updated_at": 1708038000000
+          },
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 0,
+            "fuel_cost": 5,
+            "updated_at": 1708039800000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Custom fuel cost/emissions override for one fuel type, results in hourly rows for that type.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 5,
+            "emissions_grams_per_unit": 10
+          }
+        ],
+        "clouddb.organizations": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Custom cost override for one fuel type, results in hourly rows for that type. Multiple updates in same hour, only latest is taken.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 10
+          },
+          {
+            "org_id": 1,
+            "updated_at": 1708039800000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 5
+          }
+        ],
+        "clouddb.organizations": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5,
+          "emissions_grams_per_unit": null,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Custom cost override for one fuel type, results in hourly rows for that type. Intervals explode to cover multiple hours.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708027200000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 10
+          }
+        ],
+        "clouddb.organizations": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 10,
+          "emissions_grams_per_unit": null,
+          "interval_start": "2024-02-15 20:00:00",
+          "interval_end": "2024-02-15 21:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 10.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 10,
+          "emissions_grams_per_unit": null,
+          "interval_start": "2024-02-15 21:00:00",
+          "interval_end": "2024-02-15 22:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 10.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 10,
+          "emissions_grams_per_unit": null,
+          "interval_start": "2024-02-15 22:00:00",
+          "interval_end": "2024-02-15 23:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 10.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 10,
+          "emissions_grams_per_unit": null,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 10.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Custom cost override for one fuel type, results in hourly rows for that type. Default emissions factor should be used.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 10,
+            "emissions_grams_per_unit": null
+          }
+        ],
+        "clouddb.organizations": [
+          {
+            "id": 1
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 10,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 10.0
+        }
+      ]
+    },
+    {
+      "label": "One org. Custom fuel emissions override for one fuel type, results in hourly rows for that type. Cost factor should be null.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "emissions_grams_per_unit": 10
+          }
+        ],
+        "clouddb.organizations": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": null,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        }
+      ]
+    },
+    {
+      "label": "One org. Both dynamically fetched and custom fuel cost/emissions override for one fuel type. Results in hourly rows for that type with the custom cost overriding the dynamically fetched cost.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 0,
+            "fuel_cost": 5,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 500,
+            "emissions_grams_per_unit": 10
+          }
+        ],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 500.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 500.0
+        }
+      ]
+    },
+    {
+      "label": "Two orgs. Dynamically fetched fuel cost for one fuel type, results in hourly rows for that type.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 0,
+            "fuel_cost": 5,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          },
+          {
+            "id": 2,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 2,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        }
+      ]
+    },
+    {
+      "label": "Two orgs. Custom fuel cost/emissions override for same fuel type, results in hourly rows for that type.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 5,
+            "emissions_grams_per_unit": 10
+          },
+          {
+            "org_id": 2,
+            "updated_at": 1708038000000,
+            "fuel_id": 0,
+            "fuel_cost_per_unit": 10,
+            "emissions_grams_per_unit": 20
+          }
+        ],
+        "clouddb.organizations": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-02-15",
+          "org_id": 1,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 5.0,
+          "emissions_grams_per_unit": 10.0,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 5.0
+        },
+        {
+          "date": "2024-02-15",
+          "org_id": 2,
+          "configurable_fuel_id": 0,
+          "cost_per_unit": 10.0,
+          "emissions_grams_per_unit": 20.0,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 20.0,
+          "cost_per_kg": null,
+          "cost_per_us_gal": 10.0
+        }
+      ]
+    },
+    {
+      "label": "Default emissions are respected for each supported fuel type.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 0,
+            "updated_at": 1708038000000
+          },
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 1,
+            "updated_at": 1708038000000
+          },
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 2,
+            "updated_at": 1708038000000
+          },
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 3,
+            "updated_at": 1708038000000
+          },
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 5,
+            "updated_at": 1708038000000
+          },
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 6,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "gb"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "configurable_fuel_id": 0,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 8778.371666944262,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 8778.371666944262,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        },
+        {
+          "configurable_fuel_id": 1,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 10209.25760489378,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 10209.25760489378,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        },
+        {
+          "configurable_fuel_id": 2,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 9448.389685507926,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 9448.389685507926,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        },
+        {
+          "configurable_fuel_id": 3,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 6264.857744196962,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 6264.857744196962,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        },
+        {
+          "configurable_fuel_id": 5,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 5750.041639537876,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 5750.041639537876,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        },
+        {
+          "configurable_fuel_id": 6,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 9448.389685507926,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 9448.389685507926,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        }
+      ]
+    },
+    {
+      "label": "Org locale is case insensitive.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 3,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "GB"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "configurable_fuel_id": 3,
+          "date": "2024-02-15",
+          "emissions_grams_per_unit": 6264.857744196962,
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": 6264.857744196962,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        }
+      ]
+    },
+    {
+      "label": "Electric custom fuel cost/emissions factors result in factor intervals with the special unit field populated.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [],
+        "fueldb_shards.custom_fuel_cost_emissions": [
+          {
+            "org_id": 1,
+            "updated_at": 1708038000000,
+            "fuel_id": 4,
+            "fuel_cost_per_unit": 4,
+            "emissions_grams_per_unit": 10
+          }
+        ],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "GB"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "configurable_fuel_id": 4,
+          "date": "2024-02-15",
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": 4,
+          "emissions_grams_per_wh": 10,
+          "emissions_grams_per_kg": null,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        }
+      ]
+    },
+    {
+      "label": "Gaseous locale fuel cost rows result in factor intervals with the special unit field populated.",
+      "parameters": {
+        "start_date": " '2024-02-15' ",
+        "end_date": " '2024-02-16' "
+      },
+      "input_data": {
+        "localedb.locale_fuel_costs": [
+          {
+            "locale_id": "gb",
+            "configurable_fuel_id": 8,
+            "updated_at": 1708038000000
+          }
+        ],
+        "fueldb_shards.custom_fuel_cost_emissions": [],
+        "clouddb.organizations": [
+          {
+            "id": 1,
+            "locale": "GB"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "configurable_fuel_id": 8,
+          "date": "2024-02-15",
+          "interval_start": "2024-02-15 23:00:00",
+          "interval_end": "2024-02-16 00:00:00",
+          "org_id": 1,
+          "cost_per_kwh": null,
+          "emissions_grams_per_wh": null,
+          "emissions_grams_per_kg": 1209.0,
+          "emissions_grams_per_us_gal": null,
+          "cost_per_kg": null,
+          "cost_per_us_gal": null
+        }
+      ]
+    }
+  ]
+}

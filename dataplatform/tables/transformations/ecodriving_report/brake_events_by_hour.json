@@ -1,0 +1,80 @@
+{
+  "name": "ecodriving_report.brake_events_by_hour",
+  "owner": "Sustainability",
+  "description": "Brake event diffs bucketed by hour and joined with driver assignments.",
+  "dependencies": [
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "brake_events",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "driver_assignments",
+      "type": "table"
+    }
+  ],
+  "tags": ["ecodriving"],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "ecodriving_report",
+    "tablename": "brake_events_by_hour",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "driver_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of the hourly interval."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Samsara ID of the organization that the data, device and driver belong to."
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Samsara ID of the device that the brake event was recorded against."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The Samsara ID of the driver associated with the device at this time."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The timestamp at the beginning of this hourly bucket."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The timestamp at the end of this hourly bucket."
+        }
+      },
+      {
+        "name": "brake_events",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the count of brake events during this hourly interval for a device and driver."
+        }
+      }
+    ]
+  }
+}

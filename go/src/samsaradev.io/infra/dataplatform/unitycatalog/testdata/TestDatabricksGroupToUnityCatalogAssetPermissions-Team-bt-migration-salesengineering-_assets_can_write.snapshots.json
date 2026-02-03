@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "bt-migration-salesengineering: assets can write",
+    "Values": [
+      {
+        "databaseRegions": {
+          "default.solutions_integration_services": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ]
+        }
+      }
+    ]
+  }
+]

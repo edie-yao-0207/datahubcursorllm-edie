@@ -1,0 +1,82 @@
+{
+  "name": "cm_health_report.cm_target_intervals",
+  "owner": "MediaExperience",
+  "description": "Target CM recording state intervals.",
+  "dependencies": [
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_2x_3x_linked_vgs", "type": "table" },
+    { "external": true, "dbname": "kinesisstats", "tablename": "osddashcamtargetstate", "type": "table" }
+  ],
+  "expectation": {
+    "batch_mode": "REMOVE_UNEXPECTED"
+  },
+  "backfill_start_date": "2024-08-01",
+  "parameters": ["start_date", "end_date", "pipeline_execution_time"],
+  "output": {
+    "dbname": "cm_health_report",
+    "tablename": "cm_target_intervals",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["org_id", "vg_device_id", "start_ms"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      {
+        "name": "vg_device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "VG device id"
+        }
+      },
+      {
+        "name": "vg_product_id",
+        "type": "long",
+        "metadata": {
+          "comment": "VG product id"
+        }
+      },
+      { "name": "cm_device_id", "type": "long" },
+      { "name": "cm_product_id", "type": "long" },
+      {
+        "name": "start_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Unix timestamp of the start_ms of the interval. See recording_expected to determine if the interval is on or off expected."
+        }
+      },
+      {
+        "name": "end_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Unix timestamp of the end_ms of the interval. See recording_expected to determine if the interval is on or off expected."
+        }
+      },
+      {
+        "name": "duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Duration of the interval in milliseconds"
+        }
+      },
+      { "name": "date", "type": "string" },
+      {
+        "name": "recording_expected",
+        "type": "boolean",
+        "nullable": false,
+        "metadata": {
+          "comment": "True if recording is expected, false if recording is not expected"
+        }
+      },
+      {
+        "name": "recording_reason",
+        "type": {
+          "type": "array",
+          "elementType": "integer"
+        },
+        "nullable": true,
+        "metadata": {
+          "comment": "Array containing recording reasons"
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

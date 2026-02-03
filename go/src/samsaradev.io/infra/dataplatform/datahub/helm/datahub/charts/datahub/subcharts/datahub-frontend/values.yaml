@@ -1,0 +1,248 @@
+# Default values for datahub-frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+revisionHistoryLimit: 10
+
+image:
+  repository: linkedin/datahub-frontend-react
+  tag:
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podAnnotations: {}
+  # co.elastic.logs/enabled: "true"
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: LoadBalancer # ClusterIP or NodePort
+  port: 9002
+  targetPort: http
+  containerPort: 9002
+  protocol: TCP
+  name: http
+  # Annotations to add to the service, this will help in adding
+  # Internal load balancer or various other annotation support in AWS
+  annotations: {}
+    # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+
+serviceMonitor:
+  create: false
+
+ingress:
+  enabled: true
+  defaultUserCredentials: {}
+  className: alb
+  extraLabels: {}
+  annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/security-groups: "sg-01e73e63e43549506, sg-06361862cc973ab9b"
+      # Ensure traffic is HTTPS
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:492164655156:certificate/13984a3e-7cdb-4cb7-83b6-35286db7e1ca
+      # This list comes from OfficeCidrs in backend/go/src/samsaradev.io/libs/ni/infraconsts/cidrs.go
+      alb.ingress.kubernetes.io/inbound-cidrs: 52.52.25.19/32, 100.20.103.225/32, 52.27.40.118/32, 52.89.143.16/32, 52.52.108.161/32, 3.111.155.138/32, 15.181.200.153/32, 54.70.184.89/32, 52.41.8.52/32, 54.151.86.198/32, 44.231.79.181/32, 44.240.177.131/32, 15.188.32.248/32, 18.156.115.174/32, 3.212.179.6/32, 52.16.26.70/32, 52.53.100.212/32, 52.10.232.176/32, 18.189.252.214/32, 44.230.106.30/32, 52.89.25.127/32, 50.18.205.11/32, 54.225.84.247/32, 54.194.75.90/32, 15.181.81.17/32, 18.236.13.56/32, 15.181.17.94/32, 44.226.6.35/32, 54.168.101.198/32, 18.132.101.7/32
+      alb.ingress.kubernetes.io/auth-type: cognito
+      alb.ingress.kubernetes.io/auth-on-unauthenticated-request: authenticate
+      alb.ingress.kubernetes.io/auth-idp-cognito: '{"userPoolARN":"arn:aws:cognito-idp:us-west-2:492164655156:userpool/us-west-2_roHc9TrhT","userPoolClientID":"59pon8m6vam95bb2ms2laefign","userPoolDomain":"samsara-datahub"}'
+      alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+  hosts:
+    - host: datahub.internal.samsara.com
+      redirectPaths:
+        - path: /*
+          name: ssl-redirect
+          port: use-annotation
+      paths:
+        - /*
+
+auth:
+  sessionTTLHours: "24"
+# OIDC auth based on https://datahubproject.io/docs/authentication/guides/sso/configure-oidc-react
+oidcAuthentication:
+  enabled: false
+  # provider: google/okta/azure  <- choose only one
+
+  # clientId: your-client-id
+  # clientSecret: your-client-secret
+  # only needed if you would like to store the client secret in secret
+  # clientSecretRef:
+  #   secretRef: <secret-ref>
+  #   secretKey: <secret-key>
+  # only needed if provider is `okta`
+  # oktaDomain: your-okta-domain.com
+
+  # only needed if provider is `azure`
+  # azureTenantId: your-azure-tenant-id
+  # if needed, it should set meaningful defaults from provider
+  # scope: "openid profile email"
+
+# Extra labels for Deployment
+extraLabels: {}
+  # owner: myteam
+  # environment: test
+
+# Extra labels for the Pods
+extraPodLabels: {}
+
+# Extra environment variables
+# This will be appended to the current 'env:' key. You can use any of the kubernetes env
+# syntax here
+extraEnvs: []
+  # - name: MY_ENVIRONMENT_VAR
+  #   value: the_value_goes_here
+
+extraVolumes: []
+  # - name: extras
+  #   emptyDir: {}
+
+extraVolumeMounts: []
+  # - name: extras
+  #   mountPath: /usr/share/extras
+  #   readOnly: true
+
+extraInitContainers: []
+
+# Add extra sidecar containers to deployment pod
+extraSidecars: []
+  # - name: my-image-name
+  #   image: my-image
+  #   imagePullPolicy: Always
+
+lifecycle: {}
+  # To add a new user to datahub in JAAS config without mounting the user.props file
+  # postStart:
+  #   exec:
+  #     command: ["/bin/sh", "-c", "echo "test_user:password" >> datahub-frontend/conf/user.props"]
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 500m
+  #   memory: 2Gi
+  # requests:
+  #   cpu: 100m
+  #   memory: 1Gi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  JMXPORT: 1099
+
+exporters:
+  jmx:
+    enabled: false
+#    image:
+#      repository: bitnami/jmx-exporter
+#      tag: 0.15.0
+#      pullPolicy: IfNotPresent
+#    config:
+#      lowercaseOutputName: true
+#      lowercaseOutputLabelNames: true
+#      rules:
+#        - pattern: ".*"
+#      startDelaySeconds: 30
+#    env: {}
+#    resources: {}
+#    path: /metrics
+#    ports:
+#      jmxxp:
+#        containerPort: 5556
+#        protocol: TCP
+#    livenessProbe:
+#      httpGet:
+#        path: /metrics
+#        port: jmxxp
+#      initialDelaySeconds: 30
+#      periodSeconds: 15
+#      timeoutSeconds: 60
+#      failureThreshold: 8
+#      successThreshold: 1
+#    readinessProbe:
+#      httpGet:
+#        path: /metrics
+#        port: jmxxp
+#      initialDelaySeconds: 30
+#      periodSeconds: 15
+#      timeoutSeconds: 60
+#      failureThreshold: 8
+#      successThreshold: 1
+#    serviceMonitor:
+#      interval: 30s
+#      scrapeTimeout: 30s
+#      scheme: http
+
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  failureThreshold: 4
+
+readinessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  failureThreshold: 4
+
+datahub:
+  play:
+    mem:
+      buffer:
+        size: "10MB"
+global:
+  datahub_analytics_enabled: true
+
+  elasticsearch:
+    host: "elasticsearch"
+    port: "9200"
+
+  kafka:
+    bootstrap:
+      server: "broker:9092"
+
+  datahub:
+    version: head
+    gms:
+      port: "8080"
+    monitoring:
+      enablePrometheus: false
+    appVersion: "1.0"
+    frontend:
+      validateSignUpEmail: false
+    metadata_service_authentication:
+      enabled: true
+      systemClientId: "__datahub_system"
+      # systemClientSecret:
+      #  secretRef: <secret-ref>
+      #  secretKey: <secret-key>

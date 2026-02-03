@@ -1,0 +1,11 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`id` BIGINT,
+`sfdc_account_id` STRING,
+`sam_number` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`segment` STRING,
+`partition` STRING

@@ -1,0 +1,19 @@
+{
+  "owner": "Hardware",
+  "email_notifications": [
+    "alerts-hw-analytics-aaaai3jubdsie25jfqh3rvdaau@samsara.org.slack.com",
+    "meenusree.rajapandian@samsara.com"
+  ],
+  "jobs": [
+    {
+      "name": "_",
+      "regions": ["us-west-2", "eu-west-1"],
+      "parameters": {
+        "end_date": "",
+        "start_date": ""
+      },
+      "spark_version": "default"
+    }
+  ],
+  "python_libraries": ["tqdm", "simple_salesforce"]
+}

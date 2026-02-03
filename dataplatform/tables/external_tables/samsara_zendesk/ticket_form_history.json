@@ -1,0 +1,44 @@
+{
+  "table": "ticket_form_history",
+  "owner": "DataEngineering",
+  "description": "Zendesk Ticket Form History Table from Fivetran",
+  "database": "samsara_zendesk",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "display_name",
+      "type": "string"
+    },
+    {
+      "name": "end_user_visible",
+      "type": "boolean"
+    },
+    {
+      "name": "active",
+      "type": "boolean"
+    },
+    {
+      "name": "_fivetran_deleted",
+      "type": "boolean"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    }
+  ]
+}

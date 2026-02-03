@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`sam_number` STRING,
+`sfdc_id` STRING,
+`start_date` TIMESTAMP,
+`end_date` TIMESTAMP,
+`sfdc_modified_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`created_at` TIMESTAMP,
+`netsuite_transfer_order_id` BIGINT,
+`partition` STRING

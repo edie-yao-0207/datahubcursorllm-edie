@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`autoassignment_group_uuid` STRING,
+`tag_id` BIGINT,
+`created_by` BIGINT,
+`created_at` BIGINT,
+`partition` STRING

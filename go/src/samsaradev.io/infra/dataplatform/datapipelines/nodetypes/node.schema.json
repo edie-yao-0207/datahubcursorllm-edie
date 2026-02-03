@@ -1,0 +1,358 @@
+{
+  "title": "Node schema",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "A definition file for a Node in the DAG",
+  "properties": {
+    "name": {
+      "description": "The name of the Node",
+      "type": "string"
+    },
+    "owner": {
+      "description": "The team that owns the node",
+      "type": "string"
+    },
+    "tags": {
+      "description": "List of Tags from infra/dataplatform/amundsen/amundsentags/tags.go to make the node more discoverable in Amundsen",
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "description": {
+      "description": "Description of the node",
+      "type": "string"
+    },
+    "dependencies": {
+      "description": "The other nodes that this node depends on",
+      "type": "array",
+      "items": {
+        "oneOf": [{ "$ref": "#/definitions/table_dependency" }]
+      }
+    },
+    "backfill_start_date": {
+      "description": "Date which to start the backfill of a node in the form yyyy-mm-dd",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "unsharded_backfills": {
+      "description": "Override to force backfills to use unsharded pipeline",
+      "type": "boolean"
+    },
+    "parameters": {
+      "description": "Parameters that a node need to execute",
+      "type": ["array", "null"],
+      "items": {
+        "type": "string",
+        "enum": ["start_date", "end_date", "pipeline_execution_time"]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "expectation": {
+      "description": "Values used in expectation",
+      "type": "object",
+      "properties": {
+        "batch_mode": {
+          "type": "string",
+          "enum": ["REMOVE_UNEXPECTED", "KEEP_ALL", "FAIL_ALL"]
+        }
+      },
+      "required": ["batch_mode"]
+    },
+    "output": {
+      "description": "The output of a node",
+      "type": "object",
+      "oneOf": [{ "$ref": "#/definitions/table_output" }]
+    },
+    "spark_execution_environment": {
+      "description": "Spark Execution Environment definition for this node",
+      "type": "object",
+      "oneOf": [{ "$ref": "#/definitions/spark_execution_environment" }]
+    },
+    "replication": {
+      "description": "Configuration for if this node's data should be replicated across regions.",
+      "type": "object",
+      "oneOf": [{ "$ref": "#/definitions/replication" }]
+    },
+    "disabled_regions": {
+      "description": "Regions to disable this pipeline in. Should be either us-west-2, eu-west-1, or ca-central-1",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["us-west-2", "eu-west-1", "ca-central-1"]
+      }
+    },
+    "nonproduction": {
+      "description": "Indicates whether this is a production node or not. Production nodes needs to run reliably and will have higher costs",
+      "type": "boolean"
+    },
+    "sqlite_report_config": {
+      "description": "Configuration for exporting this node as a sqlite report.",
+      "type": "object",
+      "oneOf": [{ "$ref": "#/definitions/sqlite_report_config" }]
+    },
+    "daily_run_config": {
+      "description": "Configuration for a daily job run. Please only set this if you really need it.",
+      "type": "object",
+      "oneOf": [{ "$ref": "#/definitions/daily_run_config" }]
+    },
+    "pipeline_config": {
+      "description": "Configuration for pipelines, available only on the leaf node (since pipelines = leaf nodes).",
+      "type": "object",
+      "oneOf": [{ "$ref": "#/definitions/pipeline_config" }]
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "owner", "description", "output"],
+
+  "definitions": {
+    "table_dependency": {
+      "name": "table dependency",
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "dbname": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["python", "sql"]
+        },
+        "schema_path": {
+          "type": "string"
+        },
+        "tablename": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["table"]
+        },
+        "external": {
+          "type": "boolean"
+        }
+      },
+      "required": ["dbname", "tablename", "type"],
+      "additionalProperties": false
+    },
+    "table_output": {
+      "name": "Table output",
+      "type": "object",
+      "properties": {
+        "dbname": {
+          "description": "The name of the output table",
+          "type": "string"
+        },
+        "tablename": {
+          "description": "The name of the output table",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["table"]
+        },
+        "partition": {
+          "description": "Which columns to partition the sql table by",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "primary_key": {
+          "description": "Primary key of the table. Will be used for Spark Merge",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema": {
+          "description": "The output schema",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": ["string", "object"],
+                "anyOf": [
+                  { "pattern": "^decimal\\([0-9]+,[0-9]+\\)$" },
+                  {
+                    "enum": [
+                      "string",
+                      "binary",
+                      "boolean",
+                      "date",
+                      "timestamp",
+                      "double",
+                      "float",
+                      "byte",
+                      "integer",
+                      "long",
+                      "short",
+                      "array",
+                      "map",
+                      "struct"
+                    ]
+                  }
+                ]
+              },
+              "fields": {
+                "type": "array"
+              },
+              "nullable": {
+                "type": "boolean"
+              }
+            },
+            "if": {
+              "properties": { "type": { "const": "struct" } }
+            },
+            "then": {
+              "required": ["name", "type", "fields"]
+            },
+            "else": {
+              "required": ["name", "type"]
+            }
+          }
+        },
+        "write_mode": {
+          "description": "The write mode for the node. Merge is default, and means data will be updated by primary key or inserted. Overwrite means any old data in the report period will be deleted. Overwrite is only needed to avoid overlapping data when the output primary key values are dependent on input data.",
+          "type": "string",
+          "enum": ["merge", "overwrite"]
+        }
+      },
+      "required": ["dbname", "tablename", "type", "schema", "primary_key", "write_mode"],
+      "additionalProperties": false
+    },
+    "spark_execution_environment": {
+      "name": "spark execution_environment",
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "spark_version": {
+          "type": "string",
+          "enum": [
+            "6.4.x-scala2.11",
+            "7.3.x-scala2.12",
+            "10.4.x-scala2.12",
+            "11.3.x-scala2.12",
+            "12.2.x-scala2.12",
+            "13.3.x-scala2.12"
+          ]
+        },
+        "libraries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "spark_conf_overrides": {
+          "type": "object"
+        }
+      }
+    },
+    "replication": {
+      "name": "replication",
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "replicate_to_us_from_regions": {
+          "type": "array",
+          "description": "Specify from which regions you want this node's output data copied over to the US.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["eu-west-1"]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sqlite_report_config": {
+      "name": "sqlite_report_config",
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "report_name": {
+          "type": "string",
+          "description": "Name of the report that this should be exported to in SQLite. Corresponds to a report in the sparkreportregistry/registry.go"
+        },
+        "staleness_monitors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hours": {
+                "type": "number",
+                "description": "The acceptable staleness in hours of an sqlite report. If specified, we will generate a monitor at the given urgency."
+              },
+              "urgency": {
+                "type": "string",
+                "description": "LOW or HIGH, in terms of whether we will page you low or high urgency."
+              },
+              "disable": {
+                "type": "boolean",
+                "description": "Set this to true if you want to disable creation of a staleness monitor. We don't recommend this in general."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "team_runbook_url": {
+          "type": "string",
+          "description": "Team specific runbook associated with this report."
+        },
+        "hardcoded_start_date": {
+          "type": "string",
+          "description": "Hardcoded start date for the reports; used instead of the normal start_date passed through the datapipeline. In most cases this should not be set, contact Data Platform if you want to use this.",
+          "pattern": "^DATE\\(\"[0-9]{4}-[0-9]{2}-[0-9]{2}\"\\)$"
+        },
+        "hardcoded_end_date": {
+          "type": "string",
+          "description": "Hardcoded end date for the reports; used instead of the normal end_date passed through the datapipeline. In most cases this should not be set, contact Data Platform if you want to use this.",
+          "pattern": "^DATE\\(\"[0-9]{4}-[0-9]{2}-[0-9]{2}\"\\)$"
+        },
+        "_comment": {
+          "type": "string",
+          "description": "Used for inline comments in the json, won't be actually part of the config."
+        }
+      },
+      "additionalProperties": false,
+      "required": ["report_name"]
+    },
+    "daily_run_config": {
+      "name": "daily_run_config",
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "start_date_offset": {
+          "type": "integer",
+          "description": "Number of days before today to start the daily job at. Normal values are 14 or 30.",
+          "minimum": 3,
+          "maximum": 90
+        }
+      },
+      "additionalProperties": false,
+      "required": ["start_date_offset"]
+    },
+    "pipeline_config": {
+      "name": "pipeline_config",
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "developer_error_severity": {
+          "type": "string",
+          "description": "The severity on which to page developer errors. LOW or HIGH for low/high urgency respectively."
+        }
+      },
+      "additionalProperties": false,
+      "required": []
+    }
+  }
+}

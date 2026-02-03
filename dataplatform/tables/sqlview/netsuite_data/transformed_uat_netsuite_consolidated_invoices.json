@@ -1,0 +1,29 @@
+{
+  "view": "transformed_uat_netsuite_consolidated_invoices",
+  "owner": "PlatformOperations",
+  "description": "This view compiles all data for netsuite consolidated invoices",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "schema": [
+    { "name": "consolidated_invoice_num", "type": "string", "nullable": true },
+    { "name": "consolidated_invoice_id", "type": "long", "nullable": true },
+    { "name": "amount_remaining", "type": "double", "nullable": false },
+    { "name": "total_amount", "type": "double", "nullable": true },
+    { "name": "due_date", "type": "timestamp", "nullable": true },
+    { "name": "create_date", "type": "timestamp", "nullable": true },
+    { "name": "_fivetran_synced", "type": "timestamp", "nullable": true },
+    { "name": "_fivetran_deleted", "type": "boolean", "nullable": true },
+    { "name": "sam_number", "type": "string", "nullable": true },
+    { "name": "invoice_status", "type": "string", "nullable": false },
+    { "name": "currency_symbol", "type": "string", "nullable": true },
+    { "name": "payment_status", "type": "double", "nullable": true },
+    { "name": "charge_error_message", "type": "string", "nullable": true }
+  ],
+  "dependencies": [
+    {
+      "dbname": "netsuite_data",
+      "tablename": "uat_netsuite_consolidated_invoices",
+      "type": "table"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "table": "alert_types",
+  "owner": "PlatformAlertsWorkflows",
+  "description": "Alert-type ID to alert-type name mappings to get human-readable alert-type names",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "description": "ID for alert type"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Name of alert type"
+    }
+  ]
+}

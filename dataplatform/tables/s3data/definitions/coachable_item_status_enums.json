@@ -1,0 +1,24 @@
+{
+  "table": "coachable_item_status_enums",
+  "owner": "DataEngineering",
+  "description": "Maps CoachableItemStatus enum values to their string names from coachingproto.CoachableItemStatus",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/coaching/coachable_item_status_enums.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/coaching/coachable_item_status_enums.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/coaching/coachable_item_status_enums.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "enum",
+      "type": "bigint",
+      "description": "The numerical value for a CoachableItemStatus enum"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The string name of the CoachableItemStatus enum value"
+    }
+  ]
+}

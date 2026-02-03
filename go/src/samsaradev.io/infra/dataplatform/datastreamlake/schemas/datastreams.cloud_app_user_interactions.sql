@@ -1,0 +1,10 @@
+`timestamp` TIMESTAMP,
+`name` STRING,
+`user_id` BIGINT,
+`org_id` BIGINT,
+`duration_ms` BIGINT,
+`resource` STRING,
+`raw_url` STRING,
+`tags` MAP<STRING, STRING>,
+`trace_id` STRING,
+`date` DATE

@@ -1,0 +1,24 @@
+{
+  "table": "coachable_item_backing_type",
+  "owner": "DataEngineering",
+  "description": "Maps coachable item backing type enum to its name (based on https://github.com/samsara-dev/backend/blob/master/go/src/samsaradev.io/safety/coaching/coachingproto/coachableitem.proto)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/coaching/coachable_item_backing_type.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/coaching/coachable_item_backing_type.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/coaching/coachable_item_backing_type.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "description": "The enum value for a coachable item backing type"
+    },
+    {
+      "name": "coachable_item_backing_type",
+      "type": "string",
+      "description": "The name of the associated coachable item backing type"
+    }
+  ]
+}

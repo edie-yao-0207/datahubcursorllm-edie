@@ -1,0 +1,22 @@
+{
+  "table": "oem_type_name",
+  "owner": "DataEngineering",
+  "description": "This table maps OEM types to their respective ID in device data",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/oem/oem_type_name.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/oem/oem_type_name.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/oem/oem_type_name.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}

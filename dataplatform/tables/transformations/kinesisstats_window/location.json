@@ -1,0 +1,897 @@
+{
+  "name": "kinesisstats_window.location",
+  "owner": "DataPlatform",
+  "description": "Location with previous/next values",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "helpers",
+      "tablename": "ignored_org_ids",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "location",
+      "type": "table"
+    }
+  ],
+  "spark_execution_environment": {
+    "spark_version": "13.3.x-scala2.12",
+    "spark_conf_overrides": {
+      "spark.network.timeout": "600s"
+    }
+  },
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2021-01-31",
+  "output": {
+    "dbname": "kinesisstats_window",
+    "tablename": "location",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "time"],
+    "write_mode": "overwrite",
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "time",
+        "type": "long"
+      },
+      {
+        "name": "value",
+        "type": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "time",
+              "type": "long"
+            },
+            {
+              "name": "has_fix",
+              "type": "boolean"
+            },
+            {
+              "name": "latitude",
+              "type": "double"
+            },
+            {
+              "name": "longitude",
+              "type": "double"
+            },
+            {
+              "name": "gps_speed_meters_per_second",
+              "type": "double"
+            },
+            {
+              "name": "gps_speed_invalid",
+              "type": "boolean"
+            },
+            {
+              "name": "heading_degrees",
+              "type": "double"
+            },
+            {
+              "name": "heading_invalid",
+              "type": "boolean"
+            },
+            {
+              "name": "hdop",
+              "type": "double"
+            },
+            {
+              "name": "vdop",
+              "type": "double"
+            },
+            {
+              "name": "altitude_meters",
+              "type": "double"
+            },
+            {
+              "name": "altitude_invalid",
+              "type": "boolean"
+            },
+            {
+              "name": "geoid_height_correction_meters",
+              "type": "double"
+            },
+            {
+              "name": "has_revgeo",
+              "type": "boolean"
+            },
+            {
+              "name": "revgeo_street",
+              "type": "string"
+            },
+            {
+              "name": "revgeo_city",
+              "type": "string"
+            },
+            {
+              "name": "revgeo_state",
+              "type": "string"
+            },
+            {
+              "name": "revgeo_country",
+              "type": "string"
+            },
+            {
+              "name": "has_speed_limit",
+              "type": "boolean"
+            },
+            {
+              "name": "speed_limit_meters_per_second",
+              "type": "double"
+            },
+            {
+              "name": "has_toll",
+              "type": "boolean"
+            },
+            {
+              "name": "toll",
+              "type": "boolean"
+            },
+            {
+              "name": "ecu_speed_meters_per_second",
+              "type": "double"
+            },
+            {
+              "name": "has_ecu_speed",
+              "type": "boolean"
+            },
+            {
+              "name": "revgeo_postcode",
+              "type": "string"
+            },
+            {
+              "name": "has_way_id",
+              "type": "boolean"
+            },
+            {
+              "name": "way_id",
+              "type": "long"
+            },
+            {
+              "name": "speed_limit_source",
+              "type": "integer"
+            },
+            {
+              "name": "speed_limit_updated_at_ms",
+              "type": "long"
+            },
+            {
+              "name": "revgeo_house_number",
+              "type": "string"
+            },
+            {
+              "name": "revgeo_poi",
+              "type": "string"
+            },
+            {
+              "name": "revgeo_neighborhood",
+              "type": "string"
+            },
+            {
+              "name": "received_at_ms",
+              "type": "long"
+            },
+            {
+              "name": "accuracy_millimeters",
+              "type": "long"
+            },
+            {
+              "name": "accuracy_invalid",
+              "type": "boolean"
+            },
+            {
+              "name": "gps_fix_timestamp_utc_ms",
+              "type": "long"
+            },
+            {
+              "name": "location_source",
+              "type": "integer"
+            },
+            {
+              "name": "pre_release_speed_limit_meters_per_second",
+              "type": "double"
+            },
+            {
+              "name": "pre_release_speed_limit_source",
+              "type": "integer"
+            },
+            {
+              "name": "exact_addresses_source",
+              "type": "integer"
+            },
+            {
+              "name": "speed_limit_is_smoothed",
+              "type": "boolean"
+            },
+            {
+              "name": "proxy_location_source_devices",
+              "type": {
+                "type": "array",
+                "elementType": {
+                  "type": "struct",
+                  "fields": [
+                    {
+                      "name": "org_id",
+                      "type": "long"
+                    },
+                    {
+                      "name": "device_id",
+                      "type": "long"
+                    },
+                    {
+                      "name": "in_customer_network",
+                      "type": "boolean"
+                    },
+                    {
+                      "name": "object_type",
+                      "type": "integer"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "is_spoofed",
+              "type": "boolean"
+            },
+            {
+              "name": "is_fixed",
+              "type": "boolean"
+            },
+            {
+              "name": "intermediate_locations",
+              "type": {
+                "type": "array",
+                "elementType": {
+                  "type": "struct",
+                  "fields": [
+                    {
+                      "name": "timestamp_utc_ms",
+                      "type": "long"
+                    },
+                    {
+                      "name": "latitude_1en7_degrees",
+                      "type": "long"
+                    },
+                    {
+                      "name": "longitude_1en7_degrees",
+                      "type": "long"
+                    },
+                    {
+                      "name": "gnss_speed_kmph_tenths",
+                      "type": "long"
+                    },
+                    {
+                      "name": "gnss_speed_invalid",
+                      "type": "boolean"
+                    },
+                    {
+                      "name": "ecu_speed_kmph_tenths",
+                      "type": "long"
+                    },
+                    {
+                      "name": "ecu_speed_invalid",
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "altitude_uncertainty_meters",
+              "type": "long"
+            },
+            {
+              "name": "altitude_uncertainty_valid",
+              "type": "boolean"
+            },
+            {
+              "name": "gnss_speed_uncertainty_meters_per_second",
+              "type": "float"
+            },
+            {
+              "name": "gnss_speed_uncertainty_valid",
+              "type": "boolean"
+            },
+            {
+              "name": "heading_uncertainty_degrees",
+              "type": "long"
+            },
+            {
+              "name": "heading_uncertainty_valid",
+              "type": "boolean"
+            },
+            {
+              "name": "geofences",
+              "type": {
+                "containsNull": true,
+                "type": "array",
+                "elementType": "long"
+              }
+            },
+            {
+              "name": "geofences_computed",
+              "type": "boolean"
+            }
+          ]
+        }
+      },
+      {
+        "name": "scope",
+        "type": "integer"
+      },
+      {
+        "name": "previous",
+        "type": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "date",
+              "type": "string"
+            },
+            {
+              "name": "org_id",
+              "type": "long"
+            },
+            {
+              "name": "device_id",
+              "type": "long"
+            },
+            {
+              "name": "time",
+              "type": "long"
+            },
+            {
+              "name": "value",
+              "type": {
+                "type": "struct",
+                "fields": [
+                  {
+                    "name": "time",
+                    "type": "long"
+                  },
+                  {
+                    "name": "has_fix",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "latitude",
+                    "type": "double"
+                  },
+                  {
+                    "name": "longitude",
+                    "type": "double"
+                  },
+                  {
+                    "name": "gps_speed_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "gps_speed_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "heading_degrees",
+                    "type": "double"
+                  },
+                  {
+                    "name": "heading_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "hdop",
+                    "type": "double"
+                  },
+                  {
+                    "name": "vdop",
+                    "type": "double"
+                  },
+                  {
+                    "name": "altitude_meters",
+                    "type": "double"
+                  },
+                  {
+                    "name": "altitude_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "geoid_height_correction_meters",
+                    "type": "double"
+                  },
+                  {
+                    "name": "has_revgeo",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "revgeo_street",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_city",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_state",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_country",
+                    "type": "string"
+                  },
+                  {
+                    "name": "has_speed_limit",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "speed_limit_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "has_toll",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "toll",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "ecu_speed_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "has_ecu_speed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "revgeo_postcode",
+                    "type": "string"
+                  },
+                  {
+                    "name": "has_way_id",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "way_id",
+                    "type": "long"
+                  },
+                  {
+                    "name": "speed_limit_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "speed_limit_updated_at_ms",
+                    "type": "long"
+                  },
+                  {
+                    "name": "revgeo_house_number",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_poi",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_neighborhood",
+                    "type": "string"
+                  },
+                  {
+                    "name": "received_at_ms",
+                    "type": "long"
+                  },
+                  {
+                    "name": "accuracy_millimeters",
+                    "type": "long"
+                  },
+                  {
+                    "name": "accuracy_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "gps_fix_timestamp_utc_ms",
+                    "type": "long"
+                  },
+                  {
+                    "name": "location_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "pre_release_speed_limit_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "pre_release_speed_limit_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "exact_addresses_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "speed_limit_is_smoothed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "proxy_location_source_devices",
+                    "type": {
+                      "containsNull": true,
+                      "type": "array",
+                      "elementType": {
+                        "type": "struct",
+                        "fields": [
+                          { "name": "org_id", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "device_id", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "in_customer_network", "type": "boolean", "nullable": true, "metadata": {} },
+                          { "name": "object_type", "type": "integer", "nullable": true, "metadata": {} }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "name": "is_spoofed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "is_fixed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "intermediate_locations",
+                    "type": {
+                      "containsNull": true,
+                      "type": "array",
+                      "elementType": {
+                        "type": "struct",
+                        "fields": [
+                          { "name": "timestamp_utc_ms", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "latitude_1en7_degrees", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "longitude_1en7_degrees", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "gnss_speed_kmph_tenths", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "gnss_speed_invalid", "type": "boolean", "nullable": true, "metadata": {} },
+                          { "name": "ecu_speed_kmph_tenths", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "ecu_speed_invalid", "type": "boolean", "nullable": true, "metadata": {} }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "name": "altitude_uncertainty_meters",
+                    "type": "long"
+                  },
+                  {
+                    "name": "altitude_uncertainty_valid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "gnss_speed_uncertainty_meters_per_second",
+                    "type": "float"
+                  },
+                  {
+                    "name": "gnss_speed_uncertainty_valid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "heading_uncertainty_degrees",
+                    "type": "long"
+                  },
+                  {
+                    "name": "heading_uncertainty_valid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "geofences",
+                    "type": {
+                      "containsNull": true,
+                      "type": "array",
+                      "elementType": "long"
+                    }
+                  },
+                  {
+                    "name": "geofences_computed",
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "scope",
+              "type": "integer"
+            }
+          ]
+        }
+      },
+      {
+        "name": "next",
+        "type": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "date",
+              "type": "string"
+            },
+            {
+              "name": "org_id",
+              "type": "long"
+            },
+            {
+              "name": "device_id",
+              "type": "long"
+            },
+            {
+              "name": "time",
+              "type": "long"
+            },
+            {
+              "name": "value",
+              "type": {
+                "type": "struct",
+                "fields": [
+                  {
+                    "name": "time",
+                    "type": "long"
+                  },
+                  {
+                    "name": "has_fix",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "latitude",
+                    "type": "double"
+                  },
+                  {
+                    "name": "longitude",
+                    "type": "double"
+                  },
+                  {
+                    "name": "gps_speed_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "gps_speed_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "heading_degrees",
+                    "type": "double"
+                  },
+                  {
+                    "name": "heading_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "hdop",
+                    "type": "double"
+                  },
+                  {
+                    "name": "vdop",
+                    "type": "double"
+                  },
+                  {
+                    "name": "altitude_meters",
+                    "type": "double"
+                  },
+                  {
+                    "name": "altitude_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "geoid_height_correction_meters",
+                    "type": "double"
+                  },
+                  {
+                    "name": "has_revgeo",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "revgeo_street",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_city",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_state",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_country",
+                    "type": "string"
+                  },
+                  {
+                    "name": "has_speed_limit",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "speed_limit_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "has_toll",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "toll",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "ecu_speed_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "has_ecu_speed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "revgeo_postcode",
+                    "type": "string"
+                  },
+                  {
+                    "name": "has_way_id",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "way_id",
+                    "type": "long"
+                  },
+                  {
+                    "name": "speed_limit_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "speed_limit_updated_at_ms",
+                    "type": "long"
+                  },
+                  {
+                    "name": "revgeo_house_number",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_poi",
+                    "type": "string"
+                  },
+                  {
+                    "name": "revgeo_neighborhood",
+                    "type": "string"
+                  },
+                  {
+                    "name": "received_at_ms",
+                    "type": "long"
+                  },
+                  {
+                    "name": "accuracy_millimeters",
+                    "type": "long"
+                  },
+                  {
+                    "name": "accuracy_invalid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "gps_fix_timestamp_utc_ms",
+                    "type": "long"
+                  },
+                  {
+                    "name": "location_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "pre_release_speed_limit_meters_per_second",
+                    "type": "double"
+                  },
+                  {
+                    "name": "pre_release_speed_limit_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "exact_addresses_source",
+                    "type": "integer"
+                  },
+                  {
+                    "name": "speed_limit_is_smoothed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "proxy_location_source_devices",
+                    "type": {
+                      "containsNull": true,
+                      "type": "array",
+                      "elementType": {
+                        "type": "struct",
+                        "fields": [
+                          { "name": "org_id", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "device_id", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "in_customer_network", "type": "boolean", "nullable": true, "metadata": {} },
+                          { "name": "object_type", "type": "integer", "nullable": true, "metadata": {} }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "name": "is_spoofed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "is_fixed",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "intermediate_locations",
+                    "type": {
+                      "containsNull": true,
+                      "type": "array",
+                      "elementType": {
+                        "type": "struct",
+                        "fields": [
+                          { "name": "timestamp_utc_ms", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "latitude_1en7_degrees", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "longitude_1en7_degrees", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "gnss_speed_kmph_tenths", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "gnss_speed_invalid", "type": "boolean", "nullable": true, "metadata": {} },
+                          { "name": "ecu_speed_kmph_tenths", "type": "long", "nullable": true, "metadata": {} },
+                          { "name": "ecu_speed_invalid", "type": "boolean", "nullable": true, "metadata": {} }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "name": "altitude_uncertainty_meters",
+                    "type": "long"
+                  },
+                  {
+                    "name": "altitude_uncertainty_valid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "gnss_speed_uncertainty_meters_per_second",
+                    "type": "float"
+                  },
+                  {
+                    "name": "gnss_speed_uncertainty_valid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "heading_uncertainty_degrees",
+                    "type": "long"
+                  },
+                  {
+                    "name": "heading_uncertainty_valid",
+                    "type": "boolean"
+                  },
+                  {
+                    "name": "geofences",
+                    "type": {
+                      "containsNull": true,
+                      "type": "array",
+                      "elementType": "long"
+                    }
+                  },
+                  {
+                    "name": "geofences_computed",
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "scope",
+              "type": "integer"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

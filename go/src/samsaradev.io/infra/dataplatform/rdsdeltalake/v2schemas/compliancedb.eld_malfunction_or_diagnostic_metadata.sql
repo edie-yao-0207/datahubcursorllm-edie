@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`vehicle_id` BIGINT,
+`driver_id` BIGINT,
+`malfunction_or_diagnostic_code` STRING,
+`last_resolved_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`proto` STRING,
+`partition` STRING

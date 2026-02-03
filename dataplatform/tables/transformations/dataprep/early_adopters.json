@@ -1,0 +1,231 @@
+{
+  "name": "dataprep.early_adopters",
+  "owner": "DataEngineering",
+  "description": "Identify early adopter customers through a set of criteria defined in SQL /n/n- [Early Adopters](https://paper.dropbox.com/doc/Automated-Expansion-of-Early-Adopter-Group--BSkZIhbZIhEbPyFLyNVSP~lDAg-k8mJX0RGPTJnGR8Qyl1jF)",
+  "disabled_regions": ["eu-west-1", "ca-central-1"],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "customer_metadata",
+      "schema_path": "dataprep/business/customer_metadata.metadata.json",
+      "type": "table"
+    },
+    {
+      "dbname": "dataprep",
+      "tablename": "active_devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "users_organizations",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "customer_sophistication_scores",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "dataprep",
+    "tablename": "early_adopters",
+    "type": "table",
+    "primary_key": ["sam_number", "org_id"],
+    "schema": [
+      {
+        "name": "account_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The SFDC Account Name"
+        }
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "This Internal Samsara Customer ID"
+        }
+      },
+      {
+        "name": "org_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the organization"
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Internal ID for the customer's Samsara Org"
+        }
+      },
+      {
+        "name": "release_type",
+        "nullable": false,
+        "type": "string",
+        "metadata": {
+          "comment": "The early adopter status of the organization. /n/n Possible values: 'Current' or 'Prospective'/n/n *Note. 'release_type' is a misnomer[See here](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17905798/Release+Tracks)"
+        }
+      },
+      {
+        "name": "release_type_enum",
+        "type": "byte",
+        "metadata": {
+          "comment": "The numerical code for an organization's release track /n/n ({0: 'Continuous', 1: 'Quarterly', 2: 'Early Adopter'})/n/n[Release Tracks](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17905798/Release+Tracks)/n/n[Samsara Software Release Tracks](https://kb.samsara.com/hc/en-us/articles/360059299292)"
+        }
+      },
+      {
+        "name": "segment",
+        "type": "string",
+        "metadata": {
+          "comment": "The Named Account of the organization /n/n- [Samsara Segments](https://docs.google.com/presentation/d/1Y38y-rhXUJsKbZC1T0Ylaepf6Af-BK89MxEXqwzkNw4/edit#slide=id.g6ea3b15421_0_0)"
+        }
+      },
+      {
+        "name": "organization_size",
+        "type": "string",
+        "metadata": {
+          "comment": "The size range of the organization: /n/n('1 - 99', '100 - 499', '1000 - 4999', '500 - 999', '5000+')"
+        }
+      },
+      {
+        "name": "num_users",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of user accounts in the organization"
+        }
+      },
+      {
+        "name": "customer_sophistication_score",
+        "type": "double",
+        "metadata": {
+          "comment": "A 0-100 rating describing how extensively customers use Samsara's cloud platform /n/n- [Customer Sophistication Score FAQ](https://docs.google.com/document/d/1XvkIGXdyWhksKhfOnQKDYiIUBGTC0DJi-JzcjEILt_0)"
+        }
+      },
+      {
+        "name": "num_active_devices",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of devices activated by the organization"
+        }
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the primary industry in which the organization operates (e.g., 'Construction', 'Consumer Products', 'Food & Beverage')"
+        }
+      },
+      {
+        "name": "sub_industry",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the sub-industry in which the organization operates (e.g., 'Logistics', 'Energy', 'Agriculture')"
+        }
+      },
+      {
+        "name": "billingcity",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the city to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "billingstatecode",
+        "type": "string",
+        "metadata": {
+          "comment": "The code of the state/province to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "billingcountry",
+        "type": "string",
+        "metadata": {
+          "comment": "The full name of the country to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "metadata": {
+          "comment": "The Samsara region assigned to the organization (e.g., 'Central', 'DACH', 'UK & I', 'Canada West'"
+        }
+      },
+      {
+        "name": "csm_rating",
+        "type": "string",
+        "metadata": {
+          "comment": "The organization's customer success sentiment rating /n/n(e.g., 'Green')"
+        }
+      },
+      {
+        "name": "csm_trend",
+        "type": "string",
+        "metadata": {
+          "comment": "The trend of the organization's custgomer success sentiment (e.g., 'Steady', 'Improving')."
+        }
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "metadata": {
+          "comment": "The Samsara locale /n/n- [Locales](https://paper.dropbox.com/doc/Locales--BSjW~EI61RYgW4wDKMvP3aARAg-xpmXZECgDuLwYhv3qmKIs)"
+        }
+      },
+      {
+        "name": "customer_arr",
+        "type": "long",
+        "metadata": {
+          "comment": "The organization's current annual recurring revenue"
+        }
+      },
+      {
+        "name": "implementation_consultant_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The full name of the organization's Implementation Consultant"
+        }
+      },
+      {
+        "name": "csm_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The full name of the organization's assigned Customer Success Manager"
+        }
+      },
+      {
+        "name": "billing_first_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The primary name to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "billing_last_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The surname to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "billing_email",
+        "type": "string",
+        "metadata": {
+          "comment": "The primary email to which the organization's invoices are billed"
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

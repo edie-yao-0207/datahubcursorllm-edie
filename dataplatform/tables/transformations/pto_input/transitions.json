@@ -1,0 +1,141 @@
+{
+  "name": "pto_input.transitions",
+  "owner": "Sustainability",
+  "description": "Combines PTO object stats with input device types and only outputs data points where there is a change in PTO state.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput1",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput2",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput3",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput4",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput5",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput6",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput7",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput8",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput9",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput10",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdpowertakeoff",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "helpers",
+      "tablename": "ignored_org_ids",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "pto_input",
+    "tablename": "transitions",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "port", "time", "source"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "port",
+        "type": "long"
+      },
+      {
+        "name": "time",
+        "type": "long"
+      },
+      {
+        "name": "input_type",
+        "type": "long"
+      },
+      {
+        "name": "value",
+        "type": "long"
+      },
+      {
+        "name": "is_productive",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "nullable": false
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

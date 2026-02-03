@@ -1,0 +1,5168 @@
+{
+  "datasets": [
+    {
+      "name": "076685b2",
+      "displayName": "queries.diversity.trace_stats",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Trace Diversity\n",
+        "-- View: Trace Stats Counter\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Counter\n",
+        "-- Description: Total traces and unique populations collected from\n",
+        "-- =============================================================================\n",
+        "\n",
+        "SELECT\n",
+        "  COUNT(*) AS count_traces,\n",
+        "  COUNT(DISTINCT mmyef_id) AS count_mmyefs\n",
+        "FROM product_analytics_staging.dim_trace_characteristics tc\n",
+        "JOIN product_analytics_staging.dim_device_vehicle_properties dvp USING (date, org_id, device_id)\n",
+        "WHERE tc.date BETWEEN :date.min AND :date.max\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "date",
+          "keyword": "date",
+          "dataType": "DATE",
+          "complexType": "RANGE",
+          "defaultSelection": {
+            "range": {
+              "dataType": "DATE",
+              "min": {
+                "value": "now-30d/d"
+              },
+              "max": {
+                "value": "now/d"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ce2f2737",
+      "displayName": "queries.diversity.daily_trace_counts",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Trace Diversity\n",
+        "-- View: Traces Pulled Per Day\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Bar Chart\n",
+        "-- Description: Daily trace counts\n",
+        "-- =============================================================================\n",
+        "\n",
+        "SELECT\n",
+        "  DATE(tc.date) AS date,\n",
+        "  COUNT(*) AS count_traces\n",
+        "FROM product_analytics_staging.dim_trace_characteristics tc\n",
+        "WHERE tc.date BETWEEN :date.min AND :date.max\n",
+        "GROUP BY DATE(tc.date)\n",
+        "ORDER BY date\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "date",
+          "keyword": "date",
+          "dataType": "DATE",
+          "complexType": "RANGE",
+          "defaultSelection": {
+            "range": {
+              "dataType": "DATE",
+              "min": {
+                "value": "now-30d/d"
+              },
+              "max": {
+                "value": "now/d"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "db523c7d",
+      "displayName": "queries.diversity.trace_distribution",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Trace Diversity\n",
+        "-- View: Vehicle Trace Data Distribution Analysis\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Histogram\n",
+        "-- Description: Trace count distribution per MMYEF population\n",
+        "-- =============================================================================\n",
+        "\n",
+        "SELECT\n",
+        "  d.mmyef_id,\n",
+        "  COUNT(DISTINCT t.trace_uuid) AS trace_cnt\n",
+        "FROM product_analytics_staging.dim_trace_characteristics t\n",
+        "JOIN product_analytics_staging.dim_device_vehicle_properties d\n",
+        "  USING (date, org_id, device_id)\n",
+        "WHERE t.date BETWEEN :date.min AND :date.max\n",
+        "GROUP BY d.mmyef_id\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "date",
+          "keyword": "date",
+          "dataType": "DATE",
+          "complexType": "RANGE",
+          "defaultSelection": {
+            "range": {
+              "dataType": "DATE",
+              "min": {
+                "value": "now-30d/d"
+              },
+              "max": {
+                "value": "now/d"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "32ae036d",
+      "displayName": "queries.diversity.aggregate_populations",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Trace Diversity\n",
+        "-- View: Aggregate Populations\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Multiple line charts\n",
+        "-- Description: Combined cumulative coverage by Device and by MMYEF, per date\n",
+        "-- =============================================================================\n",
+        "\n",
+        "WITH date_spine AS (\n",
+        "  SELECT DISTINCT date\n",
+        "  FROM product_analytics_staging.dim_device_vehicle_properties\n",
+        "  WHERE date BETWEEN :date.min AND :date.max\n",
+        "    AND NOT (make IS NULL OR model IS NULL OR year IS NULL)\n",
+        "),\n",
+        "\n",
+        "/* =========================\n",
+        "   DEVICE-SCOPE METRICS\n",
+        "   ========================= */\n",
+        "device_population AS (\n",
+        "  SELECT COUNT(DISTINCT device_id) AS total_devices\n",
+        "  FROM product_analytics_staging.dim_device_vehicle_properties\n",
+        "  WHERE date BETWEEN :date.min AND :date.max\n",
+        "    AND NOT (make IS NULL OR model IS NULL OR year IS NULL)\n",
+        "),\n",
+        "\n",
+        "device_traces AS (\n",
+        "  SELECT\n",
+        "    date,\n",
+        "    org_id,\n",
+        "    device_id,\n",
+        "    COUNT(DISTINCT trace_uuid) AS trace_cnt\n",
+        "  FROM product_analytics_staging.dim_trace_characteristics\n",
+        "  WHERE date BETWEEN :date.min AND :date.max\n",
+        "  GROUP BY date, org_id, device_id\n",
+        "),\n",
+        "\n",
+        "first_trace_per_device AS (\n",
+        "  SELECT\n",
+        "    org_id,\n",
+        "    device_id,\n",
+        "    MIN(date) AS first_trace_date\n",
+        "  FROM device_traces\n",
+        "  GROUP BY org_id, device_id\n",
+        "),\n",
+        "\n",
+        "device_daily_totals AS (\n",
+        "  SELECT\n",
+        "    date,\n",
+        "    SUM(trace_cnt) AS daily_traces_device\n",
+        "  FROM device_traces\n",
+        "  GROUP BY date\n",
+        "),\n",
+        "\n",
+        "device_series AS (\n",
+        "  SELECT\n",
+        "    ds.date,\n",
+        "    COALESCE(ddt.daily_traces_device, 0) AS daily_traces_device,\n",
+        "    SUM(COALESCE(ddt.daily_traces_device, 0)) OVER (\n",
+        "      ORDER BY ds.date\n",
+        "      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n",
+        "    ) AS cum_traces_device,\n",
+        "    COUNT(dft.device_id) AS cum_unique_devices_with_traces\n",
+        "  FROM date_spine ds\n",
+        "  LEFT JOIN device_daily_totals ddt USING (date)\n",
+        "  LEFT JOIN first_trace_per_device dft\n",
+        "    ON dft.first_trace_date <= ds.date\n",
+        "  GROUP BY ds.date, ddt.daily_traces_device\n",
+        "),\n",
+        "\n",
+        "/* =========================\n",
+        "   MMYEF-SCOPE METRICS\n",
+        "   ========================= */\n",
+        "\n",
+        "-- First date each MMYEF ever appears (no window restriction for true first-seen)\n",
+        "mmyef_first_seen AS (\n",
+        "  SELECT\n",
+        "    mmyef_id,\n",
+        "    MIN(date) AS first_seen_date\n",
+        "  FROM product_analytics_staging.dim_device_vehicle_properties\n",
+        "  WHERE NOT (make IS NULL OR model IS NULL OR year IS NULL)\n",
+        "  GROUP BY mmyef_id\n",
+        "),\n",
+        "\n",
+        "-- New MMYEFs that first appear on each date in the reporting window\n",
+        "mmyef_new_by_day AS (\n",
+        "  SELECT\n",
+        "    ds.date,\n",
+        "    COUNT(*) AS new_mmyefs_today\n",
+        "  FROM date_spine ds\n",
+        "  JOIN mmyef_first_seen fs\n",
+        "    ON fs.first_seen_date = ds.date\n",
+        "  GROUP BY ds.date\n",
+        "),\n",
+        "\n",
+        "-- Baseline MMYEFs that existed before the window starts\n",
+        "mmyef_baseline AS (\n",
+        "  SELECT COUNT(DISTINCT mmyef_id) AS baseline_mmyefs\n",
+        "  FROM product_analytics_staging.dim_device_vehicle_properties\n",
+        "  WHERE date < :date.min\n",
+        "    AND NOT (make IS NULL OR model IS NULL OR year IS NULL)\n",
+        "),\n",
+        "\n",
+        "-- Cumulative MMYEF universe size by day (baseline + first-seen within window)\n",
+        "mmyef_population_series AS (\n",
+        "  SELECT\n",
+        "    ds.date,\n",
+        "    COALESCE(nbd.new_mmyefs_today, 0) AS new_mmyefs_today,\n",
+        "    (SELECT baseline_mmyefs FROM mmyef_baseline)\n",
+        "      + SUM(COALESCE(nbd.new_mmyefs_today, 0)) OVER (\n",
+        "          ORDER BY ds.date\n",
+        "          ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n",
+        "        ) AS cum_mmyef_population\n",
+        "  FROM date_spine ds\n",
+        "  LEFT JOIN mmyef_new_by_day nbd USING (date)\n",
+        "),\n",
+        "\n",
+        "-- Trace activity by MMYEF within the window\n",
+        "mmyef_traces AS (\n",
+        "  SELECT\n",
+        "    t.date,\n",
+        "    d.mmyef_id,\n",
+        "    COUNT(DISTINCT t.trace_uuid) AS count_traces\n",
+        "  FROM product_analytics_staging.dim_trace_characteristics t\n",
+        "  JOIN product_analytics_staging.dim_device_vehicle_properties d\n",
+        "    USING (date, org_id, device_id)\n",
+        "  WHERE t.date BETWEEN :date.min AND :date.max\n",
+        "    AND NOT (d.make IS NULL OR d.model IS NULL OR d.year IS NULL)\n",
+        "  GROUP BY t.date, d.mmyef_id\n",
+        "),\n",
+        "\n",
+        "first_trace_per_mmyef AS (\n",
+        "  SELECT\n",
+        "    mmyef_id,\n",
+        "    MIN(date) AS first_trace_date\n",
+        "  FROM mmyef_traces\n",
+        "  GROUP BY mmyef_id\n",
+        "),\n",
+        "\n",
+        "mmyef_daily_totals AS (\n",
+        "  SELECT\n",
+        "    date,\n",
+        "    SUM(count_traces) AS daily_traces_mmyef\n",
+        "  FROM mmyef_traces\n",
+        "  GROUP BY date\n",
+        "),\n",
+        "\n",
+        "mmyef_series AS (\n",
+        "  SELECT\n",
+        "    ds.date,\n",
+        "    COALESCE(mdt.daily_traces_mmyef, 0) AS daily_traces_mmyef,\n",
+        "    SUM(COALESCE(mdt.daily_traces_mmyef, 0)) OVER (\n",
+        "      ORDER BY ds.date\n",
+        "      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n",
+        "    ) AS cum_traces_mmyef,\n",
+        "    COUNT(ftm.mmyef_id) AS cum_mmyefs_with_traces\n",
+        "  FROM date_spine ds\n",
+        "  LEFT JOIN mmyef_daily_totals mdt USING (date)\n",
+        "  LEFT JOIN first_trace_per_mmyef ftm\n",
+        "    ON ftm.first_trace_date <= ds.date\n",
+        "  GROUP BY ds.date, mdt.daily_traces_mmyef\n",
+        ")\n",
+        "\n",
+        "SELECT\n",
+        "  ds.date,\n",
+        "\n",
+        "  -- Device metrics\n",
+        "  ds.daily_traces_device,\n",
+        "  ds.cum_traces_device,\n",
+        "  ds.cum_unique_devices_with_traces,\n",
+        "  dp.total_devices,\n",
+        "  CAST(ds.cum_unique_devices_with_traces AS DOUBLE) / NULLIF(dp.total_devices, 0) AS cum_device_coverage_pct,\n",
+        "\n",
+        "  -- MMYEF metrics\n",
+        "  ms.daily_traces_mmyef,\n",
+        "  ms.cum_traces_mmyef,\n",
+        "  ms.cum_mmyefs_with_traces,\n",
+        "  mps.new_mmyefs_today,\n",
+        "  mps.cum_mmyef_population AS total_mmyef_population,\n",
+        "  CAST(ms.cum_mmyefs_with_traces AS DOUBLE) / NULLIF(mps.cum_mmyef_population, 0) AS cum_mmyef_coverage_pct\n",
+        "\n",
+        "FROM device_series ds\n",
+        "JOIN mmyef_series ms USING (date)\n",
+        "JOIN mmyef_population_series mps USING (date)\n",
+        "CROSS JOIN device_population dp\n",
+        "ORDER BY ds.date\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "date",
+          "keyword": "date",
+          "dataType": "DATE",
+          "complexType": "RANGE",
+          "defaultSelection": {
+            "range": {
+              "dataType": "DATE",
+              "min": {
+                "value": "now-30d/d"
+              },
+              "max": {
+                "value": "now/d"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "78feb3b7",
+      "displayName": "queries.traces.trace_uuids",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Traces\n",
+        "-- View: Trace UUIDs\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Table\n",
+        "-- Description: List of trace UUIDs with vehicle properties for filtering\n",
+        "-- =============================================================================\n",
+        "\n",
+        "SELECT\n",
+        "    DATE(date) AS date,\n",
+        "    org_id,\n",
+        "    device_id,\n",
+        "    make,\n",
+        "    model,\n",
+        "    year,\n",
+        "    engine_model,\n",
+        "    properties_fuel_fuelgroup.name AS fuel_group, \n",
+        "    properties_fuel_powertrain.name AS powertrain,\n",
+        "    trace_uuid,\n",
+        "    trace_duration_seconds,\n",
+        "    mmyef_id\n",
+        "FROM product_analytics_staging.dim_trace_characteristics\n",
+        "LEFT JOIN product_analytics_staging.dim_device_vehicle_properties USING (date, org_id, device_id)\n",
+        "LEFT JOIN definitions.properties_fuel_fuelgroup ON properties_fuel_fuelgroup.id = fuel_group\n",
+        "LEFT JOIN definitions.properties_fuel_powertrain ON properties_fuel_powertrain.id = powertrain\n",
+        "WHERE date BETWEEN :date.min AND :date.max\n",
+        "GROUP BY ALL\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "date",
+          "keyword": "date",
+          "dataType": "DATE",
+          "complexType": "RANGE",
+          "defaultSelection": {
+            "range": {
+              "dataType": "DATE",
+              "min": {
+                "value": "now-30d/d"
+              },
+              "max": {
+                "value": "now/d"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "74131988",
+      "displayName": "queries.traces.decoded_traces",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Traces\n",
+        "-- View: Decoded Traces\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Line Chart\n",
+        "-- Description: Decoded signal values over time for a specific trace\n",
+        "-- =============================================================================\n",
+        "\n",
+        "WITH data AS (\n",
+        "  SELECT\n",
+        "    dec.trace_uuid,\n",
+        "    FROM_UNIXTIME(start_timestamp_unix_us / 1000000) AS timestamp,\n",
+        "    signal.obd_value,\n",
+        "    signal.decoded_value,\n",
+        "    signal.data_identifier,\n",
+        "    signal.bit_start,\n",
+        "    COALESCE(\n",
+        "      application.j1939.source_address,\n",
+        "      application.uds.source_address,\n",
+        "      application.none.arbitration_id\n",
+        "    ) AS source_address\n",
+        "  FROM product_analytics_staging.fct_can_trace_decoded AS dec\n",
+        "  LATERAL VIEW EXPLODE(decoded_signals) AS signal\n",
+        "  WHERE dec.trace_uuid = :trace_uuid\n",
+        "    AND NOT signal.is_out_of_range\n",
+        "    AND signal.can_apply_rule\n",
+        ")\n",
+        "\n",
+        "SELECT\n",
+        "  data.trace_uuid,\n",
+        "  data.timestamp,\n",
+        "  data.decoded_value,\n",
+        "  data.source_address,\n",
+        "  ov.name AS obd_value_name,\n",
+        "  CONCAT_WS(\n",
+        "    \" \",\n",
+        "    FORMAT_STRING(\"SI=%s\", ov.name),\n",
+        "    FORMAT_STRING(\"SA=%d\", data.source_address),\n",
+        "    FORMAT_STRING(\"DI=%d\", data.data_identifier),\n",
+        "    FORMAT_STRING(\"BS=%d\", data.bit_start)\n",
+        "  ) AS label\n",
+        "FROM data\n",
+        "LEFT JOIN definitions.obd_values AS ov ON ov.id = data.obd_value\n",
+        "ORDER BY data.timestamp ASC\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "trace_uuid",
+          "keyword": "trace_uuid",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "823f4d48",
+      "displayName": "queries.traces.signal_summary",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Traces\n",
+        "-- View: Signal Summary\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Table\n",
+        "-- Description: Aggregate statistics per signal in a trace\n",
+        "-- =============================================================================\n",
+        "\n",
+        "WITH data AS (\n",
+        "  SELECT\n",
+        "    dec.trace_uuid,\n",
+        "    signal.obd_value,\n",
+        "    signal.decoded_value,\n",
+        "    COALESCE(\n",
+        "      application.j1939.source_address,\n",
+        "      application.uds.source_address,\n",
+        "      application.none.arbitration_id\n",
+        "    ) AS source_address\n",
+        "  FROM product_analytics_staging.fct_can_trace_decoded AS dec\n",
+        "  LATERAL VIEW EXPLODE(decoded_signals) AS signal\n",
+        "  WHERE dec.trace_uuid = :trace_uuid\n",
+        "    AND NOT signal.is_out_of_range\n",
+        "    AND signal.can_apply_rule\n",
+        ")\n",
+        "\n",
+        "SELECT\n",
+        "  data.trace_uuid,\n",
+        "  ov.name AS obd_value_name,\n",
+        "  data.source_address,\n",
+        "  COUNT(*) AS readings,\n",
+        "  ROUND(MIN(data.decoded_value), 2) AS min_value,\n",
+        "  ROUND(MAX(data.decoded_value), 2) AS max_value,\n",
+        "  ROUND(AVG(data.decoded_value), 2) AS avg_value,\n",
+        "  ROUND(STDDEV(data.decoded_value), 2) AS std_dev\n",
+        "FROM data\n",
+        "LEFT JOIN definitions.obd_values AS ov ON ov.id = data.obd_value\n",
+        "GROUP BY data.trace_uuid, ov.name, data.source_address\n",
+        "ORDER BY readings DESC\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "trace_uuid",
+          "keyword": "trace_uuid",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ee32ffd7",
+      "displayName": "queries.catalog.signal_catalog",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: Signal Catalog\n",
+        "-- View: Signal Catalog\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Table\n",
+        "-- Description: Complete signal catalog with definitions\n",
+        "-- =============================================================================\n",
+        "\n",
+        "SELECT\n",
+        "  -- Primary columns for display\n",
+        "  ov.name AS obd_value_name,\n",
+        "  CASE\n",
+        "    WHEN dim.data_source_id = 0 THEN \"Invalid\"\n",
+        "    WHEN dim.data_source_id = 1 THEN \"Global\"\n",
+        "    WHEN dim.data_source_id = 2 THEN \"J1979_DA\"\n",
+        "    WHEN dim.data_source_id = 3 THEN \"J1939_DA\"\n",
+        "    WHEN dim.data_source_id = 4 THEN \"SPS\"\n",
+        "    WHEN dim.data_source_id = 5 THEN \"A.I.\"\n",
+        "    ELSE \"Unknown\"\n",
+        "  END AS data_source_name,\n",
+        "  dim.make,\n",
+        "  dim.model,\n",
+        "  dim.year,\n",
+        "  dim.engine_model,\n",
+        "  pt.name AS powertrain_name,\n",
+        "  fg.name AS fuel_group_name,\n",
+        "  dim.trim,\n",
+        "  dim.data_identifier,\n",
+        "  dim.bit_start,\n",
+        "  dim.bit_length,\n",
+        "  endian.name AS endian_name,\n",
+        "  dim.scale,\n",
+        "  dim.internal_scaling,\n",
+        "  sign.name AS sign_name,\n",
+        "  dim.offset,\n",
+        "  dim.minimum,\n",
+        "  dim.maximum,\n",
+        "  dim.unit,\n",
+        "  dim.description,\n",
+        "  dim.mapping,\n",
+        "  dim.pgn,\n",
+        "  dim.spn,\n",
+        "  dim.passive_response_mask,\n",
+        "  dim.response_id,\n",
+        "  dim.request_id,\n",
+        "  dim.source_id,\n",
+        "  dim.application_id,\n",
+        "  dim.protocol_id,\n",
+        "  dim.signal_uuid,\n",
+        "  dim.mmyef_id,\n",
+        "  dim.request_period_ms,\n",
+        "  dim.is_broadcast,\n",
+        "  dim.is_standard,\n",
+        "  dim.stream_id,\n",
+        "  dim.signal_catalog_id,\n",
+        "  -- Raw IDs for reference\n",
+        "  dim.powertrain,\n",
+        "  dim.fuel_group,\n",
+        "  dim.obd_value,\n",
+        "  dim.endian,\n",
+        "  dim.sign,\n",
+        "  dim.data_source_id\n",
+        "FROM product_analytics_staging.dim_signal_catalog_definitions AS dim\n",
+        "LEFT JOIN definitions.properties_fuel_powertrain AS pt ON pt.id = dim.powertrain\n",
+        "LEFT JOIN definitions.properties_fuel_fuelgroup AS fg ON fg.id = dim.fuel_group\n",
+        "LEFT JOIN definitions.obd_values AS ov ON ov.id = dim.obd_value\n",
+        "LEFT JOIN definitions.signal_endian AS endian ON dim.endian = endian.id\n",
+        "LEFT JOIN definitions.signal_sign AS sign ON dim.sign = sign.id\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": []
+    },
+    {
+      "name": "8a0ab9f5",
+      "displayName": "queries.asc_files.asc_traces",
+      "queryLines": [
+        "-- =============================================================================\n",
+        "-- Dashboard: VDP Trace Explorer\n",
+        "-- Tab: ASC Files\n",
+        "-- View: ASC Traces\n",
+        "-- =============================================================================\n",
+        "-- Visualization: Table\n",
+        "-- Description: Browse ASC trace files with S3 paths\n",
+        "-- =============================================================================\n",
+        "\n",
+        "SELECT\n",
+        "    exp.date,\n",
+        "    exp.org_id,\n",
+        "    exp.device_id,\n",
+        "    exp.trace_uuid,\n",
+        "    exp.s3_path,\n",
+        "    exp.metadata_json_path,\n",
+        "    exp.file_size_bytes,\n",
+        "    prop.make,\n",
+        "    prop.model,\n",
+        "    prop.year,\n",
+        "    prop.engine_model,\n",
+        "    properties_fuel_fuelgroup.name AS fuel_group,\n",
+        "    properties_fuel_powertrain.name AS powertrain\n",
+        "FROM product_analytics_staging.fct_can_trace_exports AS exp\n",
+        "JOIN product_analytics.dim_device_dimensions USING (date, org_id, device_id)\n",
+        "LEFT JOIN product_analytics_staging.dim_device_vehicle_properties AS prop USING (date, org_id, device_id)\n",
+        "LEFT JOIN definitions.properties_fuel_fuelgroup ON properties_fuel_fuelgroup.id = fuel_group\n",
+        "LEFT JOIN definitions.properties_fuel_powertrain ON properties_fuel_powertrain.id = powertrain\n",
+        "WHERE date BETWEEN :date.min AND :date.max\n",
+        "\n",
+        "\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "date",
+          "keyword": "date",
+          "dataType": "DATE",
+          "complexType": "RANGE",
+          "defaultSelection": {
+            "range": {
+              "dataType": "DATE",
+              "min": {
+                "value": "now-30d/d"
+              },
+              "max": {
+                "value": "now/d"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "34b0d93f",
+      "displayName": "Overview",
+      "layout": [
+        {
+          "widget": {
+            "name": "d9c0db29",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Trace Collection Program\n",
+                "\n",
+                "Our goal is to collect a **representative dataset of CAN traces** that cover each unique vehicle population (Make, Model, Year, Engine, Fuel Type, Powertrain).\n",
+                "\n",
+                "This enables us to:\n",
+                "- Provide a **reference trace per customer vehicle** for diagnostics and support\n",
+                "- **Enable further development** of signal decoding and reverse engineering\n",
+                "- **Validate signal promotions** across diverse vehicle configurations\n",
+                "\n",
+                "The charts below track our progress toward comprehensive population coverage.\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "5f2640d6",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "076685b2",
+                  "fields": [
+                    {
+                      "name": "count_traces",
+                      "expression": "`count_traces`"
+                    },
+                    {
+                      "name": "count_mmyefs",
+                      "expression": "`count_mmyefs`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "count_traces",
+                  "rowNumber": 1
+                },
+                "target": {
+                  "fieldName": "count_mmyefs",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Traces & Populations Covered",
+                "showDescription": true,
+                "description": "Total traces and unique populations collected from"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "d5cd2f53",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ce2f2737",
+                  "fields": [
+                    {
+                      "name": "date",
+                      "expression": "`date`"
+                    },
+                    {
+                      "name": "count_traces",
+                      "expression": "`count_traces`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "date",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "axis": {
+                    "labelAngle": 45
+                  }
+                },
+                "y": {
+                  "fieldName": "count_traces",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "count_traces",
+                  "scale": {
+                    "type": "quantitative",
+                    "colorRamp": {
+                      "mode": "scheme",
+                      "scheme": "spectral"
+                    },
+                    "reverse": true
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Traces Pulled Per Day",
+                "showDescription": true,
+                "description": "Daily trace counts"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 3,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "c0a4c1b5",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "db523c7d",
+                  "fields": [
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    },
+                    {
+                      "name": "trace_cnt",
+                      "expression": "`trace_cnt`"
+                    },
+                    {
+                      "name": "count(trace_cnt)",
+                      "expression": "COUNT(`trace_cnt`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "histogram",
+              "encodings": {
+                "x": {
+                  "fieldName": "trace_cnt",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(trace_cnt)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "count(*)",
+                  "scale": {
+                    "type": "quantitative",
+                    "colorRamp": {
+                      "mode": "scheme",
+                      "scheme": "spectral"
+                    },
+                    "reverse": true
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Histogram of Traces per Population",
+                "showDescription": true,
+                "description": "Trace count distribution per MMYEF population"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "34f777e2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "32ae036d",
+                  "fields": [
+                    {
+                      "name": "date",
+                      "expression": "`date`"
+                    },
+                    {
+                      "name": "daily_traces_device",
+                      "expression": "`daily_traces_device`"
+                    },
+                    {
+                      "name": "cum_traces_device",
+                      "expression": "`cum_traces_device`"
+                    },
+                    {
+                      "name": "cum_unique_devices_with_traces",
+                      "expression": "`cum_unique_devices_with_traces`"
+                    },
+                    {
+                      "name": "total_devices",
+                      "expression": "`total_devices`"
+                    },
+                    {
+                      "name": "cum_device_coverage_pct",
+                      "expression": "`cum_device_coverage_pct`"
+                    },
+                    {
+                      "name": "daily_traces_mmyef",
+                      "expression": "`daily_traces_mmyef`"
+                    },
+                    {
+                      "name": "cum_traces_mmyef",
+                      "expression": "`cum_traces_mmyef`"
+                    },
+                    {
+                      "name": "cum_mmyefs_with_traces",
+                      "expression": "`cum_mmyefs_with_traces`"
+                    },
+                    {
+                      "name": "new_mmyefs_today",
+                      "expression": "`new_mmyefs_today`"
+                    },
+                    {
+                      "name": "total_mmyef_population",
+                      "expression": "`total_mmyef_population`"
+                    },
+                    {
+                      "name": "cum_mmyef_coverage_pct",
+                      "expression": "`cum_mmyef_coverage_pct`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "fields": [
+                    {
+                      "fieldName": "cum_mmyef_coverage_pct"
+                    },
+                    {
+                      "fieldName": "cum_device_coverage_pct"
+                    }
+                  ],
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "axis": {
+                    "title": "Coverage %"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Percent Coverage Cumulative",
+                "showDescription": true,
+                "description": "Combined cumulative coverage by Device and by MMYEF, per date"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 11,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "2e2d002a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "32ae036d",
+                  "fields": [
+                    {
+                      "name": "date",
+                      "expression": "`date`"
+                    },
+                    {
+                      "name": "daily_traces_device",
+                      "expression": "`daily_traces_device`"
+                    },
+                    {
+                      "name": "cum_traces_device",
+                      "expression": "`cum_traces_device`"
+                    },
+                    {
+                      "name": "cum_unique_devices_with_traces",
+                      "expression": "`cum_unique_devices_with_traces`"
+                    },
+                    {
+                      "name": "total_devices",
+                      "expression": "`total_devices`"
+                    },
+                    {
+                      "name": "cum_device_coverage_pct",
+                      "expression": "`cum_device_coverage_pct`"
+                    },
+                    {
+                      "name": "daily_traces_mmyef",
+                      "expression": "`daily_traces_mmyef`"
+                    },
+                    {
+                      "name": "cum_traces_mmyef",
+                      "expression": "`cum_traces_mmyef`"
+                    },
+                    {
+                      "name": "cum_mmyefs_with_traces",
+                      "expression": "`cum_mmyefs_with_traces`"
+                    },
+                    {
+                      "name": "new_mmyefs_today",
+                      "expression": "`new_mmyefs_today`"
+                    },
+                    {
+                      "name": "total_mmyef_population",
+                      "expression": "`total_mmyef_population`"
+                    },
+                    {
+                      "name": "cum_mmyef_coverage_pct",
+                      "expression": "`cum_mmyef_coverage_pct`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "fields": [
+                    {
+                      "fieldName": "cum_mmyefs_with_traces"
+                    },
+                    {
+                      "fieldName": "total_mmyef_population"
+                    }
+                  ],
+                  "axis": {
+                    "title": "Count"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total Populations Covered Cumulative",
+                "showDescription": true,
+                "description": "Combined cumulative coverage by Device and by MMYEF, per date"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 11,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "03b6ca3f",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "32ae036d",
+                  "fields": [
+                    {
+                      "name": "date",
+                      "expression": "`date`"
+                    },
+                    {
+                      "name": "daily_traces_device",
+                      "expression": "`daily_traces_device`"
+                    },
+                    {
+                      "name": "cum_traces_device",
+                      "expression": "`cum_traces_device`"
+                    },
+                    {
+                      "name": "cum_unique_devices_with_traces",
+                      "expression": "`cum_unique_devices_with_traces`"
+                    },
+                    {
+                      "name": "total_devices",
+                      "expression": "`total_devices`"
+                    },
+                    {
+                      "name": "cum_device_coverage_pct",
+                      "expression": "`cum_device_coverage_pct`"
+                    },
+                    {
+                      "name": "daily_traces_mmyef",
+                      "expression": "`daily_traces_mmyef`"
+                    },
+                    {
+                      "name": "cum_traces_mmyef",
+                      "expression": "`cum_traces_mmyef`"
+                    },
+                    {
+                      "name": "cum_mmyefs_with_traces",
+                      "expression": "`cum_mmyefs_with_traces`"
+                    },
+                    {
+                      "name": "new_mmyefs_today",
+                      "expression": "`new_mmyefs_today`"
+                    },
+                    {
+                      "name": "total_mmyef_population",
+                      "expression": "`total_mmyef_population`"
+                    },
+                    {
+                      "name": "cum_mmyef_coverage_pct",
+                      "expression": "`cum_mmyef_coverage_pct`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "fields": [
+                    {
+                      "fieldName": "cum_traces_device"
+                    },
+                    {
+                      "fieldName": "cum_unique_devices_with_traces"
+                    },
+                    {
+                      "fieldName": "cum_mmyefs_with_traces"
+                    }
+                  ],
+                  "axis": {
+                    "title": "Count"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Traces Pulled Cumulative",
+                "showDescription": true,
+                "description": "Combined cumulative coverage by Device and by MMYEF, per date"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 17,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "9eff9c63",
+      "displayName": "Traces",
+      "layout": [
+        {
+          "name": "8f1502ca",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "72892d83",
+            "queries": [
+              {
+                "name": "field_78feb3b7_make",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "make",
+                      "expression": "`make`"
+                    },
+                    {
+                      "name": "make_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "make",
+                    "queryName": "field_78feb3b7_make"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Make"
+              }
+            }
+          }
+        },
+        {
+          "name": "857007a6",
+          "position": {
+            "x": 1,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "81c330f4",
+            "queries": [
+              {
+                "name": "field_78feb3b7_model",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "model_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "model",
+                    "queryName": "field_78feb3b7_model"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Model"
+              }
+            }
+          }
+        },
+        {
+          "name": "7cfff57f",
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "1a7ee311",
+            "queries": [
+              {
+                "name": "field_78feb3b7_year",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "year",
+                    "queryName": "field_78feb3b7_year"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Year"
+              }
+            }
+          }
+        },
+        {
+          "name": "7c5fe102",
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "241e2850",
+            "queries": [
+              {
+                "name": "field_78feb3b7_powertrain",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "powertrain",
+                      "expression": "`powertrain`"
+                    },
+                    {
+                      "name": "powertrain_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "powertrain",
+                    "queryName": "field_78feb3b7_powertrain"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Powertrain"
+              }
+            }
+          }
+        },
+        {
+          "name": "62608f95",
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "55300e64",
+            "queries": [
+              {
+                "name": "field_78feb3b7_fuel_group",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "fuel_group",
+                      "expression": "`fuel_group`"
+                    },
+                    {
+                      "name": "fuel_group_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "fuel_group",
+                    "queryName": "field_78feb3b7_fuel_group"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Fuel Group"
+              }
+            }
+          }
+        },
+        {
+          "name": "a70eca88",
+          "position": {
+            "x": 5,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "cbfc9e06",
+            "queries": [
+              {
+                "name": "field_78feb3b7_engine_model",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "engine_model",
+                      "expression": "`engine_model`"
+                    },
+                    {
+                      "name": "engine_model_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "engine_model",
+                    "queryName": "field_78feb3b7_engine_model"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Engine"
+              }
+            }
+          }
+        },
+        {
+          "widget": {
+            "name": "37cb5326",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "date",
+                      "expression": "`date`"
+                    },
+                    {
+                      "name": "org_id",
+                      "expression": "`org_id`"
+                    },
+                    {
+                      "name": "device_id",
+                      "expression": "`device_id`"
+                    },
+                    {
+                      "name": "make",
+                      "expression": "`make`"
+                    },
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "engine_model",
+                      "expression": "`engine_model`"
+                    },
+                    {
+                      "name": "fuel_group",
+                      "expression": "`fuel_group`"
+                    },
+                    {
+                      "name": "powertrain",
+                      "expression": "`powertrain`"
+                    },
+                    {
+                      "name": "trace_uuid",
+                      "expression": "`trace_uuid`"
+                    },
+                    {
+                      "name": "trace_duration_seconds",
+                      "expression": "`trace_duration_seconds`"
+                    },
+                    {
+                      "name": "mmyef_id",
+                      "expression": "`mmyef_id`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "date",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "datetime",
+                    "displayAs": "datetime",
+                    "visible": true,
+                    "order": 100000,
+                    "title": "date",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "dateTimeFormat": "YYYY-MM-DD"
+                  },
+                  {
+                    "fieldName": "org_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "org_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "device_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100002,
+                    "title": "device_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "make",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100003,
+                    "title": "make",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "model",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100004,
+                    "title": "model",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "year",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100005,
+                    "title": "year",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "engine_model",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100006,
+                    "title": "engine_model",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "fuel_group",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100007,
+                    "title": "fuel_group",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "powertrain",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100008,
+                    "title": "powertrain",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "trace_uuid",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100009,
+                    "title": "trace_uuid",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "trace_duration_seconds",
+                    "numberFormat": "0.0%",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "float",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 100010,
+                    "title": "trace_duration_seconds",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "scalePercentBy100": true
+                  },
+                  {
+                    "fieldName": "mmyef_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100011,
+                    "title": "mmyef_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 10,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "showTitle": true,
+                "title": "Available Traces",
+                "showDescription": true,
+                "description": "Find a trace using the filters above, then select it in the Trace UUID dropdown below."
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "name": "4c3d7ffb",
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 6,
+            "height": 2
+          },
+          "widget": {
+            "name": "db01da29",
+            "queries": [
+              {
+                "name": "param_78feb3b7_trace_uuid",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "fields": [
+                    {
+                      "name": "trace_uuid",
+                      "expression": "`trace_uuid`"
+                    },
+                    {
+                      "name": "trace_uuid_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_74131988_trace_uuid",
+                "query": {
+                  "datasetName": "74131988",
+                  "parameters": [
+                    {
+                      "name": "trace_uuid",
+                      "keyword": "trace_uuid"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_823f4d48_trace_uuid",
+                "query": {
+                  "datasetName": "823f4d48",
+                  "parameters": [
+                    {
+                      "name": "trace_uuid",
+                      "keyword": "trace_uuid"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "trace_uuid",
+                    "queryName": "param_78feb3b7_trace_uuid"
+                  },
+                  {
+                    "parameterName": "trace_uuid",
+                    "queryName": "param_74131988_trace_uuid"
+                  },
+                  {
+                    "parameterName": "trace_uuid",
+                    "queryName": "param_823f4d48_trace_uuid"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Trace UUID"
+              }
+            }
+          }
+        },
+        {
+          "name": "9ed1a283",
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 3,
+            "height": 2
+          },
+          "widget": {
+            "name": "1d99241c",
+            "queries": [
+              {
+                "name": "field_74131988_obd_value_name",
+                "query": {
+                  "datasetName": "74131988",
+                  "fields": [
+                    {
+                      "name": "obd_value_name",
+                      "expression": "`obd_value_name`"
+                    },
+                    {
+                      "name": "obd_value_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "field_823f4d48_obd_value_name",
+                "query": {
+                  "datasetName": "823f4d48",
+                  "fields": [
+                    {
+                      "name": "obd_value_name",
+                      "expression": "`obd_value_name`"
+                    },
+                    {
+                      "name": "obd_value_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "obd_value_name",
+                    "queryName": "field_74131988_obd_value_name"
+                  },
+                  {
+                    "fieldName": "obd_value_name",
+                    "queryName": "field_823f4d48_obd_value_name"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Signal"
+              }
+            }
+          }
+        },
+        {
+          "name": "22300eea",
+          "position": {
+            "x": 3,
+            "y": 9,
+            "width": 3,
+            "height": 2
+          },
+          "widget": {
+            "name": "49ca7aad",
+            "queries": [
+              {
+                "name": "field_74131988_source_address",
+                "query": {
+                  "datasetName": "74131988",
+                  "fields": [
+                    {
+                      "name": "source_address",
+                      "expression": "`source_address`"
+                    },
+                    {
+                      "name": "source_address_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "field_823f4d48_source_address",
+                "query": {
+                  "datasetName": "823f4d48",
+                  "fields": [
+                    {
+                      "name": "source_address",
+                      "expression": "`source_address`"
+                    },
+                    {
+                      "name": "source_address_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "source_address",
+                    "queryName": "field_74131988_source_address"
+                  },
+                  {
+                    "fieldName": "source_address",
+                    "queryName": "field_823f4d48_source_address"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "ECU"
+              }
+            }
+          }
+        },
+        {
+          "widget": {
+            "name": "a8632bad",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "74131988",
+                  "fields": [
+                    {
+                      "name": "trace_uuid",
+                      "expression": "`trace_uuid`"
+                    },
+                    {
+                      "name": "timestamp",
+                      "expression": "`timestamp`"
+                    },
+                    {
+                      "name": "decoded_value",
+                      "expression": "`decoded_value`"
+                    },
+                    {
+                      "name": "source_address",
+                      "expression": "`source_address`"
+                    },
+                    {
+                      "name": "obd_value_name",
+                      "expression": "`obd_value_name`"
+                    },
+                    {
+                      "name": "label",
+                      "expression": "`label`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "timestamp",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "decoded_value",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "label",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Signal Timeline",
+                "showDescription": true,
+                "description": "Decoded signal values over time for the selected trace."
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 16,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "81096be0",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "823f4d48",
+                  "fields": [
+                    {
+                      "name": "trace_uuid",
+                      "expression": "`trace_uuid`"
+                    },
+                    {
+                      "name": "obd_value_name",
+                      "expression": "`obd_value_name`"
+                    },
+                    {
+                      "name": "source_address",
+                      "expression": "`source_address`"
+                    },
+                    {
+                      "name": "readings",
+                      "expression": "`readings`"
+                    },
+                    {
+                      "name": "min_value",
+                      "expression": "`min_value`"
+                    },
+                    {
+                      "name": "max_value",
+                      "expression": "`max_value`"
+                    },
+                    {
+                      "name": "avg_value",
+                      "expression": "`avg_value`"
+                    },
+                    {
+                      "name": "std_dev",
+                      "expression": "`std_dev`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "trace_uuid",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100000,
+                    "title": "trace_uuid",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "obd_value_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "obd_value_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "source_address",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100002,
+                    "title": "source_address",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "readings",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100003,
+                    "title": "readings",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "min_value",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100004,
+                    "title": "min_value",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "max_value",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100005,
+                    "title": "max_value",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "avg_value",
+                    "numberFormat": "0",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "integer",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 100006,
+                    "title": "avg_value",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "std_dev",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100007,
+                    "title": "std_dev",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 15,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "showTitle": true,
+                "title": "Signal Statistics",
+                "showDescription": true,
+                "description": "Aggregate stats per signal in the selected trace."
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 24,
+            "width": 6,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "25a2cadc",
+      "displayName": "Signal Catalog",
+      "layout": [
+        {
+          "name": "8f1502ca",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "72892d83",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_make",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "make",
+                      "expression": "`make`"
+                    },
+                    {
+                      "name": "make_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "make",
+                    "queryName": "field_ee32ffd7_make"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Make"
+              }
+            }
+          }
+        },
+        {
+          "name": "857007a6",
+          "position": {
+            "x": 1,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "81c330f4",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_model",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "model_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "model",
+                    "queryName": "field_ee32ffd7_model"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Model"
+              }
+            }
+          }
+        },
+        {
+          "name": "7cfff57f",
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "1a7ee311",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_year",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "year",
+                    "queryName": "field_ee32ffd7_year"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Year"
+              }
+            }
+          }
+        },
+        {
+          "name": "3a544336",
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "e32d084d",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_powertrain_name",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "powertrain_name",
+                      "expression": "`powertrain_name`"
+                    },
+                    {
+                      "name": "powertrain_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "powertrain_name",
+                    "queryName": "field_ee32ffd7_powertrain_name"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Powertrain"
+              }
+            }
+          }
+        },
+        {
+          "name": "2d2570ce",
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "41ed9c1a",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_fuel_group_name",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "fuel_group_name",
+                      "expression": "`fuel_group_name`"
+                    },
+                    {
+                      "name": "fuel_group_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "fuel_group_name",
+                    "queryName": "field_ee32ffd7_fuel_group_name"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Fuel Group"
+              }
+            }
+          }
+        },
+        {
+          "name": "9ed1a283",
+          "position": {
+            "x": 5,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "1d99241c",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_obd_value_name",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "obd_value_name",
+                      "expression": "`obd_value_name`"
+                    },
+                    {
+                      "name": "obd_value_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "obd_value_name",
+                    "queryName": "field_ee32ffd7_obd_value_name"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Signal"
+              }
+            }
+          }
+        },
+        {
+          "name": "683349d0",
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          },
+          "widget": {
+            "name": "e58526cd",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_data_source_name",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "data_source_name",
+                      "expression": "`data_source_name`"
+                    },
+                    {
+                      "name": "data_source_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "data_source_name",
+                    "queryName": "field_ee32ffd7_data_source_name"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Data Source"
+              }
+            }
+          }
+        },
+        {
+          "name": "3a8fcedb",
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          },
+          "widget": {
+            "name": "722dfcac",
+            "queries": [
+              {
+                "name": "field_ee32ffd7_is_standard",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "is_standard",
+                      "expression": "`is_standard`"
+                    },
+                    {
+                      "name": "is_standard_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "is_standard",
+                    "queryName": "field_ee32ffd7_is_standard"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Standard"
+              }
+            }
+          }
+        },
+        {
+          "widget": {
+            "name": "34546323",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Signal Catalog\n",
+                "\n",
+                "Search for promotions across all supported data sources. This includes the backend global\\_obd\\_configuration, SPS, J1939-DA, J1979-DA, and AI generated promotions.\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "60736255",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ee32ffd7",
+                  "fields": [
+                    {
+                      "name": "obd_value_name",
+                      "expression": "`obd_value_name`"
+                    },
+                    {
+                      "name": "data_source_name",
+                      "expression": "`data_source_name`"
+                    },
+                    {
+                      "name": "make",
+                      "expression": "`make`"
+                    },
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "engine_model",
+                      "expression": "`engine_model`"
+                    },
+                    {
+                      "name": "powertrain_name",
+                      "expression": "`powertrain_name`"
+                    },
+                    {
+                      "name": "fuel_group_name",
+                      "expression": "`fuel_group_name`"
+                    },
+                    {
+                      "name": "trim",
+                      "expression": "`trim`"
+                    },
+                    {
+                      "name": "data_identifier",
+                      "expression": "`data_identifier`"
+                    },
+                    {
+                      "name": "bit_start",
+                      "expression": "`bit_start`"
+                    },
+                    {
+                      "name": "bit_length",
+                      "expression": "`bit_length`"
+                    },
+                    {
+                      "name": "endian_name",
+                      "expression": "`endian_name`"
+                    },
+                    {
+                      "name": "scale",
+                      "expression": "`scale`"
+                    },
+                    {
+                      "name": "internal_scaling",
+                      "expression": "`internal_scaling`"
+                    },
+                    {
+                      "name": "sign_name",
+                      "expression": "`sign_name`"
+                    },
+                    {
+                      "name": "offset",
+                      "expression": "`offset`"
+                    },
+                    {
+                      "name": "minimum",
+                      "expression": "`minimum`"
+                    },
+                    {
+                      "name": "maximum",
+                      "expression": "`maximum`"
+                    },
+                    {
+                      "name": "unit",
+                      "expression": "`unit`"
+                    },
+                    {
+                      "name": "description",
+                      "expression": "`description`"
+                    },
+                    {
+                      "name": "mapping",
+                      "expression": "`mapping`"
+                    },
+                    {
+                      "name": "pgn",
+                      "expression": "`pgn`"
+                    },
+                    {
+                      "name": "spn",
+                      "expression": "`spn`"
+                    },
+                    {
+                      "name": "passive_response_mask",
+                      "expression": "`passive_response_mask`"
+                    },
+                    {
+                      "name": "response_id",
+                      "expression": "`response_id`"
+                    },
+                    {
+                      "name": "request_id",
+                      "expression": "`request_id`"
+                    },
+                    {
+                      "name": "source_id",
+                      "expression": "`source_id`"
+                    },
+                    {
+                      "name": "application_id",
+                      "expression": "`application_id`"
+                    },
+                    {
+                      "name": "protocol_id",
+                      "expression": "`protocol_id`"
+                    },
+                    {
+                      "name": "signal_uuid",
+                      "expression": "`signal_uuid`"
+                    },
+                    {
+                      "name": "mmyef_id",
+                      "expression": "`mmyef_id`"
+                    },
+                    {
+                      "name": "request_period_ms",
+                      "expression": "`request_period_ms`"
+                    },
+                    {
+                      "name": "is_broadcast",
+                      "expression": "`is_broadcast`"
+                    },
+                    {
+                      "name": "is_standard",
+                      "expression": "`is_standard`"
+                    },
+                    {
+                      "name": "stream_id",
+                      "expression": "`stream_id`"
+                    },
+                    {
+                      "name": "signal_catalog_id",
+                      "expression": "`signal_catalog_id`"
+                    },
+                    {
+                      "name": "powertrain",
+                      "expression": "`powertrain`"
+                    },
+                    {
+                      "name": "fuel_group",
+                      "expression": "`fuel_group`"
+                    },
+                    {
+                      "name": "obd_value",
+                      "expression": "`obd_value`"
+                    },
+                    {
+                      "name": "endian",
+                      "expression": "`endian`"
+                    },
+                    {
+                      "name": "sign",
+                      "expression": "`sign`"
+                    },
+                    {
+                      "name": "data_source_id",
+                      "expression": "`data_source_id`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "obd_value_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100000,
+                    "title": "obd_value_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "data_source_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "data_source_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "make",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100002,
+                    "title": "make",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "model",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100003,
+                    "title": "model",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "year",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100004,
+                    "title": "year",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "engine_model",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100005,
+                    "title": "engine_model",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "powertrain_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100006,
+                    "title": "powertrain_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "fuel_group_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100007,
+                    "title": "fuel_group_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "trim",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100008,
+                    "title": "trim",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "data_identifier",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100009,
+                    "title": "data_identifier",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "bit_start",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100010,
+                    "title": "bit_start",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "bit_length",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100011,
+                    "title": "bit_length",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "endian_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100012,
+                    "title": "endian_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "scale",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100013,
+                    "title": "scale",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "internal_scaling",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100014,
+                    "title": "internal_scaling",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "sign_name",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100015,
+                    "title": "sign_name",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "offset",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100016,
+                    "title": "offset",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "minimum",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100017,
+                    "title": "minimum",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "maximum",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100018,
+                    "title": "maximum",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "unit",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100019,
+                    "title": "unit",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "description",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100020,
+                    "title": "description",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "mapping",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100021,
+                    "title": "mapping",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "pgn",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100022,
+                    "title": "pgn",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "spn",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100023,
+                    "title": "spn",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "passive_response_mask",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100024,
+                    "title": "passive_response_mask",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "response_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100025,
+                    "title": "response_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "request_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100026,
+                    "title": "request_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "source_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100027,
+                    "title": "source_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "application_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100028,
+                    "title": "application_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "protocol_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100029,
+                    "title": "protocol_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "signal_uuid",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100030,
+                    "title": "signal_uuid",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "mmyef_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100031,
+                    "title": "mmyef_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "request_period_ms",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100032,
+                    "title": "request_period_ms",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "is_broadcast",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100033,
+                    "title": "is_broadcast",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "is_standard",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100034,
+                    "title": "is_standard",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "stream_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100035,
+                    "title": "stream_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "signal_catalog_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100036,
+                    "title": "signal_catalog_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "powertrain",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100037,
+                    "title": "powertrain",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "fuel_group",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100038,
+                    "title": "fuel_group",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "obd_value",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100039,
+                    "title": "obd_value",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "endian",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100040,
+                    "title": "endian",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "sign",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100041,
+                    "title": "sign",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "data_source_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100042,
+                    "title": "data_source_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 50,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "showTitle": true,
+                "title": "Signal Catalog",
+                "showDescription": true,
+                "description": "Complete signal catalog with definitions"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "ab7f9946",
+      "displayName": "ASC Files",
+      "layout": [
+        {
+          "name": "8f1502ca",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "72892d83",
+            "queries": [
+              {
+                "name": "field_8a0ab9f5_make",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "make",
+                      "expression": "`make`"
+                    },
+                    {
+                      "name": "make_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "make",
+                    "queryName": "field_8a0ab9f5_make"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Make"
+              }
+            }
+          }
+        },
+        {
+          "name": "857007a6",
+          "position": {
+            "x": 1,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "81c330f4",
+            "queries": [
+              {
+                "name": "field_8a0ab9f5_model",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "model_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "model",
+                    "queryName": "field_8a0ab9f5_model"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Model"
+              }
+            }
+          }
+        },
+        {
+          "name": "7cfff57f",
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "1a7ee311",
+            "queries": [
+              {
+                "name": "field_8a0ab9f5_year",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "year",
+                    "queryName": "field_8a0ab9f5_year"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Year"
+              }
+            }
+          }
+        },
+        {
+          "name": "62608f95",
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "55300e64",
+            "queries": [
+              {
+                "name": "field_8a0ab9f5_fuel_group",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "fuel_group",
+                      "expression": "`fuel_group`"
+                    },
+                    {
+                      "name": "fuel_group_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "fuel_group",
+                    "queryName": "field_8a0ab9f5_fuel_group"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Fuel Group"
+              }
+            }
+          }
+        },
+        {
+          "name": "7c5fe102",
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "241e2850",
+            "queries": [
+              {
+                "name": "field_8a0ab9f5_powertrain",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "powertrain",
+                      "expression": "`powertrain`"
+                    },
+                    {
+                      "name": "powertrain_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "powertrain",
+                    "queryName": "field_8a0ab9f5_powertrain"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Powertrain"
+              }
+            }
+          }
+        },
+        {
+          "name": "a70eca88",
+          "position": {
+            "x": 5,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          },
+          "widget": {
+            "name": "cbfc9e06",
+            "queries": [
+              {
+                "name": "field_8a0ab9f5_engine_model",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "engine_model",
+                      "expression": "`engine_model`"
+                    },
+                    {
+                      "name": "engine_model_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "engine_model",
+                    "queryName": "field_8a0ab9f5_engine_model"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Engine"
+              }
+            }
+          }
+        },
+        {
+          "widget": {
+            "name": "57746e41",
+            "multilineTextboxSpec": {
+              "lines": [
+                "**Trace Search** \u2014 Find related traces and pull from S3 using: `aws s3 cp s3://bucket/path/trace.asc ./trace.asc`\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "f10b8562",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "fields": [
+                    {
+                      "name": "date",
+                      "expression": "`date`"
+                    },
+                    {
+                      "name": "org_id",
+                      "expression": "`org_id`"
+                    },
+                    {
+                      "name": "device_id",
+                      "expression": "`device_id`"
+                    },
+                    {
+                      "name": "trace_uuid",
+                      "expression": "`trace_uuid`"
+                    },
+                    {
+                      "name": "s3_path",
+                      "expression": "`s3_path`"
+                    },
+                    {
+                      "name": "metadata_json_path",
+                      "expression": "`metadata_json_path`"
+                    },
+                    {
+                      "name": "file_size_bytes",
+                      "expression": "`file_size_bytes`"
+                    },
+                    {
+                      "name": "make",
+                      "expression": "`make`"
+                    },
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "engine_model",
+                      "expression": "`engine_model`"
+                    },
+                    {
+                      "name": "fuel_group",
+                      "expression": "`fuel_group`"
+                    },
+                    {
+                      "name": "powertrain",
+                      "expression": "`powertrain`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "date",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "datetime",
+                    "displayAs": "datetime",
+                    "visible": true,
+                    "order": 100000,
+                    "title": "date",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "dateTimeFormat": "YYYY-MM-DD"
+                  },
+                  {
+                    "fieldName": "org_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "org_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "device_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100002,
+                    "title": "device_id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "trace_uuid",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100003,
+                    "title": "trace_uuid",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "s3_path",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100004,
+                    "title": "s3_path",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "metadata_json_path",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100005,
+                    "title": "metadata_json_path",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "file_size_bytes",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100006,
+                    "title": "file_size_bytes",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "make",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100007,
+                    "title": "make",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "model",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100008,
+                    "title": "model",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "year",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100009,
+                    "title": "year",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "engine_model",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100010,
+                    "title": "engine_model",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "fuel_group",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100011,
+                    "title": "fuel_group",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "powertrain",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100012,
+                    "title": "powertrain",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "showTitle": true,
+                "title": "ASC Traces",
+                "showDescription": true,
+                "description": "Browse ASC trace files with S3 paths"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 6,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "3f5946c9",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "name": "22399964",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          },
+          "widget": {
+            "name": "76dac629",
+            "queries": [
+              {
+                "name": "param_076685b2_date",
+                "query": {
+                  "datasetName": "076685b2",
+                  "parameters": [
+                    {
+                      "name": "date",
+                      "keyword": "date"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_ce2f2737_date",
+                "query": {
+                  "datasetName": "ce2f2737",
+                  "parameters": [
+                    {
+                      "name": "date",
+                      "keyword": "date"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_db523c7d_date",
+                "query": {
+                  "datasetName": "db523c7d",
+                  "parameters": [
+                    {
+                      "name": "date",
+                      "keyword": "date"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_32ae036d_date",
+                "query": {
+                  "datasetName": "32ae036d",
+                  "parameters": [
+                    {
+                      "name": "date",
+                      "keyword": "date"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_78feb3b7_date",
+                "query": {
+                  "datasetName": "78feb3b7",
+                  "parameters": [
+                    {
+                      "name": "date",
+                      "keyword": "date"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "param_8a0ab9f5_date",
+                "query": {
+                  "datasetName": "8a0ab9f5",
+                  "parameters": [
+                    {
+                      "name": "date",
+                      "keyword": "date"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "parameterName": "date",
+                    "queryName": "param_076685b2_date"
+                  },
+                  {
+                    "parameterName": "date",
+                    "queryName": "param_ce2f2737_date"
+                  },
+                  {
+                    "parameterName": "date",
+                    "queryName": "param_db523c7d_date"
+                  },
+                  {
+                    "parameterName": "date",
+                    "queryName": "param_32ae036d_date"
+                  },
+                  {
+                    "parameterName": "date",
+                    "queryName": "param_78feb3b7_date"
+                  },
+                  {
+                    "parameterName": "date",
+                    "queryName": "param_8a0ab9f5_date"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Date Range"
+              },
+              "selection": {
+                "defaultSelection": {
+                  "range": {
+                    "dataType": "DATE",
+                    "min": {
+                      "value": "now-30d/d"
+                    },
+                    "max": {
+                      "value": "now/d"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  },
+  "parameters": [
+    {
+      "displayName": "date",
+      "keyword": "date",
+      "dataType": "DATE",
+      "complexType": "RANGE",
+      "defaultSelection": {
+        "range": {
+          "dataType": "DATE",
+          "min": {
+            "value": "now-30d/d"
+          },
+          "max": {
+            "value": "now/d"
+          }
+        }
+      }
+    },
+    {
+      "displayName": "trace_uuid",
+      "keyword": "trace_uuid",
+      "dataType": "STRING",
+      "defaultSelection": {
+        "values": {
+          "dataType": "STRING",
+          "values": [
+            {
+              "value": ""
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

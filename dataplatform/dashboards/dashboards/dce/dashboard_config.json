@@ -1,0 +1,680 @@
+{
+  "dashboard": {
+    "name": "DCE Program Metrics",
+    "default_date_range": "90d"
+  },
+  "global_filters": [
+    {
+      "name": "date",
+      "type": "date_range",
+      "title": "Date Range",
+      "width": 4,
+      "default": { "min": "-90d", "max": "today" }
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Diagnostic Depth",
+      "description": "P0 Coverage Rate - % of eligible vehicles reporting full required signal set",
+      "widgets": [
+        {
+          "sql": "queries/depth/qoq_summary.sql",
+          "type": "table",
+          "title": "P0 Signal Coverage (QoQ)",
+          "description": "Quarter-over-quarter coverage by signal type",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "coverage_rate_current": {
+                "format": "percent",
+                "decimals": 4,
+                "conditional_format": [
+                  { "fn": "<", "value": 0.25, "color": "red" },
+                  { "fn": "<", "value": 0.75, "color": "yellow" },
+                  { "fn": "is not null", "color": "green" }
+                ]
+              },
+              "coverage_rate_previous": { "format": "percent", "decimals": 4 },
+              "coverage_rate_change": {
+                "format": "percent",
+                "decimals": 4,
+                "conditional_format": [
+                  { "fn": "<", "value": 0, "color": "red" },
+                  { "fn": ">", "value": 0, "color": "green" }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "sql": "queries/depth/daily_trend.sql",
+          "type": "line",
+          "title": "Daily Coverage Rate by Signal",
+          "description": "Track P0 signal coverage attainment and maintenance over time",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["coverage_rate"],
+            "y_format": "percent",
+            "y_label": "Coverage Rate",
+            "color_by": "signal_name"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Diagnostic Breadth",
+      "description": "Grow distinct signal count - total unique signals, integrations",
+      "widgets": [
+        {
+          "sql": "queries/breadth/breadth_snapshot.sql",
+          "type": "counter",
+          "title": "Daily Unique Signals",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "daily_unique_signals" }
+        },
+        {
+          "sql": "queries/breadth/breadth_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Graduations",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "monthly_graduations" }
+        },
+        {
+          "sql": "queries/breadth/signal_growth.sql",
+          "type": "line",
+          "title": "Signal Promotion Trend",
+          "description": "Track distinct signals and graduations over time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["daily_unique_signals", "monthly_graduations"],
+            "y_label": "Count"
+          }
+        },
+        {
+          "sql": "queries/breadth/signals_by_source.sql",
+          "type": "pie",
+          "title": "Graduations by Data Source",
+          "description": "Breakdown by integration source",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "data_source",
+            "value_field": "graduations"
+          }
+        },
+        {
+          "sql": "queries/promotions/by_data_source.sql",
+          "type": "table",
+          "title": "Performance by Data Source",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "columns": {
+              "graduation_rate": { "format": "percent", "decimals": 1 },
+              "beta_rollback_rate": { "format": "percent", "decimals": 1 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workflow Velocity",
+      "description": "Accelerate throughput from request → production",
+      "widgets": [
+        {
+          "sql": "queries/velocity/velocity_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Trials",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "monthly_trials" }
+        },
+        {
+          "sql": "queries/velocity/velocity_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Graduations",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "monthly_graduations" }
+        },
+        {
+          "sql": "queries/velocity/velocity_snapshot.sql",
+          "type": "counter",
+          "title": "Graduation Rate",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "graduation_rate", "format": "percent", "decimal_places": 1 }
+        },
+        {
+          "sql": "queries/velocity/velocity_snapshot.sql",
+          "type": "counter",
+          "title": "Avg Days to Graduation",
+          "description": "Median time from request → production",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "avg_days_to_graduation", "format": "number-plain", "decimal_places": 1 }
+        },
+        {
+          "sql": "queries/velocity/velocity_snapshot.sql",
+          "type": "counter",
+          "title": "Avg Days in Stage",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "avg_days_in_stage", "format": "number-plain", "decimal_places": 1 }
+        },
+        {
+          "sql": "queries/velocity/time_to_graduation_trend.sql",
+          "type": "line",
+          "title": "Time to Graduation Trend",
+          "description": "Track request → production latency over time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["avg_days_to_graduation", "avg_days_in_stage"],
+            "y_label": "Days"
+          }
+        },
+        {
+          "sql": "queries/promotions/success_rate_trend.sql",
+          "type": "line",
+          "title": "Graduation Rate Trend",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["monthly_graduation_rate"],
+            "y_format": "percent",
+            "y_label": "Graduation Rate (30-Day)"
+          }
+        },
+        {
+          "sql": "queries/promotions/stage_distribution.sql",
+          "type": "bar",
+          "title": "Pipeline Stage Distribution",
+          "description": "Current promotions by stage",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "current_stage",
+            "y_fields": ["count"],
+            "y_label": "Promotions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resource Cost",
+      "description": "Reduce pipeline & manual AE cost",
+      "widgets": [
+        {
+          "sql": "queries/cost/cost_snapshot.sql",
+          "type": "counter",
+          "title": "Budget Status",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "budget_status" }
+        },
+        {
+          "sql": "queries/cost/cost_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Platform Cost",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "monthly_cost", "format": "currency" }
+        },
+        {
+          "sql": "queries/cost/cost_snapshot.sql",
+          "type": "counter",
+          "title": "MoM Change",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "mom_change", "format": "currency" }
+        },
+        {
+          "sql": "queries/cost/cost_snapshot.sql",
+          "type": "counter",
+          "title": "$ per Graduation",
+          "description": "Cost efficiency: pipeline cost / signals graduated",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "cost_per_graduation", "format": "currency" }
+        },
+        {
+          "sql": "queries/cost/budget_trend.sql",
+          "type": "line",
+          "title": "Platform Cost vs Budget",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["monthly_cost"],
+            "y_format": "currency",
+            "y_label": "30-Day Rolling Cost (USD)",
+            "reference_lines": [
+              { "value": 15000, "label": "Budget Limit", "color": "red", "style": "solid" },
+              { "value": 12000, "label": "Warning Threshold", "color": "yellow", "style": "dashed" }
+            ]
+          }
+        },
+        {
+          "sql": "queries/cost/cost_efficiency_trend.sql",
+          "type": "line",
+          "title": "Cost per Graduation Trend",
+          "description": "Track $ per signal decoded efficiency over time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["cost_per_graduation"],
+            "y_format": "currency",
+            "y_label": "$ per Graduation"
+          }
+        },
+        {
+          "sql": "queries/cost/cost_breakdown.sql",
+          "type": "area",
+          "title": "Cost by Product Group",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["monthly_cost"],
+            "y_format": "currency",
+            "y_label": "30-Day Rolling Cost (USD)",
+            "color_by": "product_group",
+            "stacked": true
+          }
+        },
+        {
+          "sql": "queries/cost/top_tables.sql",
+          "type": "table",
+          "title": "Top 10 Cost Drivers",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "items_per_page": 10,
+            "columns": {
+              "monthly_cost": { "format": "currency" },
+              "percent_of_total": { "format": "percent", "decimals": 1 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ML Model Metrics",
+      "description": "Signal reverse engineering ML model performance",
+      "filters": [
+        {
+          "name": "signal",
+          "type": "field_select",
+          "title": "Signal",
+          "width": 2,
+          "field": "signal",
+          "disallow_all": true,
+          "default": "OBD_VALUE_ODOMETER_HIGH_RES_METERS"
+        }
+      ],
+      "widgets": [
+        {
+          "sql": "queries/ml/prediction_accuracy.sql",
+          "type": "line",
+          "title": "Number of correctly predicted and promoted MMYEF",
+          "description": "Notes: 1) Many predictions aren't evaluated yet, i.e., prediction_count - correct_prediction_count does not mean incorrect predictions! 2) Many correct predictions are not (yet) promoted because we already have a request-based decoding.",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["promotion_count", "correct_prediction_count", "prediction_count"],
+            "y_label": "Count"
+          }
+        },
+        {
+          "sql": "queries/ml/device_coverage.sql",
+          "type": "line",
+          "title": "Number of promoted and promotable devices",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["promoted_device_count", "promoted_and_promotable_device_count"],
+            "y_label": "Device Count"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CAN Pipeline Impact",
+      "description": "Comprehensive metrics on CAN processing pipeline impact: population coverage, data compression, signal catalog, collection depth, and processing volume",
+      "widgets": [
+        {
+          "type": "text",
+          "content": "## CAN Processing Pipeline Impact\n\nThis tab tracks the overall impact of the CAN processing pipeline, including population coverage, data compression efficiency, signal catalog growth, collection depth, and processing volume metrics.\n\n**Note:** Snapshot metrics (totals, coverage percentages, compression ratios) show **all-time historical data** to match the impact metrics document. Trend charts respect the date range filter above.",
+          "width": 6,
+          "height": 3
+        },
+        {
+          "sql": "queries/can_pipeline/population_coverage_snapshot.sql",
+          "type": "counter",
+          "title": "Population Coverage",
+          "description": "Coverage percentage of MMYEF populations with collected traces",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "coverage_percentage",
+            "format": "percent",
+            "target_field": "total_populations"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/population_coverage_snapshot.sql",
+          "type": "counter",
+          "title": "Total Populations",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "total_populations",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/population_coverage_snapshot.sql",
+          "type": "counter",
+          "title": "Covered Populations",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "covered_populations",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/population_coverage_trend.sql",
+          "type": "line",
+          "title": "Coverage Trend Over Time",
+          "description": "Population coverage percentage trend",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["coverage_percentage"],
+            "y_format": "percent",
+            "y_label": "Coverage %"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/representative_dataset_stats.sql",
+          "type": "table",
+          "title": "Representative Dataset Statistics",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "trace_count": { "format": "number" },
+              "population_count": { "format": "number" }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/compression_snapshot.sql",
+          "type": "counter",
+          "title": "Compression Ratio",
+          "description": "Data compression ratio (raw frames / unique frames)",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "compression_ratio",
+            "format": "number-plain",
+            "decimal_places": 2
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/compression_snapshot.sql",
+          "type": "counter",
+          "title": "Deduplication Reduction",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "deduplication_reduction_pct",
+            "format": "percent",
+            "decimal_places": 1
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/compression_snapshot.sql",
+          "type": "counter",
+          "title": "Avg Duplicates per Frame",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "avg_duplicates_per_frame",
+            "format": "number-plain",
+            "decimal_places": 2
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/compression_trend.sql",
+          "type": "line",
+          "title": "Compression Ratio Trend",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["compression_ratio"],
+            "y_label": "Compression Ratio"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/signal_catalog_snapshot.sql",
+          "type": "counter",
+          "title": "Total Signals",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "total_signals",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/signal_catalog_snapshot.sql",
+          "type": "counter",
+          "title": "Unique OBD Values",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "unique_obd_values",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/signal_catalog_snapshot.sql",
+          "type": "counter",
+          "title": "Signals with OBD Values",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "signals_with_obd_values",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/signal_catalog_by_source.sql",
+          "type": "table",
+          "title": "Signal Catalog by Data Source",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "signal_count": { "format": "number" },
+              "populations_covered": { "format": "number" },
+              "unique_obd_values": { "format": "number" }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/monthly_collection_trend.sql",
+          "type": "bar",
+          "title": "Monthly Collection Growth",
+          "description": "Traces collected per month (last 6 months)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "collection_month",
+            "y_fields": ["traces_collected"],
+            "y_label": "Traces Collected"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/collection_depth_per_population.sql",
+          "type": "table",
+          "title": "Collection Depth per Population",
+          "description": "Statistics on traces per population",
+          "width": 6,
+          "height": 4,
+          "config": {
+            "columns": {
+              "avg_traces_per_population": { "format": "number", "decimals": 1 },
+              "median_traces_per_population": { "format": "number", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/signal_depth_per_population.sql",
+          "type": "table",
+          "title": "Signal Depth per Population",
+          "description": "Statistics on signals per population",
+          "width": 6,
+          "height": 4,
+          "config": {
+            "columns": {
+              "avg_signals_per_population": { "format": "number", "decimals": 1 },
+              "median_signals_per_population": { "format": "number", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/processing_efficiency.sql",
+          "type": "table",
+          "title": "Processing Efficiency",
+          "description": "UDF vs SQL passthrough rates",
+          "width": 6,
+          "height": 3,
+          "config": {
+            "columns": {
+              "udf_processing_percentage": { "format": "percent", "decimals": 1 },
+              "sql_passthrough_percentage": { "format": "percent", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/processing_volume_snapshot.sql",
+          "type": "counter",
+          "title": "Total Traces Processed",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "total_traces_processed",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/processing_volume_snapshot.sql",
+          "type": "counter",
+          "title": "Total Unique Frames",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "total_unique_frames",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/processing_volume_snapshot.sql",
+          "type": "counter",
+          "title": "Total Frames (with duplicates)",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "total_frames_including_duplicates",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/processing_by_protocol.sql",
+          "type": "table",
+          "title": "Processing by Protocol",
+          "description": "Breakdown by protocol (J1939, UDS, Regular CAN)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "traces": { "format": "number" },
+              "frames": { "format": "number" },
+              "populations": { "format": "number" }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/protocol_population_coverage.sql",
+          "type": "table",
+          "title": "Protocol Population Coverage",
+          "width": 6,
+          "height": 4,
+          "config": {
+            "columns": {
+              "populations": { "format": "number" }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/ml_impact_summary.sql",
+          "type": "table",
+          "title": "ML Model Performance (Odometer Example)",
+          "description": "ML-based signal reverse engineering performance metrics",
+          "width": 6,
+          "height": 4,
+          "config": {
+            "columns": {
+              "precision_percentage": { "format": "percent", "decimals": 1 },
+              "recall_percentage": { "format": "percent", "decimals": 1 },
+              "new_populations_identified": { "format": "number" }
+            }
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/product_cable_combinations.sql",
+          "type": "counter",
+          "title": "Unique Product/Cable Combinations",
+          "description": "Number of unique product and cable combinations",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "unique_product_cable_combinations",
+            "format": "number"
+          }
+        },
+        {
+          "sql": "queries/can_pipeline/product_cable_combinations.sql",
+          "type": "counter",
+          "title": "Unique Product/Cable/MMYEF Combinations",
+          "description": "Number of unique product, cable, and MMYEF population combinations",
+          "width": 2,
+          "height": 3,
+          "config": {
+            "value_field": "unique_product_cable_mmyef_combinations",
+            "format": "number"
+          }
+        }
+      ]
+    }
+  ]
+}

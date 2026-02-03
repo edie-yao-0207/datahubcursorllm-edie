@@ -1,0 +1,68 @@
+{
+  "name": "dataplatform_beta_report.report",
+  "owner": "DataPlatform",
+  "description": "Computes a hacky version of a wifi usage report.",
+  "backfill_start_date": "2022-01-02",
+  "daily_run_config": {
+    "start_date_offset": 4
+  },
+  "nonproduction": true,
+  "dependencies": [
+    {
+      "dbname": "dataplatform_beta_report",
+      "tablename": "metered_usage",
+      "type": "table"
+    },
+    {
+      "dbname": "dataplatform_beta_report",
+      "tablename": "whitelist_usage",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "sqlite_report_config": {
+    "report_name": "dataplatform_beta_report",
+    "staleness_monitors": [
+      {
+        "hours": 15,
+        "urgency": "LOW"
+      }
+    ]
+  },
+  "output": {
+    "dbname": "dataplatform_beta_report",
+    "tablename": "report",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp"
+      },
+      {
+        "name": "metered_usage_bytes",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "whitelist_usage_bytes",
+        "type": "long",
+        "nullable": false
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

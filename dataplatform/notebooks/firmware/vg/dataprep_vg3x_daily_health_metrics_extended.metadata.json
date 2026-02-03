@@ -1,0 +1,122 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "dataprep_vg3x_daily_health_metrics_extended",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "product_type",
+        "type": "string"
+      },
+      {
+        "name": "latest_build_on_day",
+        "type": "string"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "product_version",
+        "type": "string"
+      },
+      {
+        "name": "rollout_stage_id",
+        "type": "integer"
+      },
+      {
+        "name": "product_program_id",
+        "type": "integer"
+      },
+      {
+        "name": "product_program_id_type",
+        "type": "string"
+      },
+      {
+        "name": "can_bus_type",
+        "type": "string"
+      },
+      {
+        "name": "cable_type",
+        "type": "string"
+      },
+      {
+        "name": "has_modi",
+        "type": "boolean"
+      },
+      {
+        "name": "has_baxter",
+        "type": "boolean"
+      },
+      {
+        "name": "has_octo",
+        "type": "boolean"
+      },
+      {
+        "name": "gw_first_heartbeat_date",
+        "type": "string"
+      },
+      {
+        "name": "gw_last_heartbeat_date",
+        "type": "string"
+      },
+      {
+        "name": "95th_percentile_cpu_usage",
+        "type": "float"
+      },
+      {
+        "name": "median_cpu_usage",
+        "type": "float"
+      },
+      {
+        "name": "90th_percentile_trip_gap",
+        "type": "double"
+      },
+      {
+        "name": "75th_percentile_trip_gap",
+        "type": "double"
+      },
+      {
+        "name": "median_trip_gap",
+        "type": "double"
+      },
+      {
+        "name": "total_trips",
+        "type": "long"
+      },
+      {
+        "name": "perc_late_pings",
+        "type": "double"
+      },
+      {
+        "name": "diag_reset_count",
+        "type": "long"
+      },
+      {
+        "name": "perc_gps_uptime",
+        "type": "double"
+      }
+    ]
+  }
+}

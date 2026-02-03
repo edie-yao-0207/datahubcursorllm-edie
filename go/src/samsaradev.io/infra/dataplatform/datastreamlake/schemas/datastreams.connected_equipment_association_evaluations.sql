@@ -1,0 +1,11 @@
+`org_id` BIGINT,
+`group_id` BIGINT,
+`vehicle_device_id` BIGINT,
+`asset_device_id` BIGINT,
+`evaluation_ms` BIGINT,
+`vehicle_location_entry_ms` BIGINT,
+`asset_location_entry_ms` BIGINT,
+`associated` BOOLEAN,
+`heuristic_metadata` BINARY,
+`shadow_evaluation` BOOLEAN,
+`date` DATE

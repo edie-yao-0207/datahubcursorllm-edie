@@ -1,0 +1,1 @@
+electric_distance_traveled_m <= distance_traveled_m

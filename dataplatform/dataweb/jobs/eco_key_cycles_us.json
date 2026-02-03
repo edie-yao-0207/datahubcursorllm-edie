@@ -1,0 +1,17 @@
+{
+  "name": "eco_key_cycles_us",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:feature_store.fct_eco_driving_key_cycle_features_hourly",
+    "us-west-2:sustainability.write_eco_driving_features"
+  ],
+  "schedules": [
+    {
+      "name": "every_3_hours",
+      "cron": "0 */3 * * *",
+      "backfill_window": 0,
+      "backfill_batch_size": 1,
+      "use_scheduled_hour_partition": true
+    }
+  ]
+}

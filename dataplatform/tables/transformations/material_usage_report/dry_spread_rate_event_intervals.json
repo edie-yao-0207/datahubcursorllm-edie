@@ -1,0 +1,114 @@
+{
+  "name": "material_usage_report.dry_spread_rate_event_intervals",
+  "owner": "DiagnosticsTools",
+  "description": "Calculate the dry spread rate time intervals within each spreader event interval exploded by hour, along with distance covered and total material spread for each spread rate interval",
+  "nonproduction": true,
+  "dependencies": [
+    {
+      "dbname": "canonical_distance",
+      "tablename": "total_distance",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdsaltspreadernormalizedspreadratedrymilligramspermeter",
+      "type": "table"
+    },
+    {
+      "dbname": "material_usage_report",
+      "tablename": "spreader_event_intervals",
+      "type": "table"
+    },
+    {
+      "dbname": "material_usage_report",
+      "tablename": "spreader_devices",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "material_usage_report",
+    "tablename": "dry_spread_rate_event_intervals",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": [
+      "date",
+      "org_id",
+      "device_id",
+      "spreader_start_ms",
+      "spread_rate_event_start_ms",
+      "spread_rate_start_ms"
+    ],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": false
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "spreader_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "spreader_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "mode",
+        "type": "integer",
+        "metadata": {
+          "comment": "Denotes the mode spreader was in for this event interval. 0 = spreader on, 1 = burst mode"
+        }
+      },
+      {
+        "name": "spread_rate_event_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "spread_rate_event_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "spread_rate",
+        "type": "long",
+        "nullable": true
+      },
+      {
+        "name": "spread_rate_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "spread_rate_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "distance_covered_meters",
+        "type": "double",
+        "nullable": false
+      },
+      {
+        "name": "dry_material_spread_mg",
+        "type": "double",
+        "nullable": true
+      },
+      {
+        "name": "time_spread_ms",
+        "type": "long"
+      }
+    ],
+    "write_mode": "overwrite"
+  },
+  "expectation": {
+    "batch_mode": "KEEP_ALL"
+  },
+  "backfill_start_date": "2021-12-01"
+}

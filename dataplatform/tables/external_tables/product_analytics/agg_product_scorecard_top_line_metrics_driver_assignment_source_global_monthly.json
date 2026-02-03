@@ -1,0 +1,100 @@
+{
+  "name": "agg_product_scorecard_top_line_metrics_driver_assignment_source_global_monthly",
+  "owner": "DataEngineering",
+  "description": "Monthly top line driver assignment metrics for SAM groupings",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date_month",
+      "type": "string"
+    },
+    {
+      "name": "period_start",
+      "type": "string"
+    },
+    {
+      "name": "period_end",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "industry_vertical",
+      "type": "string"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "account_csm_email",
+      "type": "string"
+    },
+    {
+      "name": "account_name",
+      "type": "string"
+    },
+    {
+      "name": "account_id",
+      "type": "string"
+    },
+    {
+      "name": "driver_assignment_source",
+      "type": "string"
+    },
+    {
+      "name": "sign_in_reminder_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "inward_assigned_trip_duration",
+      "type": "double"
+    },
+    {
+      "name": "inward_total_trip_duration",
+      "type": "double"
+    },
+    {
+      "name": "outward_assigned_trip_duration",
+      "type": "double"
+    },
+    {
+      "name": "outward_total_trip_duration",
+      "type": "double"
+    },
+    {
+      "name": "no_cm_assigned_trip_duration",
+      "type": "double"
+    },
+    {
+      "name": "no_cm_total_trip_duration",
+      "type": "double"
+    }
+  ]
+}

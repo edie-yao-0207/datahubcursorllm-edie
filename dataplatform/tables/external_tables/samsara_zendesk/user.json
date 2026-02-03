@@ -1,0 +1,188 @@
+{
+  "table": "user",
+  "owner": "DataEngineering",
+  "description": "Zendesk User Table from Fivetran",
+  "database": "samsara_zendesk",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "url",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "time_zone",
+      "type": "string"
+    },
+    {
+      "name": "phone",
+      "type": "string"
+    },
+    {
+      "name": "locale_id",
+      "type": "bigint"
+    },
+    {
+      "name": "locale",
+      "type": "string"
+    },
+    {
+      "name": "organization_id",
+      "type": "bigint"
+    },
+    {
+      "name": "role",
+      "type": "string"
+    },
+    {
+      "name": "verified",
+      "type": "boolean"
+    },
+    {
+      "name": "authenticity_token",
+      "type": "string"
+    },
+    {
+      "name": "external_id",
+      "type": "string"
+    },
+    {
+      "name": "alias",
+      "type": "string"
+    },
+    {
+      "name": "active",
+      "type": "boolean"
+    },
+    {
+      "name": "shared",
+      "type": "boolean"
+    },
+    {
+      "name": "shared_agent",
+      "type": "boolean"
+    },
+    {
+      "name": "last_login_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "two_factor_auth_enabled",
+      "type": "boolean"
+    },
+    {
+      "name": "signature",
+      "type": "string"
+    },
+    {
+      "name": "details",
+      "type": "string"
+    },
+    {
+      "name": "notes",
+      "type": "string"
+    },
+    {
+      "name": "custom_role_id",
+      "type": "bigint"
+    },
+    {
+      "name": "moderator",
+      "type": "boolean"
+    },
+    {
+      "name": "ticket_restriction",
+      "type": "string"
+    },
+    {
+      "name": "only_private_comments",
+      "type": "boolean"
+    },
+    {
+      "name": "restricted_agent",
+      "type": "boolean"
+    },
+    {
+      "name": "suspended",
+      "type": "boolean"
+    },
+    {
+      "name": "chat_only",
+      "type": "boolean"
+    },
+    {
+      "name": "remote_photo_url",
+      "type": "string"
+    },
+    {
+      "name": "custom_agent_out_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_global_geography_user_",
+      "type": "string"
+    },
+    {
+      "name": "custom_csat_counter",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_support_priority",
+      "type": "string"
+    },
+    {
+      "name": "custom_office",
+      "type": "string"
+    },
+    {
+      "name": "custom_salesforce_contact_id",
+      "type": "string"
+    },
+    {
+      "name": "custom_title",
+      "type": "string"
+    },
+    {
+      "name": "custom_sam_number_user_",
+      "type": "string"
+    },
+    {
+      "name": "custom_user_role",
+      "type": "string"
+    },
+    {
+      "name": "custom_manager",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    },
+    {
+      "name": "custom_displayed_support_phone_number",
+      "type": "string"
+    },
+    {
+      "name": "custom_sync_with_salesforce",
+      "type": "boolean"
+    }
+  ]
+}

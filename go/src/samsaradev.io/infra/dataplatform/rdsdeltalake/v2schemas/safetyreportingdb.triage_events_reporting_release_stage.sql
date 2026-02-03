@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`event_uuid` STRING,
+`release_stage` SHORT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`date` STRING

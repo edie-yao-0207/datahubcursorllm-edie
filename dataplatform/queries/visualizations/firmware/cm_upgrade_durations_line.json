@@ -1,0 +1,91 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": { "traceorder": "normal" },
+  "xAxis": { "type": "-", "labels": { "enabled": true } },
+  "yAxis": [
+    { "type": "-", "title": { "text": "time (hours)" } },
+    { "type": "-", "opposite": true }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": { "type": "data", "visible": true },
+  "series": { "error_y": { "type": "data", "visible": true } },
+  "seriesOptions": {
+    "median_max_time_from_first_push_to_reboot_hours": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "median_max_delta_download_duration_hours": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "median_max_delta_apply_duration_hours": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "median_max_full_script_download_duration_hours": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "median_max_upgrade_script_duration_hours": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "median_max_wait_duration_hours": { "yAxis": 0, "type": "line" },
+    "num_devices": { "yAxis": 0, "type": "line" },
+    "sumdiff": { "yAxis": 0, "type": "line" },
+    "(num_anomalies / total_trip_hours)": { "yAxis": 0, "type": "line" },
+    "count": { "yAxis": 0, "type": "line" },
+    "Completed": { "color": "#00A972", "type": "line" },
+    "Failed": { "color": "#FF3621", "type": "line" },
+    "Pending": { "color": "#919191", "type": "line" },
+    "Cancelled": { "color": "#FFAB00", "type": "line" },
+    "device_count": { "yAxis": 0, "type": "line" }
+  },
+  "valuesOptions": {},
+  "direction": { "type": "counterclockwise" },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": { "column": "date", "id": "column_3a0e3b5117170" },
+    "y": [
+      {
+        "id": "column_b47e44ab2351",
+        "column": "median_max_time_from_first_push_to_reboot_hours"
+      },
+      {
+        "id": "column_b47e44ab15021",
+        "column": "median_max_delta_download_duration_hours"
+      },
+      {
+        "id": "column_b47e44ab15023",
+        "column": "median_max_delta_apply_duration_hours"
+      },
+      {
+        "id": "column_b47e44ab15025",
+        "column": "median_max_full_script_download_duration_hours"
+      },
+      {
+        "id": "column_b47e44ab15027",
+        "column": "median_max_upgrade_script_duration_hours"
+      },
+      {
+        "id": "column_b47e44ab15029",
+        "column": "median_max_wait_duration_hours"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

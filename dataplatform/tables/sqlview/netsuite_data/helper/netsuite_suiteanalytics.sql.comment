@@ -1,0 +1,30 @@
+netsuite_suiteanalytics.* are alias for
+delta.`s3://samsara-(eu-)netsuite-delta-tables/netsuite_suiteanalytics/*`
+
+They are manually generated with the following commands:
+```
+-- For US
+CREATE OR REPLACE VIEW netsuite_suiteanalytics.{table_name}
+AS SELECT * FROM delta.`s3://samsara-netsuite-delta-tables/netsuite_suiteanalytics/{table_name}`
+```
+
+```
+-- For EU
+CREATE OR REPLACE VIEW netsuite_suiteanalytics.{table_name}
+AS SELECT * FROM delta.`s3://samsara-eu-netsuite-delta-tables/netsuite_suiteanalytics/{table_name}`
+```
+
+Same story for biztech_edw_netsuite_sb1.* are alias for
+delta.`s3://samsara-(eu-)biztech-edw-uat/biztech_edw_netsuite_sb1.db/*`
+
+```
+For US
+CREATE OR REPLACE VIEW biztech_edw_netsuite_sb1.{table_name}
+SELECT * FROM delta.`s3://samsara-biztech-edw-uat/biztech_edw_netsuite_sb1.db/{table_name}`
+```
+
+```
+For EU
+CREATE OR REPLACE VIEW biztech_edw_netsuite_sb1.{table_name}
+SELECT * FROM delta.`s3://samsara-eu-biztech-edw-uat/biztech_edw_netsuite_sb1.db/{table_name}`
+```

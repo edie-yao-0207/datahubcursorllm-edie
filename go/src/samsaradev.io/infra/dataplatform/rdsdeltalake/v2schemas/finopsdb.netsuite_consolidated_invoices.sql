@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`sam_number` STRING,
+`netsuite_internal_id` BIGINT,
+`pdf_created_at` TIMESTAMP,
+`pdf_updated_at` TIMESTAMP,
+`partition` STRING

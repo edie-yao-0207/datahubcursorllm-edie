@@ -1,0 +1,28 @@
+{
+  "view": "uat_netsuite_deletion",
+  "owner": "PlatformOperations",
+  "description": "This view gathers netsuite transactions that should be deleted in finopsDb",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "schema": [
+    { "name": "transaction_id", "type": "long" },
+    { "name": "sam_number", "type": "string" },
+    { "name": "_fivetran_synced", "type": "timestamp" },
+    { "name": "_fivetran_deleted", "type": "boolean" },
+    { "name": "date_deleted", "type": "timestamp" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transactions",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "customers",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

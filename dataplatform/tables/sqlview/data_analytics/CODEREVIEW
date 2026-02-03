@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/data-analytics"
+  ],
+  "description": "Changes to Data Analytics SQL views should be cleared with the Data Analytics team"
+}

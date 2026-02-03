@@ -1,0 +1,32 @@
+{
+  "table": "transaction_tracking_numbers",
+  "owner": "PlatformOperations",
+  "description": "transaction_tracking_numbers table from database biztech_edw_netsuite_sb1 in s3bucket biztech-edw-uat",
+  "database": "biztech_edw_netsuite_sb1",
+  "schema": [
+    {
+      "name": "transaction_id",
+      "type": "double"
+    },
+    {
+      "name": "fivetran_index",
+      "type": "string"
+    },
+    {
+      "name": "tracking_number",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_deleted",
+      "type": "boolean"
+    },
+    {
+      "name": "date_deleted",
+      "type": "timestamp"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    }
+  ]
+}

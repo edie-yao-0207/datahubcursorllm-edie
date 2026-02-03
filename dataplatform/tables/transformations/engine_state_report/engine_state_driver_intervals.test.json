@@ -1,0 +1,222 @@
+{
+  "test_cases": [
+    {
+      "label": "include the driver id with the engine state and fuel intervals.",
+      "parameters": {
+        "start_date": " '2024-10-20' ",
+        "end_date": " '2024-10-24' "
+      },
+      "input_data": {
+        "engine_state_report.engine_state_pto_air_temp_fuel_intervals": [
+          {
+            "date": "2024-10-20",
+            "org_id": 1,
+            "object_id": 101,
+            "engine_state": "ON",
+            "productive_pto_state": 1,
+            "fuel_consumed_ml": 100,
+            "gaseous_fuel_consumed_grams": 200,
+            "start_ms": 1713151380000,
+            "end_ms": 1713151385000,
+            "avg_air_temp_c": 15,
+            "original_engine_state_interval_duration_ms": 2500,
+            "original_fuel_interval_duration_ms": 2500,
+            "original_gaseous_consumption_interval_duration_ms": 2500
+          },
+          {
+            "date": "2024-10-21",
+            "org_id": 2,
+            "object_id": 202,
+            "engine_state": "IDLE",
+            "productive_pto_state": 0,
+            "fuel_consumed_ml": 50,
+            "gaseous_fuel_consumed_grams": 100,
+            "start_ms": 1713151390000,
+            "end_ms": 1713151393000,
+            "avg_air_temp_c": 24,
+            "original_engine_state_interval_duration_ms": 1000,
+            "original_fuel_interval_duration_ms": 2000,
+            "original_gaseous_consumption_interval_duration_ms": 2500
+          },
+          {
+            "date": "2024-10-22",
+            "org_id": 3,
+            "object_id": 303,
+            "engine_state": "IDLE",
+            "productive_pto_state": 0,
+            "fuel_consumed_ml": 0,
+            "gaseous_fuel_consumed_grams": 0,
+            "start_ms": 1713151400000,
+            "end_ms": 1713151406000,
+            "avg_air_temp_c": 26,
+            "original_fuel_interval_duration_ms": 120000,
+            "original_engine_state_interval_duration_ms": 120000,
+            "original_gaseous_fuel_interval_duration_ms": 120000
+          },
+          {
+            "date": "2024-10-23",
+            "org_id": 4,
+            "object_id": 404,
+            "engine_state": "ON",
+            "productive_pto_state": 1,
+            "fuel_consumed_ml": 100,
+            "gaseous_fuel_consumed_grams": 200,
+            "start_ms": 1713151410000,
+            "end_ms": 1713151433100,
+            "avg_air_temp_c": 9999,
+            "original_engine_state_interval_duration_ms": 2000,
+            "original_fuel_interval_duration_ms": 2000,
+            "original_gaseous_consumption_interval_duration_ms": 2000
+          },
+          {
+            "date": "2024-10-23",
+            "org_id": 5,
+            "object_id": 505,
+            "start_ms": 1713151413000,
+            "end_ms": 1713151413012,
+            "engine_state": "ON",
+            "productive_pto_state": 1,
+            "fuel_consumed_ml": 100,
+            "gaseous_fuel_consumed_grams": 200,
+            "avg_air_temp_c": 9999,
+            "original_engine_state_interval_duration_ms": 2000,
+            "original_fuel_interval_duration_ms": 2000,
+            "original_gaseous_consumption_interval_duration_ms": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.driver_assignments": [
+          {
+            "date": "2024-10-20",
+            "org_id": 1,
+            "device_id": 101,
+            "driver_id": 102,
+            "start_time": 1713151380000,
+            "end_time": 1713151386000
+          },
+          {
+            "date": "2024-10-20",
+            "org_id": 1,
+            "device_id": 101,
+            "driver_id": 103,
+            "start_time": 1713151390000,
+            "end_time": 1713151396000
+          },
+          {
+            "date": "2024-10-21",
+            "org_id": 2,
+            "device_id": 202,
+            "driver_id": 203,
+            "start_time": 1713151390000,
+            "end_time": 1713151394000
+          },
+          {
+            "date": "2024-10-21",
+            "org_id": 2,
+            "device_id": 202,
+            "driver_id": 204,
+            "start_time": 1713151396010,
+            "end_time": 1713151416000
+          },
+          {
+            "date": "2024-10-22",
+            "org_id": 3,
+            "device_id": 303,
+            "driver_id": 304,
+            "start_time": 1713151420000,
+            "end_time": 1713151426000
+          },
+          {
+            "date": "2024-10-23",
+            "org_id": 4,
+            "device_id": 404,
+            "driver_id": 405,
+            "start_time": 1713151410000,
+            "end_time": 1713151436000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-10-20",
+          "org_id": 1,
+          "object_id": 101,
+          "engine_state": "ON",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 100,
+          "gaseous_fuel_consumed_grams": 200,
+          "start_ms": 1713151380000,
+          "end_ms": 1713151385000,
+          "avg_air_temp_c": 15,
+          "original_engine_state_interval_duration_ms": 2500,
+          "original_fuel_interval_duration_ms": 2500,
+          "original_gaseous_consumption_interval_duration_ms": 2500,
+          "driver_id": 102
+        },
+        {
+          "date": "2024-10-21",
+          "org_id": 2,
+          "object_id": 202,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 50,
+          "gaseous_fuel_consumed_grams": 100,
+          "start_ms": 1713151390000,
+          "end_ms": 1713151393000,
+          "avg_air_temp_c": 24,
+          "original_engine_state_interval_duration_ms": 1000,
+          "original_fuel_interval_duration_ms": 2000,
+          "original_gaseous_consumption_interval_duration_ms": 2500,
+          "driver_id": 203
+        },
+        {
+          "date": "2024-10-22",
+          "org_id": 3,
+          "object_id": 303,
+          "engine_state": "IDLE",
+          "productive_pto_state": 0,
+          "fuel_consumed_ml": 0,
+          "gaseous_fuel_consumed_grams": 0,
+          "start_ms": 1713151400000,
+          "end_ms": 1713151406000,
+          "avg_air_temp_c": 26,
+          "original_fuel_interval_duration_ms": 120000,
+          "original_engine_state_interval_duration_ms": 120000,
+          "original_gaseous_fuel_interval_duration_ms": 120000,
+          "driver_id": 0
+        },
+        {
+          "date": "2024-10-23",
+          "org_id": 4,
+          "object_id": 404,
+          "engine_state": "ON",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 100,
+          "gaseous_fuel_consumed_grams": 200,
+          "start_ms": 1713151410000,
+          "end_ms": 1713151433100,
+          "avg_air_temp_c": 9999,
+          "original_engine_state_interval_duration_ms": 2000,
+          "original_fuel_interval_duration_ms": 2000,
+          "original_gaseous_consumption_interval_duration_ms": 2000,
+          "driver_id": 405
+        },
+        {
+          "date": "2024-10-23",
+          "org_id": 5,
+          "object_id": 505,
+          "start_ms": 1713151413000,
+          "end_ms": 1713151413012,
+          "engine_state": "ON",
+          "productive_pto_state": 1,
+          "fuel_consumed_ml": 100,
+          "gaseous_fuel_consumed_grams": 200,
+          "avg_air_temp_c": 9999,
+          "original_engine_state_interval_duration_ms": 2000,
+          "original_fuel_interval_duration_ms": 2000,
+          "original_gaseous_consumption_interval_duration_ms": 2000,
+          "driver_id": 0
+        }
+      ]
+    }
+  ]
+}

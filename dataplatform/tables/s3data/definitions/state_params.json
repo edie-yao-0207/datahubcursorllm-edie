@@ -1,0 +1,29 @@
+{
+  "table": "state_params",
+  "owner": "FirmwareVdp",
+  "description": "This table contains a mapping of ObjectStats to their ObjectStatState reporting configurations. This denotes how frequently we expect to receive and ObjectStat. Note that these are only default settings",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "stat_type",
+      "type": "string"
+    },
+    {
+      "name": "int_threshold",
+      "type": "bigint"
+    },
+    {
+      "name": "double_threshold",
+      "type": "double"
+    },
+    {
+      "name": "min_period_ms",
+      "type": "bigint"
+    },
+    {
+      "name": "max_period_ms",
+      "type": "bigint"
+    }
+  ]
+}

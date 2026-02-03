@@ -1,0 +1,52 @@
+source:
+    type: unity-catalog
+    config:
+        workspace_url: https://samsara-dev-us-west-2.cloud.databricks.com/?o=5924096274798303
+        token: "${DATABRICKS_UNITY_TOKEN}"
+        emit_siblings: false
+        include_usage_statistics: false
+        include_hive_metastore: false
+        include_table_lineage: false  # we are ingesting table lineage directly from the system tables
+        include_column_lineage: false
+        include_notebooks: false
+        format_sql_queries: true
+        stateful_ingestion:
+            enabled: false
+        catalog_pattern:
+            allow:
+                - "default"
+        schema_pattern:
+            allow:
+                - "default.perf_infra"
+                - "default.activity_report"
+                - "default.customer360"
+                - "default.trip_history_report"
+                - "default.start_stop_report"
+                - "default.speeding_incident_report"
+                - "default.samsara_zendesk"
+                - "default.safety_report"
+                - "default.objectstat_diffs"
+                - "default.material_usage_report"
+                - "default.ifta_report"
+                - "default.idle_locations_report"
+                - "default.fuel_energy_efficiency_report"
+                - "default.ev_charging_report"
+                - "default.engine_state"
+                - "default.engine_state_report"
+                - "default.ecodriving_report"
+                - "default.driver_app_engagement_report"
+                - "default.dataplatform_stable_report"
+                - "default.dataplatform_beta_report"
+                - "default.cm_health_report"
+                - "default.camera_connector_health"
+                - "default.api_logs_report"
+                - "default.dispatch_routes_report"
+                - "default.kinesisstats_window"
+                - "default.apptelematics"
+                - "default.canonical_distance"
+                - "default.time_on_site_report"
+                - "default.pto_input"
+                - "default.start_stop_report"
+                - "default.datapipelines_test"
+            deny:
+              - "default.customer360_from_eu_west_1"

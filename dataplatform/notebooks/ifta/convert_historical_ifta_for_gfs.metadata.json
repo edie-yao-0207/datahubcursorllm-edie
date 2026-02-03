@@ -1,0 +1,12 @@
+{
+  "owner": "IftaCore",
+  "jobs": [
+    {
+      "name": "convert",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 86400,
+      "max_workers": 64,
+      "spark_version": "default"
+    }
+  ]
+}

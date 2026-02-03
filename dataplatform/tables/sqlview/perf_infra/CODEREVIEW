@@ -1,0 +1,6 @@
+{
+  "description": "sre team manages SQL Views for the perf-infra database",
+  "owners": [
+    "samsara-dev/sre"
+  ]
+}

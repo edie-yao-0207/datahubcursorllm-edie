@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "solutionsintegrationservices-group: assets can write",
+    "Values": [
+      {
+        "databases": [
+          "default.solutions_integration_services"
+        ]
+      }
+    ]
+  }
+]

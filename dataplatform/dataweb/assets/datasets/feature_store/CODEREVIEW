@@ -1,0 +1,19 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-tools"
+  ],
+  "description": "Changes to feature_store directory should be approved by data tools/data engineering",
+  "noParent": true,
+  "perFile": [
+    {
+      "owners": [
+        "samsara-dev/sustainability"
+      ],
+      "filePattern": "fct_eco_driving_key_cycle_features*",
+      "description": "fct_eco_driving_key_cycle_features.py is owned by the Sustainability team."
+    }
+  ]
+}

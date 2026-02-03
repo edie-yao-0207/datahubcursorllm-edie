@@ -1,0 +1,131 @@
+{
+  "name": "risk_overview.behavior_stats",
+  "owner": "SafetyRisk",
+  "description": "Behavior-level stats used by risk overview page.",
+  "dependencies": [
+    {
+      "dbname": "safetyeventtriagedb_shards",
+      "tablename": "triage_events_v2",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "product_analytics",
+      "tablename": "dim_devices_safety_settings",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "product_analytics",
+      "tablename": "dim_organizations_safety_settings",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "risk_overview",
+      "tablename": "driver_filtered_app",
+      "type": "table",
+      "external": false
+    },
+    {
+      "dbname": "risk_overview",
+      "tablename": "camera_driver_facing_active",
+      "type": "table",
+      "external": false
+    },
+    {
+      "dbname": "risk_overview",
+      "tablename": "org_stats",
+      "type": "table",
+      "external": false
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "risk_overview",
+    "tablename": "behavior_stats",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["interval_start", "org_id", "behavior", "date"],
+    "schema": [
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "Start of the day for the interval"
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "behavior",
+        "type": "string",
+        "nullable": false
+      },
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "active_drivers",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of drivers that have not been deleted"
+        }
+      },
+      {
+        "name": "active_drivers_with_app",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of drivers with app activity within 30 days"
+        }
+      },
+      {
+        "name": "active_driver_facing_cameras",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of driver-facing cameras (CM32/34) active in the last 30 days"
+        }
+      },
+      {
+        "name": "active_driver_facing_cameras_enabled",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of driver-facing cameras (CM32/34) with the behavior enabled that has been active in the last 30 days"
+        },
+        "nullable": true
+      },
+      {
+        "name": "behavior_enabled",
+        "type": "boolean",
+        "metadata": {
+          "comment": "Whether the behavior is enabled (as an org-level setting)"
+        },
+        "nullable": true
+      },
+      {
+        "name": "events_can_self_coach",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of events eligible for self-coaching"
+        },
+        "nullable": false
+      }
+    ]
+  },
+  "sqlite_report_config": {
+    "report_name": "risk_overview_behavior_stats",
+    "staleness_monitors": [
+      {
+        "hours": 12,
+        "urgency": "LOW"
+      }
+    ]
+  }
+}

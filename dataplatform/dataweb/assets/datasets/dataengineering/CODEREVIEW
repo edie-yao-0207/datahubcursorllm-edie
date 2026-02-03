@@ -1,0 +1,7 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to dataengineering directory should be approved by data engineering",
+  "noParent": true
+}

@@ -1,0 +1,74 @@
+{
+  "name": "engine_state.intervals",
+  "owner": "Sustainability",
+  "description": "Creates engine state intervals with start and end time for each state and replaces int values by the engine states: OFF, IDLE, and ON. The intervals are split at day boundaries if they span multiple days.",
+  "dependencies": [
+    {
+      "dbname": "engine_state",
+      "tablename": "transitions",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "engine_state",
+    "tablename": "intervals",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "object_id", "start_ms"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": false,
+        "metadata": {
+          "comment": "Date to which the start_ms of the interval belongs to."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The organization ID for which the engine state object stat is reported."
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The device ID for which the engine state object stat is reported."
+        }
+      },
+      {
+        "name": "start_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The time in milliseconds at which the engine state starts."
+        }
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "metadata": {
+          "comment": "The engine state (\"OFF\", \"ON\", \"IDLE\") during the time interval [start_ms, end_ms)"
+        }
+      },
+      {
+        "name": "end_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The time in milliseconds at which the engine state ends."
+        }
+      },
+      {
+        "name": "original_interval_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds of the original interval from which this interval is derived."
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

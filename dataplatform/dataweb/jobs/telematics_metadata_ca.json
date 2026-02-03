@@ -1,0 +1,29 @@
+{
+  "name": "telematics_metadata_ca",
+  "owner": "FirmwareVDP",
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 07 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ],
+  "assets": [
+    "ca-central-1:product_analytics_staging.fct_telematics_stat_metadata",
+    "ca-central-1:product_analytics_staging.fct_telematics_market_metadata",
+    "ca-central-1:product_analytics_staging.fct_telematics_products",
+    "ca-central-1:product_analytics_staging.stg_segment_canonical_fuel_types",
+    "ca-central-1:product_analytics_staging.stg_vehicle_promotions",
+    "ca-central-1:product_analytics_staging.dim_combined_passenger_signal_definitions",
+    "ca-central-1:product_analytics_staging.dim_j1939_signal_definitions",
+    "ca-central-1:product_analytics_staging.dim_combined_signal_definitions",
+    "ca-central-1:product_analytics_staging.fct_telematics_promotion_gaps",
+    "ca-central-1:product_analytics_staging.dim_signal_catalog_definitions",
+    "ca-central-1:product_analytics_staging.fct_caninterface_busid",
+    "ca-central-1:product_analytics_staging.fct_signal_promotion_transitions",
+    "ca-central-1:product_analytics_staging.fct_signal_promotion_latest_state",
+    "ca-central-1:product_analytics_staging.agg_diagnostics_coverage_v3_latest",
+    "ca-central-1:product_analytics_staging.fct_diagnostics_coverage_by_vin_latest"
+  ]
+}

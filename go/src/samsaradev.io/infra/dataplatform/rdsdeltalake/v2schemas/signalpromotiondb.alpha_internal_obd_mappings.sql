@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`population_uuid` STRING,
+`promotion_uuid` STRING,
+`internal_obd_value` INT,
+`started_at_ms` BIGINT,
+`ended_at_ms` BIGINT,
+`date` STRING

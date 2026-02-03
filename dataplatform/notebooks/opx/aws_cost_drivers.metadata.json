@@ -1,0 +1,12 @@
+{
+  "owner": "OPX",
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 0 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 86400,
+      "spark_version": "default"
+    }
+  ]
+}

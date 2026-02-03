@@ -1,0 +1,16 @@
+{
+  "name": "fct_combined_diagnostics",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:dataengineering.fct_combined_diagnostics",
+    "eu-west-1:dataengineering.fct_combined_diagnostics"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 13 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 3
+    }
+  ]
+}

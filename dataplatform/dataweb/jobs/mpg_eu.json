@@ -1,0 +1,13 @@
+{
+  "name": "mpg_eu",
+  "owner": "DataEngineering",
+  "assets": ["eu-west-1:dataengineering.vehicle_mpg_lookback_by_org", "eu-west-1:dataengineering.vehicle_mpg_lookback"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 10 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 3
+    }
+  ]
+}

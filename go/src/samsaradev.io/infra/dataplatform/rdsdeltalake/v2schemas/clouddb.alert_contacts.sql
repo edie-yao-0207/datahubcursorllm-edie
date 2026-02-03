@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`alert_id` BIGINT,
+`contact_id` BIGINT,
+`use_email` BYTE,
+`use_phone_sms` BYTE,
+`use_webhook` BYTE,
+`min_activity_duration_ms` BIGINT,
+`alert_subcondition_uuid` STRING,
+`use_voice_call` BYTE,
+`partition` STRING

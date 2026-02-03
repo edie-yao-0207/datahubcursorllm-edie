@@ -1,0 +1,39 @@
+{
+  "table": "445_calendar",
+  "owner": "DataEngineering",
+  "description": "This table contains the 4-4-5 calendar with all dates until 2031 and associated fiscal year and quarter information",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "date",
+      "type": "date",
+      "description": "The calendar date in 'YYYY-mm-dd' format (e.g., '2021-01-09')"
+    },
+    {
+      "name": "eom",
+      "type": "date",
+      "description": "End of Month (eom): The last date of the month"
+    },
+    {
+      "name": "fiscal_year",
+      "type": "string",
+      "description": "A code representing the fiscal year in which the 'date' resides (e.g., 'FY17')"
+    },
+    {
+      "name": "quarter",
+      "type": "string",
+      "description": "A code representing the fiscal quarter in which the 'date' resides (e.g., 'Q4')"
+    },
+    {
+      "name": "eoq",
+      "type": "date",
+      "description": "End of Quarter (eoq): The last date in the fiscal quarter in which the 'date' resides"
+    },
+    {
+      "name": "holiday",
+      "type": "boolean",
+      "description": "A boolean flag (i.e., 'true' or 'false) indicating whether a US holiday occurs on the 'date'"
+    }
+  ]
+}

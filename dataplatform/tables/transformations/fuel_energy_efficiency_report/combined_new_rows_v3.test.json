@@ -1,0 +1,592 @@
+{
+  "test_cases": [
+    {
+      "label": "Combine rows for a single BEV vehicle. Sets electric distance traveled to distance traveled - See EVEC-1505 for more details.",
+      "parameters": {
+        "start_date": " '2023-08-05' ",
+        "end_date": " '2023-08-06' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_state_fuel_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "on_duration_ms": 3600000,
+            "idle_duration_ms": 0,
+            "aux_during_idle_ms": 0,
+            "fuel_consumed_ml": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.energy_consumption_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_consumed_kwh": 25
+          }
+        ],
+        "fuel_energy_efficiency_report.distance_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "distance_traveled_m": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.regen_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_regen_kwh": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.electric_distance_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "electric_distance_traveled_m_odo": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval": [],
+        "fuel_energy_efficiency_report.dynamic_fuel_cost_hour_intervals": [],
+        "fueldb_shards.fuel_types": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 1,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-01 15:30:45"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172,
+            "cost_per_kwh": 0.15
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2023-08-05",
+          "org_id": 1,
+          "driver_id": 1,
+          "object_id": 1,
+          "engine_type": 2,
+          "dynamic_energy_cost": 3.75,
+          "dynamic_fuel_cost": null,
+          "aux_during_idle_ms": 0,
+          "distance_traveled_m": 2000.0,
+          "electric_distance_traveled_m": 2000.0,
+          "energy_consumed_kwh": 25.0,
+          "energy_regen_kwh": 1000.0,
+          "fuel_consumed_ml": 2000,
+          "idle_duration_ms": 0,
+          "on_duration_ms": 3600000,
+          "interval_start": "2023-08-05 00:00:00",
+          "interval_end": "2023-08-05 01:00:00",
+          "custom_energy_cost": 0
+        }
+      ]
+    },
+    {
+      "label": "Combine rows for a single Hybrid vehicle. Leaves electric distance traveled as it was - See EVEC-1505 for more details.",
+      "parameters": {
+        "start_date": " '2023-08-05' ",
+        "end_date": " '2023-08-06' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_state_fuel_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "on_duration_ms": 3600000,
+            "idle_duration_ms": 0,
+            "aux_during_idle_ms": 0,
+            "fuel_consumed_ml": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.energy_consumption_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_consumed_kwh": 25
+          }
+        ],
+        "fuel_energy_efficiency_report.distance_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "distance_traveled_m": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.regen_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_regen_kwh": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.electric_distance_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "electric_distance_traveled_m_odo": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval": [],
+        "fuel_energy_efficiency_report.dynamic_fuel_cost_hour_intervals": [],
+        "fueldb_shards.fuel_types": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 3,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-01 15:30:45"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172,
+            "cost_per_kwh": 0.15
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2023-08-05",
+          "org_id": 1,
+          "driver_id": 1,
+          "object_id": 1,
+          "dynamic_energy_cost": 3.75,
+          "dynamic_fuel_cost": null,
+          "aux_during_idle_ms": 0,
+          "distance_traveled_m": 2000.0,
+          "electric_distance_traveled_m": 1000.0,
+          "energy_consumed_kwh": 25.0,
+          "energy_regen_kwh": 1000.0,
+          "fuel_consumed_ml": 2000,
+          "idle_duration_ms": 0,
+          "on_duration_ms": 3600000,
+          "interval_start": "2023-08-05 00:00:00",
+          "interval_end": "2023-08-05 01:00:00",
+          "custom_energy_cost": 0
+        }
+      ]
+    },
+    {
+      "label": "Combine rows for a single unknown vehicle (no canonical fuel type records). Leaves electric distance traveled as it was - See EVEC-1505 for more details.",
+      "parameters": {
+        "start_date": " '2023-08-05' ",
+        "end_date": " '2023-08-06' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_state_fuel_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "on_duration_ms": 3600000,
+            "idle_duration_ms": 0,
+            "aux_during_idle_ms": 0,
+            "fuel_consumed_ml": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.energy_consumption_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_consumed_kwh": 25
+          }
+        ],
+        "fuel_energy_efficiency_report.distance_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "distance_traveled_m": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.regen_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_regen_kwh": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.electric_distance_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "electric_distance_traveled_m_odo": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval": [],
+        "fuel_energy_efficiency_report.dynamic_fuel_cost_hour_intervals": [],
+        "fueldb_shards.fuel_types": [],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172,
+            "cost_per_kwh": 0.15
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2023-08-05",
+          "org_id": 1,
+          "driver_id": 1,
+          "object_id": 1,
+          "dynamic_energy_cost": 3.75,
+          "dynamic_fuel_cost": null,
+          "aux_during_idle_ms": 0,
+          "distance_traveled_m": 2000.0,
+          "electric_distance_traveled_m": 1000.0,
+          "energy_consumed_kwh": 25.0,
+          "energy_regen_kwh": 1000.0,
+          "fuel_consumed_ml": 2000,
+          "idle_duration_ms": 0,
+          "on_duration_ms": 3600000,
+          "interval_start": "2023-08-05 00:00:00",
+          "interval_end": "2023-08-05 01:00:00",
+          "custom_energy_cost": 0
+        }
+      ]
+    },
+    {
+      "label": "Combine rows for a single Hybrid vehicle. Uses latest canonical fuel type when there is two in one hour. Leaves electric distance traveled as it was - See EVEC-1505 for more details.",
+      "parameters": {
+        "start_date": " '2023-08-05' ",
+        "end_date": " '2023-08-06' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_state_fuel_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "on_duration_ms": 3600000,
+            "idle_duration_ms": 0,
+            "aux_during_idle_ms": 0,
+            "fuel_consumed_ml": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.energy_consumption_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_consumed_kwh": 25
+          }
+        ],
+        "fuel_energy_efficiency_report.distance_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "distance_traveled_m": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.regen_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_regen_kwh": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.electric_distance_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "electric_distance_traveled_m_odo": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval": [],
+        "fuel_energy_efficiency_report.dynamic_fuel_cost_hour_intervals": [],
+        "fueldb_shards.fuel_types": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 3,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-05 00:30:45"
+          },
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 2,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-05 00:50:00"
+          },
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 1,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-05 00:55:00"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172,
+            "cost_per_kwh": 0.15
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2023-08-05",
+          "org_id": 1,
+          "driver_id": 1,
+          "object_id": 1,
+          "dynamic_energy_cost": 3.75,
+          "dynamic_fuel_cost": null,
+          "aux_during_idle_ms": 0,
+          "distance_traveled_m": 2000.0,
+          "electric_distance_traveled_m": 2000.0,
+          "energy_consumed_kwh": 25.0,
+          "energy_regen_kwh": 1000.0,
+          "fuel_consumed_ml": 2000,
+          "idle_duration_ms": 0,
+          "on_duration_ms": 3600000,
+          "interval_start": "2023-08-05 00:00:00",
+          "interval_end": "2023-08-05 01:00:00",
+          "custom_energy_cost": 0
+        }
+      ]
+    },
+    {
+      "label": "Within the same hour, a device has multiple fuel types, and those fuel types have different org IDs",
+      "parameters": {
+        "start_date": " '2023-08-05' ",
+        "end_date": " '2023-08-06' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_state_fuel_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "on_duration_ms": 3600000,
+            "idle_duration_ms": 0,
+            "aux_during_idle_ms": 0,
+            "fuel_consumed_ml": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.energy_consumption_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_consumed_kwh": 25
+          }
+        ],
+        "fuel_energy_efficiency_report.distance_by_hour_v3": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "distance_traveled_m": 2000
+          }
+        ],
+        "fuel_energy_efficiency_report.regen_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "energy_regen_kwh": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.electric_distance_by_hour": [
+          {
+            "date": "2023-08-05",
+            "org_id": 1,
+            "object_id": 1,
+            "driver_id": 1,
+            "interval_start": "2023-08-05 00:00:00",
+            "interval_end": "2023-08-05 01:00:00",
+            "electric_distance_traveled_m_odo": 1000
+          }
+        ],
+        "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval": [],
+        "fuel_energy_efficiency_report.dynamic_fuel_cost_hour_intervals": [],
+        "fueldb_shards.fuel_types": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 3,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-05 00:30:45"
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "uuid": 832489,
+            "engine_type": 2,
+            "configurable_fuel_id": 0,
+            "gasoline_type": 8,
+            "diesel_type": 0,
+            "gaseous_type": 0,
+            "hydrogen_type": 0,
+            "battery_charge_type": 0,
+            "source": 0,
+            "created_at": "2023-08-05 00:50:00"
+          }
+        ],
+        "helpers.unit_conversion": [
+          {
+            "gallon_per_ml": 0.000264172,
+            "cost_per_kwh": 0.15
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2023-08-05",
+          "org_id": 1,
+          "driver_id": 1,
+          "object_id": 1,
+          "dynamic_energy_cost": 3.75,
+          "dynamic_fuel_cost": null,
+          "aux_during_idle_ms": 0,
+          "distance_traveled_m": 2000.0,
+          "electric_distance_traveled_m": 1000.0,
+          "energy_consumed_kwh": 25.0,
+          "energy_regen_kwh": 1000.0,
+          "fuel_consumed_ml": 2000,
+          "idle_duration_ms": 0,
+          "on_duration_ms": 3600000,
+          "interval_start": "2023-08-05 00:00:00",
+          "interval_end": "2023-08-05 01:00:00",
+          "custom_energy_cost": 0
+        }
+      ]
+    }
+  ]
+}

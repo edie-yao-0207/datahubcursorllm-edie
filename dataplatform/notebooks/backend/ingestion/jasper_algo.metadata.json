@@ -1,0 +1,17 @@
+{
+  "owner": "CoreServices",
+  "email_notifications": [
+    "alerts-ingestion-aaaad7ndq3nzakgbegyy7z6xwi@samsara.org.slack.com",
+    "jasper-algo-databricks-notebook-job@samsara.pagerduty.com"
+  ],
+  "jobs": [
+    {
+      "name": "jasper-update",
+      "regions": ["us-west-2"],
+      "timeout_seconds": 5400,
+      "driver_node_type_id": "md-fleet.2xlarge",
+      "node_type_id": "rd-fleet.4xlarge",
+      "spark_version": "default"
+    }
+  ]
+}

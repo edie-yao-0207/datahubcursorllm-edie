@@ -1,0 +1,72 @@
+{
+  "version": 2,
+  "globalSeriesType": "column",
+  "sortX": true,
+  "sortY": true,
+  "legend": { "traceorder": "normal" },
+  "xAxis": { "type": "-", "labels": { "enabled": true } },
+  "yAxis": [
+    { "type": "-", "title": { "text": "count" } },
+    { "type": "-", "opposite": true }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": { "type": "data", "visible": true },
+  "series": {
+    "stacking": "stack",
+    "error_y": { "type": "data", "visible": true }
+  },
+  "seriesOptions": {
+    "median_max_time_from_first_push_to_reboot_hours": {
+      "yAxis": 0,
+      "type": "column"
+    },
+    "median_max_delta_download_duration_hours": {
+      "yAxis": 0,
+      "type": "column"
+    },
+    "median_max_delta_apply_duration_hours": {
+      "yAxis": 0,
+      "type": "column"
+    },
+    "median_max_full_script_download_duration_hours": {
+      "yAxis": 0,
+      "type": "column"
+    },
+    "median_max_upgrade_script_duration_hours": {
+      "yAxis": 0,
+      "type": "column"
+    },
+    "median_max_wait_duration_hours": { "yAxis": 0, "type": "column" },
+    "num_devices": { "yAxis": 0, "type": "column" },
+    "sumdiff": { "yAxis": 0, "type": "column" },
+    "(num_anomalies / total_trip_hours)": {
+      "yAxis": 0,
+      "type": "column"
+    },
+    "count": { "yAxis": 0, "type": "column" },
+    "Completed": { "color": "#00A972" },
+    "Failed": { "color": "#FF3621" },
+    "Pending": { "color": "#919191" },
+    "Cancelled": { "color": "#FFAB00" }
+  },
+  "valuesOptions": {},
+  "direction": { "type": "counterclockwise" },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": { "column": "date", "id": "column_3a0e3b5117170" },
+    "y": [{ "id": "column_b47e44ab2351", "column": "count" }],
+    "series": { "column": "state", "id": "column_b47e44ab11502" }
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

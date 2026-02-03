@@ -1,0 +1,263 @@
+{
+  "name": "customer360.customer_sophistication_scores",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Table that aggregates various sophistication metrics in the last 30 days that powers the customer sophistication scores for Customer Success",
+  "disabled_regions": ["eu-west-1", "ca-central-1"],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "customer_metadata",
+      "schema_path": "dataprep/business/customer_metadata.metadata.json",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "customer_360",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "customer_360_snapshot",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "devices_sold",
+      "schema_path": "dataprep/business/devices_sold.metadata.json",
+      "language": "python",
+      "type": "table"
+    },
+    {
+      "dbname": "dataprep",
+      "tablename": "active_devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "org_sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "customer_sophistication_scores",
+    "type": "table",
+    "primary_key": ["sam_number"],
+    "schema": [
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "The SAM Number (internal Samsara ID) of a customer"
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of a customer"
+        }
+      },
+      {
+        "name": "num_vehicles",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of vehicles that went on a trip in the last 30 days for a customer"
+        }
+      },
+      {
+        "name": "num_scheduled_reports",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of scheduled reports a customer has configured"
+        }
+      },
+      {
+        "name": "num_routes",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of routes a customer has configured"
+        }
+      },
+      {
+        "name": "num_addresses",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of addresses a customer has configured"
+        }
+      },
+      {
+        "name": "num_alerts",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of alerts a customer has configured"
+        }
+      },
+      {
+        "name": "num_roles",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of roles a customer has configured"
+        }
+      },
+      {
+        "name": "safety_score_configured",
+        "type": "boolean",
+        "metadata": {
+          "comment": "A flag indicating if a customer has a safety score configured"
+        }
+      },
+      {
+        "name": "num_api_calls",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of API calls made by a customer in the last 30 days"
+        }
+      },
+      {
+        "name": "num_route_loads",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of cloud dashboard page loads made by a customer in the last 30 days"
+        }
+      },
+      {
+        "name": "num_handled_events",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of safety events handled by a customer in the last 30 days"
+        }
+      },
+      {
+        "name": "num_events",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of safety events a customer had in the last 30 days"
+        }
+      },
+      {
+        "name": "num_tags",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of tags a customer has configured"
+        }
+      },
+      {
+        "name": "num_admin_app_loads",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of admin app loads a customer had in the last 30 days"
+        }
+      },
+      {
+        "name": "num_total_vehicles",
+        "type": "long",
+        "metadata": {
+          "comment": "The total number of vehicles / VG devices activated by a customer"
+        }
+      },
+      {
+        "name": "vg_installation_rate",
+        "type": "double",
+        "metadata": {
+          "comment": "The VG installation rate of a customer (installed VGs / purchased VGs)"
+        }
+      },
+      {
+        "name": "segment",
+        "type": "string",
+        "metadata": {
+          "comment": "The segment of a customer"
+        }
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "nullable": false,
+        "metadata": {
+          "comment": "The industry of a customer"
+        }
+      },
+      {
+        "name": "csm_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The CSM of a customer"
+        }
+      },
+      {
+        "name": "ae_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The AE of a customer"
+        }
+      },
+      {
+        "name": "lifetime_acv",
+        "type": "double",
+        "metadata": {
+          "comment": "The lifetime annual contract value of a customer"
+        }
+      },
+      {
+        "name": "csm_tier",
+        "type": "string",
+        "metadata": {
+          "comment": "The CSM tier of a customer"
+        }
+      },
+      {
+        "name": "owns_vg",
+        "type": "boolean",
+        "metadata": {
+          "comment": "A flag indicating if a customer owns a VG device"
+        }
+      },
+      {
+        "name": "owns_ag",
+        "type": "boolean",
+        "metadata": {
+          "comment": "A flag indicating if a customer owns a AG device"
+        }
+      },
+      {
+        "name": "owns_cm",
+        "type": "boolean",
+        "metadata": {
+          "comment": "A flag indicating if a customer owns a CM device"
+        }
+      },
+      {
+        "name": "customer_sophistication_score",
+        "type": "double",
+        "metadata": {
+          "comment": "the normalized customer sophistication score always between 0 and 100"
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

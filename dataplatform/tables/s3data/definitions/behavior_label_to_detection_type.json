@@ -1,0 +1,34 @@
+{
+  "table": "behavior_label_to_detection_type",
+  "owner": "DataEngineering",
+  "description": "Maps the behavior labels to the corresponding detection type (based on https://github.com/samsara-dev/backend/blob/master/go/src/samsaradev.io/safety/infra/safetyeventtriagemodels/detection_util.go)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/behavior_labels/behavior_label_to_detection_type.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/behavior_labels/behavior_label_to_detection_type.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/behavior_labels/behavior_label_to_detection_type.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "behavior_label",
+      "type": "bigint",
+      "description": "The numerical value for a behavior label"
+    },
+    {
+      "name": "behavior_label_type",
+      "type": "string",
+      "description": "The name of the behavior label (e.g., 'Speeding', 'HarshTurn', 'MobileUsage', 'ForwardCollisionWarning', etc.)"
+    },
+    {
+      "name": "detection_type",
+      "type": "bigint",
+      "description": "The ID of the detection type"
+    },
+    {
+      "name": "detection_type_name",
+      "type": "string",
+      "description": "The name of the detection type"
+    }
+  ]
+}

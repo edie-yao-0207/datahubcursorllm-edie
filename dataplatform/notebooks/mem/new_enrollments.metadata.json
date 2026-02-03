@@ -1,0 +1,11 @@
+{
+  "owner": "MdmSdk",
+  "jobs": [
+    {
+      "name": "daily-message",
+      "cron": "0 0 16 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

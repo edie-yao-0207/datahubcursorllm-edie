@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "bt-mda-analytics: assets can write",
+    "Values": [
+      {
+        "databases": [
+          "default.biztech_muhlfelder",
+          "default.biztech_rgeissler",
+          "default.biztech_sbourland",
+          "default.biztech_twalters",
+          "default.biztech_vrao",
+          "default.growth",
+          "default.marketingdata",
+          "default.marketingdata_dev",
+          "default.mda_production",
+          "default.mda_sandbox",
+          "default.mda_stage"
+        ]
+      }
+    ]
+  }
+]

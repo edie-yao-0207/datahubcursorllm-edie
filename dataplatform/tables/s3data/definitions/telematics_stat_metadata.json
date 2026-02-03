@@ -1,0 +1,105 @@
+{
+  "table": "telematics_stat_metadata",
+  "owner": "FirmwareVdp",
+  "description": "Table 'telematics_stat_metadata' generated from 'Dataweb Configurations.xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "product_area",
+      "type": "string"
+    },
+    {
+      "name": "sub_product_area",
+      "type": "string"
+    },
+    {
+      "name": "signal_name",
+      "type": "string"
+    },
+    {
+      "name": "default_priority",
+      "type": "bigint"
+    },
+    {
+      "name": "metric_name",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "definition_table",
+      "type": "string"
+    },
+    {
+      "name": "value_min",
+      "type": "bigint"
+    },
+    {
+      "name": "value_max",
+      "type": "double"
+    },
+    {
+      "name": "delta_min",
+      "type": "bigint"
+    },
+    {
+      "name": "delta_max",
+      "type": "bigint"
+    },
+    {
+      "name": "delta_velocity_min",
+      "type": "bigint"
+    },
+    {
+      "name": "delta_velocity_max",
+      "type": "bigint"
+    },
+    {
+      "name": "documentation_link",
+      "type": "string"
+    },
+    {
+      "name": "obd_value",
+      "type": "bigint"
+    },
+    {
+      "name": "metric_table",
+      "type": "string"
+    },
+    {
+      "name": "metric_column",
+      "type": "string"
+    },
+    {
+      "name": "exported_to_data_lake",
+      "type": "boolean"
+    },
+    {
+      "name": "is_applicable_ice",
+      "type": "boolean"
+    },
+    {
+      "name": "is_applicable_hydrogen",
+      "type": "boolean"
+    },
+    {
+      "name": "is_applicable_hybrid",
+      "type": "boolean"
+    },
+    {
+      "name": "is_applicable_phev",
+      "type": "boolean"
+    },
+    {
+      "name": "is_applicable_bev",
+      "type": "boolean"
+    },
+    {
+      "name": "is_applicable_unknown",
+      "type": "boolean"
+    }
+  ]
+}

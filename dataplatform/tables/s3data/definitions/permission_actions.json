@@ -1,0 +1,39 @@
+{
+  "table": "permission_actions",
+  "owner": "DataEngineering",
+  "description": "Mapping from permissions to the actions they grant at each access level (read, write, create, update, delete)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/iam/permission_actions.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/iam/permission_actions.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/iam/permission_actions.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "permission_set_id",
+      "type": "string",
+      "description": "The parent permission set ID (e.g., essentials, safety)"
+    },
+    {
+      "name": "permission_id",
+      "type": "string",
+      "description": "The specific permission ID (e.g., essentials.fleet.drivers)"
+    },
+    {
+      "name": "sub_permission_id",
+      "type": "string",
+      "description": "The sub-permission ID for granular write permissions (e.g., drivers.settings.name). Empty for parent-level actions."
+    },
+    {
+      "name": "access_level",
+      "type": "string",
+      "description": "The access level that grants this action: read, write, create, update, or delete"
+    },
+    {
+      "name": "action",
+      "type": "string",
+      "description": "The action string that this permission grants (e.g., driver.read)"
+    }
+  ]
+}

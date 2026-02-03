@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`vehicle_id` BIGINT,
+`driver_id` BIGINT,
+`start_ms` BIGINT,
+`end_ms` BIGINT,
+`created_at_ms` BIGINT,
+`updated_at_ms` BIGINT,
+`uuid` STRING,
+`date` STRING

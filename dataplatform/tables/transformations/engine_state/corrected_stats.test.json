@@ -1,0 +1,747 @@
+{
+  "test_cases": [
+    {
+      "label": "idle point with offset is capped to point it overlaps and original point is removed - tested with multiple devices",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641139200000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 180000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641139140000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641139080000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641139140000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641153600000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641153600000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 200,
+          "int_value": 2,
+          "time": 1641139140000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 200,
+          "int_value": 0,
+          "time": 1641139080000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 1,
+          "time": 1641139140000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "time": 1641153600000,
+          "int_value": 0
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 200,
+          "time": 1641153600000,
+          "int_value": 0
+        }
+      ]
+    },
+    {
+      "label": "offset is capped to 10 minutes and offset cannot go beyond datapoint's date",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641139200000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 1800000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641135600000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1640995500000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 600000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641067200000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1641153600000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-03",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641168180000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641082200000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641081900000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 600000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-12-31",
+            "org_id": 100,
+            "object_id": 203,
+            "time": 1640909400000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-12-31",
+            "org_id": 100,
+            "object_id": 203,
+            "time": 1640909100000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 600000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 1,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 200,
+          "int_value": 2,
+          "time": 1641138600000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 200,
+          "int_value": 1,
+          "time": 1641135600000
+        },
+        {
+          "date": "2022-01-01",
+          "org_id": 100,
+          "object_id": 201,
+          "time": 1641067200000,
+          "int_value": 0
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 200,
+          "time": 1641153600000,
+          "int_value": 0
+        },
+        {
+          "date": "2022-01-03",
+          "org_id": 100,
+          "object_id": 202,
+          "time": 1641168180000,
+          "int_value": 0
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 202,
+          "time": 1641082200000,
+          "int_value": 1
+        },
+        {
+          "date": "2022-01-01",
+          "org_id": 100,
+          "object_id": 202,
+          "time": 1641081300000,
+          "int_value": 1
+        }
+      ]
+    },
+    {
+      "label": "filter out datapoints corrected by offset duration to outside of the timeframe",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-01",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1640995800000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1640995500000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 600000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 1,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-01",
+          "org_id": 100,
+          "object_id": 202,
+          "time": 1640995800000,
+          "int_value": 0
+        }
+      ]
+    },
+    {
+      "label": "datapoints are ordered by corrected time with offset duration (bug, there should be 3 datapoints returned)",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-03",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641168180000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641081900000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 600000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641081780000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 202,
+          "time": 1641081780000,
+          "int_value": 1
+        },
+        {
+          "date": "2022-01-03",
+          "org_id": 100,
+          "object_id": 202,
+          "time": 1641168180000,
+          "int_value": 0
+        }
+      ]
+    },
+    {
+      "label": "only offsets for type 1 (idle) and type 2 (engine activity) are used, 3 and 4 are ignored",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641139200000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 60000,
+                  "offset_type": 1
+                }
+              },
+              "int_value": 2,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641139200000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 60000,
+                  "offset_type": 2
+                }
+              },
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 203,
+            "time": 1641139200000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 60000,
+                  "offset_type": 3
+                }
+              },
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 204,
+            "time": 1641139200000,
+            "value": {
+              "proto_value": {
+                "engine_state": {
+                  "offset_ms": 60000,
+                  "offset_type": 4
+                }
+              },
+              "int_value": 0,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641153600000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 2,
+          "time": 1641139140000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 202,
+          "int_value": 0,
+          "time": 1641139140000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 203,
+          "int_value": 0,
+          "time": 1641139200000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 204,
+          "int_value": 0,
+          "time": 1641139200000
+        },
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 0,
+          "time": 1641153600000
+        }
+      ]
+    },
+    {
+      "label": "databreak turns previous point to OFF, even if databreak is after last point before end_date. And databreaks are dropped",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641139200000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641141000000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": true
+            }
+          },
+          {
+            "date": "2022-01-03",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641250800000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-04",
+            "org_id": 100,
+            "object_id": 202,
+            "time": 1641258000000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": true
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 0,
+          "time": 1641139200000
+        },
+        {
+          "date": "2022-01-03",
+          "org_id": 100,
+          "object_id": 202,
+          "int_value": 0,
+          "time": 1641250800000
+        }
+      ]
+    },
+    {
+      "label": "OFF stat is injected when ON or IDLE is not terminated within 24 hours",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-05'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641139200000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-03",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641225600001,
+            "value": {
+              "int_value": 2,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-04",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641312000002,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 1,
+          "time": 1641139200000
+        },
+        {
+          "date": "2022-01-03",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 0,
+          "time": 1641225600000
+        },
+        {
+          "date": "2022-01-03",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 2,
+          "time": 1641225600001
+        },
+        {
+          "date": "2022-01-04",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 0,
+          "time": 1641312000001
+        },
+        {
+          "date": "2022-01-04",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 0,
+          "time": 1641312000002
+        }
+      ]
+    },
+    {
+      "label": "OFF stat is injected when there is no stat after the ON stat",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-05'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-02",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641139200000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-02",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 1,
+          "time": 1641139200000
+        },
+        {
+          "date": "2022-01-03",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 0,
+          "time": 1641225600000
+        }
+      ]
+    },
+    {
+      "label": "OFF stat is not injected when its time would be after the end_date",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-05'"
+      },
+      "input_data": {
+        "kinesisstats.osdenginestate": [
+          {
+            "date": "2022-01-04",
+            "org_id": 100,
+            "object_id": 201,
+            "time": 1641312000000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-04",
+          "org_id": 100,
+          "object_id": 201,
+          "int_value": 1,
+          "time": 1641312000000
+        }
+      ]
+    }
+  ]
+}

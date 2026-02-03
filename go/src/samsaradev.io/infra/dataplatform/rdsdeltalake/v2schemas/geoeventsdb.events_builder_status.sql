@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`highwater_mark_ms` BIGINT,
+`updated_at_ms` BIGINT,
+`partition` STRING

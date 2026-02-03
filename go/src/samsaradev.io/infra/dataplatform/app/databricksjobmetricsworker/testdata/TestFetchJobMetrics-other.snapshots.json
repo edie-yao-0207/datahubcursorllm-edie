@@ -1,0 +1,48 @@
+[
+  {
+    "Name": "other",
+    "Values": [
+      [
+        {
+          "metric": "dev.databricks.jobs.count",
+          "points": [
+            [
+              1640995200,
+              4
+            ]
+          ],
+          "tags": [
+            "region:us-west-2"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.active.count",
+          "points": [
+            [
+              1640995200,
+              11
+            ]
+          ],
+          "tags": [
+            "region:us-west-2"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.clusters.active.count",
+          "points": [
+            [
+              1640995200,
+              2
+            ]
+          ],
+          "tags": [
+            "region:us-west-2"
+          ],
+          "type": "gauge"
+        }
+      ]
+    ]
+  }
+]

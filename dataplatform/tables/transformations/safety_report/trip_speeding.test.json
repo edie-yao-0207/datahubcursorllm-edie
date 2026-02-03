@@ -1,0 +1,285 @@
+{
+  "test_cases": [
+    {
+      "label": "[See Commit Msg for Full Details] Scenario 1: Filter out rows by assert type, trip start/end date, trip version, and org_id/group_id.",
+      "parameters": {
+        "start_date": " '2022-01-04' ",
+        "end_date": " '2022-01-07' "
+      },
+      "input_data": {
+        "trips2db_shards.trips": [
+          {
+            "org_id": 123,
+            "group_id": 123,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "version": 101,
+
+            "date": "2022-01-05",
+            "time_ms": 1641384000000,
+            "start_ms": 1641384000000,
+            "end_ms": 1641391200000,
+
+            "proto": {
+              "trip_speeding_count_custom": {
+                "not_speeding_count": 10,
+                "light_speeding_count": 10,
+                "moderate_speeding_count": 10,
+                "heavy_speeding_count": 10,
+                "severe_speeding_count": 10
+              },
+              "trip_speeding_custom": {
+                "not_speeding_ms": 1000,
+                "light_speeding_ms": 1000,
+                "moderate_speeding_ms": 1000,
+                "heavy_speeding_ms": 1000,
+                "severe_speeding_ms": 1000
+              },
+              "trip_engine": {
+                "engine_idle_ms": 1000
+              },
+              "trip_distance": {
+                "distance_meters": 1000
+              },
+              "trip_seatbelt": {
+                "reporting_present": true,
+                "unbuckled_ms": 1000
+              }
+            }
+          },
+          {
+            "org_id": 456,
+            "group_id": 456,
+            "device_id": 2,
+            "driver_id_exclude_0_drivers": 2,
+            "version": 101,
+
+            "date": "2022-01-05",
+            "time_ms": 1641384000000,
+            "start_ms": 1641384000000,
+            "end_ms": 1641391200000,
+
+            "proto": {
+              "trip_speeding_count_custom": {
+                "not_speeding_count": 20,
+                "light_speeding_count": 20,
+                "moderate_speeding_count": 20,
+                "heavy_speeding_count": 20,
+                "severe_speeding_count": 20
+              },
+              "trip_speeding_custom": {
+                "not_speeding_ms": 2000,
+                "light_speeding_ms": 2000,
+                "moderate_speeding_ms": 2000,
+                "heavy_speeding_ms": 2000,
+                "severe_speeding_ms": 2000
+              },
+              "trip_engine": {
+                "engine_idle_ms": 2000
+              },
+              "trip_distance": {
+                "distance_meters": 2000
+              },
+              "trip_seatbelt": {
+                "reporting_present": true,
+                "unbuckled_ms": 2000
+              }
+            }
+          },
+          {
+            "org_id": 123,
+            "group_id": 123,
+            "device_id": 3,
+            "driver_id_exclude_0_drivers": 3,
+            "version": 101,
+
+            "date": "2022-01-05",
+            "time_ms": 1641384000000,
+            "start_ms": 1641384000000,
+            "end_ms": 1641391200000,
+
+            "proto": {
+              "trip_speeding_count_custom": {
+                "not_speeding_count": 100,
+                "light_speeding_count": 100,
+                "moderate_speeding_count": 100,
+                "heavy_speeding_count": 100,
+                "severe_speeding_count": 100
+              }
+            }
+          },
+          {
+            "org_id": 123,
+            "group_id": 123,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "version": 0,
+
+            "date": "2022-01-05",
+            "time_ms": 1641384000000,
+            "start_ms": 1641384000000,
+            "end_ms": 1641391200000,
+
+            "proto": {
+              "trip_speeding_count_custom": {
+                "not_speeding_count": 100,
+                "light_speeding_count": 100,
+                "moderate_speeding_count": 100,
+                "heavy_speeding_count": 100,
+                "severe_speeding_count": 100
+              }
+            }
+          },
+          {
+            "org_id": 456,
+            "group_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "version": 101,
+
+            "date": "2022-01-05",
+            "time_ms": 1641384000000,
+            "start_ms": 1641384000000,
+
+            "proto": {
+              "trip_speeding_custom": {
+                "not_speeding_ms": 1000,
+                "light_speeding_ms": 1000,
+                "moderate_speeding_ms": 1000,
+                "heavy_speeding_ms": 1000,
+                "severe_speeding_ms": 1000
+              },
+              "trip_engine": {
+                "engine_idle_ms": 1000
+              }
+            }
+          },
+          {
+            "org_id": 1,
+            "group_id": 1,
+            "device_id": 2,
+            "driver_id_exclude_0_drivers": 2,
+            "version": 101,
+
+            "date": "2022-01-05",
+            "time_ms": 1641384000000,
+            "start_ms": 1641384000000,
+            "end_ms": 1641391200000,
+
+            "proto": {
+              "trip_speeding_count_custom": {
+                "not_speeding_count": 100,
+                "light_speeding_count": 100,
+                "moderate_speeding_count": 100,
+                "heavy_speeding_count": 100,
+                "severe_speeding_count": 100
+              }
+            }
+          }
+        ],
+        "productsdb.devices": [
+          {
+            "id": 1,
+            "asset_type": 4,
+            "camera_product_id": 44
+          },
+          {
+            "id": 2,
+            "asset_type": 4,
+            "camera_product_id": 43
+          },
+          {
+            "id": 3,
+            "asset_type": 3
+          }
+        ],
+        "clouddb.organizations": [
+          {
+            "id": 123,
+            "locale": "us"
+          },
+          {
+            "id": 456,
+            "locale": "eu"
+          },
+          {
+            "id": 1,
+            "locale": "us"
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 123,
+            "id": 123
+          },
+          {
+            "organization_id": 456,
+            "id": 456
+          },
+          {
+            "organization_id": 1,
+            "group_id": 1
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "start_ms": 1641384000000,
+          "end_ms": 1641391200000,
+          "version": 101,
+          "date": "2022-01-05",
+          "not_speeding_count": 10,
+          "light_speeding_count": 10,
+          "moderate_speeding_count": 10,
+          "heavy_speeding_count": 10,
+          "severe_speeding_count": 10,
+
+          "not_speeding_ms": 1000,
+          "light_speeding_ms": 1000,
+          "moderate_speeding_ms": 1000,
+          "heavy_speeding_ms": 1000,
+          "severe_speeding_ms": 1000,
+
+          "engine_idle_ms": 1000,
+          "distance_meters": 1000,
+          "driving_time_ms": 7200000,
+          "seatbelt_reporting_present_ms": 7200000,
+          "seatbelt_unbuckled_ms": 1000,
+          "has_outward_camera": 1,
+          "has_inward_outward_camera": 0
+        },
+        {
+          "org_id": 456,
+          "device_id": 2,
+          "driver_id": 2,
+          "start_ms": 1641384000000,
+          "end_ms": 1641391200000,
+          "version": 101,
+          "date": "2022-01-05",
+          "not_speeding_count": 20,
+          "light_speeding_count": 20,
+          "moderate_speeding_count": 20,
+          "heavy_speeding_count": 20,
+          "severe_speeding_count": 20,
+
+          "not_speeding_ms": 2000,
+          "light_speeding_ms": 2000,
+          "moderate_speeding_ms": 2000,
+          "heavy_speeding_ms": 2000,
+          "severe_speeding_ms": 2000,
+
+          "engine_idle_ms": 2000,
+          "distance_meters": 2000,
+          "driving_time_ms": 7200000,
+          "seatbelt_reporting_present_ms": 7200000,
+          "seatbelt_unbuckled_ms": 2000,
+          "has_outward_camera": 0,
+          "has_inward_outward_camera": 1
+        }
+      ]
+    }
+  ]
+}

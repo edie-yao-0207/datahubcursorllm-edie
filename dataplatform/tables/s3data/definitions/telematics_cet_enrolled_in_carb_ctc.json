@@ -1,0 +1,85 @@
+{
+  "table": "telematics_cet_enrolled_in_carb_ctc",
+  "owner": "FirmwareVdp",
+  "description": "Table 'enrolledInCarbCtc' generated from 'Cable Recommendation CST Set (New Format).xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "regions",
+      "type": "string"
+    },
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year_start",
+      "type": "bigint"
+    },
+    {
+      "name": "year_end",
+      "type": "bigint"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "powertrain",
+      "type": "string"
+    },
+    {
+      "name": "fuel_group",
+      "type": "string"
+    },
+    {
+      "name": "exclude_models",
+      "type": "string"
+    },
+    {
+      "name": "row_count",
+      "type": "bigint"
+    },
+    {
+      "name": "cable",
+      "type": "string"
+    },
+    {
+      "name": "enrolled_in_carb_ctc_yes",
+      "type": "string"
+    },
+    {
+      "name": "enrolled_in_carb_ctc_no",
+      "type": "string"
+    },
+    {
+      "name": "vg34",
+      "type": "boolean"
+    },
+    {
+      "name": "vg54_nah",
+      "type": "boolean"
+    },
+    {
+      "name": "vg54_na_eu",
+      "type": "boolean"
+    },
+    {
+      "name": "vg55",
+      "type": "boolean"
+    },
+    {
+      "name": "ae_notes",
+      "type": "string"
+    }
+  ]
+}

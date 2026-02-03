@@ -1,0 +1,54 @@
+{
+  "owner": "hardware-group",
+  "region": ["us-west-2", "eu-west-1"],
+  "sql_warehouse": "hardware",
+  "name": "test_query",
+  "description": "Testing a sample Hansel Query",
+  "run_as_role": "owner",
+  "parameters": [
+    {
+      "name": "org_type",
+      "title": "Organization Type",
+      "enum": {
+        "options": ["0", "1"],
+        "values": ["0"],
+        "multiple": {
+          "separator": ","
+        }
+      }
+    },
+    {
+      "name": "fw",
+      "title": "FW Version",
+      "query": {
+        "type": "uuid",
+        "values": ["121123", "426", "730", "1411", "1444", "1479", "1535"],
+        "query_id_map": {
+          "us-west-2": "63ac7037-1300-431d-ab1d-1ff5b7f91572",
+          "eu-west-1": "36b5055d-e8b6-47e8-8371-4a2992c4b425"
+        },
+        "multiple": {
+          "separator": ","
+        }
+      }
+    },
+    {
+      "name": "date_range",
+      "title": "Date Range",
+      "date_range": {
+        "range": {
+          "start": "2024-02-12",
+          "end": "2024-02-21"
+        }
+      }
+    }
+  ],
+  "visualizations": [
+    {
+      "type": "chart",
+      "name": "line1",
+      "description": "Testing a sample Hansel Viz",
+      "visualization_filename": "hardware/test_visualization"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "table": "sku_bundles",
+  "owner": "DataEngineering",
+  "description": "Mapping from license SKUs to the feature bundles they grant",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/licenses/sku_bundles.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/licenses/sku_bundles.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/licenses/sku_bundles.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "sku",
+      "type": "string",
+      "description": "The license SKU identifier (e.g., LIC-VG-ENTERPRISE)"
+    },
+    {
+      "name": "bundle_id",
+      "type": "string",
+      "description": "The feature bundle ID granted by this SKU"
+    },
+    {
+      "name": "is_legacy",
+      "type": "boolean",
+      "description": "Whether this is a legacy license sold prior to Pricing & Packaging"
+    },
+    {
+      "name": "is_addon",
+      "type": "boolean",
+      "description": "Whether this is an add-on license rather than a core license"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "customer360.free_trial_shipments",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Determine the number of free trial devices shipped per day across each product type.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "devices_free_trials",
+      "schema_path": "dataprep/business/devices_free_trials.metadata.json",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "free_trial_shipments",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "sam_number"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "The SAM Number (internal Samsara ID) of a Customer"
+        }
+      },
+      {
+        "name": "num_ag_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of shipped free trial AG devices on the specified date"
+        }
+      },
+      {
+        "name": "num_vg_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of shipped free trial VG devices on the specified date"
+        }
+      },
+      {
+        "name": "num_cm_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of shipped free trial CM devices on the specified date"
+        }
+      },
+      {
+        "name": "num_ig_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of shipped free trial IG devices on the specified date"
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

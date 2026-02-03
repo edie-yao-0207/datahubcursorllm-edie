@@ -1,0 +1,9 @@
+`org_id` BIGINT,
+`vg_device_id` BIGINT,
+`time` BIGINT,
+`speed_limit_meters_per_second` DOUBLE,
+`speed_limit_is_smoothed` BOOLEAN,
+`speed_limit_source` INT,
+`pre_release_speed_limit_meters_per_second` DOUBLE,
+`pre_release_speed_limit_source` INT,
+`date` DATE

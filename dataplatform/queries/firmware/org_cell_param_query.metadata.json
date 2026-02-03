@@ -1,0 +1,8 @@
+{
+  "owner": "firmware-group",
+  "region": ["us-west-2", "eu-west-1"],
+  "sql_warehouse": "safetyproductgroup",
+  "name": "org_cell_param_query",
+  "description": "List of org cells for filtering",
+  "run_as_role": "owner"
+}

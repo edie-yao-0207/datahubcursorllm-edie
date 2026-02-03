@@ -1,0 +1,18 @@
+{
+  "name": "example_job",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:datamodel_dev.example_pyspark_dataset",
+    "us-west-2:datamodel_dev.example_sql_dataset",
+    "us-west-2:datamodel_dev.example_sql_dataset_with_dq",
+    "us-west-2:datamodel_dev.example_unpartitioned_dataset"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 * * * *",
+      "backfill_window": 3,
+      "backfill_batch_size": 3
+    }
+  ]
+}

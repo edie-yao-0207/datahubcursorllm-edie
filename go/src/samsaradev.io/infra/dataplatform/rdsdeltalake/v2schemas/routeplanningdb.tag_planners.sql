@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`tag_id` BIGINT,
+`planner_uuid` STRING,
+`created_by` BIGINT,
+`created_at` TIMESTAMP,
+`updated_by` BIGINT,
+`updated_at` TIMESTAMP,
+`partition` STRING

@@ -1,0 +1,4 @@
+{
+  "owners": ["samsara-dev/data-platform"],
+  "description": "Dataplatform has codereview privileges for anything in this directory for administrative purposes, however we recommend asking a specific team for codereview."
+}

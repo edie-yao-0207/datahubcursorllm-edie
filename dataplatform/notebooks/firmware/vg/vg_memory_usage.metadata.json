@@ -1,0 +1,30 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "vg_memory_usage",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "99th_percentile_memory_usage",
+        "type": "float"
+      },
+      {
+        "name": "median_memory_usage",
+        "type": "float"
+      }
+    ]
+  }
+}

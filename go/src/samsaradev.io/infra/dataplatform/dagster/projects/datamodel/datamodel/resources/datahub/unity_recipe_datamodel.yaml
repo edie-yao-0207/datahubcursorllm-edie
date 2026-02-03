@@ -1,0 +1,78 @@
+source:
+    type: unity-catalog
+    config:
+        workspace_url: https://samsara-dev-us-west-2.cloud.databricks.com/?o=5924096274798303
+        token: "${DATABRICKS_UNITY_TOKEN}"
+        emit_siblings: false
+        include_usage_statistics: false
+        include_hive_metastore: false
+        include_table_lineage: false  # we are ingesting table lineage directly from the system tables
+        include_column_lineage: false
+        include_notebooks: false
+        format_sql_queries: true
+        stateful_ingestion:
+            enabled: false
+        catalog_pattern:
+            allow:
+                - "default"
+        schema_pattern:
+            allow:
+                - "default.product_analytics"
+                - "default.product_analytics_staging"
+                - "default.metrics_repo"
+                - "default.dataengineering"
+                - "default.datamodel_safety_bronze"
+                - "default.datamodel_safety_silver"
+                - "default.datamodel_safety"
+                - "default.datamodel_telematics_bronze"
+                - "default.datamodel_telematics_silver"
+                - "default.datamodel_telematics"
+                - "default.datamodel_core_bronze"
+                - "default.datamodel_core_silver"
+                - "default.datamodel_core"
+                - "default.datamodel_platform_bronze"
+                - "default.datamodel_platform_silver"
+                - "default.datamodel_platform"
+                - "default.mixpanel_samsara"
+                - "default.auditlog"
+                - "default.feature_store"
+                - "default.inference_store"
+                - "default.datamodel_launchdarkly_bronze"
+                - "default.datamodel_launchdarkly_silver"
+            deny:
+              - "default.datamodel_dev"
+              - "default.dataengineering_dev"
+        table_pattern:
+            deny:
+                - "default.dataengineering.agg_device_stats_primary"
+                - "default.dataengineering.agg_device_stats_secondary_autodetect_consistency"
+                - "default.dataengineering.agg_device_stats_secondary_consistency"
+                - "default.dataengineering.agg_device_stats_secondary_histogram_reported"
+                - "default.dataengineering.agg_device_stats_secondary_max"
+                - "default.dataengineering.agg_device_stats_secondary_nonzero"
+                - "default.dataengineering.agg_device_stats_secondary_rate"
+                - "default.dataengineering.agg_device_stats_secondary_response_ratio"
+                - "default.dataengineering.agg_device_stats_secondary_selected_protocol"
+                - "default.dataengineering.agg_osdcommandschedulerstats_expired"
+                - "default.dataengineering.agg_osdcommandschedulerstats_stopped"
+                - "default.dataengineering.agg_population_stats_primary"
+                - "default.dataengineering.dim_attached_usb_devices"
+                - "default.dataengineering.dim_device_dimensions"
+                - "default.dataengineering.dim_device_populations"
+                - "default.dataengineering.dim_device_variant"
+                - "default.dataengineering.dim_diagnostic_cable"
+                - "default.dataengineering.dim_firmware_builds"
+                - "default.dataengineering.fct_derivedstatcoverageondrive"
+                - "default.dataengineering.fct_osdcanbitratedetectionv2"
+                - "default.dataengineering.fct_osdcanprotocolsdetected"
+                - "default.dataengineering.fct_osdcommandschedulerstats"
+                - "default.dataengineering.fct_osdenginefault"
+                - "default.dataengineering.fct_osdenginegauge"
+                - "default.dataengineering.fct_osdfirmwaremetrics"
+                - "default.dataengineering.fct_osdj1708can3busautodetectresult"
+                - "default.dataengineering.fct_osdj1939claimedaddress"
+                - "default.dataengineering.fct_osdobdvaluelockadded"
+                - "default.dataengineering.gilforsher_temp_dim_devices_20240414"
+                - "default.dataengineering.gilforsher_temp_dim_devices_20240414_new_logic"
+                - "default.dataengineering.safety_event_review_ratings"
+                - "default.dataengineering.stg_device_activity_global"

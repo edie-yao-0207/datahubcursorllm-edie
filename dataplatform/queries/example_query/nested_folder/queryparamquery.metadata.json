@@ -1,0 +1,44 @@
+{
+  "owner": "data-platform-group",
+  "region": ["us-west-2", "eu-west-1"],
+  "sql_warehouse": "aianddata",
+  "name": "enum_query",
+  "description": "enum query description",
+  "run_as_role": "owner",
+  "parameters": [
+    {
+      "name": "query_param_name",
+      "title": "Query Parameter1",
+      "query": {
+        "type": "uuid",
+        "value": "name_1",
+        "query_id_map": {
+          "us-west-2": "5b0a53be-e4c2-4008-9d63-5a3623a81e41",
+          "eu-west-1": "42dc5251-d008-49ca-9c45-ad50e90affc4"
+        },
+        "multiple": {
+          "prefix": "\"",
+          "suffix": "\"",
+          "separator": ","
+        }
+      }
+    },
+    {
+      "name": "query_param_uuid",
+      "title": "Query Parameter2",
+      "query": {
+        "type": "uuid",
+        "value": "name_3",
+        "query_id_map": {
+          "us-west-2": "1d54c038-3671-4b96-bf61-6650f50dd344",
+          "eu-west-1": "e538f2ae-5535-4e06-9826-4e0d7089e229"
+        },
+        "multiple": {
+          "prefix": "\"",
+          "suffix": "\"",
+          "separator": ","
+        }
+      }
+    }
+  ]
+}

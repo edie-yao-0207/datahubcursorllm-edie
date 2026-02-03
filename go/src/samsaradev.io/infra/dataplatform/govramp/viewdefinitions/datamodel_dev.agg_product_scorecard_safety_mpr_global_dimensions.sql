@@ -1,0 +1,65 @@
+(
+  SELECT DISTINCT
+    period,
+    period_start,
+    period_end,
+    cloud_region,
+    region,
+    account_size_segment,
+    account_arr_segment,
+    account_industry,
+    industry_vertical,
+    is_paid_safety_customer,
+    is_paid_telematics_customer,
+    is_paid_stce_customer
+  FROM
+    datamodel_dev.agg_product_scorecard_safety_mpr_global
+  UNION
+  SELECT DISTINCT
+    period,
+    period_start,
+    period_end,
+    cloud_region,
+    region,
+    account_size_segment,
+    account_arr_segment,
+    account_industry,
+    industry_vertical,
+    is_paid_safety_customer,
+    is_paid_telematics_customer,
+    is_paid_stce_customer
+  FROM
+    datamodel_dev.agg_product_scorecard_safety_mpr_api_domain_global
+  UNION
+  SELECT DISTINCT
+    period,
+    period_start,
+    period_end,
+    cloud_region,
+    region,
+    account_size_segment,
+    account_arr_segment,
+    account_industry,
+    industry_vertical,
+    is_paid_safety_customer,
+    is_paid_telematics_customer,
+    is_paid_stce_customer
+  FROM
+    datamodel_dev.agg_product_scorecard_safety_mpr_detection_type_global
+  UNION
+  SELECT DISTINCT
+    period,
+    period_start,
+    period_end,
+    cloud_region,
+    region,
+    account_size_segment,
+    account_arr_segment,
+    account_industry,
+    industry_vertical,
+    is_paid_safety_customer,
+    is_paid_telematics_customer,
+    is_paid_stce_customer
+  FROM
+    datamodel_dev.agg_product_scorecard_safety_mpr_driver_assignment_source_global
+)

@@ -1,0 +1,48 @@
+{
+  "name": "dataplatform_stable_report.metered_usage",
+  "owner": "DataPlatform",
+  "description": "Computes hourly rows for metered usage of wifi for vehicles.",
+  "backfill_start_date": "2021-05-01",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdwifiapbytes",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "dataplatform_stable_report",
+    "tablename": "metered_usage",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp"
+      },
+      {
+        "name": "metered_usage_bytes",
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

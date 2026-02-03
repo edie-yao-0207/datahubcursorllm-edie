@@ -1,0 +1,160 @@
+{
+  "name": "agg_product_scorecard_top_line_metrics_global_revised_monthly",
+  "owner": "DataEngineering",
+  "description": "Monthly top line metrics for SAM groupings",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date_month",
+      "type": "string"
+    },
+    {
+      "name": "period_start",
+      "type": "string"
+    },
+    {
+      "name": "period_end",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "industry_vertical",
+      "type": "string"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "account_csm_email",
+      "type": "string"
+    },
+    {
+      "name": "account_name",
+      "type": "string"
+    },
+    {
+      "name": "account_id",
+      "type": "string"
+    },
+    {
+      "name": "trips",
+      "type": "long"
+    },
+    {
+      "name": "miles",
+      "type": "double"
+    },
+    {
+      "name": "active_drivers",
+      "type": "long"
+    },
+    {
+      "name": "active_cloud_dashboard_users",
+      "type": "long"
+    },
+    {
+      "name": "active_driver_app_users",
+      "type": "long"
+    },
+    {
+      "name": "marketplace_integrations",
+      "type": "long"
+    },
+    {
+      "name": "api_requests",
+      "type": "long"
+    },
+    {
+      "name": "device_licenses_ag",
+      "type": "long"
+    },
+    {
+      "name": "device_licenses_vg",
+      "type": "long"
+    },
+    {
+      "name": "device_licenses_cm",
+      "type": "long"
+    },
+    {
+      "name": "device_licenses_at",
+      "type": "long"
+    },
+    {
+      "name": "device_licenses_sg",
+      "type": "long"
+    },
+    {
+      "name": "active_devices_ag",
+      "type": "long"
+    },
+    {
+      "name": "active_devices_vg",
+      "type": "long"
+    },
+    {
+      "name": "active_devices_cm",
+      "type": "long"
+    },
+    {
+      "name": "active_devices_at",
+      "type": "long"
+    },
+    {
+      "name": "active_devices_sg",
+      "type": "long"
+    },
+    {
+      "name": "total_licenses",
+      "type": "long"
+    },
+    {
+      "name": "total_licenses_assigned",
+      "type": "long"
+    },
+    {
+      "name": "total_licenses_software",
+      "type": "long"
+    },
+    {
+      "name": "total_licenses_assigned_software",
+      "type": "long"
+    },
+    {
+      "name": "total_licenses_hardware",
+      "type": "long"
+    },
+    {
+      "name": "total_licenses_assigned_hardware",
+      "type": "long"
+    }
+  ]
+}

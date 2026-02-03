@@ -1,0 +1,151 @@
+{
+  "view": "agg_product_scorecard_top_line_metrics_global",
+  "owner": "DataEngineering",
+  "description": "This view contains all top line metrics data",
+  "database": "product_analytics",
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "date", "type": "string", "description": "Date partition" },
+    { "name": "period_start", "type": "string", "description": "Start of period" },
+    { "name": "period_end", "type": "string", "description": "End of period" },
+    { "name": "sam_number", "type": "string", "description": "SAM number for set of orgs" },
+    { "name": "account_size_segment", "type": "string", "description": "Account size segment of grouping" },
+    { "name": "account_arr_segment", "type": "string", "description": "Account ARR segment of grouping" },
+    { "name": "account_billing_country", "type": "string", "description": "Billing country of the account" },
+    { "name": "account_industry", "type": "string", "description": "Account industry of grouping" },
+    { "name": "industry_vertical", "type": "string", "description": "Industry vertical of grouping" },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Safety licenses or not"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Telematics licenses or not"
+    },
+    { "name": "is_paid_stce_customer", "type": "boolean", "description": "Whether the SAM has STCE licenses or not" },
+    { "name": "account_csm_email", "type": "string", "description": "CSM email of the account" },
+    { "name": "account_name", "type": "string", "description": "Name of the account" },
+    { "name": "account_id", "type": "string", "description": "ID of the account" },
+    { "name": "trips", "type": "long", "description": "Total number of trips over the period" },
+    {
+      "name": "miles",
+      "type": "double",
+      "description": "Total number of miles driver over the period"
+    },
+    {
+      "name": "active_drivers",
+      "type": "long",
+      "description": "Total number of drivers on a trip over the period"
+    },
+    {
+      "name": "active_cloud_dashboard_users",
+      "type": "long",
+      "description": "Total number of active cloud dashboard users over the period"
+    },
+    {
+      "name": "active_driver_app_users",
+      "type": "long",
+      "description": "Total number of active driver app users over the period"
+    },
+    {
+      "name": "marketplace_integrations",
+      "type": "long",
+      "description": "Total number of active marketplace integrations"
+    },
+    {
+      "name": "api_requests",
+      "type": "long",
+      "description": "Total number of API requests made in the period"
+    },
+    {
+      "name": "device_licenses_ag",
+      "type": "long",
+      "description": "Total number of AG device licenses"
+    },
+    {
+      "name": "device_licenses_vg",
+      "type": "long",
+      "description": "Total number of VG device licenses"
+    },
+    {
+      "name": "device_licenses_cm",
+      "type": "long",
+      "description": "Total number of CM device licenses"
+    },
+    {
+      "name": "device_licenses_at",
+      "type": "long",
+      "description": "Total number of AT device licenses"
+    },
+    {
+      "name": "device_licenses_sg",
+      "type": "long",
+      "description": "Total number of SG device licenses"
+    },
+    {
+      "name": "active_devices_ag",
+      "type": "long",
+      "description": "Total number of AG active devices"
+    },
+    {
+      "name": "active_devices_vg",
+      "type": "long",
+      "description": "Total number of VG active devices"
+    },
+    {
+      "name": "active_devices_cm",
+      "type": "long",
+      "description": "Total number of CM active devices"
+    },
+    {
+      "name": "active_devices_at",
+      "type": "long",
+      "description": "Total number of AT active devices"
+    },
+    {
+      "name": "active_devices_sg",
+      "type": "long",
+      "description": "Total number of SG active devices"
+    },
+    {
+      "name": "total_licenses",
+      "type": "long",
+      "description": "Total number of active licenses"
+    },
+    {
+      "name": "total_licenses_assigned",
+      "type": "long",
+      "description": "Total number of active assigned licenses"
+    },
+    {
+      "name": "total_licenses_software",
+      "type": "long",
+      "description": "Total number of active software licenses"
+    },
+    {
+      "name": "total_licenses_assigned_software",
+      "type": "long",
+      "description": "Total number of active assigned software licenses"
+    },
+    {
+      "name": "total_licenses_hardware",
+      "type": "long",
+      "description": "Total number of active hardware licenses"
+    },
+    {
+      "name": "total_licenses_assigned_hardware",
+      "type": "long",
+      "description": "Total number of active assigned hardware licenses"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_scorecard_top_line_metrics_global_revised_monthly",
+      "type": "table"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "owner": "DeveloperExperience",
+  "jobs": [
+    {
+      "name": "create",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_conf_overrides": {
+        "spark.sql.extensions": ""
+      },
+      "spark_version": "default"
+    }
+  ]
+}

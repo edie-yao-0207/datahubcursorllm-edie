@@ -1,0 +1,21 @@
+{
+  "table": "cable_to_can_bus_types",
+  "owner": "FirmwareVdp",
+  "description": "This table contains a mapping products to the I/Os on the product",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "product_name",
+      "type": "string"
+    },
+    {
+      "name": "cable_name",
+      "type": "string"
+    },
+    {
+      "name": "can_bus_type",
+      "type": "string"
+    }
+  ]
+}

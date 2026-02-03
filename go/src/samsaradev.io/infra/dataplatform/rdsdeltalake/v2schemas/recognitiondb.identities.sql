@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`uuid` STRING,
+`org_id` BIGINT,
+`driver_id` BIGINT,
+`updated_at_ms` BIGINT,
+`partition` STRING

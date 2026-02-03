@@ -1,0 +1,22 @@
+{
+  "view": "dataplatform_costs_latest_full_date",
+  "owner": "DataPlatform",
+  "description": "This view contains a single row with a single column, date, containing the latest day that has complete data in dataplatform_costs. This is necessary because databricks and aws data come at different cadences so there are times in which we may have partial data, so data after this date isn't complete.",
+  "database": "billing",
+  "regions": ["us-west-2"],
+  "schema": [
+    {
+      "name": "date",
+      "type": "date",
+      "description": "The latest day that is fully valid in dataplatform_costs."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "billing",
+      "tablename": "dataplatform_costs",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

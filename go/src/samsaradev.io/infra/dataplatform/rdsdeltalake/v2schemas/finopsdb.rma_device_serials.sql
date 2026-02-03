@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`serial_number` STRING,
+`sam_number` STRING,
+`shipping_group_uuid` STRING,
+`rma_order_number` STRING,
+`rma_order_created_at` TIMESTAMP,
+`entry_created_at` TIMESTAMP,
+`shipping_status_enum` SHORT,
+`date` STRING

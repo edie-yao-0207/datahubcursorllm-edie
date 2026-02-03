@@ -1,0 +1,13 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`driver_id` BIGINT,
+`record_hash_key` STRING,
+`pipeline_version` STRING,
+`process_uuid` STRING,
+`risk_score` DOUBLE,
+`classification` STRING,
+`origin_service` STRING,
+`features` STRING,
+`model_version` STRING,
+`date` DATE

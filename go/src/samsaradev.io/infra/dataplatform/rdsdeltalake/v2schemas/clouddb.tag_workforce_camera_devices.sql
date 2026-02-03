@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`tag_id` BIGINT,
+`camera_device_id` BIGINT,
+`created_by` BIGINT,
+`created_at` TIMESTAMP,
+`org_id` BIGINT,
+`partition` STRING

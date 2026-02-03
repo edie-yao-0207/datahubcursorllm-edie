@@ -1,0 +1,608 @@
+{
+  "databases": [
+    {
+      "name": "dataplatformtestinternaldb",
+      "shards": [
+        {
+          "name": "prod-dataplatformtestinternaldb",
+          "cdc_task_name": "kinesis-task-cdc-prod-dataplatformtestinternaldb",
+          "load_task_name": "kinesis-task-load-prod-dataplatformtestinternaldb",
+          "kinesis_stream_name": "rds-kinesis-stream-dataplatformtestinternaldb",
+          "delta_table_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "table-parquet/prod-dataplatformtestinternaldb/dataplatformtestinternaldb"
+          },
+          "checkpoints_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "checkpoint/prod-dataplatformtestinternaldb/prod-dataplatformtestinternaldb/dataplatformtestinternaldb"
+          },
+          "ssl_certificate_arn_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "ssl_certificate_arn/prod-dataplatformtestinternaldb/dataplatformtestinternaldb"
+          },
+          "tables": [
+            {
+              "name": "json_notes",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-dataplatformtestinternaldb-dataplatformtestinternaldb-json_notes-v0-ca"
+            },
+            {
+              "name": "notes",
+              "cdc_version": 0,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-dataplatformtestinternaldb-dataplatformtestinternaldb-notes-v1-ca"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "eurofleetdb",
+      "shards": [
+        {
+          "name": "prod-eurofleetdb",
+          "cdc_task_name": "kinesis-task-cdc-prod-eurofleetdb",
+          "load_task_name": "kinesis-task-load-prod-eurofleetdb",
+          "kinesis_stream_name": "rds-kinesis-stream-eurofleetdb",
+          "delta_table_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "table-parquet/prod-eurofleetdb/eurofleetdb"
+          },
+          "checkpoints_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "checkpoint/prod-eurofleetdb/prod-eurofleetdb/eurofleetdb"
+          },
+          "ssl_certificate_arn_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "ssl_certificate_arn/prod-eurofleetdb/eurofleetdb"
+          },
+          "tables": [
+            {
+              "name": "driver_activities",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-driver_activities-v0-ca"
+            },
+            {
+              "name": "driver_expense_config",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-driver_expense_config-v0-ca"
+            },
+            {
+              "name": "driver_status",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-driver_status-v0-ca"
+            },
+            {
+              "name": "driver_status_edits",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-driver_status_edits-v0-ca"
+            },
+            {
+              "name": "overtime_profile",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-overtime_profile-v0-ca"
+            },
+            {
+              "name": "time_off_policies",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-time_off_policies-v0-ca"
+            },
+            {
+              "name": "time_off_policy_types",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-eurofleetdb-eurofleetdb-time_off_policy_types-v0-ca"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "prod_db",
+      "shards": [
+        {
+          "name": "prod-clouddb",
+          "cdc_task_name": "kinesis-task-cdc-prod-clouddb",
+          "load_task_name": "kinesis-task-load-prod-clouddb",
+          "kinesis_stream_name": "rds-kinesis-stream-prod_db",
+          "delta_table_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "table-parquet/prod-clouddb/prod_db"
+          },
+          "checkpoints_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "checkpoint/prod-clouddb/prod-clouddb/prod_db"
+          },
+          "ssl_certificate_arn_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "ssl_certificate_arn/prod-clouddb/prod_db"
+          },
+          "tables": [
+            {
+              "name": "addresses",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-addresses-v1-ca"
+            },
+            {
+              "name": "alert_asset_labels",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_asset_labels-v1-ca"
+            },
+            {
+              "name": "alert_conditions",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_conditions-v1-ca"
+            },
+            {
+              "name": "alert_contacts",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_contacts-v1-ca"
+            },
+            {
+              "name": "alert_devices",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_devices-v1-ca"
+            },
+            {
+              "name": "alert_drivers",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_drivers-v1-ca"
+            },
+            {
+              "name": "alert_industrial_assets",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_industrial_assets-v1-ca"
+            },
+            {
+              "name": "alert_machine_input_types",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_machine_input_types-v1-ca"
+            },
+            {
+              "name": "alert_machine_inputs",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_machine_inputs-v1-ca"
+            },
+            {
+              "name": "alert_subconditions",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_subconditions-v1-ca"
+            },
+            {
+              "name": "alert_tags",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_tags-v1-ca"
+            },
+            {
+              "name": "alert_webhooks",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_webhooks-v1-ca"
+            },
+            {
+              "name": "alert_widgets",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alert_widgets-v1-ca"
+            },
+            {
+              "name": "alerts",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-alerts-v1-ca"
+            },
+            {
+              "name": "api_tokens",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-api_tokens-v0-ca"
+            },
+            {
+              "name": "auth0_connections",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-auth0_connections-v0-ca"
+            },
+            {
+              "name": "contacts",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-contacts-v0-ca"
+            },
+            {
+              "name": "custom_roles",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-custom_roles-v1-ca"
+            },
+            {
+              "name": "dashboards",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-dashboards-v1-ca"
+            },
+            {
+              "name": "developer_apps",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-developer_apps-v0-ca"
+            },
+            {
+              "name": "driver_rating_actions",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-driver_rating_actions-v1-ca"
+            },
+            {
+              "name": "driver_rulesets",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-driver_rulesets-v0-ca"
+            },
+            {
+              "name": "drivers",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-drivers-v1-ca"
+            },
+            {
+              "name": "external_keys",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-external_keys-v0-ca"
+            },
+            {
+              "name": "external_values",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-external_values-v0-ca"
+            },
+            {
+              "name": "features_orgs",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-features_orgs-v1-ca"
+            },
+            {
+              "name": "feedbacks",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-feedbacks-v1-ca"
+            },
+            {
+              "name": "firmware_build_infos",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-firmware_build_infos-v1-ca"
+            },
+            {
+              "name": "groups",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-groups-v1-ca"
+            },
+            {
+              "name": "historical_video_requests",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-historical_video_requests-v1-ca"
+            },
+            {
+              "name": "industrial_local_variables",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-industrial_local_variables-v1-ca"
+            },
+            {
+              "name": "machine_input_types",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-machine_input_types-v1-ca"
+            },
+            {
+              "name": "machine_inputs",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-machine_inputs-v1-ca"
+            },
+            {
+              "name": "machine_machine_inputs",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-machine_machine_inputs-v1-ca"
+            },
+            {
+              "name": "machines",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-machines-v1-ca"
+            },
+            {
+              "name": "mobile_apps",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-mobile_apps-v0-ca"
+            },
+            {
+              "name": "netsuite_invoices",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-netsuite_invoices-v1-ca"
+            },
+            {
+              "name": "orders",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-orders-v0-ca"
+            },
+            {
+              "name": "org_cells",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-org_cells-v1-ca"
+            },
+            {
+              "name": "org_invites",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-org_invites-v0-ca"
+            },
+            {
+              "name": "org_sfdc_accounts",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-org_sfdc_accounts-v1-ca"
+            },
+            {
+              "name": "org_shards",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-org_shards-v1-ca"
+            },
+            {
+              "name": "organizations",
+              "cdc_version": 3,
+              "load_version": 3,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-organizations-v3-ca"
+            },
+            {
+              "name": "preventative_maintenance_schedules",
+              "cdc_version": 2,
+              "load_version": 2,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-preventative_maintenance_schedules-v2-ca"
+            },
+            {
+              "name": "sfdc_accounts",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-sfdc_accounts-v1-ca"
+            },
+            {
+              "name": "slave_devices",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-slave_devices-v1-ca"
+            },
+            {
+              "name": "slave_pins",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-slave_pins-v1-ca"
+            },
+            {
+              "name": "stat_mappings",
+              "cdc_version": 2,
+              "load_version": 2,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-stat_mappings-v2-ca"
+            },
+            {
+              "name": "tag_addresses",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-tag_addresses-v0-ca"
+            },
+            {
+              "name": "tag_drivers",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-tag_drivers-v1-ca"
+            },
+            {
+              "name": "tag_workforce_camera_devices",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-tag_workforce_camera_devices-v1-ca"
+            },
+            {
+              "name": "tag_workforce_sites",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-tag_workforce_sites-v1-ca"
+            },
+            {
+              "name": "tags",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-tags-v1-ca"
+            },
+            {
+              "name": "user_login_infos",
+              "cdc_version": 0,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-user_login_infos-v1-ca"
+            },
+            {
+              "name": "user_login_regions",
+              "cdc_version": 0,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-user_login_regions-v1-ca"
+            },
+            {
+              "name": "users",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-users-v1-ca"
+            },
+            {
+              "name": "users_organizations",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-users_organizations-v1-ca"
+            },
+            {
+              "name": "vehicle_electrification_type",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-vehicle_electrification_type-v0-ca"
+            },
+            {
+              "name": "vehicle_maintenance_logs",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-vehicle_maintenance_logs-v0-ca"
+            },
+            {
+              "name": "vehicle_make_model_weights",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-vehicle_make_model_weights-v1-ca"
+            },
+            {
+              "name": "webhooks",
+              "cdc_version": 1,
+              "load_version": 1,
+              "job_name": "rds-parquet-merge-prod-clouddb-prod_db-webhooks-v1-ca"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "prod_db",
+      "shards": [
+        {
+          "name": "prod-productsdb",
+          "cdc_task_name": "kinesis-task-cdc-prod-productsdb",
+          "load_task_name": "kinesis-task-load-prod-productsdb",
+          "kinesis_stream_name": "rds-kinesis-stream-prod_db",
+          "delta_table_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "table-parquet/prod-productsdb/prod_db"
+          },
+          "checkpoints_s3_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "checkpoint/prod-productsdb/prod-productsdb/prod_db"
+          },
+          "ssl_certificate_arn_location": {
+            "bucket": "samsara-ca-kinesis-dms-delta-lake",
+            "prefix": "ssl_certificate_arn/prod-productsdb/prod_db"
+          },
+          "tables": [
+            {
+              "name": "core_external_keys",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-core_external_keys-v0-ca"
+            },
+            {
+              "name": "core_external_values",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-core_external_values-v0-ca"
+            },
+            {
+              "name": "devices",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-devices-v0-ca"
+            },
+            {
+              "name": "dvir_templates_devices",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-dvir_templates_devices-v0-ca"
+            },
+            {
+              "name": "enrollment_logs",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-enrollment_logs-v0-ca"
+            },
+            {
+              "name": "gateway_device_history",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-gateway_device_history-v0-ca"
+            },
+            {
+              "name": "gateways",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-gateways-v0-ca"
+            },
+            {
+              "name": "id_cards",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-id_cards-v0-ca"
+            },
+            {
+              "name": "monitor_widget_history",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-monitor_widget_history-v0-ca"
+            },
+            {
+              "name": "monitors",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-monitors-v0-ca"
+            },
+            {
+              "name": "product_oui_batches",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-product_oui_batches-v0-ca"
+            },
+            {
+              "name": "tag_devices",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-tag_devices-v0-ca"
+            },
+            {
+              "name": "tag_widgets",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-tag_widgets-v0-ca"
+            },
+            {
+              "name": "widgets",
+              "cdc_version": 0,
+              "load_version": 0,
+              "job_name": "rds-parquet-merge-prod-productsdb-prod_db-widgets-v0-ca"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

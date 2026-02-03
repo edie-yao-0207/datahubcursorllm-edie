@@ -1,0 +1,109 @@
+{
+  "version": 2,
+  "globalSeriesType": "histogram",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal",
+    "enabled": true,
+    "placement": "below"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    },
+    "title": {
+      "text": "Last reported Battery"
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "# Assets"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "172": {
+      "name": "AT11",
+      "type": "histogram"
+    },
+    "column_6d2e938958759": {
+      "name": "P01",
+      "yAxis": 0,
+      "type": "histogram"
+    },
+    "column_3b7a74b235814": {
+      "yAxis": 0,
+      "type": "histogram",
+      "name": "P25"
+    },
+    "column_3b7a74b235817": {
+      "yAxis": 0,
+      "type": "histogram",
+      "name": "P50"
+    },
+    "column_3b7a74b235820": {
+      "yAxis": 0,
+      "type": "histogram",
+      "name": "P75"
+    },
+    "column_3b7a74b235823": {
+      "yAxis": 0,
+      "type": "histogram",
+      "name": "P90"
+    },
+    "column_3b7a74b235826": {
+      "yAxis": 0,
+      "type": "histogram",
+      "name": "P95"
+    },
+    "column_3b7a74b235829": {
+      "yAxis": 0,
+      "type": "histogram",
+      "name": "P99"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "numBins": 100,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "last_battery",
+      "id": "column_eb21116929831"
+    }
+  },
+  "isAggregationOn": true,
+  "condensed": true,
+  "withRowNumber": true
+}

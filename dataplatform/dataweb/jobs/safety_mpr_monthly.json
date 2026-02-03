@@ -1,0 +1,16 @@
+{
+  "name": "safety_mpr_monthly",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:product_analytics.agg_product_scorecard_safety_mpr_global_revised_monthly",
+    "us-west-2:product_analytics.agg_product_scorecard_safety_mpr_event_global_monthly"
+  ],
+  "schedules": [
+    {
+      "name": "monthly",
+      "cron": "00 21 1 * *",
+      "backfill_window": 2,
+      "backfill_batch_size": 1
+    }
+  ]
+}

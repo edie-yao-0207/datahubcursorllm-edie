@@ -1,0 +1,12 @@
+`org_id` BIGINT,
+`device_id` BIGINT,
+`driver_id` BIGINT,
+`assignment_source` STRING,
+`is_primary` BOOLEAN,
+`start_at` TIMESTAMP,
+`end_at` TIMESTAMP,
+`assigned_at` TIMESTAMP,
+`assigned_by` BIGINT,
+`timestamp` TIMESTAMP,
+`error_reason` STRING,
+`date` DATE

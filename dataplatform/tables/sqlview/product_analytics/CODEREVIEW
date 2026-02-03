@@ -1,0 +1,10 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-tools"
+  ],
+  "noParent": true,
+  "description": "Changes to these external tables should be approved by Data Engineering or Data Tools."
+}

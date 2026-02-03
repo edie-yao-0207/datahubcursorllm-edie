@@ -1,0 +1,44 @@
+{
+  "name": "objectstat_diffs.fuel",
+  "owner": "DataPlatform",
+  "description": "Calculate fuel diffs from kinesisstats.osdderivedfuelconsumed object stat",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdderivedfuelconsumed",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "objectstat_diffs",
+    "tablename": "fuel",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "object_id", "time"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "object_id",
+        "type": "long"
+      },
+      {
+        "name": "time",
+        "type": "long"
+      },
+      {
+        "name": "fuel_consumed_ml",
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

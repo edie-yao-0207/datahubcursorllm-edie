@@ -1,0 +1,20 @@
+source:
+    type: unity-catalog
+    config:
+        workspace_url: https://samsara-dev-us-west-2.cloud.databricks.com/?o=5924096274798303
+        token: "${DATABRICKS_UNITY_TOKEN}"
+        emit_siblings: false
+        include_usage_statistics: false
+        include_hive_metastore: false
+        include_table_lineage: false  # we are ingesting table lineage directly from the system tables
+        include_column_lineage: false
+        include_notebooks: false
+        format_sql_queries: true
+        stateful_ingestion:
+            enabled: false
+        catalog_pattern:
+            allow:
+                - "default"
+        schema_pattern:
+            allow:
+                - "default.dynamodb"

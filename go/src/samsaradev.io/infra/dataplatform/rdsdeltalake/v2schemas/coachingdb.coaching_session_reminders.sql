@@ -1,0 +1,11 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`uuid` STRING,
+`org_id` BIGINT,
+`coaching_session_uuid` STRING,
+`coach_id` BIGINT,
+`method` SHORT,
+`sent_at` TIMESTAMP,
+`date` STRING

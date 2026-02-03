@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "globalSeriesType": "column",
+  "sortX": true,
+  "sortY": true,
+  "legend": { "traceorder": "normal" },
+  "xAxis": { "type": "-", "labels": { "enabled": true } },
+  "yAxis": [
+    { "type": "-", "title": { "text": "device count" } },
+    { "type": "-", "opposite": true }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": { "type": "data", "visible": true },
+  "series": { "stacking": "stack", "error_y": { "type": "data", "visible": true } },
+  "seriesOptions": { "column_8810e1b33891": { "name": "count", "yAxis": 0 } },
+  "valuesOptions": {},
+  "direction": { "type": "counterclockwise" },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": { "column": "date", "id": "column_8810e1b33890" },
+    "y": [{ "column": "count", "id": "column_8810e1b33891" }],
+    "series": { "column": "cm_product_name", "id": "column_7c5ceec63531" }
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

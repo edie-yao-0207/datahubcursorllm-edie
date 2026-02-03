@@ -1,0 +1,24 @@
+{
+  "feature_name": "Engine Immobilizer",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17902096/Engine+Immobilizer+Action",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": ["LIC-EI-SEC"],
+        "license_required": false
+      },
+      "feature_flag_name": ["expose-workflow-action-engine-immobilization"],
+      "release_phase": "Open Beta",
+      "release_types": ["Early Adopter", "Phase 1"]
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "alerts": {
+        "action_types": [8]
+      }
+    }
+  ]
+}

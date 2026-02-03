@@ -1,0 +1,115 @@
+{
+  "feature_name": "Weather Intelligence",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17942142/Weather+Intelligence+-+Public+Alerts+StreetSense",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["smart-maps-show-public-alerts"],
+      "release_phase": "Open Beta",
+      "release_types": ["Early Adopter", "Phase 1"]
+    },
+    {
+      "effective_date": "2025-10-08",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["smart-maps-show-public-alerts"],
+      "release_phase": "GA",
+      "locales": ["us"]
+    },
+    {
+      "effective_date": "2025-11-10",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["smart-maps-show-public-alerts"],
+      "release_phase": "GA",
+      "locales": ["us", "gb", "ie"]
+    },
+    {
+      "effective_date": "2025-11-19",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["smart-maps-show-public-alerts"],
+      "release_phase": "GA",
+      "locales": ["us", "gb", "ie", "ca"]
+    },
+    {
+      "effective_date": "2025-11-26",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["smart-maps-show-public-alerts"],
+      "release_phase": "GA",
+      "locales": ["us", "gb", "ie", "ca", "mx"]
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "mixpanel_metric_names": ["smart_maps_weather_forecast_overlay_details_clicked"]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["device.location.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "owner": "Hardware",
+  "email_notifications": [
+    "alerts-hw-analytics-aaaai3jubdsie25jfqh3rvdaau@samsara.org.slack.com",
+    "meenusree.rajapandian@samsara.com"
+  ],
+  "jobs": [
+    {
+      "name": "_",
+      "cron": "0 15 3/3 ? * *",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

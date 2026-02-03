@@ -1,0 +1,1146 @@
+{
+  "name": "safety_event_traces_generation_and_sampling",
+  "email_notifications": {
+    "on_failure": ["alex.puzyk@samsara.com", "alerts-data-science-aaaad6bedydugbard3qih3m3ci@samsara.org.slack.com"],
+    "no_alert_for_skipped_runs": false
+  },
+  "webhook_notifications": {},
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "osdaccelerometer_event_traces",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/datapipelines/osdaccelerometer_event_traces",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": "",
+          "num_batches": "10"
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "osdaccelerometer_event_traces_cluster",
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 50400,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "trace_gen",
+      "depends_on": [
+        {
+          "task_key": "osdaccelerometer_event_traces"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/latent_gen/daily_backend_crash_model_traces",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": "",
+          "num_batches": "10"
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "trace_gen_cluster",
+      "libraries": [
+        {
+          "pypi": {
+            "package": "tqdm"
+          }
+        }
+      ],
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "latent_gen",
+      "depends_on": [
+        {
+          "task_key": "trace_gen"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/latent_gen/daily_backend_crash_model_latents",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": "",
+          "num_batches": "10"
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "latent_gen_cluster",
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "k_means",
+      "depends_on": [
+        {
+          "task_key": "latent_gen"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/labeling_sample_gen/daily_k_means_for_sampling",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": "",
+          "num_batches": "5"
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "k_means_cluster",
+      "libraries": [
+        {
+          "pypi": {
+            "package": "mlflow"
+          }
+        }
+      ],
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "video_request_gen",
+      "depends_on": [
+        {
+          "task_key": "k_means"
+        },
+        {
+          "task_key": "low_sev_crash_sampling"
+        },
+        {
+          "task_key": "potential_backup_events"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/labeling_sample_gen/daily_video_request_gen",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": "",
+          "num_batches": "5"
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "video_request_gen_cluster",
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "daily_hev2_crash_filter_predictions",
+      "depends_on": [
+        {
+          "task_key": "osdaccelerometer_event_traces"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/labeling_sample_gen/daily_crash_filter_predictions",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "daily_hev2_crash_filter_predictions_cluster",
+      "libraries": [
+        {
+          "pypi": {
+            "package": "tqdm"
+          }
+        }
+      ],
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "low_sev_crash_sampling",
+      "depends_on": [
+        {
+          "task_key": "daily_hev2_crash_filter_predictions"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/labeling_sample_gen/daily_low_sev_crash_sampling",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "low_sev_crash_sampling_cluster",
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "backfill_osdaccelerometer_event_traces",
+      "depends_on": [
+        {
+          "task_key": "trace_gen"
+        },
+        {
+          "task_key": "daily_hev2_crash_filter_predictions"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/datapipelines/osdaccelerometer_event_traces_7day_backfill",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": "",
+          "num_batches": "10"
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "backfill_osdaccelerometer_event_traces_cluster",
+      "timeout_seconds": 30400,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "video_retrieval",
+      "depends_on": [
+        {
+          "task_key": "video_request_gen"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/labeling_sample_gen/internal_retrievals_runner",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "video_retrieval_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "potential_backup_events",
+      "depends_on": [
+        {
+          "task_key": "osdaccelerometer_event_traces"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/datascience/harsh_events/labeling_sample_gen/daily_latent_with_physics_backup_events_for_sampling",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "potential_backup_events_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "osdaccelerometer_event_traces_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "false",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.executor.memory": "10g",
+          "spark.executor.cores": "3",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100
+        },
+        "node_type_id": "rd-fleet.2xlarge",
+        "driver_node_type_id": "rd-fleet.2xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": true,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 64
+        }
+      }
+    },
+    {
+      "job_cluster_key": "trace_gen_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.executor.memory": "10g",
+          "spark.executor.cores": "5",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.2xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": true,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 32
+        }
+      }
+    },
+    {
+      "job_cluster_key": "latent_gen_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-gpu-ml-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "g4dn.2xlarge",
+        "driver_node_type_id": "g4dn.2xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "AWS_REGION": "us-west-2",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data"
+        },
+        "enable_elastic_disk": true,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 16
+        }
+      }
+    },
+    {
+      "job_cluster_key": "k_means_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.2xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 16
+        }
+      }
+    },
+    {
+      "job_cluster_key": "video_request_gen_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "md-fleet.xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 8
+        }
+      }
+    },
+    {
+      "job_cluster_key": "daily_hev2_crash_filter_predictions_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.4xlarge",
+        "driver_node_type_id": "rd-fleet.4xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": true,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 16
+        }
+      }
+    },
+    {
+      "job_cluster_key": "low_sev_crash_sampling_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.2xlarge",
+        "driver_node_type_id": "rd-fleet.2xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 8
+        }
+      }
+    },
+    {
+      "job_cluster_key": "backfill_osdaccelerometer_event_traces_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "false",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.executor.memory": "30",
+          "spark.executor.cores": "3",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.2xlarge",
+        "driver_node_type_id": "rd-fleet.2xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": true,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 64
+        }
+      }
+    },
+    {
+      "job_cluster_key": "video_retrieval_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 4
+        }
+      }
+    },
+    {
+      "job_cluster_key": "potential_backup_events_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/datascience-admin-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "AIAndData",
+          "samsara:team": "datascience",
+          "samsara:service": "databricksjobcluster-datascience-admin",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/datascience-admin",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "us-west-2"
+            }
+          }
+        ],
+        "policy_id": "E063D86F5F0002A6",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 8
+        }
+      }
+    }
+  ],
+  "format": "MULTI_TASK"
+}

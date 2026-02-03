@@ -1,0 +1,65 @@
+{
+  "table": "telematics_cet_after_majority",
+  "owner": "FirmwareVdp",
+  "description": "Table 'afterMajority' generated from 'Cable Recommendation CST Set (New Format).xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "regions",
+      "type": "string"
+    },
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year_start",
+      "type": "bigint"
+    },
+    {
+      "name": "year_end",
+      "type": "string"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "powertrain",
+      "type": "string"
+    },
+    {
+      "name": "fuel_group",
+      "type": "string"
+    },
+    {
+      "name": "exclude_models",
+      "type": "string"
+    },
+    {
+      "name": "cable",
+      "type": "string"
+    },
+    {
+      "name": "after_majority",
+      "type": "boolean"
+    },
+    {
+      "name": "count_row",
+      "type": "bigint"
+    },
+    {
+      "name": "ae_notes",
+      "type": "string"
+    }
+  ]
+}

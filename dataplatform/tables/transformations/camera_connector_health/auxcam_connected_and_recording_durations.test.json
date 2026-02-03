@@ -1,0 +1,2386 @@
+{
+  "test_cases": [
+    {
+      "label": "can calculate connected intervals from multicam connected object stats",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552045000,
+            "end_ms": 1635552050000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 201
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552045000,
+            "end_ms": 1635552050000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552050000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552025000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552045000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "can calculate connected intervals from dashcam connected object stats",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552025000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "does not count as connected from multicam connected if unknown multicam type",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 0
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 0
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "does not count as connected from dashcam connected if wrong camera product type",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 3
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 3
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "combines multicam connected and dashcam connected intervals",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552025000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552025000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "only trips, connected, and recording intervals within [start_date, end_date) interval are included",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552005000,
+            "end_ms": 1635465610000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-09-30",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552005000,
+            "end_ms": 1635465610000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552005000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-09-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635465610000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552015000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1641081625000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2022-01-02"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "only connected and recording intervals within trip bounds are counted",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552016000,
+            "end_ms": 1635552021000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552016000,
+            "end_ms": 1635552021000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552015000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 4000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 4000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552016000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "only recording intervals within connected bounds are counted",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552025000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552025000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552015000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 10000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "multiple connected intervals per trip are aggregated into connected_ms",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552015000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552016000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552017000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552018000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552019000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 3000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 3000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "multiple recording intervals are aggregated into recording_ms",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552016000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552017000,
+            "end_ms": 1635552018000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552019000,
+            "end_ms": 1635552020000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552015000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 3000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "after first connection (within a month of end date), trips without connected intervals are included",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 0,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 0,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552025000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 0,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 0,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "before first connection, trips without connected intervals are not included",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552030000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552035000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "connected intervals without recording intervals are included",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [],
+        "kinesisstats.osddashcamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552020000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552025000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552030000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552035000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "dashcam_connection_state": {
+                  "camera_product_type": 7
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 0,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552025000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 0,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "merges overlapping recording intervals",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552020000,
+            "end_ms": 1635552035000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 25000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 25000,
+          "trip_duration_ms": 25000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "only merges overlapping recording intervals from the same device",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 201,
+            "product_id": 126,
+            "collection_uuid": "456",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 200,
+            "product_id": 24,
+            "collection_uuid": "456",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 200,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552020000,
+            "end_ms": 1635552035000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 200,
+            "auxcam_id": 201,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 200,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 200,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 25000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 20000,
+          "trip_duration_ms": 25000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 201,
+          "connected_ms": 25000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 15000,
+          "trip_duration_ms": 25000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 200
+        }
+      ]
+    },
+    {
+      "label": "will not double count overlapping recording intervals",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552045000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552040000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552020000,
+            "end_ms": 1635552045000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552045000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 30000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 30000,
+          "trip_duration_ms": 30000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        }
+      ]
+    },
+    {
+      "label": "will remove any intervals from the previous node of less than 1 second",
+      "parameters": {
+        "start_date": " '2021-10-26' ",
+        "end_date": " '2021-11-01' ",
+        "pipeline_execution_time": " '2021-11-02 12:00:00' "
+      },
+      "input_data": {
+        "deviceassociationsdb_shards.device_collection_associations": [
+          {
+            "org_id": 10,
+            "device_id": 101,
+            "product_id": 126,
+            "collection_uuid": "123",
+            "end_at": null
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "product_id": 24,
+            "collection_uuid": "123",
+            "end_at": null
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552030000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          },
+          {
+            "org_id": 10,
+            "device_id": 100,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000,
+            "proto": {
+              "ongoing": false
+            },
+            "date": "2021-10-29",
+            "version": 101
+          }
+        ],
+        "camera_connector_health.auxcam_recording_intervals": [
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552015000,
+            "end_ms": 1635552020000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552025000,
+            "end_ms": 1635552029950
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552029950,
+            "end_ms": 1635552030000
+          },
+          {
+            "org_id": 10,
+            "date": "2021-10-29",
+            "vg_id": 100,
+            "auxcam_id": 101,
+            "start_ms": 1635552035000,
+            "end_ms": 1635552040000
+          }
+        ],
+        "kinesisstats.osdmulticamconnected": [
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1633132815000,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 100,
+            "time": 1635552040000,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false,
+              "is_start": false,
+              "proto_value": {
+                "multicam_connection_state": {
+                  "multicam_type": 1
+                }
+              }
+            },
+            "date": "2021-10-30"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552015000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 4950,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552025000,
+          "vg_id": 100
+        },
+        {
+          "auxcam_id": 101,
+          "connected_ms": 5000,
+          "date": "2021-10-30",
+          "org_id": 10,
+          "recording_ms": 5000,
+          "trip_duration_ms": 5000,
+          "trip_start_ms": 1635552035000,
+          "vg_id": 100
+        }
+      ]
+    }
+  ]
+}

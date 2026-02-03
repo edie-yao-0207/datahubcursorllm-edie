@@ -1,0 +1,12 @@
+{
+  "owner": "DataScience",
+  "email_notifications": ["datascience@samsara.com"],
+  "jobs": [
+    {
+      "name": "sf_stop_signs",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ],
+  "python_libraries": ["h3", "geojson", "geopandas"]
+}

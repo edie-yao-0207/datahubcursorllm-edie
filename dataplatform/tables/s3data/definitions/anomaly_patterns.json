@@ -1,0 +1,19 @@
+{
+  "table": "anomaly_patterns",
+  "owner": "DataEngineering",
+  "description": "This table maps anomaly pattern string search patterns to short descriptions. It is intended to be used to group anomaly events together by descriptions",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "pattern",
+      "type": "string",
+      "description": "A string search pattern to match against the anomaly event description"
+    },
+    {
+      "name": "short_description",
+      "type": "string",
+      "description": "A short description of the anomaly pattern"
+    }
+  ]
+}

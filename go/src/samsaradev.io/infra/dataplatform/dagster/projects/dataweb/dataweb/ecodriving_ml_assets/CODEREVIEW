@@ -1,0 +1,10 @@
+{
+  "owners": [
+    "samsara-dev/sustainability"
+  ],
+  "description": "Changes to the EcoDriving subsection of the project should be reviewed by the Sustainability team",
+  "noParent": true,
+  "additionalReviewers": [
+    "samsara-dev/data-tools"
+  ]
+}

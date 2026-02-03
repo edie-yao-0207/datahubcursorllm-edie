@@ -1,0 +1,113 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-"
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "column_4201ef1f1024": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "weighted_mse_p70"
+    },
+    "column_4201ef1f1027": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "weighted_mse_p80"
+    },
+    "column_4201ef1f1030": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "weighted_mse_p90"
+    },
+    "column_4201ef1f1033": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "weighted_mse_p95"
+    },
+    "column_4201ef1f1036": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "weighted_mse_p99"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_4201ef1f1021"
+    },
+    "y": [
+      {
+        "id": "column_4201ef1f1024",
+        "column": "weighted_mse_p70",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_4201ef1f1027",
+        "column": "weighted_mse_p80",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_4201ef1f1030",
+        "column": "weighted_mse_p90",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_4201ef1f1033",
+        "column": "weighted_mse_p95",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_4201ef1f1036",
+        "column": "weighted_mse_p99",
+        "transform": "SUM"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

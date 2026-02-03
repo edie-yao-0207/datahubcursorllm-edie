@@ -1,0 +1,23 @@
+{
+  "owner": "Firmware",
+  "email_notifications": [
+    "alerts-data-analytics-aaaahjweyoucfacnqyvidp2ccm@samsara.org.slack.com",
+    "databricks-job-failur-aaaan3y27utpo2tcwuqqlho23q@samsara.org.slack.com"
+  ],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 16 ? * * *",
+      "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+      "timeout_seconds": 86400,
+      "parameters": {
+        "end_date": "",
+        "start_date": ""
+      },
+      "spark_version": "default",
+      "driver_node_type_id": "rd-fleet.4xlarge",
+      "node_type_id": "rd-fleet.4xlarge",
+      "max_workers": 64
+    }
+  ]
+}

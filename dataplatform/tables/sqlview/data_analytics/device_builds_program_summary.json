@@ -1,0 +1,71 @@
+{
+  "view": "device_builds_program_summary",
+  "owner": "DataEngineering",
+  "description": "This table contains build information for each device on each day as well as the product program id of each device or org on that day.",
+  "database": "data_analytics",
+  "schema": [
+    {
+      "name": "date",
+      "type": "string",
+      "description": "The calendar date in 'YYYY-mm-dd' format"
+    },
+    {
+      "name": "org_id",
+      "type": "long",
+      "description": "The internal ID of the Samsara product"
+    },
+    {
+      "name": "device_id",
+      "type": "long",
+      "description": "The ID of the customer device that the data belongs to."
+    },
+    {
+      "name": "latest_gateway_id",
+      "type": "long",
+      "description": "The ID of the attached Vehicle Gateway (VG) from the latest device event. This is equal to 'device_id' when the device is a VG."
+    },
+    {
+      "name": "active_gateways_on_day",
+      "type": "long",
+      "description": "The number of active Vehicle Gateways (VG) attached to the device on date."
+    },
+    {
+      "name": "latest_build_on_day",
+      "type": "string",
+      "description": "The latest build version of the device on date."
+    },
+    {
+      "name": "active_builds_on_day",
+      "type": "long",
+      "description": "The number of successful device builds on date."
+    },
+    {
+      "name": "boot_counts_on_day",
+      "type": "long",
+      "description": "The total number of device reboots on date."
+    },
+    {
+      "name": "product_program_id",
+      "type": "integer",
+      "description": "The is the program id assigned to the gateway or the org for firmware rollouts. Read this RFC for more details: [RFC](https://paper.dropbox.com/doc/Release-by-Program-RFC-NzlWyPen2Z1PRh9gMROcc)"
+    },
+    {
+      "name": "product_program_id_type",
+      "type": "string",
+      "description": "The values indicate if the assigned product program id is at the org level or gateway level or any other level."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "dataprep",
+      "tablename": "device_product_programs",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "device_builds",
+      "type": "table"
+    }
+  ]
+}

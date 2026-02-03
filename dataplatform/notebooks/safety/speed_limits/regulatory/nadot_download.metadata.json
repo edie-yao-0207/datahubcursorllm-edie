@@ -1,0 +1,15 @@
+{
+  "owner": "SafetyPlatform",
+  "jobs": [
+    {
+      "name": "nadot_download",
+      "cron": "0 0 0 29 11/6 ? *",
+      "regions": ["us-west-2"],
+      "spark_version": "default",
+      "driver_node_type_id": "rd-fleet.8xlarge",
+      "node_type_id": "rd-fleet.8xlarge",
+      "max_workers": 128,
+      "timeout_seconds": 7200
+    }
+  ]
+}

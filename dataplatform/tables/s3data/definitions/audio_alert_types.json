@@ -1,0 +1,24 @@
+{
+  "table": "audio_alert_types",
+  "owner": "DataEngineering",
+  "description": "Maps the audio alert type to its name (based on https://github.com/samsara-dev/backend/blob/master/go/src/samsaradev.io/hubproto/safety.proto)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/audio_alerts/audio_alert_types.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/audio_alerts/audio_alert_types.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/audio_alerts/audio_alert_types.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "audio_alert_type",
+      "type": "bigint",
+      "description": "The ID of the audio alert type"
+    },
+    {
+      "name": "audio_alert_type_name",
+      "type": "string",
+      "description": "The name of the audio alert type"
+    }
+  ]
+}

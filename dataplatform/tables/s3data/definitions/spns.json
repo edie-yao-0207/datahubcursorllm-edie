@@ -1,0 +1,19 @@
+{
+  "table": "spns",
+  "owner": "DataEngineering",
+  "description": "A table mapping Suspect Parameter Number (SPN) to SPN name /n/n[CAN SPN Support](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4977192/PRD+-+CAN+SPN+_+DTC+Support+bfac) /n/n [Suspect Parameter Numbers](https://github.com/samsara-dev/firmware/blob/d18563e0df0dd8e24508bebb69e385f71794bcd5/samsara/go/src/samsaradev.io/hubproto/config.proto)",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "spn",
+      "type": "bigint",
+      "description": "The Suspect Parameter Number reported by a CAN bus device"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "The name of the suspect parameter reported by a CAN bus device"
+    }
+  ]
+}

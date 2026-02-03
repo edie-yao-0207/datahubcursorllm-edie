@@ -1,0 +1,5 @@
+{
+  "owners": ["samsara-dev/data-engineering"],
+  "description": "Changes to dataweb/userpkgs/product_usage directory must be approved by DataEngineering",
+  "noParent": true
+}

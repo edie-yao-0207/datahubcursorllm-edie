@@ -1,0 +1,15 @@
+24,0,VG34,VG34,VG34,HW-VG34,True,False,False,NONE,False,False,True,True,False,True,False
+90,0,VG34,VG34,VG34-FN,HW-VG34-FN,True,False,False,NONE,False,False,True,False,False,True,False
+24,1,VG34,VG34-M,VG34-M,HW-VG34-M,True,False,False,NONE,False,False,True,False,False,False,False
+35,0,VG34-EU,VG34,VG34-EU,HW-VG34-EU,True,False,False,NONE,False,False,False,True,False,True,False
+53,11,VG54,VG54-ATT,VG54-ATT,HW-VG54-ATT,True,True,True,AND,True,True,False,False,False,False,False
+53,3,VG54,VG54-FN,VG54-FN,HW-VG54-FN,True,True,True,AND,True,True,False,False,False,False,False
+53,0,VG54,Thor,VG54-NA,HW-VG54-NA,True,True,True,AND,True,True,False,False,False,False,False
+53,2,VG54,VG54-NAE,VG54-NAE,HW-VG54-NAE,True,True,True,AND,True,True,False,False,False,False,False
+89,0,VG54-EU,Thor,VG54-EU,HW-VG54-EU,True,True,True,AND,True,False,False,True,False,False,True
+53,10,VG54-NAH,VG54-NAH,VG54-NAH,HW-VG54-NAH,True,False,False,NONE,False,True,False,False,False,False,False
+178,19,VG55,Freya-ATT,VG55-ATT,HW-VG55-ATT,True,True,True,OR,True,True,False,False,False,False,False
+178,17,VG55,Freya-FN,VG55-FN,HW-VG55-FN,True,True,True,OR,True,True,False,False,False,False,False
+178,0,VG55,Freya,VG55-NA,HW-VG55-NA,True,True,True,OR,True,True,False,False,False,False,False
+178,18,VG55,Freya-B25,VG55-SA,HW-VG55-SA,True,True,True,OR,True,True,False,False,False,False,False
+178,16,VG55-EU,Freya-EU,VG55-EU,HW-VG55-EU,True,True,True,OR,True,False,False,True,True,False,True

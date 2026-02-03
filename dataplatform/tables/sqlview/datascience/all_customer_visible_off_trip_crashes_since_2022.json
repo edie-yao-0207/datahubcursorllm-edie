@@ -1,0 +1,25 @@
+{
+  "view": "all_customer_visible_off_trip_crashes_since_2022",
+  "owner": "SafetyPlatform",
+  "description": "All customer visible HEv2 off-trip crashes since 2022",
+  "database": "datascience",
+  "schema": [
+    { "name": "date", "type": "date" },
+    { "name": "org_id", "type": "long" },
+    { "name": "device_id", "type": "long" },
+    { "name": "event_ms", "type": "long" },
+    { "name": "hidden_to_customer", "type": "boolean" },
+    { "name": "trip_start_ms", "type": "long" },
+    { "name": "trip_end_ms", "type": "long" },
+    { "name": "ms_after_trip_end", "type": "long" }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "schema_path": "safety/harsh_events_v2/all_crash_events_since_2022.metadata.json",
+      "dbname": "dataprep_safety",
+      "tablename": "all_crash_events_since_2022",
+      "type": "table"
+    }
+  ]
+}

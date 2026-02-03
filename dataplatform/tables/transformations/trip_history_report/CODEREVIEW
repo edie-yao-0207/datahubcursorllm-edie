@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/asset-foundations"
+  ],
+  "description": "Changes to trip history should be cleared with AssetFoundations to check for any performance regressions. Tag an individual or see our codereview guidelines https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5280508/FF+Code+Review+Guidelines"
+}

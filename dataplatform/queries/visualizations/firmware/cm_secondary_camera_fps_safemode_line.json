@@ -1,0 +1,202 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "Secondary FPS"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "count(DISTINCT cm_device_id)": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p001": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p01": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p05": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p10": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p25": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p50": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p75": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_normal_p99": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p001": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p01": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p05": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p10": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p25": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p50": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p75": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_overheated_p99": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p001": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p01": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p05": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p10": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p25": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p50": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p75": {
+      "yAxis": 0,
+      "type": "line"
+    },
+    "secondary_safe_mode_p99": {
+      "yAxis": 0,
+      "type": "line"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_b3def00017706"
+    },
+    "y": [
+      {
+        "id": "column_b3def00017708",
+        "column": "secondary_safe_mode_p001"
+      },
+      {
+        "id": "column_b3def00017719",
+        "column": "secondary_safe_mode_p01"
+      },
+      {
+        "id": "column_b3def00017721",
+        "column": "secondary_safe_mode_p05"
+      },
+      {
+        "id": "column_26b5f4a77156",
+        "column": "secondary_safe_mode_p10"
+      },
+      {
+        "id": "column_26b5f4a77158",
+        "column": "secondary_safe_mode_p25"
+      },
+      {
+        "id": "column_26b5f4a77160",
+        "column": "secondary_safe_mode_p50"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

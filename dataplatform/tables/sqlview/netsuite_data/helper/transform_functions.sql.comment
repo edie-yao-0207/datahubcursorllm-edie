@@ -1,0 +1,10 @@
+we added the following functions to databricks manually, but are committing this file for anyone in search of their definitions, or wanting to re-run this manual command
+
+CREATE OR REPLACE FUNCTION netsuite_data.replace_and_hash(original string, replacement string) RETURNS string
+  RETURN CONCAT(replacement, " (", SUBSTRING(SHA2(CONCAT("f556a14903538af6", original), 256), 0, 8), ")")
+
+CREATE OR REPLACE FUNCTION netsuite_data.set_namespace_string(original string) RETURNS string
+  RETURN CONCAT("UAT_", original)
+
+CREATE OR REPLACE FUNCTION netsuite_data.set_namespace_bigint(original bigint) RETURNS bigint
+  RETURN SHIFTLEFT(BIGINT(1), 53) - original

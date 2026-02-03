@@ -1,0 +1,183 @@
+{
+  "name": "dataprep.api_reliability",
+  "owner": "DataEngineering",
+  "description": "This table contains performance, durations, and number of api requests per day for all endpoints",
+  "dependencies": [
+    {
+      "dbname": "dataprep",
+      "tablename": "api_performance",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-01-01",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "dataprep",
+    "tablename": "api_reliability",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": [
+      "http_method",
+      "path_template",
+      "owning_team",
+      "org_id",
+      "date",
+      "access_token_id",
+      "token_name",
+      "oauth_token_id",
+      "oauth_token_app_uuid",
+      "app_name"
+    ],
+    "schema": [
+      {
+        "name": "http_method",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the http method (i.e., verb) in the api request"
+        }
+      },
+      {
+        "name": "path_template",
+        "type": "string",
+        "metadata": {
+          "comment": "The path of the api endpoint"
+        }
+      },
+      {
+        "name": "owning_team",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the team that owns the api"
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The ID of the org which called the api"
+        }
+      },
+      {
+        "name": "org_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the org which called the api"
+        }
+      },
+      {
+        "name": "org_size_segment",
+        "type": "string",
+        "metadata": {
+          "comment": "The size segment of the org which called the api -- (e.g., 'AE1', 'AE2/AE3', 'ENT')"
+        }
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "metadata": {
+          "comment": "The industry of the org which called the api"
+        }
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date on which this api call was invoked"
+        }
+      },
+      {
+        "name": "access_token_id",
+        "type": "string",
+        "metadata": {
+          "comment": "The access token id which was used to invoke the api -- will be empty if access token was used oauth app"
+        }
+      },
+      {
+        "name": "token_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The name assocated with the access token id which was used to invoke the api -- will be empty if access token was used oauth app"
+        }
+      },
+      {
+        "name": "oauth_token_id",
+        "type": "string",
+        "metadata": {
+          "comment": "The oauth token id which was used to invoke the api -- will be empty if access token was used instead"
+        }
+      },
+      {
+        "name": "oauth_token_app_uuid",
+        "type": "string",
+        "metadata": {
+          "comment": "The uuid of the oauth app which was used to invoke the api -- will be empty if access token was used instead"
+        }
+      },
+      {
+        "name": "app_name",
+        "type": "string",
+        "metadata": {
+          "comment": "The name of the oauth app which was used to invoke the api -- will be empty if access token was used instead"
+        }
+      },
+      {
+        "name": "num_api_requests_less_than_or_equal_to_5_seconds_daily",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of api requests which took <= 5 seconds to complete"
+        }
+      },
+      {
+        "name": "num_api_requests_daily",
+        "type": "long",
+        "metadata": {
+          "comment": "The total number of api requests"
+        }
+      },
+      {
+        "name": "total_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The total time it took to complete all of the api requests in ms"
+        }
+      },
+      {
+        "name": "num_fails_daily",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of api requests whose responses returned with status codes 5xx"
+        }
+      },
+      {
+        "name": "performance",
+        "type": "double",
+        "metadata": {
+          "comment": "The average request duration in milliseconds -- (total_duration_ms / num_api_requests_daily)"
+        }
+      },
+      {
+        "name": "reliability_daily",
+        "type": "double",
+        "metadata": {
+          "comment": "The percentage of successful api requests -- (num_api_requests_daily - num_fails_daily) / num_api_requests_daily"
+        }
+      },
+      {
+        "name": "percentage_of_requests_less_than_or_equal_to_5_seconds_daily",
+        "type": "double",
+        "metadata": {
+          "comment": "The percentage of api requests that completed in less than 5 seconds -- (num_api_requests_less_than_or_equal_to_5_seconds_daily / num_api_requests_daily) * 100"
+        }
+      },
+      {
+        "name": "complete_api_request",
+        "type": "string",
+        "metadata": {
+          "comment": "The request line of the api request -- (http_method + ' ' + path_template)"
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  },
+  "nonproduction": true
+}

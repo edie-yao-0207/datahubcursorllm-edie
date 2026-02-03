@@ -1,0 +1,42 @@
+{
+  "view": "trip_imu_calibration_intervals",
+  "owner": "DataScience",
+  "description": "HEv2 an interval for each calibration state interval and trip combination",
+  "database": "datascience",
+  "schema": [
+    { "name": "date", "type": "string", "nullable": true },
+    { "name": "device_id", "type": "long", "nullable": true },
+    { "name": "org_id", "type": "long", "nullable": true },
+    { "name": "status", "type": "string", "nullable": true },
+    { "name": "source", "type": "string", "nullable": true },
+    { "name": "start_ms", "type": "long", "nullable": true },
+    { "name": "end_ms", "type": "long", "nullable": true },
+    { "name": "next_status", "type": "string", "nullable": true },
+    { "name": "next_source", "type": "string", "nullable": true },
+    { "name": "trip_start_ms", "type": "long", "nullable": true },
+    { "name": "trip_end_ms", "type": "long", "nullable": true },
+    { "name": "calibration_start_ms", "type": "long", "nullable": true },
+    { "name": "calibration_end_ms", "type": "long", "nullable": true },
+    { "name": "algorithm_running_on_day", "type": "boolean", "nullable": false }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdimucalibrationstatus",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "trips2db_shards",
+      "tablename": "trips",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "datascience",
+      "tablename": "imu_calibration_intervals",
+      "type": "table"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["kalyan.vejalla@samsara.com", "steven.matson@samsara.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 1-23/3 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "parameters": {
+        "end_date": "",
+        "start_date": ""
+      },
+      "spark_version": "default"
+    }
+  ],
+  "output": {
+    "dbname": "dataprep",
+    "tablename": "device_cables",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "cable_type",
+        "type": "long"
+      }
+    ],
+    "primary_key": ["org_id", "device_id", "date"]
+  }
+}

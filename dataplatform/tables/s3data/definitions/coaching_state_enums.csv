@@ -1,0 +1,14 @@
+enum,coaching_type
+6,Pending
+11,Beta
+0,Invalid
+10,Recognized
+9,Needs Recognition
+7,Needs Coaching
+5,Archived
+2,Coached
+3,Dismissed
+8,Auto-Dismissed
+4,Reviewed
+1,Needs Review
+12,Manual Review Dismissed

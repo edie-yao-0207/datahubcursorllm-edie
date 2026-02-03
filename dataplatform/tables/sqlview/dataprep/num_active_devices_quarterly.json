@@ -1,0 +1,54 @@
+{
+  "view": "num_active_devices_quarterly",
+  "owner": "DataEngineering",
+  "description": "This table contains a quarterly history of active product devices and trips for external organizations",
+  "database": "dataprep",
+  "schema": [
+    {
+      "name": "fiscal_year",
+      "type": "string",
+      "description": "A code representing the fiscal year in which the 'date' resides (e.g., 'FY17')"
+    },
+    {
+      "name": "quarter",
+      "type": "string",
+      "description": "A code representing the fiscal quarter in which the 'date' resides (e.g., 'Q4')"
+    },
+    {
+      "name": "product_id",
+      "type": "long",
+      "description": "The internal ID of the Samsara product"
+    },
+    {
+      "name": "total_devices_heartbeats",
+      "type": "long",
+      "description": "The total number of product devices that had an active heartbeat in the fiscal year quarter",
+      "nullable": false
+    },
+    {
+      "name": "total_devices_trips",
+      "type": "long",
+      "description": "The total number of product devices with at least one trip on in the fiscal year quarter",
+      "nullable": false
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "dataprep",
+      "tablename": "active_devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "definitions",
+      "tablename": "445_calendar",
+      "type": "table"
+    }
+  ]
+}

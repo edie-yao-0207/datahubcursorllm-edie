@@ -1,0 +1,15 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["steven.matson@samsara.com"],
+  "jobs": [
+    {
+      "name": "update-daily",
+      "regions": ["us-west-2"],
+      "parameters": {
+        "start_date": "",
+        "end_date": ""
+      },
+      "spark_version": "default"
+    }
+  ]
+}

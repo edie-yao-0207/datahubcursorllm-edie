@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-science"
+  ],
+  "description": "Changes to Customer360 Pipeline should be clearing with Data Science/Engineering."
+}

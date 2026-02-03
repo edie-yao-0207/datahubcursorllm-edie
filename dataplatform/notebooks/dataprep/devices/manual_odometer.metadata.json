@@ -1,0 +1,11 @@
+{
+  "owner": "PlatformReports",
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 1 0 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

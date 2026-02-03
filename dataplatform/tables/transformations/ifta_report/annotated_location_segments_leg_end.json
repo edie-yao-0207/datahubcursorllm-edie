@@ -1,0 +1,359 @@
+{
+  "name": "ifta_report.annotated_location_segments_leg_end",
+  "owner": "IftaCore",
+  "description": "Joins annotated location segments with trips so we can calculate leg end",
+  "dependencies": [
+    {
+      "dbname": "ifta_report",
+      "tablename": "annotated_location_segments",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "trips2db_shards",
+      "tablename": "trips",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2023-08-01",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "ifta_report",
+    "tablename": "annotated_location_segments_leg_end",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "start_ms"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": true,
+        "metadata": {
+          "comment": "The date associated with `start_ms`."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "The device ID of the vehicle driven during this location segment."
+        }
+      },
+      {
+        "name": "start_ms",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "The start time in milliseconds of this location segment."
+        }
+      },
+      {
+        "name": "end_ms",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "The end time in milliseconds of this location segment."
+        }
+      },
+      {
+        "name": "start_value",
+        "metadata": {
+          "comment": "The location data that occurred at `start_ms`. Extends `kinesisstats.location`."
+        },
+        "type": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "time",
+              "type": "long",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_fix",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "latitude",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "longitude",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "gps_speed_meters_per_second",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "heading_degrees",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_revgeo",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "revgeo_city",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "revgeo_state",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "revgeo_country",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_speed_limit",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "speed_limit_meters_per_second",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_toll",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "toll",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "off_highway",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "private_road",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "jurisdiction",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "operating_authority",
+              "type": "integer",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "driver_id",
+              "type": "long",
+              "nullable": true,
+              "metadata": {}
+            }
+          ]
+        },
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "end_value",
+        "metadata": {
+          "comment": "The location data that occurred at `end_ms`. Extends the `value` proto field from `kinesisstats.location`."
+        },
+        "type": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "time",
+              "type": "long",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_fix",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "latitude",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "longitude",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "gps_speed_meters_per_second",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "heading_degrees",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_revgeo",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "revgeo_city",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "revgeo_state",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "revgeo_country",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_speed_limit",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "speed_limit_meters_per_second",
+              "type": "double",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "has_toll",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "toll",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "off_highway",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "private_road",
+              "type": "boolean",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "jurisdiction",
+              "type": "string",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "operating_authority",
+              "type": "integer",
+              "nullable": true,
+              "metadata": {}
+            },
+            {
+              "name": "driver_id",
+              "type": "long",
+              "nullable": true,
+              "metadata": {}
+            }
+          ]
+        },
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "start_odo_meters",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "The last known odometer distance reading in meters at the time of `start_ms`."
+        }
+      },
+      {
+        "name": "end_odo_meters",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "The last known odometer distance reading in meters at the time of `end_ms`."
+        }
+      },
+      {
+        "name": "canonical_distance_meters",
+        "type": "double",
+        "nullable": false,
+        "metadata": {
+          "comment": "The canonical distance driven in meters between `start_ms` and `end_ms`."
+        }
+      },
+      {
+        "name": "leg_end",
+        "type": "boolean",
+        "nullable": false,
+        "metadata": {
+          "comment": "Whether or not this was the last segment of the trip."
+        }
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  }
+}

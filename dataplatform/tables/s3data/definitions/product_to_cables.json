@@ -1,0 +1,21 @@
+{
+  "table": "product_to_cables",
+  "owner": "FirmwareVdp",
+  "description": "This table contains a mapping of products to the set of manufactured cables",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "product_name",
+      "type": "string"
+    },
+    {
+      "name": "cable_name",
+      "type": "string"
+    },
+    {
+      "name": "cable_id",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "feature_name": "EBPMS",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17848913/Electronic+Brake+Performance+Monitoring+EBPMS+Product+Truth",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "release_phase": "Open Beta",
+      "licenses": {
+        "skus": ["LIC-TRLR-PREM"],
+        "license_required": true
+      },
+      "feature_flag_name": ["ebpms-enabled"],
+      "locales": ["eu_all_locales"]
+    },
+    {
+      "effective_date": "2025-12-08",
+      "serves_all": true,
+      "release_types": ["Early Adopter", "Phase 1"],
+      "locales": ["eu_all_locales"]
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "route_names": ["fleet_maintenance_ebpms_report", "fleet_maintenance_ebpms_device_dashboard"]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["group.fleetmaintenance.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

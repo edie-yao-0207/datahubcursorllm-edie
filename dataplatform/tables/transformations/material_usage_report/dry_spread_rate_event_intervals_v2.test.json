@@ -1,0 +1,445 @@
+{
+  "test_cases": [
+    {
+      "label": "test simple case with spread rates defined, no events spanning multiple hours",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 1, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 1, "device_id": 2 }
+          }
+        ],
+        "material_usage_report.spreader_event_intervals_v2": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "spreader_start_ms": 1577923190000,
+            "spreader_end_ms": 1577923192000,
+            "mode": 0,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "device_id": 2,
+            "spreader_start_ms": 1577923193000,
+            "spreader_end_ms": 1577923194000,
+            "mode": 0,
+            "date": "2020-01-01"
+          }
+        ],
+        "kinesisstats.osdsaltspreadernormalizedspreadratedrymilligramspermeter": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "time": 1577923190000,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 10
+            }
+          },
+          {
+            "org_id": 1,
+            "object_id": 2,
+            "date": "2020-01-01",
+            "time": 1577923193000,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 5
+            }
+          },
+          {
+            "org_id": 1,
+            "object_id": 2,
+            "date": "2020-01-01",
+            "time": 1577923193500,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 2
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time_ms": 1577923190050,
+            "distance": 2
+          },
+          {
+            "org_id": 1,
+            "device_id": 2,
+            "date": "2020-01-01",
+            "time_ms": 1577923193000,
+            "distance": 2
+          },
+          {
+            "org_id": 1,
+            "device_id": 2,
+            "date": "2020-01-01",
+            "time_ms": 1577923193050,
+            "distance": 3
+          },
+          {
+            "org_id": 1,
+            "device_id": 2,
+            "date": "2020-01-01",
+            "time_ms": 1577923193500,
+            "distance": 4
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923190000,
+          "spreader_end_ms": 1577923192000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577923190000,
+          "spread_rate_event_end_ms": 1577923192000,
+          "spread_rate": 10,
+          "spread_rate_start_ms": 1577923190000,
+          "spread_rate_end_ms": 1577923192000,
+          "distance_covered_meters": 2,
+          "dry_material_spread_mg": 20,
+          "time_spread_ms": 2000
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 2,
+          "spreader_start_ms": 1577923193000,
+          "spreader_end_ms": 1577923194000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577923193000,
+          "spread_rate_event_end_ms": 1577923193500,
+          "spread_rate": 5,
+          "spread_rate_start_ms": 1577923193000,
+          "spread_rate_end_ms": 1577923193500,
+          "distance_covered_meters": 5,
+          "dry_material_spread_mg": 25,
+          "time_spread_ms": 500
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 2,
+          "spreader_start_ms": 1577923193000,
+          "spreader_end_ms": 1577923194000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577923193500,
+          "spread_rate_event_end_ms": 1577923194000,
+          "spread_rate": 2,
+          "spread_rate_start_ms": 1577923193500,
+          "spread_rate_end_ms": 1577923194000,
+          "distance_covered_meters": 4,
+          "dry_material_spread_mg": 8,
+          "time_spread_ms": 500
+        }
+      ]
+    },
+    {
+      "label": "should use last received spread rate before spread event if it was within 1 minute",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 1, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 1, "device_id": 2 }
+          }
+        ],
+        "material_usage_report.spreader_event_intervals_v2": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "spreader_start_ms": 1577923190000,
+            "spreader_end_ms": 1577923192000,
+            "mode": 0,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "device_id": 2,
+            "spreader_start_ms": 1577923190000,
+            "spreader_end_ms": 1577923192000,
+            "mode": 0,
+            "date": "2020-01-01"
+          }
+        ],
+        "kinesisstats.osdsaltspreadernormalizedspreadratedrymilligramspermeter": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "time": 1577923130000,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 10
+            }
+          },
+          {
+            "org_id": 1,
+            "object_id": 2,
+            "date": "2020-01-01",
+            "time": 1577923129999,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 2
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time_ms": 1577923190050,
+            "distance": 2
+          },
+          {
+            "org_id": 1,
+            "device_id": 2,
+            "date": "2020-01-01",
+            "time_ms": 1577923190050,
+            "distance": 5
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923190000,
+          "spreader_end_ms": 1577923192000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577923190000,
+          "spread_rate_event_end_ms": 1577923192000,
+          "spread_rate": 10,
+          "spread_rate_start_ms": 1577923190000,
+          "spread_rate_end_ms": 1577923192000,
+          "distance_covered_meters": 2,
+          "dry_material_spread_mg": 20,
+          "time_spread_ms": 2000
+        }
+      ]
+    },
+    {
+      "label": "should explode spreader event spanning multiple days into individual hours with date associated w/ hour start",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-03'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 1, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 1, "device_id": 2 }
+          }
+        ],
+        "material_usage_report.spreader_event_intervals_v2": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "spreader_start_ms": 1577922600000,
+            "spreader_end_ms": 1577927400000,
+            "mode": 0,
+            "date": "2020-01-01"
+          }
+        ],
+        "kinesisstats.osdsaltspreadernormalizedspreadratedrymilligramspermeter": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "time": 1577922600000,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 10
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time_ms": 1577922600000,
+            "distance": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577922600000,
+          "spreader_end_ms": 1577927400000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577922600000,
+          "spread_rate_event_end_ms": 1577927400000,
+          "spread_rate": 10,
+          "spread_rate_start_ms": 1577922600000,
+          "spread_rate_end_ms": 1577923200000,
+          "distance_covered_meters": 2,
+          "dry_material_spread_mg": 20,
+          "time_spread_ms": 600000
+        },
+        {
+          "date": "2020-01-02",
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577922600000,
+          "spreader_end_ms": 1577927400000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577922600000,
+          "spread_rate_event_end_ms": 1577927400000,
+          "spread_rate": 10,
+          "spread_rate_start_ms": 1577923200000,
+          "spread_rate_end_ms": 1577926800000,
+          "distance_covered_meters": 0,
+          "dry_material_spread_mg": 0,
+          "time_spread_ms": 3600000
+        },
+        {
+          "date": "2020-01-02",
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577922600000,
+          "spreader_end_ms": 1577927400000,
+          "mode": 0,
+          "spread_rate_event_start_ms": 1577922600000,
+          "spread_rate_event_end_ms": 1577927400000,
+          "spread_rate": 10,
+          "spread_rate_start_ms": 1577926800000,
+          "spread_rate_end_ms": 1577927400000,
+          "distance_covered_meters": 0,
+          "dry_material_spread_mg": 0,
+          "time_spread_ms": 600000
+        }
+      ]
+    },
+    {
+      "label": "no data should be generated if spread rate couldn't be found",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 1, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 1, "device_id": 2 }
+          }
+        ],
+        "material_usage_report.spreader_event_intervals_v2": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "spreader_start_ms": 1577923190000,
+            "spreader_end_ms": 1577926810000,
+            "mode": 0,
+            "date": "2020-01-01"
+          }
+        ],
+        "kinesisstats.osdsaltspreadernormalizedspreadratedrymilligramspermeter": [],
+        "canonical_distance.total_distance": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time_ms": 1577923190050,
+            "distance": 2
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "no data should be generated if spread rate is not within valid ranges",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 1, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 1, "device_id": 2 }
+          }
+        ],
+        "material_usage_report.spreader_event_intervals_v2": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "spreader_start_ms": 1577923190000,
+            "spreader_end_ms": 1577926810000,
+            "mode": 0,
+            "date": "2020-01-01"
+          }
+        ],
+        "kinesisstats.osdsaltspreadernormalizedspreadratedrymilligramspermeter": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "time": 1577922600000,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": -1
+            }
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "time": 1577922600001,
+            "value": {
+              "is_databreak": false,
+              "is_end": false,
+              "int_value": 282001
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time_ms": 1577923190050,
+            "distance": 2
+          }
+        ]
+      },
+      "expected_data": []
+    }
+  ]
+}

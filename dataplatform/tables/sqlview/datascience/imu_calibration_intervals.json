@@ -1,0 +1,30 @@
+{
+  "view": "imu_calibration_intervals",
+  "owner": "DataScience",
+  "description": "HEv2 IMU calibration state intervals",
+  "database": "datascience",
+  "schema": [
+    { "name": "org_id", "type": "long", "nullable": true },
+    { "name": "device_id", "type": "long", "nullable": true },
+    { "name": "status", "type": "string", "nullable": false },
+    { "name": "source", "type": "string", "nullable": true },
+    { "name": "start_ms", "type": "long", "nullable": true },
+    { "name": "end_ms", "type": "long", "nullable": true },
+    { "name": "next_status", "type": "string", "nullable": true },
+    { "name": "next_source", "type": "string", "nullable": true }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdimuorientation",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdimucalibrationreset",
+      "type": "table"
+    }
+  ]
+}

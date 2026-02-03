@@ -1,0 +1,13 @@
+{
+  "owner": "DataAnalytics",
+  "email_notifications": ["alerts-data-analytics-aaaahjweyoucfacnqyvidp2ccm@samsara.org.slack.com"],
+  "description": "Updates the tables required for the Speed Limit Comparison Dashbaord",
+  "schedules": [
+    {
+      "name": "daily",
+      "regions": ["us-west-2"],
+      "timeout_seconds": 21600,
+      "cron": "21 30 7 * * ?"
+    }
+  ]
+}

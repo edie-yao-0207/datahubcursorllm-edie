@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "supportautomation-group: assets can read",
+    "Values": [
+      {
+        "databases": [
+          "default.query_agents"
+        ]
+      },
+      {
+        "tables": []
+      }
+    ]
+  }
+]

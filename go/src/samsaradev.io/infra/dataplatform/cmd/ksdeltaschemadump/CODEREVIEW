@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/data-platform"
+  ],
+  "description": "Simple app to dump ks delta lake schemas to files.",
+  "additionalReviewers": [
+    "alex-govan"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "firmware_data_model_ca",
+  "owner": "FirmwareVDP",
+  "assets": [
+    "ca-central-1:product_analytics_staging.fct_osdfirmwaremetrics",
+    "ca-central-1:product_analytics.agg_osdanomalyevent_hourly"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 01 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 5
+    }
+  ]
+}

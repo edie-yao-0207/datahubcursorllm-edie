@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`locale_id` STRING,
+`updated_at` BIGINT,
+`fuel_cost` FLOAT,
+`configurable_fuel_id` BYTE,
+`currency_exchange_rate` DECIMAL(6, 4),
+`partition` STRING

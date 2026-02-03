@@ -1,0 +1,25 @@
+{
+  "feature_name": "Connected Training",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17820410/Connected+Training",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": ["LIC-FL-APPS", "LIC-TRAINING", "LIC-TRAINING-PROMO"],
+        "license_required": true
+      },
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "connected_training.sql",
+        "eu_sql_file": "connected_training_eu.sql",
+        "filter_internal_usage": true,
+        "has_user_id_field": true
+      }
+    }
+  ]
+}

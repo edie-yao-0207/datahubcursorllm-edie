@@ -1,0 +1,19 @@
+{
+  "table": "dtcs",
+  "owner": "DataEngineering",
+  "description": "A table mapping industry Diagnostic Trouble Codes (DTCs) to DTC names /n/n[DTCs Review](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5596694/OEM+DTCs+Review+a275) /n/n [CAN DTC Support](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4977192/PRD+-+CAN+SPN+_+DTC+Support+bfac)",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "dtc_hex",
+      "type": "string",
+      "description": "A code representing a component malfunction in a vehicle"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "The name of the component malfunction"
+    }
+  ]
+}

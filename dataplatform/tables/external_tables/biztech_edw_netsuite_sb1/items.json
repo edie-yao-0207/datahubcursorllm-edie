@@ -1,0 +1,936 @@
+{
+  "table": "items",
+  "owner": "PlatformOperations",
+  "description": "items table from database biztech_edw_netsuite_sb1 in s3bucket biztech-edw-uat",
+  "database": "biztech_edw_netsuite_sb1",
+  "schema": [
+    {
+      "name": "item_id",
+      "type": "double"
+    },
+    {
+      "name": "acv_impacting",
+      "type": "string"
+    },
+    {
+      "name": "allocation_id",
+      "type": "double"
+    },
+    {
+      "name": "allow_drop_ship",
+      "type": "string"
+    },
+    {
+      "name": "alt_demand_source_item_id",
+      "type": "double"
+    },
+    {
+      "name": "asset_account_id",
+      "type": "double"
+    },
+    {
+      "name": "associated_product_id",
+      "type": "double"
+    },
+    {
+      "name": "atp_lead_time",
+      "type": "double"
+    },
+    {
+      "name": "atp_method",
+      "type": "string"
+    },
+    {
+      "name": "available_to_partners",
+      "type": "string"
+    },
+    {
+      "name": "averagecost",
+      "type": "double"
+    },
+    {
+      "name": "backward_consumption_days",
+      "type": "double"
+    },
+    {
+      "name": "bill_exch_rate_var_account_id",
+      "type": "double"
+    },
+    {
+      "name": "bill_price_variance_account_id",
+      "type": "double"
+    },
+    {
+      "name": "bill_qty_variance_account_id",
+      "type": "double"
+    },
+    {
+      "name": "build_sub_assemblies",
+      "type": "string"
+    },
+    {
+      "name": "class_id",
+      "type": "double"
+    },
+    {
+      "name": "code_of_supply_id",
+      "type": "double"
+    },
+    {
+      "name": "commodity_code",
+      "type": "string"
+    },
+    {
+      "name": "company_id",
+      "type": "double"
+    },
+    {
+      "name": "consumption_unit_id",
+      "type": "double"
+    },
+    {
+      "name": "costing_method",
+      "type": "string"
+    },
+    {
+      "name": "cost_0",
+      "type": "double"
+    },
+    {
+      "name": "cost_basis",
+      "type": "double"
+    },
+    {
+      "name": "cost_category",
+      "type": "string"
+    },
+    {
+      "name": "cost_center_hierarchy_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_parent_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_estimate_type",
+      "type": "string"
+    },
+    {
+      "name": "country_of_manufacture",
+      "type": "string"
+    },
+    {
+      "name": "country_of_origin",
+      "type": "string"
+    },
+    {
+      "name": "country_of_origin_2",
+      "type": "string"
+    },
+    {
+      "name": "created",
+      "type": "timestamp"
+    },
+    {
+      "name": "create_plan_on_event_type",
+      "type": "string"
+    },
+    {
+      "name": "current_on_order_count",
+      "type": "double"
+    },
+    {
+      "name": "custreturn_variance_account_id",
+      "type": "double"
+    },
+    {
+      "name": "date_last_modified",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_of_last_transaction",
+      "type": "timestamp"
+    },
+    {
+      "name": "default_return_cost",
+      "type": "double"
+    },
+    {
+      "name": "default_wt_code_id",
+      "type": "double"
+    },
+    {
+      "name": "deferred_expense_account_id",
+      "type": "double"
+    },
+    {
+      "name": "deferred_revenue_account_id",
+      "type": "double"
+    },
+    {
+      "name": "deferred_revenue_account_inte",
+      "type": "string"
+    },
+    {
+      "name": "demand_source",
+      "type": "string"
+    },
+    {
+      "name": "demand_time_fence",
+      "type": "double"
+    },
+    {
+      "name": "department_id",
+      "type": "double"
+    },
+    {
+      "name": "deposit",
+      "type": "string"
+    },
+    {
+      "name": "description_translationgerman",
+      "type": "string"
+    },
+    {
+      "name": "description_translation_spani",
+      "type": "string"
+    },
+    {
+      "name": "dimensions_cm3",
+      "type": "string"
+    },
+    {
+      "name": "displayname",
+      "type": "string"
+    },
+    {
+      "name": "distribution_category",
+      "type": "string"
+    },
+    {
+      "name": "distribution_network",
+      "type": "string"
+    },
+    {
+      "name": "dropship_expense_account_id",
+      "type": "double"
+    },
+    {
+      "name": "eccn",
+      "type": "string"
+    },
+    {
+      "name": "effective_bom_control_type",
+      "type": "string"
+    },
+    {
+      "name": "end_of_life_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "end_of_ms_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "expense_account_id",
+      "type": "double"
+    },
+    {
+      "name": "featureddescription",
+      "type": "string"
+    },
+    {
+      "name": "featureditem",
+      "type": "string"
+    },
+    {
+      "name": "fixed_lot_size",
+      "type": "double"
+    },
+    {
+      "name": "forward_consumption_days",
+      "type": "double"
+    },
+    {
+      "name": "fraud_risk",
+      "type": "string"
+    },
+    {
+      "name": "ft_cost_basis",
+      "type": "double"
+    },
+    {
+      "name": "full_name",
+      "type": "string"
+    },
+    {
+      "name": "fx_adjustment_account_id",
+      "type": "double"
+    },
+    {
+      "name": "gain_loss_account_id",
+      "type": "double"
+    },
+    {
+      "name": "handling_cost",
+      "type": "double"
+    },
+    {
+      "name": "hazmat",
+      "type": "string"
+    },
+    {
+      "name": "hazmat_hazard_class",
+      "type": "string"
+    },
+    {
+      "name": "hazmat_id",
+      "type": "string"
+    },
+    {
+      "name": "hazmat_item_units",
+      "type": "string"
+    },
+    {
+      "name": "hazmat_item_units_qty",
+      "type": "double"
+    },
+    {
+      "name": "hazmat_packing_group",
+      "type": "string"
+    },
+    {
+      "name": "hazmat_shipping_name",
+      "type": "string"
+    },
+    {
+      "name": "hs_code",
+      "type": "string"
+    },
+    {
+      "name": "include_child_subsidiaries",
+      "type": "string"
+    },
+    {
+      "name": "income_account_id",
+      "type": "double"
+    },
+    {
+      "name": "interco_expense_account_id",
+      "type": "double"
+    },
+    {
+      "name": "interco_income_account_id",
+      "type": "double"
+    },
+    {
+      "name": "invt_count_classification",
+      "type": "double"
+    },
+    {
+      "name": "invt_count_interval",
+      "type": "double"
+    },
+    {
+      "name": "isinactive",
+      "type": "string"
+    },
+    {
+      "name": "isonline",
+      "type": "string"
+    },
+    {
+      "name": "istaxable",
+      "type": "string"
+    },
+    {
+      "name": "is_cont_rev_handling",
+      "type": "string"
+    },
+    {
+      "name": "is_enforce_min_qty_internally",
+      "type": "string"
+    },
+    {
+      "name": "is_hold_rev_rec",
+      "type": "string"
+    },
+    {
+      "name": "is_moss",
+      "type": "string"
+    },
+    {
+      "name": "is_phantom",
+      "type": "string"
+    },
+    {
+      "name": "is_special_order_item",
+      "type": "string"
+    },
+    {
+      "name": "item_category_id",
+      "type": "double"
+    },
+    {
+      "name": "item_defined_cost",
+      "type": "double"
+    },
+    {
+      "name": "item_extid",
+      "type": "string"
+    },
+    {
+      "name": "item_revenue_category",
+      "type": "string"
+    },
+    {
+      "name": "last_cogs_correction",
+      "type": "timestamp"
+    },
+    {
+      "name": "last_invt_count_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "last_purchase_price",
+      "type": "double"
+    },
+    {
+      "name": "list_price",
+      "type": "double"
+    },
+    {
+      "name": "location_id",
+      "type": "double"
+    },
+    {
+      "name": "lot_numbered_item",
+      "type": "string"
+    },
+    {
+      "name": "lot_sizing_method",
+      "type": "string"
+    },
+    {
+      "name": "maintenancesupport_type_id",
+      "type": "double"
+    },
+    {
+      "name": "manufacturer",
+      "type": "string"
+    },
+    {
+      "name": "manufacturing_charge_item",
+      "type": "string"
+    },
+    {
+      "name": "match_bill_to_receipt",
+      "type": "string"
+    },
+    {
+      "name": "matrix_type",
+      "type": "string"
+    },
+    {
+      "name": "maximum_quantity",
+      "type": "double"
+    },
+    {
+      "name": "maximum_quantity_hidden",
+      "type": "double"
+    },
+    {
+      "name": "metataghtml",
+      "type": "string"
+    },
+    {
+      "name": "minimum_quantity",
+      "type": "double"
+    },
+    {
+      "name": "modified",
+      "type": "timestamp"
+    },
+    {
+      "name": "mpn",
+      "type": "string"
+    },
+    {
+      "name": "ms_pricing_option_id",
+      "type": "double"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "nature_of_transaction_codes_id",
+      "type": "double"
+    },
+    {
+      "name": "next_invt_count_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "ns_gdc___useful_life_months",
+      "type": "string"
+    },
+    {
+      "name": "ns_lead_time",
+      "type": "double"
+    },
+    {
+      "name": "offersupport",
+      "type": "string"
+    },
+    {
+      "name": "office_location_id",
+      "type": "double"
+    },
+    {
+      "name": "onspecial",
+      "type": "string"
+    },
+    {
+      "name": "optout_ms",
+      "type": "string"
+    },
+    {
+      "name": "overhead_type",
+      "type": "string"
+    },
+    {
+      "name": "parent_id",
+      "type": "double"
+    },
+    {
+      "name": "payment_method_id",
+      "type": "double"
+    },
+    {
+      "name": "periodic_lot_size_days",
+      "type": "double"
+    },
+    {
+      "name": "periodic_lot_size_type",
+      "type": "string"
+    },
+    {
+      "name": "pref_purchase_tax_id",
+      "type": "double"
+    },
+    {
+      "name": "pref_sale_tax_id",
+      "type": "double"
+    },
+    {
+      "name": "pref_stock_level",
+      "type": "double"
+    },
+    {
+      "name": "prices_include_tax",
+      "type": "string"
+    },
+    {
+      "name": "pricing_group_id",
+      "type": "double"
+    },
+    {
+      "name": "print_sub_items",
+      "type": "string"
+    },
+    {
+      "name": "product_family_plm",
+      "type": "string"
+    },
+    {
+      "name": "product_group_id",
+      "type": "double"
+    },
+    {
+      "name": "product_line_id",
+      "type": "double"
+    },
+    {
+      "name": "product_line_plm",
+      "type": "string"
+    },
+    {
+      "name": "product_subgroup_old_id",
+      "type": "double"
+    },
+    {
+      "name": "product_type_plm",
+      "type": "string"
+    },
+    {
+      "name": "prod_price_var_account_id",
+      "type": "double"
+    },
+    {
+      "name": "prod_qty_var_account_id",
+      "type": "double"
+    },
+    {
+      "name": "purchasedescription",
+      "type": "string"
+    },
+    {
+      "name": "purchaseorderamount",
+      "type": "double"
+    },
+    {
+      "name": "purchaseorderquantity",
+      "type": "double"
+    },
+    {
+      "name": "purchaseorderquantitydiff",
+      "type": "double"
+    },
+    {
+      "name": "purchase_price_var_account_id",
+      "type": "double"
+    },
+    {
+      "name": "purchase_unit_id",
+      "type": "double"
+    },
+    {
+      "name": "quantityavailable",
+      "type": "double"
+    },
+    {
+      "name": "quantitybackordered",
+      "type": "double"
+    },
+    {
+      "name": "quantityonhand",
+      "type": "double"
+    },
+    {
+      "name": "quantity_cap_hidden_id",
+      "type": "double"
+    },
+    {
+      "name": "quantity_type_id",
+      "type": "double"
+    },
+    {
+      "name": "receiptamount",
+      "type": "double"
+    },
+    {
+      "name": "receiptquantity",
+      "type": "double"
+    },
+    {
+      "name": "receiptquantitydiff",
+      "type": "double"
+    },
+    {
+      "name": "renewals_exclusion",
+      "type": "string"
+    },
+    {
+      "name": "renew_with_id",
+      "type": "double"
+    },
+    {
+      "name": "reorderpoint",
+      "type": "double"
+    },
+    {
+      "name": "reorder_multiple",
+      "type": "double"
+    },
+    {
+      "name": "replaced_with_id",
+      "type": "double"
+    },
+    {
+      "name": "replenishment_method",
+      "type": "string"
+    },
+    {
+      "name": "resalable",
+      "type": "string"
+    },
+    {
+      "name": "reschedule_in_days",
+      "type": "double"
+    },
+    {
+      "name": "reschedule_out_days",
+      "type": "double"
+    },
+    {
+      "name": "revenue_allocation_group",
+      "type": "string"
+    },
+    {
+      "name": "rev_rec_forecast_rule_id",
+      "type": "double"
+    },
+    {
+      "name": "rev_rec_rule_id",
+      "type": "double"
+    },
+    {
+      "name": "rma_create_revenue_plans_on_id",
+      "type": "double"
+    },
+    {
+      "name": "rma_rev_rec_rule_id",
+      "type": "double"
+    },
+    {
+      "name": "round_up_as_component",
+      "type": "string"
+    },
+    {
+      "name": "safety_stock_days",
+      "type": "double"
+    },
+    {
+      "name": "safety_stock_level",
+      "type": "double"
+    },
+    {
+      "name": "salesdescription",
+      "type": "string"
+    },
+    {
+      "name": "salesforce_id",
+      "type": "string"
+    },
+    {
+      "name": "salesprice",
+      "type": "string"
+    },
+    {
+      "name": "sales_rep_territory_id",
+      "type": "double"
+    },
+    {
+      "name": "sale_unit_id",
+      "type": "double"
+    },
+    {
+      "name": "sat_item_code_id",
+      "type": "double"
+    },
+    {
+      "name": "scrap_account_id",
+      "type": "double"
+    },
+    {
+      "name": "serialized_item",
+      "type": "string"
+    },
+    {
+      "name": "shippingcost",
+      "type": "double"
+    },
+    {
+      "name": "sn_post_to_cloud_response_mes",
+      "type": "string"
+    },
+    {
+      "name": "sn_post_to_cloud_retry_count",
+      "type": "double"
+    },
+    {
+      "name": "sn_post_to_cloud_status_id",
+      "type": "double"
+    },
+    {
+      "name": "specialsdescription",
+      "type": "string"
+    },
+    {
+      "name": "special_work_order_item",
+      "type": "string"
+    },
+    {
+      "name": "status_id",
+      "type": "double"
+    },
+    {
+      "name": "stock_unit_id",
+      "type": "double"
+    },
+    {
+      "name": "storedescription",
+      "type": "string"
+    },
+    {
+      "name": "storedetaileddescription",
+      "type": "string"
+    },
+    {
+      "name": "storedisplayname",
+      "type": "string"
+    },
+    {
+      "name": "subtype",
+      "type": "string"
+    },
+    {
+      "name": "sub_product_line_plm",
+      "type": "string"
+    },
+    {
+      "name": "supplementary_unit_id",
+      "type": "double"
+    },
+    {
+      "name": "supplementary_unit__abberviat",
+      "type": "string"
+    },
+    {
+      "name": "supply_time_fence",
+      "type": "double"
+    },
+    {
+      "name": "supply_type",
+      "type": "string"
+    },
+    {
+      "name": "tax_item_id",
+      "type": "double"
+    },
+    {
+      "name": "term__contract_pricing_type_id",
+      "type": "double"
+    },
+    {
+      "name": "totalvalue",
+      "type": "double"
+    },
+    {
+      "name": "transferprice",
+      "type": "double"
+    },
+    {
+      "name": "transfer_price_for_ra",
+      "type": "double"
+    },
+    {
+      "name": "type_name",
+      "type": "string"
+    },
+    {
+      "name": "type_of_goods_id",
+      "type": "double"
+    },
+    {
+      "name": "unbuild_variance_account_id",
+      "type": "double"
+    },
+    {
+      "name": "units_type_id",
+      "type": "double"
+    },
+    {
+      "name": "un_number",
+      "type": "string"
+    },
+    {
+      "name": "upc_code",
+      "type": "string"
+    },
+    {
+      "name": "use_component_yield",
+      "type": "string"
+    },
+    {
+      "name": "vck_country_of_origin_id",
+      "type": "double"
+    },
+    {
+      "name": "vendorname",
+      "type": "string"
+    },
+    {
+      "name": "vendor_id",
+      "type": "double"
+    },
+    {
+      "name": "vendreturn_variance_account_id",
+      "type": "double"
+    },
+    {
+      "name": "vertex_product_class_flag",
+      "type": "string"
+    },
+    {
+      "name": "vertex_product_class_id",
+      "type": "double"
+    },
+    {
+      "name": "vertex_unspsc_code_id",
+      "type": "double"
+    },
+    {
+      "name": "vsoe_deferral",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_delivered",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_discount",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_price",
+      "type": "double"
+    },
+    {
+      "name": "weight",
+      "type": "double"
+    },
+    {
+      "name": "weight_in_user_defined_unit",
+      "type": "double"
+    },
+    {
+      "name": "weight_unit_index",
+      "type": "double"
+    },
+    {
+      "name": "wip_account_id",
+      "type": "double"
+    },
+    {
+      "name": "wip_cost_variance_account_id",
+      "type": "double"
+    },
+    {
+      "name": "work_order_lead_time",
+      "type": "double"
+    },
+    {
+      "name": "_fivetran_deleted",
+      "type": "boolean"
+    },
+    {
+      "name": "date_deleted",
+      "type": "timestamp"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    },
+    {
+      "name": "description_translation_frenc",
+      "type": "string"
+    }
+  ]
+}

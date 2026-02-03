@@ -1,0 +1,68 @@
+{
+  "view": "samnumber_accuracy_email_match",
+  "owner": "PlatformOperations",
+  "description": "This view will show samnumbers with emails that do not line up between cloud, ns, and sfdc",
+  "database": "platops",
+  "schema": [
+    { "name": "sfdc_poc_email", "type": "string", "description": "The email we are comparing" },
+    {
+      "name": "cloud_sam_number",
+      "type": "string",
+      "description": "The samnumber of the account associated with this email in cloud"
+    },
+    {
+      "name": "sfdc_sam_number",
+      "type": "string",
+      "description": "The samnumber of the account associated with this email in Salesforce"
+    },
+    {
+      "name": "org_id",
+      "type": "long",
+      "description": "The id of the org associated with the cloud samnumber"
+    },
+    {
+      "name": "is_poc_email_in_org",
+      "type": "boolean",
+      "description": "Is the SFDC email in the orgs list of user emails"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "sfdc_data",
+      "tablename": "sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "org_sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "users",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "users_organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "sfdc_accounts",
+      "type": "table"
+    }
+  ]
+}

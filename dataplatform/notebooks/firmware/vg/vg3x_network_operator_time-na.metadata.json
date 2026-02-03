@@ -1,0 +1,30 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "vg3x_network_operator_time",
+    "type": "table",
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "attached_to_modi",
+        "type": "boolean"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      }
+    ]
+  }
+}

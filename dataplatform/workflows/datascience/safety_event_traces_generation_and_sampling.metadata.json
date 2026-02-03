@@ -1,0 +1,16 @@
+{
+  "owner": "DataScience",
+  "description": "A pipeline for generating: (1) cleansed timeseries traces from safety events, (2) IMU feature embeddings, and (3) embedding samples",
+  "admin_teams": ["DataEngineering"],
+  "spark_confs": {
+    "spark.network.timeout": "600s"
+  },
+  "schedules": [
+    {
+      "name": "daily",
+      "regions": ["us-west-2"],
+      "timeout_seconds": 86400,
+      "cron": ""
+    }
+  ]
+}

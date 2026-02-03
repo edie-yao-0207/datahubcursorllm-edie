@@ -1,0 +1,374 @@
+[
+  {
+    "Name": "bt-gtm-marketing-developers: assets can read",
+    "Values": [
+      {
+        "databaseRegions": {
+          "default.auditlog": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_agautam": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_edw_dev": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_edw_netsuite_silver": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_edw_silver": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_galtobelli": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_hvenkatesh": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_isingh": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_ngurram": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_njaton": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_spendry": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.biztech_tkelley": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.cm_health_report": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.coachingdb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.compliancedb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.customer360": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.customer360_from_eu_west_1": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.data_analytics": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataanalytics_dev": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataengineering": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataengineering_dev": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_core": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_platform": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_platform_bronze": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_platform_silver": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_safety": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_telematics": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datamodel_telematics_silver": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataprep": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataprep_firmware": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataprep_safety": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dataproducts": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datascience": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datastreams": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.datastreams_history": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dojo": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.driverdocumentsdb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.dynamodb": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.ecodriving_report": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.eldhosdb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.firmware_dev": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.formsdb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.fueldb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.growth": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.hardware_analytics": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.kinesisstats": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.marketingdata": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.marketingdata_dev": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.mda_production": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.mda_sandbox": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.metrics_repo": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.mixpanel": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.mixpanel_samsara": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.oauth2db_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.perf_infra": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.product_analytics": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.product_analytics_staging": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.productsdb": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.report_staging": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.s3inventories_delta": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.s3inventory": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.s3logs": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.safety_report": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.safetydb_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.samsara_zendesk": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.speeding_incident_report": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.speedlimitsdb": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.stateramp": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.statsdb": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.supportops": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.technical_support": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.trips2db_shards": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ]
+        }
+      },
+      {
+        "tables": []
+      }
+    ]
+  }
+]

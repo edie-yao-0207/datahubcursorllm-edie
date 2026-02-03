@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "supportops-group: assets can write",
+    "Values": [
+      {
+        "databases": [
+          "default.supportops"
+        ]
+      }
+    ]
+  }
+]

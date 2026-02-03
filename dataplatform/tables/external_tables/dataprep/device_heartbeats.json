@@ -1,0 +1,71 @@
+{
+  "table": "device_heartbeats",
+  "owner": "DataEngineering",
+  "description": "contain first and last heartbeat information and more information associated with the last recording heartbeat",
+  "database": "dataprep",
+  "schema": [
+    {
+      "name": "org_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "The Internal ID for the customer`s Samsara org."
+      }
+    },
+    {
+      "name": "device_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Unique identifier for devices. Joins to datamodel_core.dim_devices"
+      }
+    },
+    {
+      "name": "first_heartbeat_date",
+      "type": "string",
+      "metadata": {
+        "comment": "First heartbeat date for device"
+      }
+    },
+    {
+      "name": "first_heartbeat_ms",
+      "type": "bigint",
+      "metadata": {
+        "comment": "First heartbeat time for device"
+      }
+    },
+    {
+      "name": "last_heartbeat_date",
+      "type": "string",
+      "metadata": {
+        "comment": "Last heartbeat date for device"
+      }
+    },
+    {
+      "name": "last_heartbeat_ms",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Last heartbeat time for device"
+      }
+    },
+    {
+      "name": "last_reported_bootcount",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Last reported bootcount for device"
+      }
+    },
+    {
+      "name": "last_reported_build",
+      "type": "string",
+      "metadata": {
+        "comment": "Last reported build for device"
+      }
+    },
+    {
+      "name": "last_reported_gateway_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Last reported gateway ID for device"
+      }
+    }
+  ]
+}

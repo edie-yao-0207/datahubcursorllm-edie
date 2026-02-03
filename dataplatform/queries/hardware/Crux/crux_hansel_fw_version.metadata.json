@@ -1,0 +1,8 @@
+{
+  "owner": "hardware-group",
+  "region": ["us-west-2", "eu-west-1"],
+  "sql_warehouse": "hardware",
+  "name": "crux_hansel_fw_version",
+  "description": "List of FW versions to filter on for the Hansel KPI dashboard",
+  "run_as_role": "owner"
+}

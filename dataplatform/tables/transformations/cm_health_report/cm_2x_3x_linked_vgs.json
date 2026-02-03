@@ -1,0 +1,55 @@
+{
+  "name": "cm_health_report.cm_2x_3x_linked_vgs",
+  "owner": "MediaExperience",
+  "description": "Create VG-CM pairs for CM2X's and CM3X's",
+  "dependencies": [
+    { "external": true, "dbname": "productsdb", "tablename": "gateways", "type": "table" },
+    { "external": true, "dbname": "productsdb", "tablename": "devices", "type": "table" },
+    { "external": true, "dbname": "clouddb", "tablename": "organizations", "type": "table" }
+  ],
+  "expectation": {
+    "batch_mode": "REMOVE_UNEXPECTED"
+  },
+  "output": {
+    "dbname": "cm_health_report",
+    "tablename": "cm_2x_3x_linked_vgs",
+    "type": "table",
+    "partition": [],
+    "primary_key": ["org_id", "vg_device_id"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      { "name": "vg_device_id", "type": "long" },
+      {
+        "name": "product_id",
+        "type": "long",
+        "metadata": {
+          "comment": "VG product id"
+        }
+      },
+      {
+        "name": "linked_cm_id",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "Only applicable to CM3X's, will be null for CM2X's"
+        }
+      },
+      { "name": "cm_product_id", "type": "long" },
+      {
+        "name": "upper_camera_serial",
+        "type": "string",
+        "metadata": {
+          "comment": "Camera serial in uppercase letters, no hyphens"
+        }
+      },
+      {
+        "name": "camera_first_connected_at_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Unix timestamp the camera was first connected to the VG"
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

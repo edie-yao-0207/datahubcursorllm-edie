@@ -1,0 +1,39 @@
+{
+  "view": "stateramp_orgs",
+  "owner": "DataPlatform",
+  "description": "This is a view that contains all the orgs that are stateramp customers",
+  "database": "stateramp",
+  "regions": ["us-west-2"],
+  "schema": [
+    {
+      "name": "org_id",
+      "type": "long",
+      "description": "The org id of the stateramp customer"
+    },
+    {
+      "name": "sam_number",
+      "type": "string",
+      "description": "The sam number of the stateramp customer"
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "clouddb",
+      "tablename": "sfdc_accounts",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "clouddb",
+      "tablename": "org_sfdc_accounts",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw",
+      "tablename": "silver.dim_customer",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

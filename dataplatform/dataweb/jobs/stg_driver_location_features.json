@@ -1,0 +1,18 @@
+{
+  "name": "stg_driver_location_features",
+  "owner": "DataEngineering",
+  "max_concurrent": 3,
+  "assets": [
+    "us-west-2:product_analytics_staging.agg_trip_location_stats",
+    "us-west-2:product_analytics_staging.agg_trip_roadway",
+    "us-west-2:product_analytics_staging.agg_trip_driving_environment"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 9 * * *",
+      "backfill_window": 7,
+      "backfill_batch_size": 3
+    }
+  ]
+}

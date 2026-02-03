@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`uuid` STRING,
+`label_id` STRING,
+`created_at_ms` BIGINT,
+`label_source` BIGINT,
+`label_author` BIGINT,
+`deleted` BYTE,
+`date` STRING

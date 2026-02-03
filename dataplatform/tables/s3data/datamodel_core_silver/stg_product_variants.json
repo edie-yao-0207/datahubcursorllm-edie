@@ -1,0 +1,34 @@
+{
+  "table": "stg_product_variants",
+  "owner": "DataEngineering",
+  "description": "Mapping from Product ID + variant ID to human-readable names",
+  "database": "datamodel_core_silver",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/product_variants/product_variants.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/product_variants/product_variants.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/product_variants/product_variants.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "description": "The internal ID of the Samsara product"
+    },
+    {
+      "name": "variant_id",
+      "type": "bigint",
+      "description": "The internal ID of the product variant"
+    },
+    {
+      "name": "variant_name",
+      "type": "string",
+      "description": "The name of the product variant"
+    },
+    {
+      "name": "batch_list_name",
+      "type": "string",
+      "description": "The batch list name of the product variant"
+    }
+  ]
+}

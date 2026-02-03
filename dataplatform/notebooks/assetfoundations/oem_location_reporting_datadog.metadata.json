@@ -1,0 +1,11 @@
+{
+  "owner": "AssetFoundations",
+  "jobs": [
+    {
+      "name": "every_6_hours",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default",
+      "cron": "0 0 0/6 ? * *"
+    }
+  ]
+}

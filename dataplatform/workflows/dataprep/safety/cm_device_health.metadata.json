@@ -1,0 +1,41 @@
+{
+  "owner": "DataEngineering",
+  "description": "DAG that updates the dataprep_safety.cm_device_health_daily table, its dependencies, and its dependents",
+  "admin_teams": ["Firmware", "DataAnalytics"],
+  "schedules": [
+    {
+      "name": "daily-us",
+      "regions": ["us-west-2"],
+      "timeout_seconds": 28800,
+      "cron": "0 0 10 * * ?",
+      "workflow_overrides": {
+        "webhook_notifications": {
+          "on_failure": [
+            { "id": "0cd93f35-3db4-486d-8961-a242bd403968" },
+            { "id": "b2f2b14a-6963-4104-831b-a9750f0f2987" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "daily-eu",
+      "regions": ["eu-west-1"],
+      "timeout_seconds": 28800,
+      "cron": "0 0 10 * * ?",
+      "workflow_overrides": {
+        "webhook_notifications": {
+          "on_failure": [
+            { "id": "ef4afe39-8405-442c-8f34-cea4924e86de" },
+            { "id": "3b01bc53-8f0e-478d-8504-a576ed86bb1a" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "daily-ca",
+      "regions": ["ca-central-1"],
+      "timeout_seconds": 28800,
+      "cron": "0 0 10 * * ?"
+    }
+  ]
+}

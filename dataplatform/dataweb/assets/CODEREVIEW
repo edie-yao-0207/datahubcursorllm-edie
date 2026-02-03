@@ -1,0 +1,5 @@
+{
+  "owners": ["samsara-dev/data-tools"],
+  "description": "Changes to dataweb/assets directory must be approved by DataTools",
+  "noParent": true
+}

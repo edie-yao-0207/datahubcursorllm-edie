@@ -1,0 +1,15 @@
+{
+  "owners": [
+    "samsara-dev/dev"
+  ],
+  "perFile": [
+    {
+      "owners": [
+        "samsara-dev/data-platform"
+      ],
+      "description": "Changes to DB Registry should be reviewed by data platform and DB deletions should be done with care",
+      "filePattern": "database_registry.go",
+      "prComment": "We've created a snapshot test to capture the list of DBs. Please be cognizant of the fact that deleting an entry from this registry code can permanently remove table/view definitions. If applicable, please run `go test -run=TestDBNames -rewriteSnapshots` in `go/src/samsaradev.io/infra/dataplatform/terraform/dataplatformprojects` folder to acknowledge the change to the DB registry. \n Note that running the test does not back up any tables. Please reach out to #ask-data-platform for any questions or concerns."
+    }
+  ]
+}

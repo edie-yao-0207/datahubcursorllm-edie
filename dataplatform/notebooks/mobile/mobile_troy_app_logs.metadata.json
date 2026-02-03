@@ -1,0 +1,62 @@
+{
+  "owner": "DataScience",
+  "email_notifications": ["steven.matson@samsara.com"],
+  "jobs": [],
+  "output": {
+    "external": true,
+    "dbname": "mobile_logs",
+    "tablename": "mobile_app_log_events",
+    "type": "table",
+    "primary_key": ["timestamp"],
+    "schema": [
+      {
+        "name": "timestamp",
+        "type": "timestamp"
+      },
+      {
+        "name": "DeviceUUID",
+        "type": "string"
+      },
+      {
+        "name": "EventType",
+        "type": "string"
+      },
+      {
+        "name": "JSONParams",
+        "type": "string"
+      },
+      {
+        "name": "OrgID",
+        "type": "long"
+      },
+      {
+        "name": "DriverID",
+        "type": "long"
+      },
+      {
+        "name": "UserID",
+        "type": "long"
+      },
+      {
+        "name": "ServerDate",
+        "type": "timestamp"
+      },
+      {
+        "name": "EventUUID",
+        "type": "string"
+      },
+      {
+        "name": "AppInfo",
+        "type": "string"
+      },
+      {
+        "name": "SessionUUID",
+        "type": "string"
+      },
+      {
+        "name": "date",
+        "type": "date"
+      }
+    ]
+  }
+}

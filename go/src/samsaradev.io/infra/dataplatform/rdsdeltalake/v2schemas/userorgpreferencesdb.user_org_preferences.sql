@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`user_id` BIGINT,
+`key_enum` INT,
+`value_str` STRING,
+`updated_at` TIMESTAMP,
+`partition` STRING

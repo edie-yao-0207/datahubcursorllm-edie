@@ -1,0 +1,12 @@
+{
+  "owner": "DataScience",
+  "email_notifications": ["alerts-data-science-aaaaczhdkl7nobdgonxhcf3y5y@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "daily_acv_snapshot",
+      "cron": "0 0 13 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

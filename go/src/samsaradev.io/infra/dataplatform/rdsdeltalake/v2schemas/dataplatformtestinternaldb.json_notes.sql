@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`id` BIGINT,
+`note` STRING,
+`nullable_note` STRING,
+`created_at` TIMESTAMP,
+`org_id` BIGINT,
+`partition` STRING

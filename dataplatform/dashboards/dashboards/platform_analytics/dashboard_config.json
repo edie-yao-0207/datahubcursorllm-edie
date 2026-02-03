@@ -1,0 +1,451 @@
+{
+  "dashboard": {
+    "name": "Platform Analytics Dashboard",
+    "default_date_range": "90d"
+  },
+  "global_filters": [
+    {
+      "name": "date",
+      "type": "date_range",
+      "title": "Date Range",
+      "width": 2,
+      "default": { "min": "-90d", "max": "today" }
+    },
+    {
+      "name": "team",
+      "type": "select",
+      "title": "Team",
+      "width": 2,
+      "default": "firmwarevdp"
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Overview",
+      "widgets": [
+        {
+          "sql": "queries/cost/overview/top_cost_summary.sql",
+          "type": "counter",
+          "title": "30-Day Rolling Cost",
+          "width": 2,
+          "height": 2,
+          "config": { "value_field": "value", "row_number": 1, "format": "currency" }
+        },
+        {
+          "sql": "queries/usage/overview/usage_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Active Users",
+          "width": 2,
+          "height": 2,
+          "config": { "value_field": "monthly_active_users" }
+        },
+        {
+          "sql": "queries/cost/overview/monthly_cost_trend.sql",
+          "type": "line",
+          "title": "30-Day Rolling Cost Trend",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["current_monthly_cost"],
+            "y_format": "currency",
+            "y_label": "30-Day Rolling Cost (USD)",
+            "reference_lines": [
+              { "value": 15000, "label": "Budget Limit", "color": "red", "style": "solid" },
+              { "value": 12000, "label": "Warning Threshold", "color": "yellow", "style": "dashed" }
+            ]
+          }
+        },
+        {
+          "sql": "queries/usage/overview/usage_summary.sql",
+          "type": "line",
+          "title": "Active Users (Daily / 7-Day / 30-Day)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["daily_users", "weekly_active_users", "monthly_active_users"],
+            "y_label": "Active Users"
+          }
+        },
+        {
+          "sql": "queries/cost/anomalies/anomaly_summary.sql",
+          "type": "line",
+          "title": "Daily Anomaly Count by Severity",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["warnings", "anomalous", "critical"],
+            "y_label": "Anomaly Count"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cost Analysis",
+      "widgets": [
+        {
+          "sql": "queries/cost/overview/cost_by_time_window.sql",
+          "type": "line",
+          "title": "Rolling Cost Comparison (Daily / 7d / 30d / 90d)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["daily_cost", "rolling_7d_cost", "rolling_30d_cost", "rolling_90d_cost"],
+            "y_format": "currency",
+            "y_label": "Cost (USD)"
+          }
+        },
+        {
+          "sql": "queries/cost/overview/cost_by_time_window.sql",
+          "type": "line",
+          "title": "Trailing 12-Month Cost (365-Day Rolling)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["rolling_365d_cost"],
+            "y_format": "currency",
+            "y_label": "365-Day Rolling Cost (USD)"
+          }
+        },
+        {
+          "sql": "queries/cost/efficiency/cost_per_user.sql",
+          "type": "line",
+          "title": "30-Day Cost Efficiency ($/User, $/1K Queries)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["cost_per_user", "cost_per_1k_queries"],
+            "y_format": "currency",
+            "y_label": "Cost per Unit (USD)"
+          }
+        },
+        {
+          "sql": "queries/cost/attribution/cost_by_team.sql",
+          "type": "area",
+          "title": "30-Day Cost by Product Group (Stacked)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["monthly_cost"],
+            "y_format": "currency",
+            "y_label": "30-Day Rolling Cost (USD)",
+            "color_by": "product_group",
+            "stacked": true
+          }
+        },
+        {
+          "sql": "queries/cost/attribution/top_tables_by_cost.sql",
+          "type": "table",
+          "title": "Top Tables by 30-Day Cost",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "monthly_cost": { "format": "currency", "decimals": 2 },
+              "monthly_change": { "format": "currency", "decimals": 2 },
+              "yesterday_cost": { "format": "currency", "decimals": 2 },
+              "percent_of_total": { "format": "percent", "decimals": 1 },
+              "datahub_url": { "format": "link", "label": "Datahub" },
+              "dagster_url": { "format": "link", "label": "Dagster" }
+            }
+          }
+        },
+        {
+          "sql": "queries/cost/efficiency/idle_table_cost.sql",
+          "type": "table",
+          "title": "Idle & Low-Usage Tables",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "columns": {
+              "monthly_cost": { "format": "currency", "decimals": 2 },
+              "datahub_url": { "format": "link", "label": "Datahub" },
+              "dagster_url": { "format": "link", "label": "Dagster" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alerts & Anomalies",
+      "widgets": [
+        {
+          "sql": "queries/cost/alerts/active_alerts.sql",
+          "type": "table",
+          "title": "Active Alerts by Type",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "total_cost_affected": { "format": "currency", "decimals": 2 },
+              "avg_z_score": { "format": "number", "decimals": 2 },
+              "avg_percent_change": { "format": "percent", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/cost/anomalies/critical_table_increases.sql",
+          "type": "table",
+          "title": "Critical Cost Spikes (>5σ)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "current_cost": { "format": "currency" },
+              "expected_cost": { "format": "currency" },
+              "cost_increase": { "format": "currency" },
+              "percent_change": { "format": "percent" }
+            }
+          }
+        },
+        {
+          "sql": "queries/cost/alerts/alert_details.sql",
+          "type": "table",
+          "title": "Alert Details",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "cost": { "format": "currency", "decimals": 2 },
+              "baseline_mean": { "format": "currency", "decimals": 2 },
+              "z_score": { "format": "number", "decimals": 2 },
+              "percent_change_pct": { "format": "percent", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/cost/alerts/recurring_alerts.sql",
+          "type": "table",
+          "title": "Recurring Alerts (Chronic Issues)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "avg_cost": { "format": "currency", "decimals": 2 },
+              "avg_z_score": { "format": "number", "decimals": 2 }
+            }
+          }
+        },
+        {
+          "sql": "queries/cost/anomalies/persistent_anomalies.sql",
+          "type": "table",
+          "title": "Persistent Anomalies (3+ Days)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "avg_cost": { "format": "currency", "decimals": 2 },
+              "max_z_score": { "format": "number", "decimals": 2 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usage & Engagement",
+      "widgets": [
+        {
+          "sql": "queries/usage/overview/usage_growth.sql",
+          "type": "line",
+          "title": "30-Day User & Query Growth",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["monthly_active_users", "monthly_queries"],
+            "y_label": "Count (30-Day Rolling)"
+          }
+        },
+        {
+          "sql": "queries/usage/engagement/platform_usage_trends.sql",
+          "type": "line",
+          "title": "Platform Usage (7-Day Rolling Average)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["active_users_7d_avg", "sql_users_7d_avg", "dashboard_users_7d_avg"],
+            "y_label": "Users (7-Day Avg)"
+          }
+        },
+        {
+          "sql": "queries/usage/engagement/most_accessed_tables.sql",
+          "type": "table",
+          "title": "Most Accessed Tables (30-Day Period)",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "columns": {
+              "percent_of_users": { "format": "percent", "decimals": 1 },
+              "datahub_url": { "format": "link", "label": "Datahub" },
+              "dagster_url": { "format": "link", "label": "Dagster" }
+            }
+          }
+        },
+        {
+          "sql": "queries/usage/tables/unused_tables.sql",
+          "type": "table",
+          "title": "Unused Tables in Date Range",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "columns": {
+              "datahub_url": { "format": "link", "label": "Datahub" },
+              "dagster_url": { "format": "link", "label": "Dagster" }
+            }
+          }
+        },
+        {
+          "sql": "queries/usage/engagement/platform_power_users.sql",
+          "type": "table",
+          "title": "Power Users (30-Day Period)",
+          "width": 6,
+          "height": 5
+        },
+        {
+          "sql": "queries/usage/engagement/platform_engagement_scores.sql",
+          "type": "table",
+          "title": "User Engagement Scores (30-Day Period)",
+          "width": 6,
+          "height": 5
+        },
+        {
+          "sql": "queries/usage/engagement/dashboard_usage.sql",
+          "type": "line",
+          "title": "Dashboard Usage Over Time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["events"],
+            "y_label": "Events",
+            "color_by": "dashboard_title"
+          }
+        },
+        {
+          "sql": "queries/usage/engagement/dashboard_weekly_trends.sql",
+          "type": "line",
+          "title": "Weekly Dashboard Activity",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "week",
+            "x_label": "Week",
+            "y_fields": ["events"],
+            "y_label": "Events",
+            "color_by": "dashboard_title"
+          }
+        },
+        {
+          "sql": "queries/usage/engagement/dashboard_top_users.sql",
+          "type": "table",
+          "title": "Top Users by Dashboard",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "dashboard_url": { "format": "link", "label": "Open Dashboard" }
+            }
+          }
+        },
+        {
+          "sql": "queries/usage/engagement/dashboard_overall_top_users.sql",
+          "type": "table",
+          "title": "Top Users Overall (All Dashboards)",
+          "width": 6,
+          "height": 5
+        },
+        {
+          "sql": "queries/usage/engagement/dashboard_actions_breakdown.sql",
+          "type": "heatmap",
+          "title": "Dashboard Events by Action Type",
+          "width": 6,
+          "height": 7,
+          "config": {
+            "x_field": "dashboard_title",
+            "y_field": "action_name",
+            "color_field": "event_count"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reliability",
+      "widgets": [
+        {
+          "sql": "queries/reliability/overview/reliability_snapshot.sql",
+          "type": "table",
+          "title": "Reliability Snapshot (Latest)",
+          "width": 6,
+          "height": 5
+        },
+        {
+          "sql": "queries/reliability/overview/reliability_trend.sql",
+          "type": "line",
+          "title": "Reliability Trend Over Time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["pct_fresh", "pct_meeting_2d_sla"],
+            "y_label": "Percentage",
+            "y_min": 0,
+            "y_max": 1,
+            "y_format": "percent"
+          }
+        },
+        {
+          "sql": "queries/reliability/overview/reliability_worst_offenders.sql",
+          "type": "table",
+          "title": "Worst Offenders (Tables with Poor Reliability)",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "columns": {
+              "pct_days_stale": { "format": "percent" },
+              "avg_pct_meeting_1d_sla": { "format": "percent" },
+              "avg_pct_meeting_2d_sla": { "format": "percent" },
+              "datahub_url": { "format": "link", "label": "Datahub" },
+              "dagster_url": { "format": "link", "label": "Dagster" }
+            }
+          }
+        },
+        {
+          "sql": "queries/reliability/tables/table_freshness.sql",
+          "type": "table",
+          "title": "Table Freshness (Latest Status)",
+          "width": 6,
+          "height": 6
+        },
+        {
+          "sql": "queries/reliability/tables/sla_breaches.sql",
+          "type": "table",
+          "title": "SLA Breaches (>2 Days Stale)",
+          "width": 6,
+          "height": 6
+        }
+      ]
+    }
+  ]
+}

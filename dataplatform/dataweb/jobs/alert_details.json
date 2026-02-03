@@ -1,0 +1,13 @@
+{
+  "name": "alert_details",
+  "owner": "DataEngineering",
+  "assets": ["us-west-2:datamodel_platform.fct_alert_details_global"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 12 * * *",
+      "backfill_window": 7,
+      "backfill_batch_size": 7
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+Vehicle Diagnostics,Maintenance Reports,12V Battery Voltage,0,kinesisstats.osDCableVoltage,value.int_value,,0,48,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,12V Battery Voltage,0,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.battery_milli_v,,0,3276725,0,0,0,0,
+Vehicle Diagnostics,Electric Vehicles,Battery State of Health,0,kinesisstats.osDEvHighCapacityBatteryStateOfHealthMilliPercent,value.int_value,,0,100000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,Charging Status,0,kinesisstats.osDEvChargingStatus,value.int_value,,1,3,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,Consumed Energy,0,kinesisstats.osDDeltaEvEnergyConsumedMicroWh,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,Distance Driven on Electric,0,kinesisstats.osDDeltaEvDistanceDrivenOnElectricPowerMeters,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Maintenance Reports,Engine Faults,0,kinesisstats.osDEngineFault,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,Engine Faults,0,kinesisstats.osDEngineFault,j1939_faults,,0,0,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,Engine Faults,0,kinesisstats.osDEngineFault,passenger_faults,,0,0,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,Engine Faults,0,kinesisstats.osDJ1939D1Status,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,Engine Faults,0,kinesisstats.osDPassengerDtcs,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,Tell Tale Status,0,kinesisstats.osDTellTaleStatus,int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,US Compliance,Engine State,0,kinesisstats.osDEngineState,value.int_value,,0,2,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5279935/VDP+Engine+State
+Vehicle Diagnostics,Fuel and Energy,Fuel Consumption,0,kinesisstats.osDDeltaFuelConsumed,value.int_value,,0,100000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4621773/VDP+Fuel+Consumption
+Vehicle Diagnostics,Fuel and Energy,Fuel Consumption,0,kinesisstats.osDFuelConsumedGaseous,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4621773/VDP+Fuel+Consumption
+Vehicle Diagnostics,Fuel and Energy,Fuel Level,0,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.fuel_level_percent,,0.4,100,0,10,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4621773/VDP+Fuel+Consumption
+Vehicle Diagnostics,US Compliance,Odometer,0,kinesisstats.osDOdometer,value.int_value,,1,691206266573,0,10000000000000,0,200,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5715439/VDP+Odometer
+Vehicle Diagnostics,Electric Vehicles,State of Charge,0,kinesisstats.osDEvUsableStateOfChargeMilliPercent,value.int_value,,0,100000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,US Compliance,Total Engine Runtime,0,kinesisstats.osDEngineSeconds,value.int_value,,0,773094113010,0,20000,0,0,
+Vehicle Diagnostics,US Compliance,Vehicle Speed,0,kinesisstats.osDEngineMilliknots,value.int_value,,0,137420,0,0,-20276,20276,
+Vehicle Diagnostics,US Compliance,VIN,0,kinesisstats.osDVin,value.proto_value.vin_event.vin,,0,0,0,0,0,0,
+Vehicle Diagnostics,Eco Driving,Anticipation Braking,1,kinesisstats.osDDeltaAnticipationBrakeEvents,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Coasting,1,kinesisstats.osDCoastingTimeTorqueBasedIgnoringBrakeMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Coasting,1,kinesisstats.osDDeltaCoastingTimeMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Coasting,1,kinesisstats.osDDeltaCoastingTimeTorqueBasedWhileNotOnCruiseControlMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Coasting,1,kinesisstats.osDDeltaCoastingTimeWhileNotOnCruiseControlMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Cruise Control,1,kinesisstats.osDDeltaCruiseControlMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Maintenance Alerts,DEF Level,1,kinesisstats.osDDEFTankLevelMillipercent,value.int_value,,400,100000,0,10000,0,0,
+Vehicle Diagnostics,Maintenance Alerts,DPF Lamp Status,1,kinesisstats.osDDpfLampStatus,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Eco Driving,Engine Idle Time,1,kinesisstats.osDEngineState,value.int_value,,0,2,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5279935/VDP+Engine+State
+Vehicle Diagnostics,Eco Driving,Engine Torque Over Limit,1,kinesisstats.osDDeltaAccelEngineTorqueOverLimitMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Engine Torque Over Limit,1,kinesisstats.osDDeltaAccelEngineTorqueOverLimitWhileNotOnCruiseControlMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Eco Driving,Overspeeding,1,kinesisstats.osDEngineMilliknots,value.int_value,,0,137420,0,0,-20276,20276,
+Vehicle Diagnostics,Eco Driving,RPM Green Band,1,kinesisstats.osDDeltaRpmGreenBandMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,Fuel and Energy,Power Take Off,2,kinesisstats.osDPowerTakeoff,value.int_value,,1,2,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5773902/PTO+Status
+Vehicle Diagnostics,Safety Features,Seatbelt Driver,2,kinesisstats.osDSeatbeltDriver,value.int_value,,0,2,0,0,0,0,
+Vehicle Diagnostics,General Information,Air Temperature,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.air_temp_milli_c,,-272984.375,1734953.125,0,0,0,0,
+Vehicle Diagnostics,General Information,Engine Coolant Temperature,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.coolant_temp_milli_c,,-39500,214500,0,0,0,0,
+Vehicle Diagnostics,General Information,Engine Load,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.engine_load_percent,,0,127.25,0,0,0,0,
+Vehicle Diagnostics,General Information,Engine RPM,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.engine_rpm,,0,16383.625,0,0,0,0,
+Vehicle Diagnostics,General Information,Oil Pressure,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.oil_pressure_k_pa,,0,998,0,0,0,0,
+Vehicle Diagnostics,General Information,Soot Load,3,kinesisstats.osDAt1DpfSootLoadPercent,value.int_value,,0,250,0,0,0,0,
+Vehicle Diagnostics,Tire Pressure Monitoring Systems,Tire Pressure Back Left,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.tire_pressure_back_left_k_pa,,0,0,0,0,0,0,
+Vehicle Diagnostics,Tire Pressure Monitoring Systems,Tire Pressure Back Right,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.tire_pressure_back_right_k_pa,,0,0,0,0,0,0,
+Vehicle Diagnostics,Tire Pressure Monitoring Systems,Tire Pressure Front Left,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.tire_pressure_front_left_k_pa,,0,0,0,0,0,0,
+Vehicle Diagnostics,Tire Pressure Monitoring Systems,Tire Pressure Front Right,3,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.tire_pressure_front_right_k_pa,,0,0,0,0,0,0,
+Vehicle Diagnostics,Electric Vehicles,AC Wall Charger Energy Consumed,50,kinesisstats.osDEvLastChargeAcWallEnergyConsumedWh,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Eco Driving,Accelerator over 95%,50,kinesisstats.osDDeltaAcceleratorPedalTimeGreaterThan95PercentMs,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Refridgeration Units,General Information,Active Zones,50,kinesisstats.osDReeferActiveZones,value.int_value,,0,3,0,0,0,0,
+Material Spreaders,General Information,Actual Dry Material Spread,50,kinesisstats.osDSaltSpreaderActualSpreadRateDryMilligramsPerMeter,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Actual Prewet Material Spread,50,kinesisstats.osDSaltSpreaderActualSpreadRatePrewetMillilitersPerMeter,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Actual Wet Spread Rate,50,kinesisstats.osDSaltSpreaderActualSpreadRateWetMillilitersPerMeter,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Vehicle Diagnostics,General Information,Air Inlet Pressure,50,kinesisstats.osDAirInletPressurePa,value.int_value,,0,499000,0,0,0,0,
+Vehicle Diagnostics,General Information,Air Inlet Temperature,50,kinesisstats.osDAirInletTempMilliC,value.int_value,,-39500,209500,0,0,0,0,
+Material Spreaders,General Information,Air Temperature,50,kinesisstats.osDSaltSpreaderAirTempMilliC,value.int_value,,-40000,40000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Refridgeration Units,General Information,Air Temperature Zone 2,50,kinesisstats.osDReeferReturnAirTempMilliCZone2,value.int_value,,-38000,70000,0,0,0,0,
+Refridgeration Units,General Information,Air Temperature Zone 3,50,kinesisstats.osDReeferReturnAirTempMilliCZone3,value.int_value,,-38000,70000,0,0,0,0,
+Refridgeration Units,General Information,Air Temperature Zone 3,50,kinesisstats.osDReeferSupplyAirTempMilliCZone3,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Alarms,50,kinesisstats.osDReeferAlarms,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Ambient Air Temperature,50,kinesisstats.osDReeferAmbientAirTempMilliC,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Apparent Power,50,kinesisstats.osDApparentPowerVoltAmpere,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Average AC Current,50,kinesisstats.osDAverageACCurrentMilliAmps,value.int_value,,0,64254500,0,0,0,0,
+Vehicle Diagnostics,General Information,Average AC Frequency,50,kinesisstats.osDAverageACFrequencyMicroHertz,value.int_value,,0,501988281.3,0,0,0,0,
+Vehicle Diagnostics,Electric Vehicles,Average Cell Temperature,50,kinesisstats.osDEvAverageCellTemperatureMilliCelsius,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,General Information,Average Line to Line ACRMS Voltage,50,kinesisstats.osDAverageLineToLineACRMSMilliVolts,value.int_value,,0,64254500,0,0,0,0,
+Vehicle Diagnostics,General Information,Barometric Pressure,50,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.barometer_pa,,0,254500,0,0,0,0,
+Vehicle Diagnostics,General Information,Battery Potential,50,kinesisstats.osDBatteryPotentialSwitchedMilliV,value.int_value,,0,3212725,0,0,0,0,
+Refridgeration Units,General Information,Battery Voltage,50,kinesisstats.osDReeferBattVoltageMilliV,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Boost Pressure,50,kinesisstats.osDBoostPressurePa,value.int_value,,0,499000,0,0,0,0,
+Vehicle Diagnostics,General Information,Boost Pressure Turbocharger,50,kinesisstats.osDBoostPressureTurbocharger1Pa,value.int_value,,0,8031812.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Boost Pressure Turbocharger 2,50,kinesisstats.osDBoostPressureTurbocharger2Pa,value.int_value,,0,8031812.5,0,0,0,0,
+Vehicle Diagnostics,Eco Driving,Brake Events,50,kinesisstats.osDDeltaBrakeEvents,value.int_value,,0,600000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Refridgeration Units,General Information,Carrier Status,50,kinesisstats.osDReeferPretripStatus,value.proto_value.reefer_pretrip_status.carrier.overall_status,,0,6,0,0,0,0,
+Vehicle Diagnostics,Electric Vehicles,Charger Current,50,kinesisstats.osDEvChargerMilliAmp,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,Charger Type,50,kinesisstats.osDEvChargingType,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,Charger Voltage,50,kinesisstats.osDEvChargerMilliVolt,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,Charging Energy,50,kinesisstats.osDDeltaEvChargingEnergyMicroWh,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Fuel and Energy,Consumption Rate Debug,50,kinesisstats.osDFuelConsumptionRateMlPerHour,value.int_value,,0,3875939970,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4621773/VDP+Fuel+Consumption
+Refridgeration Units,General Information,Controller Type,50,kinesisstats.osDReeferAttachedController,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Current Gear Selected,50,kinesisstats.osDVehicleCurrentGear,value.int_value,,-125,126.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Delivery Pressure,50,kinesisstats.osDFuelDeliveryPressureKPa,value.int_value,,0,998,0,0,0,0,
+Samsara Platform,Device Dimensions,Diagnostic Cable,50,kinesisstats.osDObdCableId,value.int_value,definitions.product_to_cables,0,0,0,0,0,0,
+Refridgeration Units,General Information,Display Air Temperature,50,kinesisstats.osDReeferDispRetAirTempMilliC,value.int_value,,-38000,70000,0,0,0,0,
+Samsara Platform,GPS,Distance Travelled,50,kinesisstats.osDDeltaGpsDistance,value.double_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Door Open,50,kinesisstats.osDReeferDoorOpen,value.int_value,,0,1,0,0,0,0,
+Refridgeration Units,General Information,Door Open Zone 1,50,kinesisstats.osDReeferDoorOpenZone1,value.int_value,,0,1,0,0,0,0,
+Refridgeration Units,General Information,Door Open Zone 2,50,kinesisstats.osDReeferDoorOpenZone2,value.int_value,,0,1,0,0,0,0,
+Refridgeration Units,General Information,Door Open Zone 3,50,kinesisstats.osDReeferDoorOpenZone3,value.int_value,,0,1,0,0,0,0,
+Vehicle Diagnostics,EU Compliance,Download Error,50,kinesisstats.osDTachographDownloadError,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4697302/VDP+Tachograph+API
+Vehicle Diagnostics,EU Compliance,Driver Info,50,kinesisstats.osDTachographDriverInfo,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4697302/VDP+Tachograph+API
+Vehicle Diagnostics,EU Compliance,Driver State,50,kinesisstats.osDTachographDriverState,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4697302/VDP+Tachograph+API
+Material Spreaders,General Information,Dry Material Spread,50,kinesisstats.osDSaltSpreaderQuantitySpreadDryMilligrams,value.int_value,,0,999999999999,0,999999999999,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Dry Material Spread,50,kinesisstats.osDSaltSpreaderSpreadRateDryMilligramsPerMeter,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Vehicle Diagnostics,General Information,ECU History,50,kinesisstats.osDEcuHistoryTotalRunTimeSec,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Electric Hours,50,kinesisstats.osDReeferElectricHours,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Maintenance Reports,Engine Faults,50,kinesisstats.osDJ1939D2Status,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Engine Hours Zone 2,50,kinesisstats.osDReeferEngineHoursZone2,value.int_value,,0,99999,0,0,0,0,
+Vehicle Diagnostics,General Information,Engine Oil Temperature,50,kinesisstats.osDEngineOilTempMicroC,value.int_value,,-272984375,1734953125,0,0,0,0,
+Vehicle Diagnostics,US Compliance,Engine Runtime Derived,50,kinesisstats.osDDerivedEngineSecondsFromIgnitionCycle,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Engine Time Since Ignition,50,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.engine_on_secs,,0.5,65534.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Exhaust Gas Pressure,50,kinesisstats.osDExhaustGasPressurePa,value.int_value,,-250000,251988.2813,0,0,0,0,
+Vehicle Diagnostics,General Information,Fuel Economy,50,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.fuel_economy_meters_per_k_g,,0,125497.0703,0,0,0,0,
+Refridgeration Units,General Information,Fuel Level Percent,50,kinesisstats.osDReeferFuelLevelPercent,value.int_value,,0,100,0,0,0,0,
+Vehicle Diagnostics,General Information,Fuel Temperature,50,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.fuel_temp_milli_c,,-39500,209500,0,0,0,0,
+Material Spreaders,General Information,Ground Speed,50,kinesisstats.osDSaltSpreaderGroundSpeedMilliknots,value.int_value,,0,69518,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Ground Temperature,50,kinesisstats.osDSaltSpreaderGroundTempMilliC,value.int_value,,-40000,40000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Refridgeration Units,General Information,Heartbeat,50,kinesisstats.osDReeferHeartbeat,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Electric Vehicles,High Capacity Battery Current,50,kinesisstats.osDEvHighCapacityBatteryMilliAmp,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,Electric Vehicles,High Capacity Battery Voltage,50,kinesisstats.osDEvHighCapacityBatteryMilliVolt,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Vehicle Diagnostics,General Information,Intake Manifold Temperature,50,kinesisstats.osDIntakeManifoldTemperatureMicroCelsius,value.int_value,,-39500000,214500000,0,0,0,0,
+Vehicle Diagnostics,Developer Debugging,Internal End,50,kinesisstats.osDObdInternalEnd,value.int_value,,,,,,,,
+Vehicle Diagnostics,Developer Debugging,Internal Start,50,kinesisstats.osDObdInternalStart,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,J1939 Component ID,50,kinesisstats.osDJ1939ComponentId,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Fuel and Energy,Lifetime Consumption,50,kinesisstats.osDLifetimeFuelConsumed,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4621773/VDP+Fuel+Consumption
+Vehicle Diagnostics,General Information,Line to Neutral ARCMS Voltage,50,kinesisstats.osDAverageLineToNeutralACRMSMilliVolts,value.int_value,,0,64254500,0,0,0,0,
+Material Spreaders,General Information,Major Event,50,kinesisstats.osDSaltSpreaderMajorEvent,value.int_value,,0,1,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Vehicle Diagnostics,General Information,Manifold Temperature,50,kinesisstats.osDEngineGauge,value.proto_value.engine_gauge_event.mnfld_temp_milli_c,,-39500,214500,0,0,0,0,
+Refridgeration Units,General Information,Metadata,50,kinesisstats.osDReeferCommandMetadata,value.proto_value.reefer_command_metadata.reefer_command_type,,0,12,0,0,0,0,
+Vehicle Diagnostics,General Information,OBD Compliance Standard,50,kinesisstats.osDObdComplianceStandard,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,On Hours,50,kinesisstats.osDReeferOnHours,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase A RMS,50,kinesisstats.osDPhaseAAmpsRms,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase ACC Frequency,50,kinesisstats.osDPhaseAACFreqMicroHertz,value.int_value,,0,501988281.3,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase ALL Voltage,50,kinesisstats.osDPhaseALLVolts,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase ALN Voltage,50,kinesisstats.osDPhaseALNVolts,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase B RMS,50,kinesisstats.osDPhaseBAmpsRms,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase BLL Voltage,50,kinesisstats.osDPhaseBLLVolts,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase BLN Voltage,50,kinesisstats.osDPhaseBLNVolts,value.int_value,,0,64254.5,0,0,0,0,
+Refridgeration Units,General Information,Phase C RMS,50,kinesisstats.osDPhaseCAmpsRms,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase CLL Voltage,50,kinesisstats.osDPhaseCLLVolts,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Phase CLN Voltage,50,kinesisstats.osDPhaseCLNVolts,value.int_value,,0,64254.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Power Factor Ratio,50,kinesisstats.osDPowerFactorRatio,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Power Status,50,kinesisstats.osDReeferPowerStatus,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Pretrip Status,50,kinesisstats.osDReeferPretripStatus,value.int_value,,0,0,0,0,0,0,
+Material Spreaders,General Information,Prewet Material Spread,50,kinesisstats.osDSaltSpreaderQuantitySpreadPrewetMilliliters,value.int_value,,0,999999999999,0,999999999999,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Prewet Material Spread,50,kinesisstats.osDSaltSpreaderSpreadRatePrewetLitersPerTonne,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Prewet Material Spread,50,kinesisstats.osDSaltSpreaderSpreadRatePrewetMillilitersPerMeter,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Vehicle Diagnostics,Developer Debugging,Raw State of Charge,50,kinesisstats.osDEvRawStateOfChargeMillipercent,value.int_value,,,,,,,,
+Refridgeration Units,General Information,Reefer Run Mode,50,kinesisstats.osDReeferRunMode,value.int_value,,0,0,0,0,0,0,
+Vehicle Diagnostics,Electric Vehicles,Regenerated Energy,50,kinesisstats.osDDeltaEvTotalEnergyRegeneratedWhileDrivingMicroWh,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5695980/VDP+Electric+Vehicles
+Refridgeration Units,General Information,Road Engine Hours Zone 1,50,kinesisstats.osDReeferRoadHoursZone1,value.int_value,,0,99999,0,0,0,0,
+Refridgeration Units,General Information,Road Engine Hours Zone 2,50,kinesisstats.osDReeferRoadHoursZone2,value.int_value,,0,99999,0,0,0,0,
+Vehicle Diagnostics,General Information,Service Distance,50,kinesisstats.osDDistanceServiceMeters,value.int_value,,-160635000,160637500,0,0,0,0,
+Refridgeration Units,General Information,Set Point Temperature,50,kinesisstats.osDSetPointTempMilliC,value.int_value,,-30000,30000,0,0,0,0,
+Refridgeration Units,General Information,Set Point Temperature Zone 2,50,kinesisstats.osDSetPointTempMilliCZone2,value.int_value,,-30000,30000,0,0,0,0,
+Refridgeration Units,General Information,Set Point Temperature Zone 3,50,kinesisstats.osDSetPointTempMilliCZone3,value.int_value,,-30000,30000,0,0,0,0,
+Vehicle Diagnostics,General Information,Smog Check Results,50,kinesisstats.osDSmogCheckResults,value.int_value,,0,0,0,0,0,0,
+Material Spreaders,General Information,Spreading State,50,kinesisstats.osDSaltSpreaderState,value.int_value,,0,2,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Refridgeration Units,General Information,State,50,kinesisstats.osDReeferState,value.int_value,,0,3,0,0,0,0,
+Refridgeration Units,General Information,State Zone 1,50,kinesisstats.osDReeferStateZone1,value.int_value,,0,3,0,0,0,0,
+Refridgeration Units,General Information,State Zone 2,50,kinesisstats.osDReeferStateZone2,value.int_value,,0,3,0,0,0,0,
+Refridgeration Units,General Information,State Zone 3,50,kinesisstats.osDReeferStateZone3,value.int_value,,0,3,0,0,0,0,
+Refridgeration Units,General Information,Supplied Air Temperature,50,kinesisstats.osDReeferSupplyAirTempMilliC,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Supplied Air Temperature Zone 2,50,kinesisstats.osDReeferSupplyAirTempMilliCZone2,value.int_value,,0,0,0,0,0,0,
+Refridgeration Units,General Information,Thermoking IBOX Attached Controller,50,kinesisstats.osDReeferAttachedController,value.proto_value.reefer_attached_controller.thermo_king_ibox_attached_controller,,0,24,0,0,0,0,
+Vehicle Diagnostics,General Information,Torque Percent,50,kinesisstats.osDTorquePercent,value.int_value,,-125.5,125.5,0,0,0,0,
+Vehicle Diagnostics,General Information,Total Apparent Power,50,kinesisstats.osDTotalApparentPowerVoltAmpere,value.int_value,,-2000000000,2211081215,0,0,0,0,
+Vehicle Diagnostics,General Information,Total KWH Exported,50,kinesisstats.osDTotalkWHExported,value.int_value,,0,4211081215,0,0,0,0,
+Vehicle Diagnostics,General Information,Total Power,50,kinesisstats.osDTotalPowerkW,value.int_value,,0,32127.25,0,0,0,0,
+Vehicle Diagnostics,General Information,Total Reactive Power,50,kinesisstats.osDTotalReactivePowerVoltAmpereReactive,value.int_value,,-2000000000,2211081215,0,0,0,0,
+Vehicle Diagnostics,General Information,Total Real Power,50,kinesisstats.osDTotalRealPowerWatt,value.int_value,,-2000000000,2211081215,0,0,0,0,
+Vehicle Diagnostics,Fuel and Energy,Type,50,kinesisstats.osDFuelType,value.int_value,definitions.fuel_types,0,254.5,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4621773/VDP+Fuel+Consumption
+Material Spreaders,General Information,Type,50,kinesisstats.osDSaltSpreaderType,value.int_value,definitions.salt_spreader_type,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Vehicle Diagnostics,General Information,Vehicle Network Connection,50,kinesisstats.osDCanConnected,value.int_value,,0,5,0,0,0,0,
+Vehicle Diagnostics,Eco Driving,Vehicle Weight,50,kinesisstats.osDJ1939CVWGrossCombinationVehicleWeightKilograms,value.int_value,,0,655300,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5818493/VDP+EcoDriving
+Vehicle Diagnostics,EU Compliance,VU Download,50,kinesisstats.osDTachographVUDownload,value.int_value,,0,0,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4697302/VDP+Tachograph+API
+Material Spreaders,General Information,Wet Material Spread,50,kinesisstats.osDSaltSpreaderQuantitySpreadWetMilliliters,value.int_value,,0,999999999999,0,999999999999,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Material Spreaders,General Information,Wet Spread Rate,50,kinesisstats.osDSaltSpreaderSpreadRateWetMillilitersPerMeter,value.int_value,,0,282000,0,0,0,0,https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5883646/VDP+Material+Spreader
+Vehicle Diagnostics,Developer Debugging,Command Scheduler Debug,100,kinesisstats.osDCommandSchedulerStats,value.int_value,,0,0,0,0,0,0,
+Samsara Platform,Device Dimensions,Firmware Build,100,kinesisstats.osDHubServerDeviceHeartbeat,value.proto_value.hub_server_device_heartbeat.connection.device_hello.build,,0,0,0,0,0,0,
+Vehicle Diagnostics,General Information,Accelerator Pedal Position,1000,kinesisstats.osDAcceleratorPedalPositionDeciPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Actual Engine Ignition Timing,1000,kinesisstats.osDEngineActualIgnitionTimingNanoDegrees,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Advanced Emergency Braking System State,1000,kinesisstats.osDJ1939AEBS1AdvancedEmergencyBrakingSystemStateState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Aftertreatment 1 DEF Tank Level,1000,kinesisstats.osDAftertreatment1DieselExhaustFluidTankLevelMicroMeter,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Aftertreatment 1 DEF Tank Volume,1000,kinesisstats.osDAftertreatment1DieselExhaustFluidTankVolumeDeciPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Aftertreatment Regen Inhibited,1000,kinesisstats.osDAftertreatmentRegenerationInhibitSwitchState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Air Filter Pressure,1000,kinesisstats.osDAirFilterDiffPressurePa,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Analog Input Current 1,1000,kinesisstats.osDJ1939PropAnalogInputCurrent1MicroAmps,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Analog Input Current 3,1000,kinesisstats.osDJ1939PropAnalogInputCurrent3MicroAmps,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Analog Input Voltage 1,1000,kinesisstats.osDJ1939PropAnalogInputVoltage1MilliVolts,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Analog Input Voltage 2,1000,kinesisstats.osDJ1939PropAnalogInputVoltage2MilliVolts,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Analog Input Voltage 3,1000,kinesisstats.osDJ1939PropAnalogInputVoltage3MilliVolts,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Analong Input Current 2,1000,kinesisstats.osDJ1939PropAnalogInputCurrent2MicroAmps,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Collision Warning Lvel,1000,kinesisstats.osDJ1939AEBS1CollisionWarningLevelState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Compressor Discharge Temperature,1000,kinesisstats.osDSullairCompressorDischargeTempMicroCelsius,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Compressor Fuel Level,1000,kinesisstats.osDSullairCompressorFuelLevelDeciPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Compressor P1 Pressure,1000,kinesisstats.osDSullairCompressorP1PressurePa,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Compressor P2 Pressure,1000,kinesisstats.osDSullairCompressorP2PressurePa,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Compressor P3 Pressure,1000,kinesisstats.osDSullairCompressorP3PressurePa,value.int_value,,,,,,,,
+Vehicle Diagnostics,Developer Debugging,Custom OBD,1000,kinesisstats.osDCustomObdStart,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,DEF Active Regen Inhibitied,1000,kinesisstats.osDDieselParticulateFilterActiveRegenerationInhibitedDueToInhibitSwitchState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,DEF Active Regen Inhibitied,1000,kinesisstats.osDDieselParticulateFilterActiveRegenerationInhibitedStatusState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Desired Engine Ignition Timing,1000,kinesisstats.osDEngineDesiredIgnitionTimingNanoDegrees,value.int_value,,,,,,,,
+Vehicle Diagnostics,Electric Vehicles,Display State of Charge,1000,kinesisstats.osDEvHighCapacityBatteryDisplayStateOfChargeMilliPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,DPF Regeneration Active,1000,kinesisstats.osDJ1939DpfRegenActiveStatus,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,DPF Regeneration Forced,1000,kinesisstats.osDJ1939DpfRegenForcedStatus,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,DPF Regeneration Needed,1000,kinesisstats.osDJ1939DpfRegenNeededStatus,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,DPF Regeneration Passive,1000,kinesisstats.osDJ1939DpfRegenPassiveStatus,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Driver Alertness,1000,kinesisstats.osDJ1939FLI1DriverAlertnessWarning,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,ELD Odometer Meters,1000,kinesisstats.osDEldOdometerMeters,value.int_value,,,,,,,,
+Vehicle Diagnostics,Electric Vehicles,Energy Remaining,1000,kinesisstats.osDEvHighCapacityBatteryRemainingEnergyWh,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Engine Oil Level,1000,kinesisstats.osDEngineOilLevelDeciPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Engine Throttle Actuator Control Command Percent,1000,kinesisstats.osDEngineThrottleActuator1ControlCommandMicroPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Engine Total Fuel Used,1000,kinesisstats.osDEngineTotalFuelUsedMilliLiters,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Engine Total Idle Fuel Used,1000,kinesisstats.osDEngineTotalIdleFuelUsedMilliLiters,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Engine Total Idle Time,1000,kinesisstats.osDEngineTotalIdleTimeMinutes,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Exhaust Manifold Temperature Bank 1,1000,kinesisstats.osDEngineExhaustManifoldBank1Temp1MicroCelsius,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Exhaust Manifold Temperature Bank 2,1000,kinesisstats.osDEngineExhaustManifoldBank2Temp1MicroCelsius,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Exhaust Temperature,1000,kinesisstats.osDEngineExhaustTempMicroC,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Fuel Level Tank 1,1000,kinesisstats.osDFuelLevel1DeciPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Fuel Level Tank 2,1000,kinesisstats.osDFuelLevel2DeciPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Intercooler Temperature,1000,kinesisstats.osDEngineIntercoolerTempC,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Lane Departure Imminent Left Side,1000,kinesisstats.osDJ1939FLI1LaneDepartureImminentLeftSideState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Lane Departure Imminent Right Side,1000,kinesisstats.osDJ1939FLI1LaneDepartureImminentRightSideState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Lane Departure Left Side,1000,kinesisstats.osDJ1939FLI1LaneDepartureLeftState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Lane Departure Right Side,1000,kinesisstats.osDJ1939FLI1LaneDepartureRightState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Lane Keeping Assist,1000,kinesisstats.osDJ1939ASSC1LaneKeepingAssistSystemState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Power Factor Lagging,1000,kinesisstats.osDOverallPowerFactorLaggingEnum,value.int_value,,,,,,,,
+Vehicle Diagnostics,Electric Vehicles,Real State of Charge,1000,kinesisstats.osDEvHighCapacityBatteryRealStateOfChargeMilliPercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,System Cleaning Inhibited Status State,1000,kinesisstats.osDScrSystemCleaningInhibitedStatusState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,System Cleaning Inhibited Switch State,1000,kinesisstats.osDScrSystemCleaningInhibitedDueToInhibitSwitchState,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Throttle Position,1000,kinesisstats.osDThrottleValue1Position1Decipercent,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Time to Collision,1000,kinesisstats.osDJ1939AEBS1TimeToCollisionWithRelevantObjectCentiSeconds,value.int_value,,,,,,,,
+Vehicle Diagnostics,General Information,Turn Signal Switch State,1000,kinesisstats.osDJ1939OELTurnSignalSwitchState,value.int_value,,,,,,,,

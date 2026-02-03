@@ -1,0 +1,12 @@
+`org_id` BIGINT,
+`device_id` BIGINT,
+`query_start_ms` BIGINT,
+`query_end_ms` BIGINT,
+`query_time` BIGINT,
+`datapoint_count` BIGINT,
+`inaccurate_datapoint_count` BIGINT,
+`repaired_datapoint_count` BIGINT,
+`max_gps_speed` BIGINT,
+`has_ecu_speed` BOOLEAN,
+`app_name` STRING,
+`date` DATE

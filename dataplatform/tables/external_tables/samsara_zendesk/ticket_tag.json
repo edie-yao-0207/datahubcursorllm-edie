@@ -1,0 +1,20 @@
+{
+  "table": "ticket_tag",
+  "owner": "DataEngineering",
+  "description": "Zendesk Ticket Tag Table from Fivetran",
+  "database": "samsara_zendesk",
+  "schema": [
+    {
+      "name": "ticket_id",
+      "type": "bigint"
+    },
+    {
+      "name": "tag",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`uuid` STRING,
+`org_id` BIGINT,
+`route_template_uuid` STRING,
+`location_uuid` STRING,
+`position` INT,
+`partition` STRING

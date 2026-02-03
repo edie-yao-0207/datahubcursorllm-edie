@@ -1,0 +1,40 @@
+`date` STRING,
+`stat_type` INT,
+`org_id` BIGINT,
+`object_type` INT,
+`object_id` BIGINT,
+`time` BIGINT,
+`value` STRUCT<
+  `date`: STRING,
+  `time`: BIGINT,
+  `received_delta_seconds`: BIGINT,
+  `is_start`: BOOLEAN,
+  `is_end`: BOOLEAN,
+  `is_databreak`: BOOLEAN,
+  `int_value`: BIGINT,
+  `double_value`: DOUBLE,
+  `proto_value`: STRUCT<
+    `engine_gauge_event`: STRUCT<
+      `air_temp_milli_c`: BIGINT,
+      `barometer_pa`: BIGINT,
+      `battery_milli_v`: BIGINT,
+      `coolant_temp_milli_c`: BIGINT,
+      `engine_on_secs`: BIGINT,
+      `engine_load_percent`: BIGINT,
+      `fuel_level_percent`: BIGINT,
+      `fuel_temp_milli_c`: BIGINT,
+      `mnfld_temp_milli_c`: BIGINT,
+      `oil_pressure_k_pa`: BIGINT,
+      `engine_rpm`: BIGINT,
+      `odometer_meters`: BIGINT,
+      `fuel_economy_meters_per_k_g`: BIGINT,
+      `engine_hours_secs`: BIGINT,
+      `tire_pressure_front_left_k_pa`: BIGINT,
+      `tire_pressure_front_right_k_pa`: BIGINT,
+      `tire_pressure_back_left_k_pa`: BIGINT,
+      `tire_pressure_back_right_k_pa`: BIGINT
+    >
+  >
+>,
+`_filename` STRING,
+`_sort_key` STRING

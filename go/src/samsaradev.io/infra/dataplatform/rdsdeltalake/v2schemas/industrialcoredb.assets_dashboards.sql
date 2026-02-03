@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`asset_uuid` STRING,
+`dashboard_id` BIGINT,
+`is_default_dashboard` BYTE,
+`partition` STRING

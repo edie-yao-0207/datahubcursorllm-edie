@@ -1,0 +1,8 @@
+[
+  {
+    "Name": "json",
+    "Values": [
+      "{\"primary_int\":\"0\",\"primary_string\":\"\",\"primary_uuid\":\"00000000-0000-0000-0000-000000000000\",\"non_null_int\":\"0\",\"null_int\":null,\"non_null_string\":\"\",\"null_string\":null,\"non_null_bool\":false,\"null_bool\":null,\"non_null_float\":0,\"null_float\":null,\"non_null_uuid\":\"00000000-0000-0000-0000-000000000000\",\"null_uuid\":null,\"non_null_time\":\"0001-01-01T00:00:00Z\",\"null_time\":null,\"non_null_proto\":{\"fuel_consumed_ml\":\"0\",\"start_fuel_consumed_ml\":\"0\",\"start_fuel_consumed_timestamp_ms\":\"0\",\"end_fuel_consumed_ml\":\"0\",\"end_fuel_consumed_timestamp_ms\":\"0\"},\"null_proto\":null,\"created_at\":\"0001-01-01T00:00:00Z\",\"updated_at\":\"0001-01-01T00:00:00Z\",\"citizen_id\":\"0\",\"non_null_enum\":0,\"null_bytes\":null,\"non_null_uint32\":0,\"null_uint32\":null,\"non_null_uint64\":\"0\",\"null_uint64\":null,\"omit_sql_proto\":{\"fuel_consumed_ml\":\"0\",\"start_fuel_consumed_ml\":\"0\",\"start_fuel_consumed_timestamp_ms\":\"0\",\"end_fuel_consumed_ml\":\"0\",\"end_fuel_consumed_timestamp_ms\":\"0\"}}"
+    ]
+  }
+]

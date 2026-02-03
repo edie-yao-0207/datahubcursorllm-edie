@@ -1,0 +1,104 @@
+{
+  "view": "elite_org_combined_route_loads",
+  "owner": "OPX",
+  "description": "Contains a combination of Route Load data and User Interactions performed by Elite Orgs.",
+  "database": "perf_infra",
+  "schema": [
+    {
+      "name": "date",
+      "type": "date",
+      "description": "The date the route load or user interaction occurred on."
+    },
+    {
+      "name": "timestamp",
+      "type": "timestamp",
+      "description": "The timestamp the route load or user interaction occurred on."
+    },
+    {
+      "name": "resource",
+      "type": "string",
+      "description": "Stripped down name of the route minus org and query params."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "description": "Indicates if the record is for a User Interaction or Route Load.",
+      "nullable": false
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The name of the user interaction performed, or 'route.load' if a Route Load."
+    },
+    {
+      "name": "org_name",
+      "type": "string",
+      "description": "The name of the org that the route load or user interaction was performed for."
+    },
+    {
+      "name": "org_id",
+      "type": "long",
+      "description": "The org for this route load or user interaction, joinable with clouddb.organizations."
+    },
+    {
+      "name": "user_id",
+      "type": "long",
+      "description": "The user id of the user who loaded the page or performed the interaction."
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "description": "The email of the user who loaded the page or performed the interaction."
+    },
+    {
+      "name": "duration_ms",
+      "type": "long",
+      "description": "The duration, in milliseconds, that the route load or user interaction took to complete."
+    },
+    {
+      "name": "team_owner",
+      "type": "string",
+      "description": "Team that owns and maintains this route."
+    },
+    {
+      "name": "raw_url",
+      "type": "string",
+      "description": "The exact URL where the metric occurred."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "perf_infra",
+      "tablename": "route_config",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datastreams",
+      "tablename": "frontend_routeload",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "users",
+      "type": "table"
+    },
+    {
+      "dbname": "perf_infra",
+      "tablename": "elite_orgs",
+      "type": "table"
+    },
+    {
+      "dbname": "datastreams",
+      "tablename": "cloud_app_user_interactions",
+      "type": "table"
+    }
+  ]
+}

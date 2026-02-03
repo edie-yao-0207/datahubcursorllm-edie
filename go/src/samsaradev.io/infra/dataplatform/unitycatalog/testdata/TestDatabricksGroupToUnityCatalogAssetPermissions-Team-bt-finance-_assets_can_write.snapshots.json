@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "bt-finance: assets can write",
+    "Values": [
+      {
+        "databases": [
+          "default.finops"
+        ]
+      }
+    ]
+  }
+]

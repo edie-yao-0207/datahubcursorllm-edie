@@ -1,0 +1,11 @@
+`error_session_uuid` STRING,
+`stream_session_uuid` STRING,
+`org_id` BIGINT,
+`user_id` BIGINT,
+`cell` STRING,
+`offset_from_stream_session_start_ms` BIGINT,
+`server_recorded_timestamp` TIMESTAMP,
+`client_recorded_timestamp` TIMESTAMP,
+`error_type` STRING,
+`error_details` STRING,
+`date` DATE

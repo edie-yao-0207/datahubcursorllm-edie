@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`alert_id` BIGINT,
+`user_id` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`has_push_notification` BYTE,
+`has_email_notification` BYTE,
+`has_sms_notification` BYTE,
+`partition` STRING

@@ -1,0 +1,98 @@
+{
+  "version": 2,
+  "globalSeriesType": "pie",
+  "sortX": true,
+  "sortY": true,
+  "legend": { "traceorder": "normal" },
+  "xAxis": { "type": "-", "labels": { "enabled": true } },
+  "yAxis": [
+    { "type": "-", "title": { "text": "count per device" } },
+    { "type": "-", "opposite": true }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": { "type": "data", "visible": true },
+  "series": {
+    "stacking": null,
+    "error_y": { "type": "data", "visible": true }
+  },
+  "seriesOptions": {
+    "median_max_time_from_first_push_to_reboot_hours": {
+      "yAxis": 0,
+      "type": "pie"
+    },
+    "median_max_delta_download_duration_hours": {
+      "yAxis": 0,
+      "type": "pie"
+    },
+    "median_max_delta_apply_duration_hours": {
+      "yAxis": 0,
+      "type": "pie"
+    },
+    "median_max_full_script_download_duration_hours": {
+      "yAxis": 0,
+      "type": "pie"
+    },
+    "median_max_upgrade_script_duration_hours": {
+      "yAxis": 0,
+      "type": "pie"
+    },
+    "median_max_wait_duration_hours": { "yAxis": 0, "type": "pie" },
+    "num_devices": { "yAxis": 0, "type": "pie" },
+    "sumdiff": { "yAxis": 0, "type": "pie" },
+    "(num_anomalies / total_trip_hours)": { "yAxis": 0, "type": "pie" },
+    "count": { "yAxis": 0, "type": "pie" },
+    "Completed": { "color": "#00A972", "type": "pie" },
+    "Failed": { "color": "#FF3621", "type": "pie" },
+    "Pending": { "color": "#919191", "type": "pie" },
+    "Cancelled": { "color": "#FFAB00", "type": "pie" },
+    "device_count": { "yAxis": 0, "type": "pie" },
+    "num_errors": { "yAxis": 0, "type": "pie" },
+    "total_gbytes": { "yAxis": 0, "type": "pie" },
+    "anomalies_per_device": { "yAxis": 0, "type": "pie" },
+    "num_events": { "yAxis": 0, "type": "pie" },
+    "median": { "yAxis": 0, "type": "pie" },
+    "p40": { "yAxis": 0, "type": "pie" },
+    "p30": { "yAxis": 0, "type": "pie" },
+    "p20": { "yAxis": 0, "type": "pie" },
+    "p10": { "yAxis": 0, "type": "pie" },
+    "p5": { "yAxis": 0, "type": "pie" },
+    "p01": { "yAxis": 0, "type": "pie" },
+    "p001": { "yAxis": 0, "type": "pie" },
+    "avg": { "yAxis": 0, "type": "pie" },
+    "p9": { "yAxis": 0, "type": "pie" },
+    "p8": { "yAxis": 0, "type": "pie" },
+    "p7": { "yAxis": 0, "type": "pie" },
+    "p6": { "yAxis": 0, "type": "pie" },
+    "p4": { "yAxis": 0, "type": "pie" },
+    "p3": { "yAxis": 0, "type": "pie" },
+    "p2": { "yAxis": 0, "type": "pie" },
+    "num_anomalies": { "yAxis": 0, "type": "pie" },
+    "total_download_gbytes": { "yAxis": 0, "type": "pie" },
+    "total_upload_gbytes": { "yAxis": 0, "type": "pie" },
+    "total_download_gbyte": { "yAxis": 0, "type": "pie" },
+    "successfully_connected": { "yAxis": 0, "type": "pie" },
+    "failed_to_connect": { "yAxis": 0, "type": "pie" }
+  },
+  "valuesOptions": {
+    "upgrade complete": { "color": "#00A972" },
+    "inactive": { "color": "#919191" }
+  },
+  "direction": { "type": "counterclockwise" },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": false,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": true,
+  "columnConfigurationMap": {
+    "x": { "column": "reason", "id": "column_f50bc89c4168" },
+    "y": [{ "id": "column_94f088c512140", "column": "count" }]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

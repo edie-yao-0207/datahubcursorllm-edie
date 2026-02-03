@@ -1,0 +1,9 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`predictive_maintenance_event_uuid` STRING,
+`predictive_maintenance_type` STRING,
+`severity` STRING,
+`alert_emitted` BOOLEAN,
+`alert_emit_reason` STRING,
+`date` DATE

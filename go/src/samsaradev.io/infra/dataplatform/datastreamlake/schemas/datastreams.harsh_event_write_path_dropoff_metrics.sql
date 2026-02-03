@@ -1,0 +1,11 @@
+`org_id` BIGINT,
+`device_id` BIGINT,
+`event_ms` BIGINT,
+`event_id` BIGINT,
+`is_hev2` BOOLEAN,
+`accel_type` INT,
+`record_type` BIGINT,
+`filters_caught` MAP<STRING, BIGINT>,
+`sent_at_ms` BIGINT,
+`app_name` STRING,
+`date` DATE

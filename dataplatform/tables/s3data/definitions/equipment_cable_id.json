@@ -1,0 +1,24 @@
+{
+  "table": "equipment_cable_id",
+  "owner": "DataEngineering",
+  "description": "Mappings for equipment cable IDs to name and SKU (source: go/src/samsaradev.io/products/equipment_devices.go). Denormalized: one row per cable_id + cable_sku combination.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "cable_id",
+      "type": "bigint",
+      "description": "The ID for the equipment cable"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Cable name"
+    },
+    {
+      "name": "cable_sku",
+      "type": "string",
+      "description": "The CBL-* cable SKU that maps to this cable ID (empty if no specific SKU)"
+    }
+  ]
+}

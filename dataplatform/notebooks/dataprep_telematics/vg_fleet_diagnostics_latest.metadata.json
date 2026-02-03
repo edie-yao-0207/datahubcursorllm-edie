@@ -1,0 +1,266 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["alerts-data-engineeri-aaaafmgsat75dpgg7nhr3tbcvu@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 7 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "max_retries": 3,
+      "min_retry_interval_seconds": 300,
+      "max_workers": 64,
+      "driver_node_type_id": "md-fleet.xlarge",
+      "parameters": {
+        "LOOKBACK_DAYS": "7"
+      },
+      "spark_version": "default"
+    }
+  ],
+  "output": {
+    "dbname": "dataprep_telematics",
+    "tablename": "vg_fleet_diagnostics_latest",
+    "type": "table",
+    "schema": [
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "object_id",
+        "type": "long"
+      },
+      {
+        "name": "product_id",
+        "type": "long"
+      },
+      {
+        "name": "variant_id",
+        "type": "long"
+      },
+      {
+        "name": "serial",
+        "type": "string"
+      },
+      {
+        "name": "device_name",
+        "type": "string"
+      },
+      {
+        "name": "make",
+        "type": "string"
+      },
+      {
+        "name": "model",
+        "type": "string"
+      },
+      {
+        "name": "year",
+        "type": "long"
+      },
+      {
+        "name": "engine_model",
+        "type": "string"
+      },
+      {
+        "name": "primary_fuel_type",
+        "type": "string"
+      },
+      {
+        "name": "engine_manufacturer",
+        "type": "string"
+      },
+      {
+        "name": "has_ecm_vin",
+        "type": "boolean"
+      },
+      {
+        "name": "has_ecm_odo",
+        "type": "boolean"
+      },
+      {
+        "name": "has_ecm_enginehours",
+        "type": "boolean"
+      },
+      {
+        "name": "cable_id",
+        "type": "long"
+      },
+      {
+        "name": "can_id",
+        "type": "long"
+      },
+      {
+        "name": "cable_name",
+        "type": "string"
+      },
+      {
+        "name": "can_name",
+        "type": "string"
+      },
+      {
+        "name": "ecm_vin_value",
+        "type": "string"
+      },
+      {
+        "name": "first_vin_date",
+        "type": "string"
+      },
+      {
+        "name": "last_vin_date",
+        "type": "string"
+      },
+      {
+        "name": "ecm_odometer_value",
+        "type": "long"
+      },
+      {
+        "name": "ecm_engine_hour_value",
+        "type": "long"
+      },
+      {
+        "name": "fuel_level_value",
+        "type": "long"
+      },
+      {
+        "name": "fuel_consumption_value",
+        "type": "long"
+      },
+      {
+        "name": "first_fuel_consumption_date",
+        "type": "string"
+      },
+      {
+        "name": "last_fuel_consumption_date",
+        "type": "string"
+      },
+      {
+        "name": "seatbelt_value",
+        "type": "long"
+      },
+      {
+        "name": "battery_voltage_value",
+        "type": "long"
+      },
+      {
+        "name": "first_odometer_date",
+        "type": "string"
+      },
+      {
+        "name": "last_odometer_date",
+        "type": "string"
+      },
+      {
+        "name": "first_engine_hour_date",
+        "type": "string"
+      },
+      {
+        "name": "last_engine_hour_date",
+        "type": "string"
+      },
+      {
+        "name": "last_belt_date",
+        "type": "string"
+      },
+      {
+        "name": "last_fuel_level_date",
+        "type": "string"
+      },
+      {
+        "name": "manual_odometer_meters",
+        "type": "long"
+      },
+      {
+        "name": "manual_engine_hours",
+        "type": "long"
+      },
+      {
+        "name": "manual_odometer_updated_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "manual_engine_hours_updated_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "vin_value",
+        "type": "string"
+      },
+      {
+        "name": "first_heartbeat",
+        "type": "string"
+      },
+      {
+        "name": "last_heartbeat",
+        "type": "string"
+      },
+      {
+        "name": "last_reported_build",
+        "type": "string"
+      },
+      {
+        "name": "first_can_connection",
+        "type": "string"
+      },
+      {
+        "name": "last_can_connection",
+        "type": "string"
+      },
+      {
+        "name": "can_connected",
+        "type": "boolean"
+      },
+      {
+        "name": "ecm_vin_detected",
+        "type": "boolean"
+      },
+      {
+        "name": "ecm_odometer_detected",
+        "type": "boolean"
+      },
+      {
+        "name": "ecm_engine_hours_detected",
+        "type": "boolean"
+      },
+      {
+        "name": "fuel_level_detected",
+        "type": "boolean"
+      },
+      {
+        "name": "fuel_consumption_detected",
+        "type": "boolean"
+      },
+      {
+        "name": "seatbelt_detected",
+        "type": "boolean"
+      },
+      {
+        "name": "total",
+        "type": "long"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "link",
+        "type": "string"
+      },
+      {
+        "name": "first_trip_date",
+        "type": "string"
+      },
+      {
+        "name": "last_trip_date",
+        "type": "string"
+      },
+      {
+        "name": "config_override_json",
+        "type": "string"
+      }
+    ]
+  }
+}

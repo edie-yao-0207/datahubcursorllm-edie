@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`gateway_id` BIGINT,
+`updated_at` TIMESTAMP,
+`config_version` INT,
+`config_version_pushed` INT,
+`partition` STRING

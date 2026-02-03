@@ -1,0 +1,11 @@
+{
+  "owner": "DataScience",
+  "email_notifications": ["datascience@samsara.com"],
+  "jobs": [
+    {
+      "name": "backend_crash_filter",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

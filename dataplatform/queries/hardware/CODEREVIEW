@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/hardware"
+  ],
+  "description": "Databricks SQL Queries. All changes in hardware must be cleared with the hardware team"
+}

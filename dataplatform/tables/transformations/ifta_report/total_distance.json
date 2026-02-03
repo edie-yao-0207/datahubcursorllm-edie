@@ -1,0 +1,132 @@
+{
+  "name": "ifta_report.total_distance",
+  "owner": "IftaCore",
+  "description": "Aggregates IFTA distances by device, jurisdiction, hour. IFTA applies to US, CA, and MX.",
+  "dependencies": [
+    {
+      "dbname": "ifta_report",
+      "tablename": "annotated_location_segments",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2023-08-01",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "ifta_report",
+    "tablename": "total_distance",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "hour_start", "org_id", "device_id", "jurisdiction"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date associated with `hour_start`."
+        }
+      },
+      {
+        "name": "hour_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The hour interval over which this data is aggregated."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The device ID of the vehicle that was driven."
+        }
+      },
+      {
+        "name": "jurisdiction",
+        "type": "string",
+        "metadata": {
+          "comment": "The jurisdiction where this distance was driven. This value will be the state/province code derived from `kinesisstats.location.revgeo_state`."
+        }
+      },
+      {
+        "name": "canonical_distance_meters",
+        "type": "double",
+        "metadata": {
+          "comment": "The distance driven in meters during this hour."
+        }
+      },
+      {
+        "name": "gps_meters",
+        "type": "double",
+        "metadata": {
+          "comment": "The GPS derived distance driven in meters during this hour."
+        }
+      },
+      {
+        "name": "odo_meters",
+        "type": "long",
+        "metadata": {
+          "comment": "The odometer derived distance driven in meters during this hour."
+        }
+      },
+      {
+        "name": "canonical_toll_meters",
+        "type": "double",
+        "metadata": {
+          "comment": "The toll distance driven in meters during this hour. This value is derived using `kinesisstats.location.toll` and canonical distance."
+        }
+      },
+      {
+        "name": "gps_toll_meters",
+        "type": "double",
+        "metadata": {
+          "comment": "The toll distance driven in meters during this hour. This value is derived using `kinesisstats.location.toll` and GPS distance."
+        }
+      },
+      {
+        "name": "odo_toll_meters",
+        "type": "long",
+        "metadata": {
+          "comment": "The toll distance driven in meters during this hour. This value is derived using `kinesisstats.location.toll` and odometer distance."
+        }
+      },
+      {
+        "name": "canonical_off_highway_meters",
+        "type": "double",
+        "metadata": {
+          "comment": "The off highway distance driven in meters during this hour. Derived from kinesisstats.osdlocationwithroadcontext IFTA geofence exemption types."
+        }
+      },
+      {
+        "name": "canonical_private_road_meters",
+        "type": "double",
+        "metadata": {
+          "comment": "The private road distance driven in meters during this hour. Derived from kinesisstats.osdlocationwithroadcontext IFTA geofence exemption types."
+        }
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp",
+        "nullable": false,
+        "metadata": {
+          "comment": "The timestamp that this record was created or last updated. This mostly available for debugging."
+        }
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  }
+}

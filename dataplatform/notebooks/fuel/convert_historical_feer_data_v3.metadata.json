@@ -1,0 +1,200 @@
+{
+  "owner": "Sustainability",
+  "output": {
+    "dbname": "fuel_maintenance",
+    "tablename": "historical_fuel_energy_report_delta_v3",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The driver or vehicle id of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "metadata": {
+          "comment": "The type of object this data is aggregated for (1 if vehicle, 5 if driver)."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The starting timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The ending timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "fuel_consumed_ml",
+        "type": "long",
+        "metadata": {
+          "comment": "The amount of fuel consumed in milliliters for this hour of aggregated data after filtering out impossibly high fuel efficiency."
+        }
+      },
+      {
+        "name": "fuel_consumed_ml_original",
+        "type": "long",
+        "metadata": {
+          "comment": "The amount of fuel consumed in milliliters for this hour of aggregated data before filtering out impossibly high fuel efficiency."
+        }
+      },
+      {
+        "name": "energy_consumed_kwh",
+        "type": "decimal(38,9)",
+        "metadata": {
+          "comment": "The amount of energy consumed in kilowatt-hours for this hour of aggregated data after filtering out impossible high energy efficiency."
+        }
+      },
+      {
+        "name": "energy_consumed_kwh_original",
+        "type": "decimal(38,9)",
+        "metadata": {
+          "comment": "The amount of energy consumed in kilowatt-hours for this hour of aggregated data before filtering out impossible high energy efficiency."
+        }
+      },
+      {
+        "name": "distance_traveled_m",
+        "type": "double",
+        "metadata": {
+          "comment": "The distance traveled in meters for this hour of aggregated data after filtering out impossibly high fuel/energy efficiency."
+        }
+      },
+      {
+        "name": "distance_traveled_m_original",
+        "type": "double",
+        "metadata": {
+          "comment": "The distance traveled in meters for this hour of aggregated data before filtering out impossibly high fuel/energy efficiency."
+        }
+      },
+      {
+        "name": "distance_traveled_m_gps",
+        "type": "double",
+        "metadata": {
+          "comment": "The GPS distance traveled in meters for this hour of aggregated data after filtering out impossibly high fuel/energy efficiency. This is only reported for historical values from the old monolithic report."
+        }
+      },
+      {
+        "name": "distance_traveled_m_gps_original",
+        "type": "double",
+        "metadata": {
+          "comment": "The GPS distance traveled in meters for this hour of aggregated data before filtering out impossibly high fuel/energy efficiency. This is only reported for historical values from the old monolithic report."
+        }
+      },
+      {
+        "name": "distance_traveled_m_odo",
+        "type": "long",
+        "metadata": {
+          "comment": "The odometer distance traveled in meters for this hour of aggregated data after filtering out impossibly high fuel/energy efficiency. This is only reported for historical values from the old monolithic report."
+        }
+      },
+      {
+        "name": "distance_traveled_m_odo_original",
+        "type": "long",
+        "metadata": {
+          "comment": "The odometer distance traveled in meters for this hour of aggregated data before filtering out impossibly high fuel/energy efficiency. This is only reported for historical values from the old monolithic report."
+        }
+      },
+      {
+        "name": "custom_fuel_cost",
+        "type": "double",
+        "metadata": {
+          "comment": "The total cost in US dollars of the fuel consumed in this hour of aggregated data. This cost is derived from an org's custom entered fuel costs."
+        }
+      },
+      {
+        "name": "dynamic_fuel_cost",
+        "type": "double",
+        "metadata": {
+          "comment": "The total cost in US dollars of the fuel consumed in this hour of aggregated data. This cost is derived from a value pulled from a fuel price API."
+        }
+      },
+      {
+        "name": "custom_energy_cost",
+        "type": "long",
+        "metadata": {
+          "comment": "The total cost in US dollars of the energy consumed in this hour of aggregated data. This is currently 0 as org's do not have the ability yet to set custom energy costs."
+        },
+        "nullable": true
+      },
+      {
+        "name": "dynamic_energy_cost",
+        "type": "decimal(38,11)",
+        "metadata": {
+          "comment": "The total cost in US dollars of the energy consumed in this hour of aggregated data. This is derived from a constant cost per kilowatt-hour."
+        }
+      },
+      {
+        "name": "on_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds that the engine was on during this hour."
+        }
+      },
+      {
+        "name": "idle_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds that the engine was idle during this hour."
+        }
+      },
+      {
+        "name": "aux_during_idle_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds that auxillary power was being used during idle time in this hour. This is often referred to as productive idle time or PTO (power take-off)."
+        }
+      },
+      {
+        "name": "electric_distance_traveled_m",
+        "type": "double",
+        "metadata": {
+          "comment": "The distance in meters that was traveled via electricity in this hour after filtering out impossibley high energy efficiency."
+        }
+      },
+      {
+        "name": "electric_distance_traveled_m_original",
+        "type": "double",
+        "metadata": {
+          "comment": "The distance in meters that was traveled via electricity in this hour before filtering out impossibly high energy efficiency."
+        }
+      },
+      {
+        "name": "energy_regen_kwh",
+        "type": "decimal(38,9)",
+        "metadata": {
+          "comment": "The amount of energy regenerated in kilowatt-hours during this hour after filtering out impossibly high energy efficiency. This usually happens via regenerative braking."
+        }
+      },
+      {
+        "name": "energy_regen_kwh_original",
+        "type": "decimal(38,9)",
+        "metadata": {
+          "comment": "The amount of energy regenerated in kilowatt-hours during this hour before filtering out impossibly high energy efficiency. This usually happens via regenerative braking."
+        }
+      }
+    ]
+  }
+}

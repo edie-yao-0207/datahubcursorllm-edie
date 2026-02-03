@@ -1,0 +1,65 @@
+{
+  "name": "objectstat_diffs.gps",
+  "owner": "AssetFoundations",
+  "description": "Calculates distance traveled between two consecutive points in kinesisstats.osdderivedgpsdistance, as recorded by gps.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdderivedgpsdistance",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "helpers",
+      "tablename": "ignored_org_ids",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "objectstat_diffs",
+    "tablename": "gps",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "object_id", "time"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date on which this gps difference was recorded."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The object id (device id) of this data point."
+        }
+      },
+      {
+        "name": "time",
+        "type": "long",
+        "metadata": {
+          "comment": "The time in milliseconds at which this gps difference was recorded."
+        }
+      },
+      {
+        "name": "distance_traveled_m",
+        "type": "double",
+        "metadata": {
+          "comment": "The distance traveled in meters as recorded by GPS between this point in time and the previous point in time."
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

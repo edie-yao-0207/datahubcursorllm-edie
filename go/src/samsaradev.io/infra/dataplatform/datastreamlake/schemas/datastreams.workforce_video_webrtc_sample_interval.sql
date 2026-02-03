@@ -1,0 +1,13 @@
+`livestream_uuid` STRING,
+`stream_page_session_uuid` STRING,
+`org_id` BIGINT,
+`user_id` BIGINT,
+`stream_id` BIGINT,
+`channel_id` BIGINT,
+`gateway_network_protocol:` STRING,
+`gateway_network_protocol` STRING,
+`start_ms` BIGINT,
+`duration_ms` BIGINT,
+`average_fps` BIGINT,
+`inbound_rtp_stat` STRING,
+`date` DATE

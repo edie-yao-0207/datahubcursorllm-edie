@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "solutionsintegrationservices-group: assets can read",
+    "Values": [
+      {
+        "databases": [
+          "default.solutions_integration_services"
+        ]
+      },
+      {
+        "tables": []
+      }
+    ]
+  }
+]

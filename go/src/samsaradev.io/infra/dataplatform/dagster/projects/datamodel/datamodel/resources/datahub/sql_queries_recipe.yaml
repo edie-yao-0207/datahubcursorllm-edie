@@ -1,0 +1,5 @@
+source:
+    type: sql-queries
+    config:
+      platform: databricks
+      query_file: sql_queries.json

@@ -1,0 +1,10 @@
+[
+  {
+    "Name": "edw_bronze tables shared in a delta share",
+    "Values": [
+      [
+        "edw_bronze.workday.company_global_holiday"
+      ]
+    ]
+  }
+]

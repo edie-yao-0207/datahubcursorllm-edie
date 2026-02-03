@@ -1,0 +1,3 @@
+SELECT 'name_1'
+UNION
+SELECT 'name_2'

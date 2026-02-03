@@ -1,0 +1,85 @@
+{
+  "view": "uat_netsuite_child_invoices",
+  "owner": "PlatformOperations",
+  "description": "This view compiles all data for netsuite child invoices",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "schema": [
+    { "name": "order_type", "type": "string" },
+    { "name": "create_date", "type": "timestamp" },
+    { "name": "_fivetran_synced", "type": "timestamp" },
+    { "name": "_fivetran_deleted", "type": "boolean" },
+    { "name": "invoice_number", "type": "string" },
+    { "name": "transaction_id", "type": "long" },
+    { "name": "sam_number", "type": "string" },
+    { "name": "cost_amount", "type": "double" },
+    { "name": "shipping_amount", "type": "double" },
+    { "name": "tax_amount", "type": "double" },
+    { "name": "payment_amount", "type": "double" },
+    { "name": "symbol", "type": "string" },
+    { "name": "amount_unbilled", "type": "double" },
+    { "name": "exchange_rate", "type": "double" },
+    { "name": "invoice_status", "type": "string" },
+    { "name": "due_date", "type": "timestamp" },
+    { "name": "payment_status", "type": "double" },
+    { "name": "charge_error_message", "type": "string" },
+    { "name": "po_number", "type": "string" },
+    { "name": "netsuite_internal_id", "type": "long" },
+    { "name": "order_number", "type": "string" },
+    { "name": "billing_addressee", "type": "string" },
+    { "name": "billing_attention", "type": "string" },
+    { "name": "bill_address_line_1", "type": "string" },
+    { "name": "bill_address_line_2", "type": "string" },
+    { "name": "bill_city", "type": "string" },
+    { "name": "bill_state", "type": "string" },
+    { "name": "bill_zip", "type": "string" },
+    { "name": "bill_country", "type": "string" },
+    { "name": "bill_phone_number", "type": "string" },
+    { "name": "ship_attention", "type": "string" },
+    { "name": "shipping_addressee", "type": "string" },
+    { "name": "ship_address_line_1", "type": "string" },
+    { "name": "ship_address_line_2", "type": "string" },
+    { "name": "ship_city", "type": "string" },
+    { "name": "ship_state", "type": "string" },
+    { "name": "ship_zip", "type": "string" },
+    { "name": "ship_country", "type": "string" },
+    { "name": "ship_phone_number", "type": "string" },
+    { "name": "consolidated_invoice_id", "type": "long" },
+    { "name": "total_amount", "type": "double" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "transactions",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "customers",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "biztech_edw_netsuite_sb1",
+      "tablename": "currencies",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "netsuite_data",
+      "tablename": "uat_transaction_addresses",
+      "type": "table"
+    },
+    {
+      "dbname": "netsuite_data",
+      "tablename": "uat_consolidated_invoices_map",
+      "type": "table"
+    },
+    {
+      "dbname": "netsuite_data",
+      "tablename": "uat_netsuite_child_invoice_amounts",
+      "type": "table"
+    }
+  ]
+}

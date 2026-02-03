@@ -1,0 +1,12 @@
+{
+  "owner": "DataPlatform",
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 0/1 ? * * *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 1800,
+      "spark_version": "default"
+    }
+  ]
+}

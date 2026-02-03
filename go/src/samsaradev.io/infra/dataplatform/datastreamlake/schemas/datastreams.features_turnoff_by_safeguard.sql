@@ -1,0 +1,11 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`gateway_id` BIGINT,
+`product_id` BIGINT,
+`inward_mtl_shadow` BOOLEAN,
+`outward_mtl_shadow` BOOLEAN,
+`forward_collision_warning_shadow` BOOLEAN,
+`drowsiness_shadow` BOOLEAN,
+`rolling_stop_shadow` BOOLEAN,
+`date` DATE

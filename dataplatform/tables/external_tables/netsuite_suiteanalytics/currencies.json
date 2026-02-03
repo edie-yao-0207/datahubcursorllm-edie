@@ -1,0 +1,48 @@
+{
+  "table": "currencies",
+  "owner": "PlatformOperations",
+  "description": "currencies table from database netsuite_suiteanalytics in s3bucket netsuite-delta-tables",
+  "database": "netsuite_suiteanalytics",
+  "schema": [
+    {
+      "name": "currency_id",
+      "type": "double"
+    },
+    {
+      "name": "currency_extid",
+      "type": "string"
+    },
+    {
+      "name": "date_last_modified",
+      "type": "timestamp"
+    },
+    {
+      "name": "is_inactive",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "precision_0",
+      "type": "double"
+    },
+    {
+      "name": "symbol",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_deleted",
+      "type": "boolean"
+    },
+    {
+      "name": "date_deleted",
+      "type": "timestamp"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    }
+  ]
+}

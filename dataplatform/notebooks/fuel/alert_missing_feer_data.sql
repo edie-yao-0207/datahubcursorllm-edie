@@ -1,0 +1,126 @@
+-- Databricks notebook source
+-- MAGIC %run backend/backend/databricks_data_alerts/alerting_system
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC
+-- MAGIC org_ids = [
+-- MAGIC   ### Reference Customers
+-- MAGIC   728, # Hardies
+-- MAGIC   874, # Dohrn
+-- MAGIC   792, # American Eagle Logistics
+-- MAGIC   9666, # Walnut Creek Foods
+-- MAGIC   702, # Cash-Wa Distributing
+-- MAGIC   47450, # Brent Redmond Logistics
+-- MAGIC   ### (PTO/Aux)
+-- MAGIC   14083, # Pike
+-- MAGIC   27186, # Borden Dairy
+-- MAGIC   21800, # Bulkmatic, LLC
+-- MAGIC   57092, # Chalk Mountain Services of Texas
+-- MAGIC   ### Electric Vehicles
+-- MAGIC   9086, # Duke
+-- MAGIC   3427, # City of Boston
+-- MAGIC   16306, # Primoris Services Corporation
+-- MAGIC ]
+-- MAGIC
+-- MAGIC org_ids_predicate = ", ".join([str(org_id) for org_id in org_ids])
+-- MAGIC
+-- MAGIC alert_query = f'''
+-- MAGIC   WITH pipeline AS (
+-- MAGIC   SELECT
+-- MAGIC      SUM(fuel_consumed_ml) AS fuel_consumed_ml
+-- MAGIC     ,SUM(energy_consumed_kwh) AS energy_consumed_kwh
+-- MAGIC     ,SUM(distance_traveled_m_gps) AS distance_traveled_m_gps
+-- MAGIC     ,SUM(distance_traveled_m_odo) AS distance_traveled_m_odo
+-- MAGIC     ,SUM(custom_fuel_cost) AS custom_fuel_cost
+-- MAGIC     ,SUM(dynamic_fuel_cost) AS dynamic_fuel_cost
+-- MAGIC     -- ,SUM(custom_energy_cost) AS custom_energy_cost /** NOT POPULATED */
+-- MAGIC     ,SUM(dynamic_energy_cost) AS dynamic_energy_cost
+-- MAGIC     ,SUM(on_duration_ms) AS on_duration_ms
+-- MAGIC     ,SUM(idle_duration_ms) AS idle_duration_ms
+-- MAGIC     ,SUM(COALESCE(aux_during_idle_ms, 0)) AS aux_during_idle_ms
+-- MAGIC     ,SUM(electric_distance_traveled_m_odo) AS electric_distance_traveled_m_odo
+-- MAGIC     ,SUM(energy_regen_kwh) AS energy_regen_kwh
+-- MAGIC   FROM fuel_energy_efficiency_report.aggregated_vehicle_driver_rows_corrected_with_original_col
+-- MAGIC   WHERE org_id IN ({org_ids_predicate})
+-- MAGIC     AND date = CURRENT_DATE()
+-- MAGIC     AND object_type = 1
+-- MAGIC   HAVING (fuel_consumed_ml = 0
+-- MAGIC     OR energy_consumed_kwh = 0
+-- MAGIC     OR distance_traveled_m_gps = 0
+-- MAGIC     OR distance_traveled_m_odo = 0
+-- MAGIC     OR custom_fuel_cost = 0
+-- MAGIC     OR dynamic_fuel_cost = 0
+-- MAGIC     -- OR custom_energy_cost = 0 ** This value isn't populated in the report
+-- MAGIC     OR dynamic_energy_cost = 0
+-- MAGIC     OR on_duration_ms = 0
+-- MAGIC     OR idle_duration_ms = 0
+-- MAGIC     OR aux_during_idle_ms = 0
+-- MAGIC     OR electric_distance_traveled_m_odo = 0
+-- MAGIC     OR energy_regen_kwh = 0
+-- MAGIC   )
+-- MAGIC ),
+-- MAGIC
+-- MAGIC monolith AS (
+-- MAGIC   SELECT
+-- MAGIC      SUM(fuel_consumed_ml) AS fuel_consumed_ml
+-- MAGIC     ,SUM(energy_consumed_kwh) AS energy_consumed_kwh
+-- MAGIC     ,SUM(distance_traveled_m_gps) AS distance_traveled_m_gps
+-- MAGIC     ,SUM(distance_traveled_m_odo) AS distance_traveled_m_odo
+-- MAGIC     ,SUM(custom_fuel_cost) AS custom_fuel_cost
+-- MAGIC     ,SUM(dynamic_fuel_cost) AS dynamic_fuel_cost
+-- MAGIC     -- ,SUM(custom_energy_cost) AS custom_energy_cost /** NOT POPULATED */
+-- MAGIC     ,SUM(dynamic_energy_cost) AS dynamic_energy_cost
+-- MAGIC     ,SUM(on_duration_ms) AS on_duration_ms
+-- MAGIC     ,SUM(idle_duration_ms) AS idle_duration_ms
+-- MAGIC     ,SUM(COALESCE(aux_during_idle_ms, 0)) AS aux_during_idle_ms
+-- MAGIC     ,SUM(electric_distance_traveled_m_odo) AS electric_distance_traveled_m_odo
+-- MAGIC     ,SUM(energy_regen_kwh) AS energy_regen_kwh
+-- MAGIC   FROM delta.`s3://samsara-report-staging-tables/report_aggregator/fuel_energy_efficiency_report`
+-- MAGIC   WHERE org_id IN ({org_ids_predicate})
+-- MAGIC     AND date = CURRENT_DATE()
+-- MAGIC     AND object_type = 1
+-- MAGIC   HAVING (fuel_consumed_ml = 0
+-- MAGIC     OR energy_consumed_kwh = 0
+-- MAGIC     OR distance_traveled_m_gps = 0
+-- MAGIC     OR distance_traveled_m_odo = 0
+-- MAGIC     OR custom_fuel_cost = 0
+-- MAGIC     OR dynamic_fuel_cost = 0
+-- MAGIC     -- OR custom_energy_cost = 0 ** This value isn't populated in the report
+-- MAGIC     OR dynamic_energy_cost = 0
+-- MAGIC     OR on_duration_ms = 0
+-- MAGIC     OR idle_duration_ms = 0
+-- MAGIC     OR aux_during_idle_ms = 0
+-- MAGIC     OR electric_distance_traveled_m_odo = 0
+-- MAGIC     OR energy_regen_kwh = 0
+-- MAGIC   )
+-- MAGIC )
+-- MAGIC
+-- MAGIC -- ** Pipeline alerting is disabled until validation is complete. **
+-- MAGIC -- SELECT *, "pipeline" AS source FROM pipeline
+-- MAGIC -- UNION ALL
+-- MAGIC SELECT *, "monolith" AS source FROM monolith
+-- MAGIC '''
+-- MAGIC
+-- MAGIC alert_df = spark.sql(alert_query)
+-- MAGIC emails = []
+-- MAGIC slack_channels = ["alerts-fuel"]
+-- MAGIC alert_name = "fuel_services_feer_missing_data"
+-- MAGIC notebook_url = "https://samsara-dev-us-west-2.cloud.databricks.com/?o=5924096274798303#notebook/1962197545142918"
+-- MAGIC
+-- MAGIC alert_details_query = f'''
+-- MAGIC   ```
+-- MAGIC   SELECT * FROM databricks_alerts.alert_logs
+-- MAGIC   WHERE alert_name = '{alert_name}'
+-- MAGIC   ORDER BY alert_timestamp DESC
+-- MAGIC   LIMIT 1```
+-- MAGIC '''
+-- MAGIC
+-- MAGIC message = f'''
+-- MAGIC \U0001F525 \U0001F525 Missing FEER Data Detected \U0001F525 \U0001F525:
+-- MAGIC - See ({notebook_url})
+-- MAGIC - Execute {alert_details_query} for more alert details
+-- MAGIC '''
+-- MAGIC
+-- MAGIC execute_alert(alert_df, emails, slack_channels, alert_name, message)

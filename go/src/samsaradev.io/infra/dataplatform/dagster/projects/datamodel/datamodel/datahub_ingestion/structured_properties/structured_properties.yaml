@@ -1,0 +1,21 @@
+- id: num_files
+  type: number
+  description: "number of files in table"
+- id: min_date_us
+  type: string
+  description: "earliest date partition in table for US data"
+- id: max_date_us
+  type: string
+  description: "most recent date partition in table for US data"
+- id: min_date_eu
+  type: string
+  description: "earliest date partition in table for EU data"
+- id: max_date_eu
+  type: string
+  description: "most recent date partition in table for EU data"
+- id: min_date_ca
+  type: string
+  description: "earliest date partition in table for CA data"
+- id: max_date_ca
+  type: string
+  description: "most recent date partition in table for CA data"

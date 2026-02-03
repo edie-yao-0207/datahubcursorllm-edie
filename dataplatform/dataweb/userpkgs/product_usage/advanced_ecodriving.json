@@ -1,0 +1,43 @@
+{
+  "feature_name": "Advanced Eco-Driving",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17758332/Driver+Efficiency+Eco-Driving+Report",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": [
+          "LIC-VG-ENT",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-ENTERPRISE",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PREM-PLTFM-ESS",
+          "LIC-VG-PREM-PLTFM-PREM",
+          "LIC-VG-PREMIER",
+          "LIC-VG-PREMIER-PLTFM-ESS",
+          "LIC-VG-PREMIER-PLTFM-PREM",
+          "LIC-VG-PREMIER-PS",
+          "LIC-VG-PS"
+        ],
+        "license_required": true
+      },
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "mixpanel_metric_names": ["ecodriving_difficultyscore_tooltip_opened"]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["group.fleet_reports.read", "fuel_and_energy_reports.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

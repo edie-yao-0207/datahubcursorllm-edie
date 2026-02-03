@@ -1,0 +1,19 @@
+{
+  "view": "transformed_uat_consolidated_invoices_map",
+  "owner": "PlatformOperations",
+  "description": "A mapping of consolidated invoices to their child invoice IDs",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "schema": [
+    { "name": "consolidated_invoice_id", "type": "long" },
+    { "name": "transaction_id", "type": "long" },
+    { "name": "sam_number", "type": "string" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "netsuite_data",
+      "tablename": "uat_consolidated_invoices_map",
+      "type": "table"
+    }
+  ]
+}

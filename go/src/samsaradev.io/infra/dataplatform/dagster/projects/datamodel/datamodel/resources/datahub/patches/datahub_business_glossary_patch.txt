@@ -1,0 +1,4 @@
+//The command to be used to load glossary term,
+//This is 1 time patch and datahub_business_glossary ingestion should not be scheduled/rerun as the glossary terms will be edited via UI
+datahub ingest run -c /datamodel/datamodel/datahub_ingestion/glossary_terms/datahub_business_glossary.yaml
+

@@ -1,0 +1,21 @@
+{
+  "owner": "PlatformOperations",
+  "email_notifications": ["platops-notebook-aler-aaaad6yplk2cd33xw6iwfq3kxi@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "netsuite-exchange-history-collection",
+      "cron": "0 */30 * * * ?",
+      "parameters": {
+        "NOTEBOOK_NAME": "exchange_history",
+        "EXCHANGE_HISTORY_VIEW": "netsuite_data.exchange_history",
+        "LATEST_ROW_SYNCED_KEY": "latest_row_synced.timestamp"
+      },
+      "regions": ["us-west-2", "eu-west-1"],
+      "rnd_allocation": 0,
+      "spark_version": "default",
+      "unity_catalog_setting": {
+        "data_security_mode": "USER_ISOLATION"
+      }
+    }
+  ]
+}

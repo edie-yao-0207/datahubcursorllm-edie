@@ -1,0 +1,15 @@
+{
+  "owner": "DataScience",
+  "description": "This table contains 'cleansed' osdaccelerometer event traces from safety events. Each row represents the osdaccelerometer trace data from a single safety event.",
+  "email_notifications": [
+    "alerts-data-science-aaaad6bedydugbard3qih3m3ci@samsara.org.slack.com",
+    "alex.puzyk@samsara.com"
+  ],
+  "jobs": [
+    {
+      "name": "restate-daily",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

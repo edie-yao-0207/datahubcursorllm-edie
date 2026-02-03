@@ -1,0 +1,121 @@
+{
+  "name": "cm_health_report.cm_recording_intervals_v4",
+  "owner": "MediaExperience",
+  "description": "Time intervals for which a CM was marked as connected and recording.",
+  "dependencies": [
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_recording_intervals_cm2x", "type": "table" },
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_recording_intervals_cm3x", "type": "table" }
+  ],
+  "expectation": {
+    "batch_mode": "REMOVE_UNEXPECTED"
+  },
+  "backfill_start_date": "2024-08-01",
+  "parameters": ["start_date", "end_date", "pipeline_execution_time"],
+  "output": {
+    "dbname": "cm_health_report",
+    "tablename": "cm_recording_intervals_v4",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["org_id", "device_id", "start_ms"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "VG device id"
+        }
+      },
+      { "name": "cm_device_id", "type": "long" },
+      {
+        "name": "product_id",
+        "type": "long",
+        "metadata": {
+          "comment": "VG product id"
+        }
+      },
+      { "name": "cm_product_id", "type": "long" },
+      {
+        "name": "start_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Unix timestamp of the start_ms of the interval. Intervals are broken up by on trip and off trip. See on_trip to determine if the interval is on or off trip."
+        }
+      },
+      {
+        "name": "end_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Unix timestamp of the end_ms of the interval. Intervals are broken up by on trip and off trip. See on_trip to determine if the interval is on or off trip."
+        }
+      },
+      {
+        "name": "duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Duration of the interval in milliseconds"
+        }
+      },
+      { "name": "date", "type": "string" },
+      {
+        "name": "interval_connected_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds the CM was connected to the VG during the interval"
+        }
+      },
+      {
+        "name": "interval_recording_start_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The unix timestamp the CM first began recording for the interval"
+        }
+      },
+      {
+        "name": "grace_recording_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The same as interval_recording_start_ms, but we potentially extend the recording duration to the start of the trip if we see recording start within 90s of the trip/interval start"
+        }
+      },
+      {
+        "name": "recording_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds the CM was recording to the VG during the interval"
+        }
+      },
+      {
+        "name": "vg_bootcount",
+        "type": "integer",
+        "nullable": false,
+        "metadata": {
+          "comment": "The number of times the VG rebooted during the interval"
+        }
+      },
+      {
+        "name": "vg_build",
+        "type": "string",
+        "metadata": {
+          "comment": "The firmware build that the VG was on during the interval"
+        }
+      },
+      {
+        "name": "cm_bootcount",
+        "type": "integer",
+        "nullable": false,
+        "metadata": {
+          "comment": "The number of times the CM rebooted during the interval"
+        }
+      },
+      {
+        "name": "cm_build",
+        "type": "string",
+        "metadata": {
+          "comment": "The firmware build that the CM was on during the interval"
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

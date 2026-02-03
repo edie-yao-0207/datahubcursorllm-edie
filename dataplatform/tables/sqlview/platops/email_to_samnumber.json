@@ -1,0 +1,43 @@
+{
+  "view": "email_to_samnumber",
+  "owner": "PlatformOperations",
+  "description": "This view connects user email to related samnumber",
+  "database": "platops",
+  "schema": [
+    { "name": "email", "type": "string", "description": "Cloud user's email" },
+    { "name": "sam_number", "type": "string", "description": "Samnumber for the account associated with this user" },
+    { "name": "internal_type", "type": "long", "description": "Is this an internal organization?" }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "users_organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "org_sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "users",
+      "type": "table"
+    }
+  ]
+}

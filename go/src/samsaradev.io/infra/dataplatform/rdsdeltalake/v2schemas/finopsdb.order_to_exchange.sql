@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`sam_number` STRING,
+`order_number` STRING,
+`exchange_number` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`date` STRING

@@ -1,0 +1,506 @@
+{
+  "test_cases": [
+    {
+      "label": "generate no entries when engine hour data is missing",
+      "parameters": {
+        "start_date": " '2020-01-20' ",
+        "end_date": " '2020-01-30' "
+      },
+      "input_data": {
+        "ecodriving_report.coasting_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "coasting_time_ms": 5000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "coasting_time_ms": 7000
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "generate entries for engine hour only data and use null values for missing data",
+      "parameters": {
+        "start_date": " '2020-01-20' ",
+        "end_date": " '2020-01-30' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_duration_by_hour_v2": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "on_duration_ms": 5000,
+            "idle_duration_ms": 6000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "on_duration_ms": 7000,
+            "idle_duration_ms": 8000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 300,
+          "interval_start": "2020-01-25 10:00:00",
+          "interval_end": "2020-01-25 11:00:00",
+          "cruise_control_ms": null,
+          "coasting_ms": null,
+          "green_band_ms": null,
+          "accelerator_engine_torque_over_ms": null,
+          "quick_brake_event_count": null,
+          "total_brake_event_count": null,
+          "on_duration_ms": null,
+          "idle_duration_ms": null,
+          "aux_during_idle_ms": null,
+          "over_speed_ms": null,
+          "fuel_consumed_ml": null,
+          "distance_meters_gps": null,
+          "weight_time": 0,
+          "weighted_weight": 0,
+          "uphill_duration_ms": 0,
+          "downhill_duration_ms": 0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 300,
+          "interval_start": "2020-01-25 11:00:00",
+          "interval_end": "2020-01-25 12:00:00",
+          "cruise_control_ms": null,
+          "coasting_ms": null,
+          "green_band_ms": null,
+          "accelerator_engine_torque_over_ms": null,
+          "quick_brake_event_count": null,
+          "total_brake_event_count": null,
+          "on_duration_ms": null,
+          "idle_duration_ms": null,
+          "aux_during_idle_ms": null,
+          "over_speed_ms": null,
+          "fuel_consumed_ml": null,
+          "distance_meters_gps": null,
+          "weight_time": 0,
+          "weighted_weight": 0,
+          "uphill_duration_ms": 0,
+          "downhill_duration_ms": 0
+        }
+      ]
+    },
+    {
+      "label": "consider all data, use zero values where data exists but the value is zero, prefer limited values where available and applicable",
+      "parameters": {
+        "start_date": " '2020-01-20' ",
+        "end_date": " '2020-01-30' "
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.engine_duration_by_hour_v2": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "on_duration_ms": 5000,
+            "idle_duration_ms": 6000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "on_duration_ms": 7000,
+            "idle_duration_ms": 8000
+          }
+        ],
+        "ecodriving_report.anticipation_brake_events_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "anticipation_brake_events": 5001
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "anticipation_brake_events": 0
+          }
+        ],
+        "ecodriving_report.brake_events_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "brake_events": 5002
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "brake_events": 0
+          }
+        ],
+        "ecodriving_report.coasting_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "coasting_time_ms": 5003
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "coasting_time_ms": 0
+          }
+        ],
+        "ecodriving_report.cruise_control_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "cruise_control_ms": 5004
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "cruise_control_ms": 0
+          }
+        ],
+        "ecodriving_report.limited_accel_engine_torque_over_limit_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "limited_accel_engine_torque_over_limit_ms": 5005
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "limited_accel_engine_torque_over_limit_ms": 0
+          }
+        ],
+        "ecodriving_report.limited_coasting_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "limited_coasting_time_ms": 5006
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "limited_coasting_time_ms": 0
+          }
+        ],
+        "ecodriving_report.rpm_green_band_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "rpm_green_band_ms": 5007
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "rpm_green_band_ms": 0
+          }
+        ],
+        "ecodriving_report.accel_engine_torque_over_limit_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "accel_engine_torque_over_limit_ms": 5008
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "accel_engine_torque_over_limit_ms": 0
+          }
+        ],
+        "fuel_energy_efficiency_report.engine_state_fuel_by_hour_v3": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "fuel_consumed_ml": 5010,
+            "aux_during_idle_ms": 5009,
+            "on_duration_ms": 3000,
+            "idle_duration_ms": 4000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "fuel_consumed_ml": 0,
+            "aux_during_idle_ms": 0,
+            "on_duration_ms": 0,
+            "idle_duration_ms": 0
+          }
+        ],
+        "fuel_energy_efficiency_report.distance_by_hour_v3": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "distance_traveled_m": 5011
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "distance_traveled_m": 0
+          }
+        ],
+        "ecodriving_report.speed_over_profile_threshold_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "over_speed_ms": 5012
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "over_speed_ms": 0
+          }
+        ],
+        "ecodriving_report.weighted_weight_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "weighted_weight": 5000,
+            "weight_time": 2000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "weighted_weight": 6000,
+            "weight_time": 3000
+          }
+        ],
+        "ecodriving_report.uphill_and_downhill_duration_by_hour": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "uphill_duration_ms": 11011,
+            "downhill_duration_ms": 7997
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "uphill_duration_ms": 5008,
+            "downhill_duration_ms": 6813
+          }
+        ],
+        "ecodriving_report.wear_free_braking_duration_ms": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "duration_ms": 802
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "duration_ms": 4699
+          }
+        ],
+        "ecodriving_report.braking_duration_ms": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 10:00:00",
+            "interval_end": "2020-01-25 11:00:00",
+            "duration_ms": 2021
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2020-01-25 11:00:00",
+            "interval_end": "2020-01-25 12:00:00",
+            "duration_ms": 626
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 300,
+          "interval_start": "2020-01-25 10:00:00",
+          "interval_end": "2020-01-25 11:00:00",
+          "cruise_control_ms": 5004,
+          "coasting_ms": 5006,
+          "green_band_ms": 5007,
+          "accelerator_engine_torque_over_ms": 5005,
+          "quick_brake_event_count": 5001,
+          "total_brake_event_count": 5002,
+          "on_duration_ms": 3000,
+          "idle_duration_ms": 4000,
+          "aux_during_idle_ms": 5009,
+          "over_speed_ms": 5012,
+          "fuel_consumed_ml": 5010,
+          "distance_meters_gps": 5011,
+          "weight_time": 2000,
+          "weighted_weight": 5000,
+          "uphill_duration_ms": 11011,
+          "downhill_duration_ms": 7997,
+          "wear_free_braking_duration_ms": 802,
+          "braking_duration_ms": 2021
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 300,
+          "interval_start": "2020-01-25 11:00:00",
+          "interval_end": "2020-01-25 12:00:00",
+          "cruise_control_ms": 0,
+          "coasting_ms": 0,
+          "green_band_ms": 0,
+          "accelerator_engine_torque_over_ms": 0,
+          "quick_brake_event_count": 0,
+          "total_brake_event_count": 0,
+          "on_duration_ms": 0,
+          "idle_duration_ms": 0,
+          "aux_during_idle_ms": 0,
+          "over_speed_ms": 0,
+          "fuel_consumed_ml": 0,
+          "distance_meters_gps": 0,
+          "weight_time": 3000,
+          "weighted_weight": 6000,
+          "uphill_duration_ms": 5008,
+          "downhill_duration_ms": 6813,
+          "wear_free_braking_duration_ms": 4699,
+          "braking_duration_ms": 626
+        }
+      ]
+    }
+  ]
+}

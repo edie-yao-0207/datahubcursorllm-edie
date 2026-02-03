@@ -1,0 +1,152 @@
+{
+  "test_cases": [
+    {
+      "label": "test reverse dates",
+      "parameters": {
+        "start_date": "'2021-06-01'",
+        "end_date": "'2021-05-01'"
+      },
+      "input_data": {},
+      "expected_data": []
+    },
+    {
+      "label": "test full report pipeline",
+      "parameters": {
+        "start_date": "'2021-06-01'",
+        "end_date": "'2021-06-02'"
+      },
+      "input_data": {
+        "trips2db_shards.trips": [
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "driver_id": 1,
+            "version": 101,
+            "start_ms": 1622548800000,
+            "proto": {
+              "start": { "time": 1622548800000 },
+              "end": { "time": 1622550600000 },
+              "trip_distance": { "distance_meters": 1000 }
+            },
+            "date": "2021-06-01"
+          },
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "driver_id": 1,
+            "version": 101,
+            "start_ms": 1622550600000,
+            "proto": {
+              "start": { "time": 1622550600000 },
+              "end": { "time": 1622551200000 },
+              "trip_distance": { "distance_meters": 3000 }
+            },
+            "date": "2021-06-01"
+          },
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "driver_id": 2,
+            "version": 101,
+            "start_ms": 1622554200000,
+            "proto": {
+              "start": { "time": 1622554200000 },
+              "end": { "time": 1622557800000 },
+              "trip_distance": { "distance_meters": 2000 }
+            },
+            "date": "2021-06-01"
+          }
+        ],
+        "tripsdb_shards.trip_purpose_assignments": [
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "driver_id": 1,
+            "assignment_start_ms": 1622548800000,
+            "trip_purpose": 1
+          },
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "driver_id": 1,
+            "assignment_start_ms": 1622550600000,
+            "trip_purpose": 2
+          },
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "driver_id": 2,
+            "assignment_start_ms": 1622554200000,
+            "trip_purpose": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 5,
+          "object_id": 1,
+          "date": "2021-06-01",
+          "object_type": 1,
+          "interval_start": "2021-06-01 12:00:00",
+          "interval_end": "2021-06-01 13:00:00",
+          "gps_distance_m": 4000,
+          "gps_distance_personal_m": 1000,
+          "gps_distance_work_m": 3000,
+          "gps_distance_commute_m": 0,
+          "gps_distance_other_m": 0,
+          "engine_ms": 2400000,
+          "stops_count": 2,
+          "last_trip_start_ms": 1622550600000
+        },
+        {
+          "org_id": 5,
+          "object_id": 1,
+          "date": "2021-06-01",
+          "object_type": 1,
+          "interval_start": "2021-06-01 14:00:00",
+          "interval_end": "2021-06-01 15:00:00",
+          "gps_distance_m": 2000,
+          "gps_distance_personal_m": 0,
+          "gps_distance_work_m": 2000,
+          "gps_distance_commute_m": 0,
+          "gps_distance_other_m": 0,
+          "engine_ms": 3600000,
+          "stops_count": 1,
+          "last_trip_start_ms": 1622554200000
+        },
+        {
+          "org_id": 5,
+          "object_id": 1,
+          "date": "2021-06-01",
+          "object_type": 5,
+          "interval_start": "2021-06-01 12:00:00",
+          "interval_end": "2021-06-01 13:00:00",
+          "gps_distance_m": 4000,
+          "gps_distance_personal_m": 1000,
+          "gps_distance_work_m": 3000,
+          "gps_distance_commute_m": 0,
+          "gps_distance_other_m": 0,
+          "engine_ms": 2400000,
+          "stops_count": 2,
+          "last_trip_start_ms": 1622550600000
+        },
+        {
+          "org_id": 5,
+          "object_id": 2,
+          "date": "2021-06-01",
+          "object_type": 5,
+          "interval_start": "2021-06-01 14:00:00",
+          "interval_end": "2021-06-01 15:00:00",
+          "gps_distance_m": 2000,
+          "gps_distance_personal_m": 0,
+          "gps_distance_work_m": 2000,
+          "gps_distance_commute_m": 0,
+          "gps_distance_other_m": 0,
+          "engine_ms": 3600000,
+          "stops_count": 1,
+          "last_trip_start_ms": 1622554200000
+        }
+      ]
+    }
+  ]
+}

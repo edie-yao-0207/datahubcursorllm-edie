@@ -1,0 +1,10 @@
+{
+  "owner": "DeveloperExperience",
+  "jobs": [
+    {
+      "name": "rebalance",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

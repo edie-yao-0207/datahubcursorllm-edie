@@ -1,0 +1,69 @@
+{
+  "name": "ev_charging_report.decorated_charge_events",
+  "owner": "Sustainability",
+  "description": "Charge events decorated with the location at the start of charging, the energy charged during the period and the start and end charge level.",
+  "dependencies": [
+    {
+      "dbname": "ev_charging_report",
+      "tablename": "charge_events",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdevusablestateofchargemillipercent",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddeltaevchargingenergymicrowh",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "location",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "expectation": {
+    "batch_mode": "KEEP_ALL"
+  },
+  "sqlite_report_config": {
+    "report_name": "ev_charging_report",
+    "staleness_monitors": [
+      {
+        "hours": 12,
+        "urgency": "HIGH"
+      },
+      {
+        "hours": 9,
+        "urgency": "LOW"
+      }
+    ],
+    "team_runbook_url": "https://samsaradev.atlassian.net/wiki/x/XaMZmQ"
+  },
+  "output": {
+    "dbname": "ev_charging_report",
+    "tablename": "decorated_charge_events",
+    "type": "table",
+    "write_mode": "overwrite",
+    "partition": ["date"],
+    "primary_key": ["org_id", "device_id", "start_ms"],
+    "schema": [
+      { "name": "date", "type": "string" },
+      { "name": "org_id", "type": "long" },
+      { "name": "device_id", "type": "long" },
+      { "name": "start_ms", "type": "long" },
+      { "name": "end_ms", "type": "long" },
+      { "name": "start_soc", "type": "double" },
+      { "name": "end_soc", "type": "double" },
+      { "name": "address", "type": "string" },
+      { "name": "latitude", "type": "double" },
+      { "name": "longitude", "type": "double" },
+      { "name": "energy_charged_kwh", "type": "double" }
+    ]
+  }
+}

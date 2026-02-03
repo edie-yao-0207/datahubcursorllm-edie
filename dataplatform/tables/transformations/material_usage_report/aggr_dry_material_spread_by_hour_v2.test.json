@@ -1,0 +1,147 @@
+{
+  "test_cases": [
+    {
+      "label": "simple test case where an hour interval exist in every input node",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.dry_spread_rate_event_intervals_v2": [
+          {
+            "date": "2020-01-01",
+            "org_id": 1,
+            "device_id": 1,
+            "mode": 0,
+            "spreader_start_ms": 1577890800000,
+            "spreader_end_ms": 1577892600000,
+            "spread_rate_event_start_ms": 1577890800000,
+            "spread_rate_event_end_ms": 1577891400000,
+            "spread_rate_start_ms": 1577890800000,
+            "spread_rate_end_ms": 1577891400000,
+            "spread_rate": 10,
+            "distance_covered_meters": 2000,
+            "time_spread_ms": 600000,
+            "dry_material_spread_mg": 1000
+          }
+        ],
+        "material_usage_report.total_quantity_dry_spread_by_hour_v2": [
+          {
+            "date": "2020-01-01",
+            "org_id": 1,
+            "device_id": 1,
+            "hour_start": "2020-01-01 15:00:00",
+            "total_quantity_spread": 888
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 1,
+          "interval_start": "2020-01-01 15:00:00",
+          "material_spread_mg_from_deltas": 888,
+          "material_spread_mg_from_spread_rate": 1000,
+          "distance_spread_meters_from_spread_rate": 2000,
+          "duration_spread_ms_from_spread_rate": 600000
+        }
+      ]
+    },
+    {
+      "label": "should aggregate material spread from spreader intervals in same hour",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.dry_spread_rate_event_intervals_v2": [
+          {
+            "date": "2020-01-01",
+            "org_id": 1,
+            "device_id": 1,
+            "mode": 0,
+            "spreader_start_ms": 1577890800000,
+            "spreader_end_ms": 1577892600000,
+            "spread_rate_event_start_ms": 1577890800000,
+            "spread_rate_event_end_ms": 1577891400000,
+            "spread_rate_start_ms": 1577890800000,
+            "spread_rate_end_ms": 1577891400000,
+            "spread_rate": 10,
+            "distance_covered_meters": 2000,
+            "dry_material_spread_mg": 1000,
+            "time_spread_ms": 600000
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 1,
+            "device_id": 1,
+            "mode": 0,
+            "spreader_start_ms": 1577890800000,
+            "spreader_end_ms": 1577892600000,
+            "spread_rate_event_start_ms": 1577890800000,
+            "spread_rate_event_end_ms": 1577891400000,
+            "spread_rate_start_ms": 1577891400000,
+            "spread_rate_end_ms": 1577891500000,
+            "spread_rate": 10,
+            "distance_covered_meters": 2000,
+            "dry_material_spread_mg": 1000,
+            "time_spread_ms": 100000
+          }
+        ],
+        "material_usage_report.total_quantity_dry_spread_by_hour_v2": [
+          {
+            "date": "2020-01-01",
+            "org_id": 1,
+            "device_id": 1,
+            "hour_start": "2020-01-01 15:00:00",
+            "total_quantity_spread": 888
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 1,
+          "interval_start": "2020-01-01 15:00:00",
+          "material_spread_mg_from_deltas": 888,
+          "material_spread_mg_from_spread_rate": 2000,
+          "distance_spread_meters_from_spread_rate": 4000,
+          "duration_spread_ms_from_spread_rate": 700000
+        }
+      ]
+    },
+    {
+      "label": "computation method columns should be null if there is no data for an hour interval",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.dry_spread_rate_event_intervals_v2": [],
+        "material_usage_report.total_quantity_dry_spread_by_hour_v2": [
+          {
+            "date": "2020-01-01",
+            "org_id": 1,
+            "device_id": 1,
+            "hour_start": "2020-01-01 15:00:00",
+            "total_quantity_spread": 888
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "device_id": 1,
+          "interval_start": "2020-01-01 15:00:00",
+          "material_spread_mg_from_deltas": 888,
+          "material_spread_mg_from_spread_rate": null,
+          "distance_spread_meters_from_spread_rate": null,
+          "duration_spread_ms_from_spread_rate": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,735 @@
+-- Databricks notebook source
+-- MAGIC %md
+-- MAGIC ## Gateway Health Spark Query
+-- MAGIC This databricks notebook will let you compute gateway health statuses for all devices at any point in time.
+-- MAGIC 
+-- MAGIC ### How to use
+-- MAGIC 1. Run Cmd 2
+-- MAGIC 2. Once that's done, you can specify an `endMs` + `orgId` as widget values.
+-- MAGIC 3. Run the rest of the notebook until the `Testing` section.
+-- MAGIC 
+-- MAGIC You'll get 3 tables:
+-- MAGIC 
+-- MAGIC `spark_gateway_health_vgs` <-- the health statuses of VGs
+-- MAGIC 
+-- MAGIC `spark_gateway_health_ag45_46` <-- health status of undpowered assets
+-- MAGIC 
+-- MAGIC `spark_gateway_health_ag24_26_46p` <-- health status of powered assets
+-- MAGIC 
+-- MAGIC ## Hypothetical Use
+-- MAGIC TODO parth: show how you might diff things
+-- MAGIC 
+-- MAGIC ## Known Limitations
+-- MAGIC ### Inaccurate for devices whose last connection was > 90 days ago
+-- MAGIC Unfortunately, this report will not always report health statuses for devices that have not connected in more than 90 days. 
+-- MAGIC This isn't actually a very big deal since we only make mistakes in the `Low Battery`, `Weak Cellular Signal` and `Prolonged Offline` (from battery isolator cases) statuses for these devices (classifying them all as `Requires Investigation`). I think this is actually a conceptual bug in Gateway Health logic we should look into fixing.
+-- MAGIC 
+-- MAGIC ### Battery Isolator Cases
+-- MAGIC There is a bug in how we handle battery isolator cases that I have replicated here. TODO parth: link to jira cuz i think I need to file this
+-- MAGIC 
+-- MAGIC ## Future Improvements
+-- MAGIC ### Combine the tables together
+-- MAGIC No real reason they need to be split up, we could combine them into 1 query.
+-- MAGIC 
+-- MAGIC ### Factor out common elements
+-- MAGIC There are some copy-pasted elements between the queries, I think we can factor them out (e.g. computation of `connected` status, for example)
+-- MAGIC 
+-- MAGIC ### Allow running for all orgs more easily
+-- MAGIC Should just require modifying the code a bit to optionally add orgId to the dataframes. Also may require refactoring the queries a bit so that we only filter by `orgId` in 1 place rather than all over the place.
+-- MAGIC 
+-- MAGIC ### Performance
+-- MAGIC This query is abysmally slow because of how far we need to lookback. because we can't get object stat like semantics in SQL easily. See: https://paper.dropbox.com/doc/Proposal-for-more-performant-ObjectStats-querying-in-SQL--A7o_TC7DehyuUeBSZ663nxf~Ag-wVBzxJinafikllRLANoiB
+-- MAGIC 
+-- MAGIC ### Data Pipeline?
+-- MAGIC Would it be useful to calculate this on some set interval and then store the results? Not sure what value that would provide but maybe useful
+-- MAGIC 
+-- MAGIC ### "Days In Status"
+-- MAGIC In the go-world, we can pretty easily see on a per-device-basis how the status has changed. We don't really have an easy way to do that here, and unfortunately I'm not exactly sure how to do that here easily.
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC from datetime import datetime
+-- MAGIC dbutils.widgets.text("endMs", "1597770000000", "endMs")
+-- MAGIC dbutils.widgets.text("orgId", "9086", "orgId")
+-- MAGIC 
+-- MAGIC endMs = int(dbutils.widgets.get('endMs'))
+-- MAGIC orgId = int(dbutils.widgets.get('orgId'))
+-- MAGIC date = datetime.utcfromtimestamp(int(endMs/1000)).strftime('%Y-%m-%d')
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC # The Queries
+-- MAGIC We build up some smaller building blocks and then have 3 queries that produce the results for VGs, Powered Assets, and Unpowered Assets. Finally, we combine everything in a final table.
+-- MAGIC Honestly, the efficiency on this is absolute garbage because we don't have any efficient method of determining things like "latest" object stat or whatever
+
+-- COMMAND ----------
+
+-- MAGIC %py
+-- MAGIC spark.sql(f"""
+-- MAGIC -- For our timerange (plus or minus 1 day from our current time), link every heartbeat to the next one.
+-- MAGIC -- This is common amongst every query so just calculate it once here so it can be re-used.
+-- MAGIC CREATE OR REPLACE TEMPORARY VIEW windowed_heartbeats AS 
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     object_id,
+-- MAGIC     value.proto_value.hub_server_device_heartbeat.connection.started_at_ms AS started_at_ms,
+-- MAGIC     value.proto_value.hub_server_device_heartbeat.last_heartbeat_at_ms + COALESCE(value.proto_value.hub_server_device_heartbeat.heartbeat_period_sec, 0) * 2 * 1000 AS active_until_ms, -- period is null for unpowered assets rip
+-- MAGIC     LEAD(value.proto_value.hub_server_device_heartbeat.connection.started_at_ms) OVER ascending_time_window AS next_started_at_ms
+-- MAGIC   FROM kinesisstats.osdhubserverdeviceheartbeat
+-- MAGIC   WHERE date >= DATE_SUB('{date}', 4) AND date <= DATE_ADD('{date}', 1)  -- - 4 days for ag45/46, and 1 day in the future for 1 day window
+-- MAGIC   AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   WINDOW ascending_time_window AS (
+-- MAGIC     PARTITION BY org_id, object_id
+-- MAGIC     ORDER BY time ASC
+-- MAGIC   )
+-- MAGIC """)
+-- MAGIC spark.sql("CACHE TABLE windowed_heartbeats")
+
+-- COMMAND ----------
+
+-- MAGIC %py
+-- MAGIC spark.sql(f"""
+-- MAGIC CREATE OR 
+-- MAGIC REPLACE TEMPORARY VIEW spark_gateway_health_vgs AS 
+-- MAGIC 
+-- MAGIC -- start with every device in this org
+-- MAGIC WITH 
+-- MAGIC renamed_clouddb_devices AS (
+-- MAGIC   SELECT org_id, id AS device_id
+-- MAGIC   FROM productsdb.devices
+-- MAGIC   WHERE org_id = {orgId}
+-- MAGIC     AND product_id IN (7, 17, 24, 35, 53, 89, 90) -- vg32, vg33, vg34, vg34eu, thor, vg45eu, vg34fn
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- figure out the battery metrics
+-- MAGIC latest_battery_metric AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     object_id AS device_id, 
+-- MAGIC     MAX(time) AS time, 
+-- MAGIC     MAX(STRUCT(time, value.int_value AS latest_val)).latest_val AS latest_battery_metric
+-- MAGIC   FROM kinesisstats.osdcablevoltage
+-- MAGIC   WHERE date <= '{date}' AND date > date_sub('{date}', 91) AND time <= {endMs} AND org_id = {orgId} AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   GROUP BY org_id, object_id
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC devices_without_heartbeats AS (
+-- MAGIC   SELECT org_id, device_id, 1 AS never_connected
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT ANTI JOIN (
+-- MAGIC     SELECT * 
+-- MAGIC     FROM dataprep.device_heartbeats
+-- MAGIC     WHERE first_heartbeat_ms < {endMs}
+-- MAGIC       AND org_id = {orgId}
+-- MAGIC   ) USING (org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC --
+-- MAGIC -- figure out if the device was connected at the timestamp
+-- MAGIC --
+-- MAGIC heartbeats_with_next AS (
+-- MAGIC   SELECT *
+-- MAGIC   FROM windowed_heartbeats
+-- MAGIC   WHERE org_id = {orgId}
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- TODO select distinct vs groupby
+-- MAGIC connected AS (
+-- MAGIC   SELECT org_id, object_id AS device_id, TRUE as is_connected
+-- MAGIC   FROM heartbeats_with_next
+-- MAGIC   WHERE
+-- MAGIC     -- either:
+-- MAGIC     -- 1. the device is explicitly active at the time point
+-- MAGIC     (started_at_ms <= {endMs} AND active_until_ms >= {endMs})
+-- MAGIC     OR
+-- MAGIC     -- 2. the device is between active periods and that period spans <= 1 day
+-- MAGIC     (active_until_ms <= {endMs} AND next_started_at_ms >= {endMs} AND next_started_at_ms - active_until_ms < 24 * 60 * 60 * 1000)
+-- MAGIC   GROUP BY org_id, object_id -- we don't really care which, just one of them needs to be true
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- see if there's been a gps location point in the last 1 day
+-- MAGIC weak_gps_signal AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     MAX(STRUCT(time, value)).value AS value
+-- MAGIC   FROM connected
+-- MAGIC   LEFT JOIN kinesisstats.location
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   WHERE date >= DATE_SUB('{date}', 1) AND time >= {endMs} - 24 * 60 * 60 * 1000 AND date <= '{date}' AND time <= {endMs}
+-- MAGIC   GROUP BY 1, 2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC connected_or_weak_gps AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     CASE 
+-- MAGIC       WHEN value IS NOT NULL THEN 'connected' 
+-- MAGIC       ELSE 'weakgps' 
+-- MAGIC     END AS connected_status
+-- MAGIC   FROM connected
+-- MAGIC   LEFT JOIN weak_gps_signal
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC --
+-- MAGIC -- the remaining devices must be unconnected, so only for those should we do the work of looking back
+-- MAGIC -- at heartbeats to figure out just how long they've been disconnected
+-- MAGIC --
+-- MAGIC disconnected_devices_start AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id AS object_id
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT ANTI JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT ANTI JOIN devices_without_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- figure out when their last heartbeat was in the last 3 months
+-- MAGIC latest_heartbeats AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id,
+-- MAGIC     (({endMs} - (latest_heartbeat.proto_value.hub_server_device_heartbeat.last_heartbeat_at_ms + latest_heartbeat.proto_value.hub_server_device_heartbeat.heartbeat_period_sec * 2 * 1000)) / (24 * 60 * 60 * 1000)) AS days_active
+-- MAGIC   FROM (
+-- MAGIC     SELECT
+-- MAGIC       org_id,
+-- MAGIC       object_id AS device_id,
+-- MAGIC       MAX(STRUCT(time, value)).value AS latest_heartbeat
+-- MAGIC     FROM disconnected_devices_start
+-- MAGIC     LEFT JOIN kinesisstats.osdhubserverdeviceheartbeat
+-- MAGIC       USING(org_id, object_id)
+-- MAGIC     WHERE date > date_sub('{date}', 91) AND date <= '{date}' AND time <= {endMs} AND org_id = {orgId}
+-- MAGIC     AND value.is_end != true AND value.is_databreak != true
+-- MAGIC     GROUP BY 1, 2
+-- MAGIC   )
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC latest_power_stats AS (
+-- MAGIC   SELECT org_id, device_id, latest_power_stat
+-- MAGIC   FROM
+-- MAGIC   (
+-- MAGIC     SELECT
+-- MAGIC       org_id,
+-- MAGIC       object_id AS device_id,
+-- MAGIC       MAX(STRUCT(time, value)).value AS latest_power_stat
+-- MAGIC     FROM disconnected_devices_start
+-- MAGIC     JOIN kinesisstats.osdpowerstate
+-- MAGIC       USING(org_id, object_id)
+-- MAGIC     WHERE 
+-- MAGIC       date > date_sub('{date}', 91) AND date <= '{date}'
+-- MAGIC       AND org_id = {orgId}
+-- MAGIC       AND time <= {endMs}
+-- MAGIC       AND value.is_end != true AND value.is_databreak != true
+-- MAGIC     GROUP BY 1, 2
+-- MAGIC   )
+-- MAGIC   WHERE latest_power_stat.int_value = 10
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC battery_isolator_cases AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id,
+-- MAGIC     latest_power_stat,
+-- MAGIC     CASE 
+-- MAGIC       WHEN days_active < 7 THEN 13
+-- MAGIC       WHEN days_active < 90 THEN 21
+-- MAGIC       ELSE 22
+-- MAGIC     END AS battery_isolator_status
+-- MAGIC   FROM latest_power_stats
+-- MAGIC   LEFT JOIN latest_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC -- figure out the remaining devices
+-- MAGIC remaining_devices AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id AS object_id
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT ANTI JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT ANTI JOIN devices_without_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT ANTI JOIN battery_isolator_cases
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC ---
+-- MAGIC --- figure out latest cell status
+-- MAGIC --- TODO(parth): no need to do this for every device, you should really filter down here.
+-- MAGIC ---
+-- MAGIC latest_cell_signal AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     object_id AS device_id,
+-- MAGIC     MAX(STRUCT(time, value)).value.proto_value.interface_state.cellular.rssi_dbm AS latest_rssi
+-- MAGIC   FROM remaining_devices
+-- MAGIC   JOIN kinesisstats.osdcellularinterfacestate
+-- MAGIC     USING (org_id, object_id)
+-- MAGIC   WHERE date > DATE_SUB('{date}', 91) AND date <= '{date}' AND time <= {endMs} AND org_id = {orgId}
+-- MAGIC   AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   GROUP BY 1,2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC enums AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     never_connected,
+-- MAGIC     latest_battery_metric,
+-- MAGIC     latest_power_stat,
+-- MAGIC     connected_status,
+-- MAGIC     battery_isolator_status,
+-- MAGIC     latest_rssi,
+-- MAGIC     days_active,
+-- MAGIC     CASE 
+-- MAGIC       WHEN never_connected = 1 THEN 2 
+-- MAGIC       WHEN latest_battery_metric >= 3000 AND latest_battery_metric < 8000 THEN 10
+-- MAGIC       WHEN connected_status = 'connected' THEN 1
+-- MAGIC       WHEN connected_status = 'weakgps' THEN 14
+-- MAGIC       WHEN battery_isolator_status IS NOT NULL THEN battery_isolator_status
+-- MAGIC       WHEN latest_rssi <= -80 THEN 5
+-- MAGIC       WHEN days_active < 14 THEN 21
+-- MAGIC       ELSE 6
+-- MAGIC     END AS status_enum
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT JOIN devices_without_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_battery_metric
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN battery_isolator_cases
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_cell_signal
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC )
+-- MAGIC 
+-- MAGIC SELECT 
+-- MAGIC   *, 
+-- MAGIC   CASE 
+-- MAGIC     WHEN status_enum = 1 THEN "Connected"
+-- MAGIC     WHEN status_enum = 2 THEN "Not Installed" 
+-- MAGIC     WHEN status_enum = 5 THEN "Weak Cell Signal"
+-- MAGIC     WHEN status_enum = 6 THEN "Requires Investigation"
+-- MAGIC     WHEN status_enum = 10 THEN "Low Vehicle Battery"
+-- MAGIC     WHEN status_enum = 13 THEN "Vehicle Off"
+-- MAGIC     WHEN status_enum = 14 THEN "Weak GPS Signal"
+-- MAGIC     WHEN status_enum = 21 THEN "Temporarily Offline"
+-- MAGIC     WHEN status_enum = 22 THEN "Prolonged Offline"
+-- MAGIC     ELSE "lol" 
+-- MAGIC   END AS status
+-- MAGIC FROM enums
+-- MAGIC """)
+-- MAGIC spark.sql("CACHE TABLE spark_gateway_health_vgs")
+
+-- COMMAND ----------
+
+-- MAGIC %py
+-- MAGIC spark.sql(f"""
+-- MAGIC CREATE OR 
+-- MAGIC REPLACE TEMPORARY VIEW spark_gateway_health_ag45_46 AS 
+-- MAGIC 
+-- MAGIC -- start with every device in this org
+-- MAGIC WITH 
+-- MAGIC renamed_clouddb_devices AS (
+-- MAGIC   SELECT org_id, id AS device_id, product_id
+-- MAGIC   FROM productsdb.devices
+-- MAGIC   WHERE org_id = {orgId}
+-- MAGIC     AND product_id IN (42, 54, 62, 65) -- ag45/eu, ag46eu
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- this works because this table is like <2 gb.
+-- MAGIC -- would highly prefer dataprep
+-- MAGIC earliest_diagnostic_messages AS (
+-- MAGIC   SELECT DISTINCT org_id, device_id 
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   JOIN (
+-- MAGIC     SELECT org_id, object_id AS device_id, time, value
+-- MAGIC     FROM kinesisstats.osdgatewaymicrodiagnosticstatus
+-- MAGIC     WHERE date <= '{date}' AND time <= {endMs} AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   ) USING (org_id, device_id)
+-- MAGIC   WHERE value.proto_value.gateway_micro_diagnostic_status.activated = true
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- TODO(parth): once this works find a better way
+-- MAGIC never_connected_devices AS (
+-- MAGIC   SELECT org_id, device_id, 1 AS never_connected
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT ANTI JOIN earliest_diagnostic_messages
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- figure out the battery metrics
+-- MAGIC latest_battery_metric AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     object_id AS device_id, 
+-- MAGIC     MAX(STRUCT(time, value.int_value AS latest_val)).latest_val AS latest_battery_metric
+-- MAGIC   FROM kinesisstats.osdbattery
+-- MAGIC   WHERE date <= '{date}' AND date > DATE_SUB('{date}', 91) AND time <= {endMs} AND org_id = {orgId} AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   GROUP BY org_id, object_id
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC --
+-- MAGIC --
+-- MAGIC -- connected
+-- MAGIC --
+-- MAGIC --
+-- MAGIC heartbeats_with_next AS (
+-- MAGIC   SELECT *
+-- MAGIC   FROM windowed_heartbeats
+-- MAGIC   WHERE org_id = {orgId}
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC connected AS (
+-- MAGIC   SELECT org_id, object_id AS device_id, TRUE as is_connected
+-- MAGIC   FROM heartbeats_with_next
+-- MAGIC   WHERE
+-- MAGIC     -- either:
+-- MAGIC     -- 1. the device is explicitly active at the time point
+-- MAGIC     (started_at_ms <= {endMs} AND active_until_ms >= {endMs})
+-- MAGIC     OR
+-- MAGIC     -- 2. the device is between active periods and that period spans <= 1 day
+-- MAGIC     (active_until_ms <= {endMs} AND next_started_at_ms >= {endMs} AND next_started_at_ms - active_until_ms < 24 * 60 * 60 * 1000)
+-- MAGIC     OR
+-- MAGIC     -- 3. it's been <72 hours since disconnect.
+-- MAGIC     (active_until_ms <= {endMs} AND {endMs} - active_until_ms < 3 * 24 * 60 * 60 * 1000)
+-- MAGIC   GROUP BY org_id, object_id -- we don't really care which, just one of them needs to be true
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- see if there's been a gps location point in the last 1 day
+-- MAGIC weak_gps_signal AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     MAX(STRUCT(time, value)).value AS value
+-- MAGIC   FROM connected
+-- MAGIC   LEFT JOIN kinesisstats.location
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   WHERE date >= DATE_SUB('{date}', 1) AND time >= {endMs} - 3 * 24 * 60 * 60 * 1000 AND date <= '{date}' AND time <= {endMs}
+-- MAGIC   GROUP BY 1, 2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC connected_or_weak_gps AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     CASE 
+-- MAGIC       WHEN value IS NOT NULL THEN 'connected' 
+-- MAGIC       ELSE 'weakgps' 
+-- MAGIC     END AS connected_status
+-- MAGIC   FROM connected
+-- MAGIC   LEFT JOIN weak_gps_signal
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- figure out the remaining devices
+-- MAGIC -- this is not smart, like you're not even excluding the battery ones properly
+-- MAGIC remaining_devices AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id AS object_id
+-- MAGIC   FROM earliest_diagnostic_messages -- represents all activated devices
+-- MAGIC   LEFT ANTI JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC ---
+-- MAGIC --- figure out latest cell status
+-- MAGIC -- TODO(parth): is this shareable?
+-- MAGIC ---
+-- MAGIC latest_cell_signal AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     object_id AS device_id,
+-- MAGIC     MAX(STRUCT(time, value)).value.proto_value.interface_state.cellular.rssi_dbm AS latest_rssi
+-- MAGIC   FROM remaining_devices
+-- MAGIC   JOIN kinesisstats.osdcellularinterfacestate
+-- MAGIC     USING (org_id, object_id)
+-- MAGIC   WHERE date > DATE_SUB('{date}', 91) AND date <= '{date}' AND time <= {endMs} AND org_id = {orgId}
+-- MAGIC   AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   GROUP BY 1,2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC enums AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     never_connected,
+-- MAGIC     latest_battery_metric,
+-- MAGIC     connected_status,
+-- MAGIC     latest_rssi,
+-- MAGIC     CASE 
+-- MAGIC       WHEN never_connected = 1 THEN 2 
+-- MAGIC       WHEN latest_battery_metric < 3500 THEN
+-- MAGIC         CASE WHEN product_id = 42 OR product_id = 54 THEN 17
+-- MAGIC              ELSE 19
+-- MAGIC         END
+-- MAGIC       WHEN connected_status = 'connected' THEN 1
+-- MAGIC       WHEN connected_status = 'weakgps' THEN 14
+-- MAGIC       WHEN latest_rssi <= -80 THEN 5
+-- MAGIC       ELSE 6
+-- MAGIC     END AS status_enum
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT JOIN never_connected_devices
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_battery_metric
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_cell_signal
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC )
+-- MAGIC 
+-- MAGIC SELECT 
+-- MAGIC   *, 
+-- MAGIC   CASE 
+-- MAGIC     WHEN status_enum = 1 THEN "Connected"
+-- MAGIC     WHEN status_enum = 2 THEN "Not Installed" 
+-- MAGIC     WHEN status_enum = 5 THEN "Weak Cell Signal"
+-- MAGIC     WHEN status_enum = 6 THEN "Requires Investigation"
+-- MAGIC     WHEN status_enum = 10 THEN "Low Vehicle Battery"
+-- MAGIC     WHEN status_enum = 13 THEN "Vehicle Off"
+-- MAGIC     WHEN status_enum = 14 THEN "Weak GPS Signal"
+-- MAGIC     WHEN status_enum = 17 THEN "Low Gateway Battery (AG45)"
+-- MAGIC     WHEN status_enum = 19 THEN "Low Gateway Battery (AG46)"
+-- MAGIC     WHEN status_enum = 21 THEN "Temporarily Offline"
+-- MAGIC     WHEN status_enum = 22 THEN "Prolonged Offline"
+-- MAGIC     ELSE "lol" 
+-- MAGIC   END AS status
+-- MAGIC FROM enums
+-- MAGIC """)
+-- MAGIC spark.sql("CACHE TABLE spark_gateway_health_ag45_46")
+
+-- COMMAND ----------
+
+-- MAGIC %py
+-- MAGIC spark.sql(f"""
+-- MAGIC CREATE OR 
+-- MAGIC REPLACE TEMPORARY VIEW spark_gateway_health_ag24_26_46p AS 
+-- MAGIC 
+-- MAGIC -- -- start with every device in this org
+-- MAGIC WITH 
+-- MAGIC renamed_clouddb_devices AS (
+-- MAGIC   SELECT org_id, id AS device_id, product_id
+-- MAGIC   FROM productsdb.devices
+-- MAGIC   WHERE org_id = {orgId}
+-- MAGIC   AND product_id IN (27, 36, 68, 83, 84, 85) -- ag24/eu, ag26/eu, ag46p/eu
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC -- figure out the battery metrics
+-- MAGIC latest_battery_metric AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     object_id AS device_id, 
+-- MAGIC     MAX(STRUCT(time, value.int_value AS latest_val)).latest_val AS latest_battery_metric
+-- MAGIC   FROM kinesisstats.osdbattery
+-- MAGIC   WHERE date <= '{date}' AND date > date_sub('{date}', 91) AND time <= {endMs} AND org_id = {orgId} AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   GROUP BY org_id, object_id
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC -- TODO(parth): i forget now why i even need this
+-- MAGIC devices_without_heartbeats AS (
+-- MAGIC   SELECT org_id, device_id, 1 AS never_connected
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT ANTI JOIN (
+-- MAGIC     SELECT * 
+-- MAGIC     FROM dataprep.device_heartbeats
+-- MAGIC     WHERE first_heartbeat_ms < {endMs}
+-- MAGIC       AND org_id = {orgId}
+-- MAGIC   ) USING (org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC --
+-- MAGIC --
+-- MAGIC -- connected
+-- MAGIC --
+-- MAGIC --
+-- MAGIC heartbeats_with_next AS (
+-- MAGIC   SELECT *
+-- MAGIC   FROM windowed_heartbeats
+-- MAGIC   WHERE org_id = {orgId}
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC connected AS (
+-- MAGIC   SELECT org_id, object_id AS device_id, TRUE as is_connected
+-- MAGIC   FROM heartbeats_with_next
+-- MAGIC   WHERE
+-- MAGIC     -- either:
+-- MAGIC     -- 1. the device is explicitly active at the time point
+-- MAGIC     (started_at_ms <= {endMs} AND active_until_ms >= {endMs})
+-- MAGIC     OR
+-- MAGIC     -- 2. the device is between active periods and that period spans <= 1 day
+-- MAGIC     (active_until_ms <= {endMs} AND next_started_at_ms >= {endMs} AND next_started_at_ms - active_until_ms < 24 * 60 * 60 * 1000)
+-- MAGIC     OR
+-- MAGIC     -- 3. it's been <24 hours since disconnect.
+-- MAGIC     (active_until_ms <= {endMs} AND {endMs} - active_until_ms < 24 * 60 * 60 * 1000)
+-- MAGIC   GROUP BY org_id, object_id -- we don't really care which, just one of them needs to be true
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- see if there's been a gps location point in the last 1 day
+-- MAGIC weak_gps_signal AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     MAX(STRUCT(time, value)).value AS value
+-- MAGIC   FROM connected
+-- MAGIC   LEFT JOIN kinesisstats.location
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   WHERE date >= DATE_SUB('{date}', 1) AND time >= {endMs} - 24 * 60 * 60 * 1000 AND date <= '{date}' AND time <= {endMs}
+-- MAGIC   GROUP BY 1, 2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC connected_or_weak_gps AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     device_id,
+-- MAGIC     CASE 
+-- MAGIC       WHEN value IS NOT NULL THEN 'connected' 
+-- MAGIC       ELSE 'weakgps' 
+-- MAGIC     END AS connected_status
+-- MAGIC   FROM connected
+-- MAGIC   LEFT JOIN weak_gps_signal
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC ----------
+-- MAGIC 
+-- MAGIC -- TODO(parth): this is the sketchiest part of all the logic, the most likely to have some small mistakes.
+-- MAGIC -- for instance we don't do well with intervals starting before the range 
+-- MAGIC windowed_powerstats AS (
+-- MAGIC   SELECT 
+-- MAGIC     org_id, 
+-- MAGIC     object_id AS device_id,
+-- MAGIC     time,
+-- MAGIC     LEAD(time) OVER org_device_time AS next_time
+-- MAGIC   FROM kinesisstats.osdpowerstate
+-- MAGIC   WHERE date >= DATE_SUB('{date}', 91) AND date <= '{date}' AND time <= {endMs} -- go 6 days further back than necessary
+-- MAGIC   AND value.int_value = 1 -- on
+-- MAGIC   WINDOW org_device_time AS (PARTITION BY org_id, object_id ORDER BY time ASC)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC -- filter out stuff thats clearly in the past, and limit start and end to within our range
+-- MAGIC windowed_powerstats_in_range AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id,
+-- MAGIC     array_max(array(time, {endMs} - 14 * 24 * 60 * 60 * 1000)) AS time,
+-- MAGIC     array_min(array(COALESCE(next_time, {endMs}), {endMs})) AS next_time
+-- MAGIC   FROM windowed_powerstats
+-- MAGIC   WHERE 
+-- MAGIC   -- point is clearly in the range
+-- MAGIC   time >= {endMs} - 14 * 24 * 60 * 60 * 1000
+-- MAGIC   -- point is before but ends in the range
+-- MAGIC   OR time < {endMs} - 14 * 24 * 60 * 60 * 1000 AND next_time > {endMs} - 14 * 24 * 60 * 60 * 1000
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC charge_times AS (
+-- MAGIC   SELECT org_id, device_id, SUM(next_time - time) AS total_charge_time_ms
+-- MAGIC   FROM windowed_powerstats_in_range
+-- MAGIC   GROUP BY 1, 2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC -- figure out the remaining devices
+-- MAGIC -- this is not smart, like you're not even excluding a lot of them properly
+-- MAGIC remaining_devices AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id AS object_id
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT ANTI JOIN devices_without_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT ANTI JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC ---
+-- MAGIC --- figure out latest cell status
+-- MAGIC ---
+-- MAGIC latest_cell_signal AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     object_id AS device_id,
+-- MAGIC     MAX(STRUCT(time, value)).value.proto_value.interface_state.cellular.rssi_dbm AS latest_rssi
+-- MAGIC   FROM remaining_devices
+-- MAGIC   JOIN kinesisstats.osdcellularinterfacestate
+-- MAGIC     USING (org_id, object_id)
+-- MAGIC   WHERE date > DATE_SUB('{date}', 91) AND date <= '{date}' AND time <= {endMs} AND org_id = {orgId}
+-- MAGIC   AND value.is_end != true AND value.is_databreak != true
+-- MAGIC   GROUP BY 1,2
+-- MAGIC ),
+-- MAGIC 
+-- MAGIC 
+-- MAGIC enums AS (
+-- MAGIC   SELECT
+-- MAGIC     org_id,
+-- MAGIC     device_id,
+-- MAGIC     never_connected,
+-- MAGIC     latest_battery_metric,
+-- MAGIC     connected_status,
+-- MAGIC     total_charge_time_ms,
+-- MAGIC     latest_rssi,
+-- MAGIC     CASE
+-- MAGIC       WHEN never_connected = 1 THEN 2
+-- MAGIC       WHEN latest_battery_metric < 3350 THEN
+-- MAGIC         CASE WHEN product_id = 27 OR product_id = 36 THEN 16 -- ag24/eu
+-- MAGIC              WHEN product_id = 68 OR product_id = 83 THEN 18 -- ag26/eu
+-- MAGIC              WHEN product_id = 84 OR product_id = 85 THEN 20 -- ag46p/eu
+-- MAGIC              ELSE 0 -- shouldn't happen probably don't need
+-- MAGIC         END
+-- MAGIC       WHEN connected_status = 'connected' THEN 1
+-- MAGIC       WHEN connected_status = 'weakgps' THEN 14
+-- MAGIC       WHEN COALESCE(total_charge_time_ms, 0) < 24192000 THEN 12
+-- MAGIC       WHEN latest_rssi <= -80 THEN 5
+-- MAGIC       ELSE 6
+-- MAGIC     END AS status_enum
+-- MAGIC   FROM renamed_clouddb_devices
+-- MAGIC   LEFT JOIN devices_without_heartbeats
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_battery_metric
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN connected_or_weak_gps
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN charge_times
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC   LEFT JOIN latest_cell_signal
+-- MAGIC     USING(org_id, device_id)
+-- MAGIC )
+-- MAGIC 
+-- MAGIC SELECT 
+-- MAGIC   *, 
+-- MAGIC   CASE 
+-- MAGIC     WHEN status_enum = 1 THEN "Connected"
+-- MAGIC     WHEN status_enum = 2 THEN "Not Installed" 
+-- MAGIC     WHEN status_enum = 5 THEN "Weak Cell Signal"
+-- MAGIC     WHEN status_enum = 6 THEN "Requires Investigation"
+-- MAGIC     WHEN status_enum = 10 THEN "Low Vehicle Battery"
+-- MAGIC     WHEN status_enum = 12 THEN "Low Charging State"
+-- MAGIC     WHEN status_enum = 13 THEN "Vehicle Off"
+-- MAGIC     WHEN status_enum = 14 THEN "Weak GPS Signal"
+-- MAGIC     WHEN status_enum = 16 THEN "Low Gateway Battery (AG24)"
+-- MAGIC     WHEN status_enum = 17 THEN "Low Gateway Battery (AG45)"
+-- MAGIC     WHEN status_enum = 18 THEN "Low Gateway Batter (AG26)"
+-- MAGIC     WHEN status_enum = 19 THEN "Low Gateway Battery (AG46)"
+-- MAGIC     WHEN status_enum = 12 THEN "Low Gateway Battery (AG46P)"
+-- MAGIC     WHEN status_enum = 21 THEN "Temporarily Offline"
+-- MAGIC     WHEN status_enum = 22 THEN "Prolonged Offline"
+-- MAGIC     ELSE "lol" 
+-- MAGIC   END AS status
+-- MAGIC FROM enums
+-- MAGIC """)
+-- MAGIC spark.sql("CACHE TABLE spark_gateway_health_ag24_26_46p")

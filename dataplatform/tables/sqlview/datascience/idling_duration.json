@@ -1,0 +1,98 @@
+{
+  "view": "idling_duration",
+  "owner": "DataScience",
+  "description": "Get idling duration by org by day",
+  "database": "datascience",
+  "schema": [
+    { "name": "org_id", "type": "long" },
+    { "name": "date", "type": "date" },
+    { "name": "on_duration_ms", "type": "long", "nullable": false },
+    { "name": "idle_duration_ms", "type": "long", "nullable": false }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdenginestate",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput1",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput2",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput3",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput4",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput5",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput6",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput7",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput8",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput9",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osddigioinput10",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "definitions",
+      "tablename": "445_calendar",
+      "type": "table"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "view": "dummy_view_for_lineage",
+  "owner": "DataPlatform",
+  "description": "This is a view created solely for testing our lineage generation",
+  "database": "dataplatform_dev",
+  "schema": [
+    {
+      "name": "date",
+      "type": "string",
+      "description": "a cool date"
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "dataplatform_beta_report",
+      "tablename": "metered_usage",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

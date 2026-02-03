@@ -1,0 +1,11 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`quarterly_release_uuid` STRING,
+`org_id` BIGINT,
+`user_id` BIGINT,
+`enabled` BYTE,
+`updated_at` TIMESTAMP,
+`scope` BYTE,
+`partition` STRING

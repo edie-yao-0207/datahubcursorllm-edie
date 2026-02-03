@@ -1,0 +1,97 @@
+{
+  "test_cases": [
+    {
+      "label": "creates intervals split on days",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-03'"
+      },
+      "input_data": {
+        "engine_state.transitions": [
+          {
+            "date": "2019-12-31",
+            "org_id": 5,
+            "object_id": 1,
+            "time": 1577768663000,
+            "int_value": 0
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "object_id": 1,
+            "time": 1577913392960,
+            "int_value": 1
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "object_id": 1,
+            "time": 1577913392980,
+            "int_value": 2
+          },
+          {
+            "date": "2020-01-02",
+            "org_id": 5,
+            "object_id": 1,
+            "time": 1577928605000,
+            "int_value": 0
+          },
+          {
+            "date": "2020-01-02",
+            "org_id": 5,
+            "object_id": 1,
+            "time": 1577935810000,
+            "int_value": 1
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "object_id": 1,
+          "start_ms": 1577836800000,
+          "end_ms": 1577913392960,
+          "state": "OFF",
+          "original_interval_duration_ms": 144729960
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "object_id": 1,
+          "start_ms": 1577913392960,
+          "end_ms": 1577913392980,
+          "state": "ON",
+          "original_interval_duration_ms": 20
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "object_id": 1,
+          "start_ms": 1577913392980,
+          "end_ms": 1577923200000,
+          "state": "IDLE",
+          "original_interval_duration_ms": 15212020
+        },
+        {
+          "date": "2020-01-02",
+          "org_id": 5,
+          "object_id": 1,
+          "start_ms": 1577923200000,
+          "end_ms": 1577928605000,
+          "state": "IDLE",
+          "original_interval_duration_ms": 15212020
+        },
+        {
+          "date": "2020-01-02",
+          "org_id": 5,
+          "object_id": 1,
+          "start_ms": 1577928605000,
+          "end_ms": 1577935810000,
+          "state": "OFF",
+          "original_interval_duration_ms": 7205000
+        }
+      ]
+    }
+  ]
+}

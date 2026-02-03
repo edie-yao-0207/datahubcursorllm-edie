@@ -1,0 +1,94 @@
+{
+  "feature_name": "Performance Overview",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17801586/Performance+Overview",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "feature_flag_name": ["show-coaching-intelligence-supervisor-focus-tab"],
+      "release_phase": "Closed Beta"
+    },
+    {
+      "effective_date": "2025-10-01",
+      "licenses": {
+        "skus": [
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT",
+          "LIC-CM1-EXPRESS",
+          "LIC-CM2-EXPRESS",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-VG-ENT",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-ENTERPRISE",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PS"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["show-coaching-intelligence-supervisor-focus-tab"],
+      "release_phase": "Open Beta"
+    },
+    {
+      "effective_date": "2025-11-07",
+      "licenses": {
+        "skus": [
+          "LIC-CM1-ENT",
+          "LIC-CM2-ENT",
+          "LIC-CM1-EXPRESS",
+          "LIC-CM2-EXPRESS",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-VG-ENT",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-ENTERPRISE",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PS"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["show-coaching-intelligence-supervisor-focus-tab"],
+      "release_types": ["Early Adopter", "Phase 1"],
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "route_names": ["fleet_supervisor_insights"],
+      "mixpanel_metric_names": [
+        "supervisor_view_safety_score_navigation_click",
+        "supervisor_view_ecodriving_score_navigation_click",
+        "supervisor_insights_drivers_to_recognize_click_driver_name",
+        "supervisor_insights_drivers_requiring_attention_click_send_to_coaching",
+        "supervisor_insights_drivers_requiring_attention_click_send_message",
+        "supervisor_insights_drivers_requiring_attention_click_driver_name",
+        "supervisor_insights_coaching_timeliness_click_send_notification",
+        "supervisor_insights_coaching_effectiveness_click_view_drivers",
+        "supervisor_insights_training_timeliness_click_send_message",
+        "positive_recognition_kudos_send_kudos"
+      ]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["safety_event.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

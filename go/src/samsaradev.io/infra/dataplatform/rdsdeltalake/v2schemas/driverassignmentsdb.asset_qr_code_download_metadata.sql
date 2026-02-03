@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`last_download_timestamp` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`date` STRING

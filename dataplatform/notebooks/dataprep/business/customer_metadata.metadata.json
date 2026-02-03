@@ -1,0 +1,516 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["kalyan.vejalla@samsara.com", "steven.matson@samsara.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 17 * * ?",
+      "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+      "spark_version": "default",
+      "unity_catalog_setting": {
+        "data_security_mode": "USER_ISOLATION"
+      }
+    }
+  ],
+  "output": {
+    "dbname": "dataprep",
+    "tablename": "customer_metadata",
+    "type": "table",
+    "schema": [
+      {
+        "name": "sfdc_id",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The salesforce id associated with the customer - is the first 15 characters from 'salesforce_accounts.id'"
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "The Internal ID for the customer's Samsara Org"
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The customer's name"
+        }
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The Internal Samsara Customer ID"
+        }
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The customer's indsutry -- e.g. 'Wholesale', 'Trucking', 'Oil & Gas', 'Energy', 'Healthcare'"
+        }
+      },
+      {
+        "name": "ae_id",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The ID of the customer's Account Executive (AE)"
+        }
+      },
+      {
+        "name": "ae_name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The name of the customer's account executive"
+        }
+      },
+      {
+        "name": "ae_email",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The email of the customer's account executive"
+        }
+      },
+      {
+        "name": "first_purchase_date",
+        "type": "date",
+        "nullable": true,
+        "metadata": {
+          "comment": "The date of the customer's first purchase"
+        }
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The current status of the customer -- e.g. 'Existing Customer', 'Open Opportunity', 'Assigned'"
+        }
+      },
+      {
+        "name": "segment",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The customer segment -- e.g. 'Management', 'Enterprise'"
+        }
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The customer's region -- e.g. 'East', 'West', 'Central'"
+        }
+      },
+      {
+        "name": "billingcity",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The city where the customer gets billed"
+        }
+      },
+      {
+        "name": "billingpostalcode",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The postal code of the city where the customer gets billed"
+        }
+      },
+      {
+        "name": "billingcountry",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The country of the city where the customer gets billed"
+        }
+      },
+      {
+        "name": "billingcountrycode",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The country code of the country where the customer gets billed"
+        }
+      },
+      {
+        "name": "date_first_trial_shipped",
+        "type": "date",
+        "nullable": true,
+        "metadata": {
+          "comment": "The country code of the country where the customer gets billed "
+        }
+      },
+      {
+        "name": "last_modified_date",
+        "type": "date",
+        "nullable": true,
+        "metadata": {
+          "comment": "The date of the most recent record change"
+        }
+      },
+      {
+        "name": "lifetime_acv",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The Annual Contract Value (ACV) over the customer's lifetime in the customer's local currency"
+        }
+      },
+      {
+        "name": "delinquent",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A boolean flag indicating whether the customer's account is flagged as 'delinquent'"
+        }
+      },
+      {
+        "name": "org_size",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The org size segment of the customer"
+        }
+      },
+      {
+        "name": "org_type",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The type of customer e.g. 'Fleet', 'Partner', 'Connected Worker'"
+        }
+      },
+      {
+        "name": "implementation_consultant",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The ID of the customer's assigned Implementation Consultant (IC)"
+        }
+      },
+      {
+        "name": "implementation_consultant_name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The name of the customer's assigned Implementation Consultant (IC)"
+        }
+      },
+      {
+        "name": "csm_rating",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The organization's customer success sentiment rating /n/n(e.g., 'Green')"
+        }
+      },
+      {
+        "name": "csm_notes",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The notes currently on the Salesforce account"
+        }
+      },
+      {
+        "name": "csm_trend",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The trend of the organization's custgomer success sentiment (e.g., 'steady', 'Improving')"
+        }
+      },
+      {
+        "name": "csm_sentiment_cause",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The attributed reason for the customer success sentiment rating -- e.g., 'Product fit', 'Ease of doing business', 'Product technical issues'"
+        }
+      },
+      {
+        "name": "csm",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The ID of the customer's Customer Success Manager (CSM)"
+        }
+      },
+      {
+        "name": "csm_name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The name of the customer's Customer Success Manager (CSM)"
+        }
+      },
+      {
+        "name": "csm_tier",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The tier of the customer account e.g. 'Elite', 'Premier', 'starter', 'Plus'"
+        }
+      },
+      {
+        "name": "has_trial",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A boolean flag indicating whether the customer is currently on an active trial"
+        }
+      },
+      {
+        "name": "total_open_opp_expected_revenue",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The total amount of revenue expected from current open opportunities in the customer's local currency"
+        }
+      },
+      {
+        "name": "free_trial_kit_sent_date",
+        "type": "timestamp",
+        "nullable": true,
+        "metadata": {
+          "comment": "The latest calendar date a free trial kit was shipped to the customer"
+        }
+      },
+      {
+        "name": "customer_arr",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The organization's current annual recurring revenue"
+        }
+      },
+      {
+        "name": "billing_first_name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The primary name to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "billing_last_name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The surname to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "billing_email",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The primary email to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "sfdc_id_long",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "This is the long form salesforce id associated with the customer - is the first 18 characters from 'salesforce_accounts.id'"
+        }
+      },
+      {
+        "name": "size_segment",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The customer segment size of the organization -- (e.g., 'AE1', 'AE2/AE3', 'ENT')"
+        }
+      },
+      {
+        "name": "sub_industry",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The name of the sub-industry in which the organization operates (e.g., 'Logistics', 'Energy', 'Agriculture')"
+        }
+      },
+      {
+        "name": "billingstatecode",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The code of the state/province to which the organization's invoices are billed"
+        }
+      },
+      {
+        "name": "has_active_contract",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A boolean flag indicating whether the customer is currently under at least one contract"
+        }
+      },
+      {
+        "name": "support_escalation",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "current_escalated",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "high_churn_risk",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "se_assignment",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The user id of the customer's assigned Sales Engineer (SE)"
+        }
+      },
+      {
+        "name": "CS_POC_email_address",
+        "type": "string",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "expected_ACV_revenue",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The estimated total acquired customer value (i.e., revenue) in the customer's local currency"
+        }
+      },
+      {
+        "name": "cloud_dashboard_link",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "A URL link to the Samsara Cloud Dashboard for the customer's organization"
+        }
+      },
+      {
+        "name": "days_since_first_purchase",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The number of days that have elapsed since the customer's first invoicing date"
+        }
+      },
+      {
+        "name": "revenue_opp_count",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "promo_opp_count",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "free_trial_opp_count",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "exchange_and_refund_opp_count",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "beta_program_opp_count",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "num_opp_feature_assignments",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "release_type",
+        "type": "integer",
+        "nullable": true,
+        "metadata": {
+          "comment": "The current product/feature release track of the customer /n/n[Release Tracks](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17905798/Release+Tracks)"
+        }
+      },
+      {
+        "name": "num_submitted_feedback",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "number_of_campaign_members",
+        "type": "long",
+        "nullable": true,
+        "metadata": {}
+      },
+      {
+        "name": "ic_email",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The email of the customer's assigned Implementation Consultant (IC)"
+        }
+      },
+      {
+        "name": "csm_email",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The email of the customer's assigned Customer Success Manager (CSM)"
+        }
+      },
+      {
+        "name": "se_name",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The name of the customer's assigned Sales Engineer (SE)"
+        }
+      },
+      {
+        "name": "lifetime_purchases",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The total value of purchases over the customer's lifetime in USD"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "view": "harsh_brake",
+  "owner": "DataScience",
+  "description": "Get harsh brake data by org by day",
+  "database": "datascience",
+  "schema": [
+    { "name": "org_id", "type": "long" },
+    { "name": "date", "type": "date" },
+    { "name": "total_harsh_brake", "type": "long", "nullable": false }
+  ],
+  "dependencies": [
+    {
+      "dbname": "dataprep",
+      "tablename": "vg_safety_events",
+      "type": "table"
+    },
+    {
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "dbname": "definitions",
+      "tablename": "445_calendar",
+      "type": "table"
+    }
+  ]
+}

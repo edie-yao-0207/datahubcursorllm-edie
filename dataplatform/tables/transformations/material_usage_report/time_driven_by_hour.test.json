@@ -1,0 +1,162 @@
+{
+  "test_cases": [
+    {
+      "label": "test a trip spanning multiple hours",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-03'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 2, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 2, "device_id": 2 }
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "date": "2020-01-01",
+            "org_id": 2,
+            "device_id": 1,
+            "proto": {
+              "start": {
+                "time": 1577923190000
+              },
+              "end": {
+                "time": 1577926810000
+              }
+            },
+            "version": 101
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 2,
+            "device_id": 2,
+            "proto": {
+              "start": {
+                "time": 1577847840000
+              },
+              "end": {
+                "time": 1577848080000
+              }
+            },
+            "version": 101
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 2,
+          "device_id": 1,
+          "hour_start": "2020-01-01 23:00:00",
+          "hour_end": "2020-01-02 00:00:00",
+          "duration_driven_ms": 10000
+        },
+        {
+          "date": "2020-01-02",
+          "org_id": 2,
+          "device_id": 1,
+          "hour_start": "2020-01-02 00:00:00",
+          "hour_end": "2020-01-02 01:00:00",
+          "duration_driven_ms": 3600000
+        },
+        {
+          "date": "2020-01-02",
+          "org_id": 2,
+          "device_id": 1,
+          "hour_start": "2020-01-02 01:00:00",
+          "hour_end": "2020-01-02 02:00:00",
+          "duration_driven_ms": 10000
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 2,
+          "device_id": 2,
+          "hour_start": "2020-01-01 03:00:00",
+          "hour_end": "2020-01-01 04:00:00",
+          "duration_driven_ms": 240000
+        }
+      ]
+    },
+    {
+      "label": "should exclude trips of devices that aren't spreaders",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 2, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 2, "device_id": 2 }
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "date": "2020-01-01",
+            "org_id": 2,
+            "device_id": 3,
+            "proto": {
+              "start": {
+                "time": 1577847840000
+              },
+              "end": {
+                "time": 1577848080000
+              }
+            },
+            "version": 101
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "should exclude hourly rows of trips that occurred outside of queried date range",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "material_usage_report.spreader_devices": [
+          {
+            "org_device": { "org_id": 2, "device_id": 1 }
+          },
+          {
+            "org_device": { "org_id": 2, "device_id": 2 }
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "date": "2019-12-31",
+            "org_id": 2,
+            "device_id": 1,
+            "proto": {
+              "start": {
+                "time": 1577835015000
+              },
+              "end": {
+                "time": 1577837415000
+              }
+            },
+            "version": 101
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 2,
+          "device_id": 1,
+          "hour_start": "2020-01-01 00:00:00",
+          "hour_end": "2020-01-01 01:00:00",
+          "duration_driven_ms": 615000
+        }
+      ]
+    }
+  ]
+}

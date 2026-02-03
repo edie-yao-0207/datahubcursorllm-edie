@@ -1,0 +1,10 @@
+`timestamp` TIMESTAMP,
+`action` STRING,
+`completion_duration_ms` BIGINT,
+`file_modified` STRING,
+`user_identifier` STRING,
+`env` STRING,
+`gopls_version` STRING,
+`metric_version` STRING,
+`blocked_by_reload` BOOLEAN,
+`date` DATE

@@ -1,0 +1,26 @@
+{
+  "view": "netsuite_consolidated_invoice_calculated_amount",
+  "owner": "PlatformOperations",
+  "description": "This view compiles the amount paid for a specific consolidated invoice",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "payment_amount", "type": "double" },
+    { "name": "total_amount", "type": "double" },
+    { "name": "consolidated_invoice_id", "type": "double" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "scs_consolidated_invoice_map",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "netsuite_data",
+      "tablename": "netsuite_child_invoice_amounts",
+      "type": "table"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "databricks_usage_us",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:auditlog.databricks_tables_queried",
+    "us-west-2:auditlog.biztech_assistant_events",
+    "us-west-2:auditlog.biztech_audit",
+    "us-west-2:auditlog.biztech_column_lineage",
+    "us-west-2:auditlog.biztech_table_lineage",
+    "us-west-2:auditlog.fct_databricks_dashboard_events"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "5 6 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`settings` STRUCT<`time_and_attendance_enabled`: BOOLEAN>,
+`_raw_settings` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

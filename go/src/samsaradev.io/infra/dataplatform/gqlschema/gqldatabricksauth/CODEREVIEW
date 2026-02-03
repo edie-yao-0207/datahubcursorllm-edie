@@ -1,0 +1,5 @@
+{
+    "owners": ["samsara-dev/data-platform"],
+    "description": "Changes to gqldatabricksauth should be cleared with the Data Platform team.",
+    "additionalReviewers": ["samsara-dev/dataproducts"]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "dataplatform_beta_report.whitelist_usage",
+  "owner": "DataPlatform",
+  "description": "Computes hourly rows for whitelist usage of wifi for vehicles.",
+  "backfill_start_date": "2022-01-01",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdwifiapwhitelistbytes",
+      "type": "table"
+    }
+  ],
+  "nonproduction": true,
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "dataplatform_beta_report",
+    "tablename": "whitelist_usage",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp"
+      },
+      {
+        "name": "whitelist_usage_bytes",
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

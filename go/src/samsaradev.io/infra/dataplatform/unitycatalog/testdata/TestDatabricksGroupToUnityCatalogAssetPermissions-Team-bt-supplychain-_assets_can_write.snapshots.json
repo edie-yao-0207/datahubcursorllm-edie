@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "bt-supplychain: assets can write",
+    "Values": [
+      {
+        "databaseRegions": {
+          "default.supplychain": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,102 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "vg3x_daily_summary",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "latest_gateway_id",
+        "type": "long"
+      },
+      {
+        "name": "product_id",
+        "type": "long"
+      },
+      {
+        "name": "serial",
+        "type": "string"
+      },
+      {
+        "name": "variant_id",
+        "type": "integer"
+      },
+      {
+        "name": "camera_product_id",
+        "type": "long"
+      },
+      {
+        "name": "active_builds_on_day",
+        "type": "long"
+      },
+      {
+        "name": "latest_build_on_day",
+        "type": "string"
+      },
+      {
+        "name": "trip_count",
+        "type": "long"
+      },
+      {
+        "name": "total_distance_meters",
+        "type": "double"
+      },
+      {
+        "name": "can_bus_type",
+        "type": "long"
+      },
+      {
+        "name": "cable_type",
+        "type": "long"
+      },
+      {
+        "name": "has_modi",
+        "type": "boolean"
+      },
+      {
+        "name": "has_baxter",
+        "type": "boolean"
+      },
+      {
+        "name": "has_octo",
+        "type": "boolean"
+      },
+      {
+        "name": "product_version",
+        "type": "string"
+      },
+      {
+        "name": "rollout_stage_id",
+        "type": "integer"
+      },
+      {
+        "name": "product_program_id",
+        "type": "integer"
+      },
+      {
+        "name": "product_program_id_type",
+        "type": "string"
+      }
+    ]
+  }
+}

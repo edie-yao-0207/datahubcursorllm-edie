@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dagster-prod-workspace
+  namespace: dagster-prod
+data:
+  workspace.yaml: |
+    load_from:
+      - grpc_server:
+          location_name: "datamodel-prod"
+          host: "datamodel-prod"
+          port: 3030
+      - grpc_server:
+          location_name: "dataweb-prod"
+          host: "dataweb-prod"
+          port: 3030
+      - grpc_server:
+          location_name: "ml-prod"
+          host: "ml-prod"
+          port: 3030
+

@@ -1,0 +1,149 @@
+{
+  "name": "safety_report.trip_stats_hourly_agg",
+  "owner": "SafetyScoringInsights",
+  "nonproduction": false,
+  "description": "Trip statistics aggregated for each object hourly",
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "trip_speeding",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2018-01-01",
+  "parameters": ["start_date", "end_date"],
+  "unsharded_backfills": true,
+  "output": {
+    "dbname": "safety_report",
+    "tablename": "trip_stats_hourly_agg",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["org_id", "object_id", "object_type", "interval_start", "version", "date"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "nullable": true,
+        "type": "long",
+        "metadata": {
+          "comment": "an id that can represent a driver_id or device_id"
+        }
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "nullable": false,
+        "metadata": {
+          "comment": "determine the object representation of object_id, 1 for device and 5 for driver"
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "Start time of the hourly aggregation"
+        }
+      },
+      {
+        "name": "trip_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "version",
+        "type": "integer"
+      },
+      {
+        "name": "not_speeding_count",
+        "type": "long"
+      },
+      {
+        "name": "light_speeding_count",
+        "type": "long"
+      },
+      {
+        "name": "moderate_speeding_count",
+        "type": "long"
+      },
+      {
+        "name": "heavy_speeding_count",
+        "type": "long"
+      },
+      {
+        "name": "severe_speeding_count",
+        "type": "long"
+      },
+      {
+        "name": "not_speeding_ms",
+        "type": "long"
+      },
+      {
+        "name": "light_speeding_ms",
+        "type": "long"
+      },
+      {
+        "name": "moderate_speeding_ms",
+        "type": "long"
+      },
+      {
+        "name": "heavy_speeding_ms",
+        "type": "long"
+      },
+      {
+        "name": "severe_speeding_ms",
+        "type": "long"
+      },
+      {
+        "name": "engine_idle_ms",
+        "type": "long"
+      },
+      {
+        "name": "distance_meters",
+        "type": "double"
+      },
+      {
+        "name": "outward_camera_distance_meters",
+        "type": "double"
+      },
+      {
+        "name": "inward_outward_camera_distance_meters",
+        "type": "double"
+      },
+      {
+        "name": "driving_time_ms",
+        "type": "long"
+      },
+      {
+        "name": "outward_camera_driving_time_ms",
+        "type": "long"
+      },
+      {
+        "name": "inward_outward_camera_driving_time_ms",
+        "type": "long"
+      },
+      {
+        "name": "seatbelt_reporting_present_ms",
+        "type": "long"
+      },
+      {
+        "name": "seatbelt_unbuckled_ms",
+        "type": "long"
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "material_usage_report.spreader_devices",
+  "owner": "DiagnosticsTools",
+  "description": "Stores all spreader devices based on spreader_event_intervals so it can be used to limit amount of downstream data we in the report",
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "material_usage_report",
+      "tablename": "spreader_event_intervals",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "material_usage_report",
+    "tablename": "spreader_devices",
+    "type": "table",
+    "partition": [],
+    "primary_key": ["org_device"],
+    "schema": [
+      {
+        "name": "org_device",
+        "type": {
+          "type": "struct",
+          "fields": [
+            { "name": "org_id", "type": "long" },
+            { "name": "device_id", "type": "long" }
+          ]
+        },
+        "nullable": false
+      }
+    ],
+    "write_mode": "overwrite"
+  },
+  "expectation": {
+    "batch_mode": "KEEP_ALL"
+  },
+  "backfill_start_date": "2021-12-01"
+}

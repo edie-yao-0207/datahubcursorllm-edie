@@ -1,0 +1,19 @@
+{
+  "owner": "STCEUnpowered",
+  "email_notifications": ["stce-unpowered-oncall-aaaanv7iwr5fotbvzweicwgdhu@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "update-monthly",
+      "cron": "0 0 12 ? * 7#2",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 172800,
+      "driver_node_type_id": "rd-fleet.4xlarge",
+      "node_type_id": "rd-fleet.4xlarge",
+      "max_workers": 32,
+      "spark_version": "default",
+      "parameters": {
+        "filter_date": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+`org_id` BIGINT,
+`vg_device_id` BIGINT,
+`event_ms` BIGINT,
+`event_id` BIGINT,
+`duration_ms` BIGINT,
+`accel_type` INT,
+`triggered_customer_threshold` BOOLEAN,
+`previous_event_ms` BIGINT,
+`severity` INT,
+`date` DATE

@@ -1,0 +1,13 @@
+`experiment_name` STRING,
+`reversed` BOOLEAN,
+`outcome` STRING,
+`expected` STRING,
+`received` STRING,
+`error` STRING,
+`extra_data` STRING,
+`request_id` STRING,
+`service_name` STRING,
+`cell` STRING,
+`region` STRING,
+`timestamp` TIMESTAMP,
+`date` DATE

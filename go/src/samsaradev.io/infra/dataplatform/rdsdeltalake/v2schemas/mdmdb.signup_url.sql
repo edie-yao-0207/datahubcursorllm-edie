@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`url` STRING,
+`name` STRING,
+`created_at` TIMESTAMP,
+`partition` STRING

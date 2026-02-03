@@ -1,0 +1,48 @@
+{
+  "name": "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval",
+  "owner": "Sustainability",
+  "description": "fuel_energy_efficiency_report.custom_fuel_unit_cost_interval",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "fueldb_shards",
+      "tablename": "custom_fuel_costs",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2022-06-16",
+  "output": {
+    "dbname": "fuel_energy_efficiency_report",
+    "tablename": "custom_fuel_unit_cost_interval",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": false
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "nullable": false
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "nullable": false
+      },
+      {
+        "name": "custom_fuel_cost",
+        "type": "double"
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

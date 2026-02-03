@@ -1,0 +1,16 @@
+{
+  "name": "eco_reports_us",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:product_analytics.fct_eco_driving_reports",
+    "us-west-2:product_analytics.fct_eco_driving_augmented_reports"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 04 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ]
+}

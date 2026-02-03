@@ -1,0 +1,26 @@
+{
+  "owner": "safetyeventdetection-group",
+  "region": ["us-west-2", "eu-west-1"],
+  "sql_warehouse": "safetyproductgroup",
+  "name": "konmari_latency_event_type",
+  "description": "SQL Query that finds the percentiles of konmari latency grouped by event type",
+  "run_as_role": "owner",
+  "permissions": [
+    {
+      "level": "CAN_RUN",
+      "group_name": "dev-group"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "date_range",
+      "title": "date_range",
+      "date_range": {
+        "range": {
+          "start": "2024-09-12",
+          "end": "2024-09-13"
+        }
+      }
+    }
+  ]
+}

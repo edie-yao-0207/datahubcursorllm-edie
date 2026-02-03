@@ -1,0 +1,28 @@
+{
+  "name": "product_review_metrics_weekly_backfill_ca",
+  "owner": "DataEngineering",
+  "container_config": {
+    "resources": {
+      "requests": {
+        "cpu": "1000m",
+        "memory": "1024Mi"
+      }
+    }
+  },
+  "max_concurrent": 5,
+  "assets": [
+    "ca-central-1:dataengineering.safety_event_review_results_details_region",
+    "ca-central-1:dataengineering.safety_event_reviews_details_region",
+    "ca-central-1:dataengineering.safety_event_surveys",
+    "ca-central-1:dataengineering.safety_inbox_events_status",
+    "ca-central-1:dataengineering.video_requests"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 12 * * *",
+      "backfill_window": 14,
+      "backfill_batch_size": 14
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "owners": ["*"],
+  "description": "Anyone can review Data Configuration changes. However, it is strongly encouraged to create CODEREVIEW files for specific files and/or directories that belong to specific teams. Please review the Code Review Machinery Guide (https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4427779/How+to+Code+Review+Machinery) for a walk through on how to define CODEOWNERs.",
+  "onlyIfNoChildren": true
+}

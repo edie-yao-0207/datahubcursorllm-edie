@@ -1,0 +1,41 @@
+{
+  "view": "orgs",
+  "owner": "AppTelematics",
+  "description": "This view is a subset of clouddb.organizations for all orgs that have created app telematics devices, along with their org type",
+  "database": "apptelematics",
+  "schema": [
+    {
+      "name": "id",
+      "type": "long",
+      "description": "The ID of the organization."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The name of the org"
+    },
+    {
+      "name": "org_type",
+      "type": "string",
+      "nullable": false,
+      "description": "Describes whether the org is an internal or external orgs. This value is either 'external,all' or 'internal,all', where we append 'all' to all rows to be able to easily select both internal and external orgs."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    },
+    {
+      "dbname": "apptelematics",
+      "tablename": "device_ids",
+      "type": "table"
+    }
+  ]
+}

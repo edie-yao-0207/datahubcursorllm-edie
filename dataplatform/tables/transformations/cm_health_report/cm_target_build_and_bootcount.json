@@ -1,0 +1,37 @@
+{
+  "name": "cm_health_report.cm_target_build_and_bootcount",
+  "owner": "MediaExperience",
+  "description": "Build names and bootcounts over CM/Target paired intervals for VGs and CM3x's. CM2x's do not report heartbeats.",
+  "dependencies": [
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_2x_3x_linked_vgs", "type": "table" },
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_target_intervals", "type": "table" },
+    { "external": true, "dbname": "kinesisstats", "tablename": "osdhubserverdeviceheartbeat", "type": "table" }
+  ],
+  "expectation": {
+    "batch_mode": "REMOVE_UNEXPECTED"
+  },
+  "backfill_start_date": "2024-08-01",
+  "parameters": ["start_date", "end_date", "pipeline_execution_time"],
+  "output": {
+    "dbname": "cm_health_report",
+    "tablename": "cm_target_build_and_bootcount",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["org_id", "vg_device_id", "start_ms"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      { "name": "vg_device_id", "type": "long" },
+      { "name": "cm_device_id", "type": "long" },
+      { "name": "vg_product_id", "type": "long" },
+      { "name": "cm_product_id", "type": "long" },
+      { "name": "date", "type": "string" },
+      { "name": "start_ms", "type": "long" },
+      { "name": "end_ms", "type": "long" },
+      { "name": "vg_bootcount", "type": "integer" },
+      { "name": "vg_build", "type": "string" },
+      { "name": "cm_bootcount", "type": "integer" },
+      { "name": "cm_build", "type": "string" }
+    ],
+    "write_mode": "overwrite"
+  }
+}

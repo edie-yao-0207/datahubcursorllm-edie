@@ -1,0 +1,23 @@
+{
+  "feature_name": "API Calls",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17892984/REST+API+Endpoints",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "serves_all": true
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "api.sql",
+        "eu_sql_file": "api_eu.sql",
+        "filter_internal_usage": false,
+        "has_user_id_field": false,
+        "usage_field": "num_requests",
+        "operation": "SUM"
+      }
+    }
+  ]
+}

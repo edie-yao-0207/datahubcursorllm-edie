@@ -1,0 +1,25 @@
+{
+  "view": "gvwr_vehicle_types",
+  "owner": "DataScience",
+  "description": "Gross Vehicle Weight Rating for a given make and model between clouddb and vindb",
+  "database": "datascience",
+  "schema": [
+    { "name": "make", "type": "string" },
+    { "name": "model", "type": "string" },
+    { "name": "gvwr_vehicle_type", "nullable": false, "type": "string" }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "vehicle_make_model_weights",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "vindb_shards",
+      "tablename": "device_vin_metadata",
+      "type": "table"
+    }
+  ]
+}

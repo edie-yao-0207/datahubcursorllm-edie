@@ -1,0 +1,64 @@
+{
+  "table": "device_builds",
+  "owner": "DataEngineering",
+  "description": "contain build information for each device on each day",
+  "database": "dataprep",
+  "schema": [
+    {
+      "name": "date",
+      "type": "string",
+      "metadata": {
+        "comment": "The field which partitions the table, in 'YYYY-mm-dd' format."
+      }
+    },
+    {
+      "name": "org_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "The Internal ID for the customer`s Samsara org."
+      }
+    },
+    {
+      "name": "device_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Unique identifier for devices. Joins to datamodel_core.dim_devices"
+      }
+    },
+    {
+      "name": "latest_gateway_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Latest gateway for device"
+      }
+    },
+    {
+      "name": "active_gateways_on_day",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Number of active gateways on given day"
+      }
+    },
+    {
+      "name": "latest_build_on_day",
+      "type": "string",
+      "metadata": {
+        "comment": "Latest build on given day"
+      }
+    },
+    {
+      "name": "active_builds_on_day",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Number of active builds on given day"
+      }
+    },
+    {
+      "name": "boot_counts_on_day",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Boot counts on given day"
+      }
+    }
+  ]
+}

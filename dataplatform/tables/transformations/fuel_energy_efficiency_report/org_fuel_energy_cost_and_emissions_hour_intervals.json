@@ -1,0 +1,130 @@
+{
+  "name": "fuel_energy_efficiency_report.org_fuel_energy_cost_and_emissions_hour_intervals",
+  "owner": "Sustainability",
+  "description": "Computes the fuel cost/emissions per org per configurable fuel type, where either a dynamically fetched or custom cost exists for the type, in hourly intervals. We also apply default emissions to each row based on the configurable fuel type, if there is no custom override.",
+  "dependencies": [
+    {
+      "dbname": "localedb",
+      "tablename": "locale_fuel_costs",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "fueldb_shards",
+      "tablename": "custom_fuel_cost_emissions",
+      "type": "table",
+      "external": true
+    },
+    {
+      "external": true,
+      "dbname": "helpers",
+      "tablename": "unit_conversion",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-05-23",
+  "output": {
+    "dbname": "fuel_energy_efficiency_report",
+    "tablename": "org_fuel_energy_cost_and_emissions_hour_intervals",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "configurable_fuel_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": true,
+        "metadata": {
+          "comment": "The date of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "configurable_fuel_id",
+        "type": "byte",
+        "nullable": true,
+        "metadata": {
+          "comment": "The configurable fuel type (Gasoline, Diesel, Biodiesel, Ethanol or Electricity) of the vehicle for this hourly interval."
+        }
+      },
+      {
+        "name": "cost_per_kwh",
+        "type": "float",
+        "nullable": true,
+        "metadata": {
+          "comment": "If applicable, the cost per kwh of fuel for this hourly interval. If kwh is not a valid unit for the configurable fuel type, this field will be null."
+        }
+      },
+      {
+        "name": "emissions_grams_per_wh",
+        "type": "float",
+        "nullable": true,
+        "metadata": {
+          "comment": "If applicable the emissions (gCO2) per wh of fuel for this hourly interval. If wh is not a valid unit for the configurable fuel type, this field will be null."
+        }
+      },
+      {
+        "name": "emissions_grams_per_kg",
+        "type": "float",
+        "nullable": true,
+        "metadata": {
+          "comment": "If applicable, the emissions (gCO2) per kg of fuel for this hourly interval. If kg is not a valid unit for the configurable fuel type, this field will be null."
+        }
+      },
+      {
+        "name": "emissions_grams_per_us_gal",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "If applicable, the emissions (gCO2) per US gallon of fuel for this hourly interval. If US gal is not a valid unit for the configurable fuel type, this field will be null."
+        }
+      },
+      {
+        "name": "cost_per_kg",
+        "type": "float",
+        "nullable": true,
+        "metadata": {
+          "comment": "If applicable, the cost per kg of fuel for this hourly interval. If kg is not a valid unit for the configurable fuel type, this field will be null."
+        }
+      },
+      {
+        "name": "cost_per_us_gal",
+        "type": "float",
+        "nullable": true,
+        "metadata": {
+          "comment": "If applicable, the cost per US gallon of fuel for this hourly interval. If US gal is not a valid unit for the configurable fuel type, this field will be null."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "nullable": true,
+        "metadata": {
+          "comment": "The starting timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "nullable": true,
+        "metadata": {
+          "comment": "The ending timestamp of this hourly interval."
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

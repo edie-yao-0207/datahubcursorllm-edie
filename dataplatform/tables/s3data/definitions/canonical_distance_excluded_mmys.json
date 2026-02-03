@@ -1,0 +1,17 @@
+{
+  "table": "canonical_distance_excluded_mmys",
+  "owner": "TelematicsData",
+  "description": "Make/model combinations that are excluded during the canonical distance calculation because of known issues with the odomter readings.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    }
+  ]
+}

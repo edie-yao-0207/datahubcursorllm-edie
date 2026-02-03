@@ -1,0 +1,22 @@
+{
+  "name": "vehicle_trip_anomaly",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:dataengineering.fct_vehicle_hourly_on_trip_buckets",
+    "eu-west-1:dataengineering.fct_vehicle_hourly_on_trip_buckets",
+    "us-west-2:dataengineering.fct_vehicle_hourly_trip_trends",
+    "eu-west-1:dataengineering.fct_vehicle_hourly_trip_trends",
+    "us-west-2:dataengineering.fct_org_weekly_trip_trends",
+    "eu-west-1:dataengineering.fct_org_weekly_trip_trends",
+    "us-west-2:dataengineering.fct_vehicle_trip_alert_signals",
+    "eu-west-1:dataengineering.fct_vehicle_trip_alert_signals"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 11 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 7
+    }
+  ]
+}

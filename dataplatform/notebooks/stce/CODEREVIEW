@@ -1,0 +1,13 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-platform",
+    "samsara-dev/data-science",
+    "samsara-dev/data-analytics",
+    "samsara-dev/connectedequipment",
+    "samsara-dev/assets-firmware"
+  ],
+  "description": "STCE Team Specific - Scheduled jobs used with Databricks Notebooks. Code written in SQL or Python."
+}

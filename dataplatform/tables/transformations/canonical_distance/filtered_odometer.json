@@ -1,0 +1,24 @@
+{
+  "name": "canonical_distance.filtered_odometer",
+  "owner": "TelematicsData",
+  "description": "Filter out anomalous odometer data on hour long windows",
+  "dependencies": [{ "dbname": "kinesisstats_window", "tablename": "osdodometer", "type": "table" }],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2021-01-31",
+  "output": {
+    "dbname": "canonical_distance",
+    "tablename": "filtered_odometer",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "time_ms"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      { "name": "date", "type": "string" },
+      { "name": "device_id", "type": "long" },
+      { "name": "time_ms", "type": "long" },
+      { "name": "osd_odometer", "type": "long" },
+      { "name": "valid", "type": "boolean" }
+    ],
+    "write_mode": "merge"
+  }
+}

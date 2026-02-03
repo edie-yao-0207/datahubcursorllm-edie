@@ -1,0 +1,19 @@
+{
+  "table": "installer_domain_name",
+  "owner": "DataEngineering",
+  "description": "Mapping of partner installer names to email domain names.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "partner_name",
+      "type": "string",
+      "description": "Name of installation partner."
+    },
+    {
+      "name": "domain_name",
+      "type": "string",
+      "description": "Email domain of installation partner."
+    }
+  ]
+}

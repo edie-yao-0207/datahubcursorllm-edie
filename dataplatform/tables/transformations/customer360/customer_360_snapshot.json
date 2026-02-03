@@ -1,0 +1,600 @@
+{
+  "name": "customer360.customer_360_snapshot",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Create a row for each date customer first had a heartbeat to the current date",
+  "dependencies": [
+    {
+      "dbname": "customer360",
+      "tablename": "customer_metadata",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "customer360_from_eu_west_1",
+      "tablename": "customer_metadata",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "customer_operations_snapshot",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "customer360_from_eu_west_1",
+      "tablename": "customer_operations_snapshot",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "org_operations_snapshot",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "customer360_from_eu_west_1",
+      "tablename": "org_operations_snapshot",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "org_platform_usage_snapshot",
+      "type": "table"
+    },
+    {
+      "dbname": "customer360",
+      "tablename": "customer_support_snapshot",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "definitions",
+      "tablename": "industry_mapping",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "customer_360_snapshot",
+    "type": "table",
+    "primary_key": ["org_id"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "This Internal ID for the customer's Samsara Org"
+        }
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "This Internal Samsara Customer ID"
+        }
+      },
+      {
+        "name": "sfdc_id",
+        "type": "string"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "industry",
+        "type": "string"
+      },
+      {
+        "name": "ae_id",
+        "type": "string"
+      },
+      {
+        "name": "ae_name",
+        "type": "string"
+      },
+      {
+        "name": "ae_email",
+        "type": "string"
+      },
+      {
+        "name": "first_purchase_date",
+        "type": "date"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "segment",
+        "type": "string"
+      },
+      {
+        "name": "region",
+        "type": "string"
+      },
+      {
+        "name": "billingcity",
+        "type": "string"
+      },
+      {
+        "name": "billingpostalcode",
+        "type": "string"
+      },
+      {
+        "name": "billingcountry",
+        "type": "string"
+      },
+      {
+        "name": "billingcountrycode",
+        "type": "string"
+      },
+      {
+        "name": "date_first_trial_shipped",
+        "type": "date"
+      },
+      {
+        "name": "last_modified_date",
+        "type": "date"
+      },
+      {
+        "name": "lifetime_acv",
+        "type": "double"
+      },
+      {
+        "name": "delinquent",
+        "type": "boolean"
+      },
+      {
+        "name": "org_size",
+        "type": "string"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "implementation_consultant",
+        "type": "string"
+      },
+      {
+        "name": "implementation_consultant_name",
+        "type": "string"
+      },
+      {
+        "name": "csm",
+        "type": "string"
+      },
+      {
+        "name": "csm_name",
+        "type": "string"
+      },
+      {
+        "name": "csm_tier",
+        "type": "string"
+      },
+      {
+        "name": "num_vg_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of VG devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_cm_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of CM devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_ag_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of AG devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_ig_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of IG devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_vg_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of VG devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_cm_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of CM devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_ag_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of AG devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_ig_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of IG devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_vg_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of VG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_cm_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of CM devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_ag_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of AG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_ig_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of IG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_vg_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of VG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_cm_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of CM devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_ag_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of AG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_ig_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of IG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_passenger_vehicles",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of passenger vehicles the customer has"
+        }
+      },
+      {
+        "name": "num_non_passenger_vehicles",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of non-passenger vehicles the customer has"
+        }
+      },
+      {
+        "name": "assets_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Assets product area"
+        }
+      },
+      {
+        "name": "backend_infrastructure_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Backend Infrastucture product area"
+        }
+      },
+      {
+        "name": "connected_admin_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Connected Admin product area"
+        }
+      },
+      {
+        "name": "connected_driver_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Connected Driver product area"
+        }
+      },
+      {
+        "name": "dashcam_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Dashcam product area"
+        }
+      },
+      {
+        "name": "eurofleet_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Eurofleet product area"
+        }
+      },
+      {
+        "name": "fleet_app_ecosystem_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Fleet App Ecosystem product area"
+        }
+      },
+      {
+        "name": "fleet_management_-_other_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Fleet Management - Other product area"
+        }
+      },
+      {
+        "name": "hardware_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Hardware product area"
+        }
+      },
+      {
+        "name": "industrial_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Industrial product area"
+        }
+      },
+      {
+        "name": "multicam_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Multicam product area"
+        }
+      },
+      {
+        "name": "non-product_related_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Non-Product Related product area"
+        }
+      },
+      {
+        "name": "platform_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Platform product area"
+        }
+      },
+      {
+        "name": "safety_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Safety product area"
+        }
+      },
+      {
+        "name": "telematics_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Telematics product area"
+        }
+      },
+      {
+        "name": "unknown_open",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of currently open tickets in the Unknown product area"
+        }
+      },
+      {
+        "name": "total_dashboard_users",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of distinct non-samsara user emails associated with this customer"
+        },
+        "nullable": true
+      },
+      {
+        "name": "gamification_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the gamification toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "forward_collision_warning_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the forward collision warning toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "distracted_driving_detection_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the distracted driving detection toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "following_distance_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the following distance toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "adas_all_features_allowed",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the ADAS All Features Allowed toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "safety_event_auto_triage_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer has the auto_triage_enabled toggle on"
+        }
+      },
+      {
+        "name": "voice_coaching_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer has the voice_coaching_enabled toggle on"
+        }
+      },
+      {
+        "name": "canada_hos_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer has the canada_hos_enabled toggle on"
+        }
+      },
+      {
+        "name": "safety_score_configured",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer has the safety score configured"
+        }
+      },
+      {
+        "name": "eco_driving_score_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the eco driving score toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "safety_score_ranking_enabled",
+        "type": "boolean",
+        "nullable": true,
+        "metadata": {
+          "comment": "A flag to show that the customer had the saftey score ranking toggle enabled on the specific date"
+        }
+      },
+      {
+        "name": "num_sg_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SG devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_sc_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SC devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_em_shipped",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of EM devices shipped to the customer"
+        }
+      },
+      {
+        "name": "num_sg_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SG devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_sc_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SC devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_em_purchased",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of EM devices purchased by the customer"
+        }
+      },
+      {
+        "name": "num_sg_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_sc_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SC devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_em_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of EM devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_sg_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of sg devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_sc_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SC devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_em_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of EM devices that sent a heartbeat in the last 30 days"
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "table": "telematics_cet_vin_char",
+  "owner": "FirmwareVdp",
+  "description": "Table 'vinChar' generated from 'Cable Recommendation CST Set (New Format).xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "regions",
+      "type": "string"
+    },
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year_start",
+      "type": "bigint"
+    },
+    {
+      "name": "year_end",
+      "type": "bigint"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "powertrain",
+      "type": "string"
+    },
+    {
+      "name": "fuel_group",
+      "type": "string"
+    },
+    {
+      "name": "priority",
+      "type": "bigint"
+    },
+    {
+      "name": "vin_pattern_start_position_values_1_17",
+      "type": "bigint"
+    },
+    {
+      "name": "vin_pattern_length",
+      "type": "bigint"
+    },
+    {
+      "name": "vin_patterns",
+      "type": "string"
+    },
+    {
+      "name": "exclude_models",
+      "type": "string"
+    },
+    {
+      "name": "count_row",
+      "type": "bigint"
+    },
+    {
+      "name": "return_code",
+      "type": "string"
+    },
+    {
+      "name": "cable",
+      "type": "string"
+    },
+    {
+      "name": "tacho_no",
+      "type": "string"
+    },
+    {
+      "name": "tacho_yes",
+      "type": "string"
+    },
+    {
+      "name": "vg34",
+      "type": "boolean"
+    },
+    {
+      "name": "vg54_nah",
+      "type": "boolean"
+    },
+    {
+      "name": "vg54_na_eu",
+      "type": "boolean"
+    },
+    {
+      "name": "vg55",
+      "type": "boolean"
+    },
+    {
+      "name": "ae_notes",
+      "type": "string"
+    }
+  ]
+}

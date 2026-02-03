@@ -1,0 +1,11 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`driver_id` BIGINT,
+`type` STRING,
+`pipeline_version` STRING,
+`process_uuid` STRING,
+`risk_score` DOUBLE,
+`classification` STRING,
+`most_recent_trip_date` STRING,
+`origin_service` STRING,
+`date` DATE

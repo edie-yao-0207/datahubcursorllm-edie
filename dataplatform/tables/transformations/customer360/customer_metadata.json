@@ -1,0 +1,215 @@
+{
+  "name": "customer360.customer_metadata",
+  "owner": "DataAnalytics",
+  "nonproduction": true,
+  "description": "Create a row for each customer and SFDC metadata. This data is from salesforce.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "customer_metadata",
+      "schema_path": "dataprep/business/customer_metadata.metadata.json",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "customer_metadata",
+    "type": "table",
+    "primary_key": ["org_id"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "This is the Internal ID for the customer's Samsara Org."
+        }
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the Internal Samsara Customer ID."
+        }
+      },
+      {
+        "name": "sfdc_id",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the salesforce id associated with the customer."
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the customer's name."
+        }
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the customer's indsutry e.g. wholesale, trucking, oil & gas, energy, healthcare, etc."
+        }
+      },
+      {
+        "name": "ae_id",
+        "type": "string",
+        "metadata": {
+          "comment": "This is id of the customer's account executive."
+        }
+      },
+      {
+        "name": "ae_name",
+        "type": "string",
+        "metadata": {
+          "comment": "This is name of the customer's account executive."
+        }
+      },
+      {
+        "name": "ae_email",
+        "type": "string",
+        "metadata": {
+          "comment": "This is email of the customer's account executive."
+        }
+      },
+      {
+        "name": "first_purchase_date",
+        "type": "date",
+        "metadata": {
+          "comment": "This is the date of the customer's first purchase."
+        }
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the current status of the customer e.g. existing customer, open opportunity, assigned, etc."
+        }
+      },
+      {
+        "name": "segment",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the customer's segment e.g. management, enterprise, etc."
+        }
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the customer's region e.g. east, west, central, etc."
+        }
+      },
+      {
+        "name": "billingcity",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the city where the customer gets billed."
+        }
+      },
+      {
+        "name": "billingpostalcode",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the postal code of the city where the customer gets billed."
+        }
+      },
+      {
+        "name": "billingcountry",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the country of the city where the customer gets billed."
+        }
+      },
+      {
+        "name": "billingcountrycode",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the country code of the country where the customer gets billed."
+        }
+      },
+      {
+        "name": "date_first_trial_shipped",
+        "type": "date",
+        "metadata": {
+          "comment": "This is the country code of the country where the customer gets billed."
+        }
+      },
+      {
+        "name": "last_modified_date",
+        "type": "date"
+      },
+      {
+        "name": "lifetime_acv",
+        "type": "double",
+        "metadata": {
+          "comment": "This is the lifetime revenue from the customer."
+        }
+      },
+      {
+        "name": "delinquent",
+        "type": "boolean",
+        "metadata": {
+          "comment": "Indicates if the customer is delinquent."
+        }
+      },
+      {
+        "name": "org_size",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the org size segment of the customer."
+        }
+      },
+      {
+        "name": "org_type",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the type of customer e.g. fleet, partner, connected worker, etc."
+        }
+      },
+      {
+        "name": "implementation_consultant",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the id of the customer's implementation consultant."
+        }
+      },
+      {
+        "name": "implementation_consultant_name",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the name of the customer's implementation consultant."
+        }
+      },
+      {
+        "name": "csm",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the id of the customer's customer success manager."
+        }
+      },
+      {
+        "name": "csm_name",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the name of the customer's customer success manager."
+        }
+      },
+      {
+        "name": "csm_tier",
+        "type": "string",
+        "metadata": {
+          "comment": "This is the customer's tier e.g. elite, premier, starter, plus."
+        }
+      }
+    ],
+    "write_mode": "merge"
+  },
+  "replication": {
+    "replicate_to_us_from_regions": ["eu-west-1"]
+  }
+}

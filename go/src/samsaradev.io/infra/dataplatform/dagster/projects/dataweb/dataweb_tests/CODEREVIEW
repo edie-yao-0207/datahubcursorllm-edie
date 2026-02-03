@@ -1,0 +1,5 @@
+{
+  "owners": ["samsara-dev/data-tools"],
+  "description": "Changes to Dagster projects must be approved by DataTools",
+  "noParent": true
+}

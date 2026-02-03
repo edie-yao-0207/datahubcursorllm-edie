@@ -1,0 +1,87 @@
+{
+  "name": "fuel_energy_efficiency_report.engine_duration_by_hour_v2",
+  "owner": "Sustainability",
+  "description": "Tracks engine duration in IDLE and ON states in an hour for each device.",
+  "tags": ["telematics", "fuel", "ev"],
+  "dependencies": [
+    {
+      "dbname": "engine_state",
+      "tablename": "intervals_by_hour",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "driver_assignments",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "fuel_energy_efficiency_report",
+    "tablename": "engine_duration_by_hour_v2",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "type": "table",
+    "primary_key": ["date", "org_id", "object_id", "driver_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The device id of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The driver id of this hour of aggregated data. This value comes from driver assignments derived from tripsdb."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The starting timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The ending timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "on_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration of time in milliseconds that the engine is on during this hour."
+        }
+      },
+      {
+        "name": "idle_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration of time in milliseconds that the engine is idle during this hour."
+        }
+      }
+    ]
+  }
+}

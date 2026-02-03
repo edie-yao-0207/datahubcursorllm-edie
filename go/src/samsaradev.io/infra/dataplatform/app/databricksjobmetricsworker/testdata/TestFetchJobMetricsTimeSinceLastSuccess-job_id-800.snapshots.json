@@ -1,0 +1,765 @@
+[
+  {
+    "Name": "job_id:800",
+    "Values": [
+      [
+        {
+          "metric": "dev.databricks.jobs.task.run.finish",
+          "points": [
+            [
+              1640991600,
+              1
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:success",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.setup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:success",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.execution_duration",
+          "points": [
+            [
+              1640991600,
+              190
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:success",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.cleanup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:success",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.duration",
+          "points": [
+            [
+              1640991600,
+              3600000
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:success",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.finish",
+          "points": [
+            [
+              1640991600,
+              1
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:success",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.setup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:success",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.execution_duration",
+          "points": [
+            [
+              1640991600,
+              190
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:success",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.cleanup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:success",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.duration",
+          "points": [
+            [
+              1640991600,
+              3600000
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:success",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.finish",
+          "points": [
+            [
+              1640991600,
+              1
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:failure",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.setup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:failure",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.execution_duration",
+          "points": [
+            [
+              1640991600,
+              190
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:failure",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.cleanup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:failure",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.duration",
+          "points": [
+            [
+              1640991600,
+              3600000
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "spark_version:7.3.x-scala2.12",
+            "status:failure",
+            "table:test_table",
+            "task_name:task-1",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.finish",
+          "points": [
+            [
+              1640991600,
+              1
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:failure",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.setup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:failure",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.execution_duration",
+          "points": [
+            [
+              1640991600,
+              190
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:failure",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.cleanup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:failure",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.duration",
+          "points": [
+            [
+              1640991600,
+              3600000
+            ]
+          ],
+          "tags": [
+            "availability_zone:us-west-2a",
+            "business-hours-threshold:24",
+            "database:test_db",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "failure_type:failed",
+            "high-urgency-threshold:72",
+            "is-production-job:true",
+            "job-test:job1",
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "job_overrun:false",
+            "low-urgency-threshold:7",
+            "pool-test:job1",
+            "region:us-west-2",
+            "serverless:false",
+            "slo-target:7",
+            "status:failure",
+            "table:test_table",
+            "team:owning_team"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.time_since_last_success",
+          "points": [
+            [
+              1640995200,
+              3600000
+            ]
+          ],
+          "tags": [
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "database:test_db",
+            "table:test_table",
+            "schedule:",
+            "region:us-west-2",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.slo_counter",
+          "points": [
+            [
+              1640995200,
+              1
+            ]
+          ],
+          "tags": [
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "database:test_db",
+            "table:test_table",
+            "schedule:",
+            "region:us-west-2",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge",
+            "slo_met:true",
+            "slo_hours:7"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.slo_target",
+          "points": [
+            [
+              1640995200,
+              7
+            ]
+          ],
+          "tags": [
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "database:test_db",
+            "table:test_table",
+            "schedule:",
+            "region:us-west-2",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.low_urgency_threshold",
+          "points": [
+            [
+              1640995200,
+              7
+            ]
+          ],
+          "tags": [
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "database:test_db",
+            "table:test_table",
+            "schedule:",
+            "region:us-west-2",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.business_hours_threshold",
+          "points": [
+            [
+              1640995200,
+              24
+            ]
+          ],
+          "tags": [
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "database:test_db",
+            "table:test_table",
+            "schedule:",
+            "region:us-west-2",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.high_urgency_threshold",
+          "points": [
+            [
+              1640995200,
+              72
+            ]
+          ],
+          "tags": [
+            "job_id:800",
+            "job_name:job_with_mix_of_failures_and_successes",
+            "database:test_db",
+            "table:test_table",
+            "schedule:",
+            "region:us-west-2",
+            "dataplatform-job-type:kinesisstats_deltalake_ingestion_merge"
+          ],
+          "type": "gauge"
+        }
+      ]
+    ]
+  }
+]

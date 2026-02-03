@@ -1,0 +1,309 @@
+{
+  "test_cases": [
+    {
+      "label": "test location object stat diffs",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "kinesisstats_window.location": [
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 60000, "latitude": 33.42116272, "longitude": -86.657954429 },
+            "previous": null
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 120000, "latitude": 33.42116272, "longitude": -86.657954429 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 60000, "latitude": 33.42116272, "longitude": -86.657954429 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 180000, "latitude": 33.42116302, "longitude": -86.65794248 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 120000, "latitude": 33.42116272, "longitude": -86.657954429 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 240000, "latitude": 33.42117055, "longitude": -86.657944619 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 180000, "latitude": 33.42116302, "longitude": -86.65794248 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 300000, "latitude": 33.42097066, "longitude": -86.65778821 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 240000, "latitude": 33.42117055, "longitude": -86.657944619 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 360000, "latitude": 33.42083096, "longitude": -86.65774986 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 300000, "latitude": 33.42097066, "longitude": -86.65778821 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 420000, "latitude": 33.420968369, "longitude": -86.6576433 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 360000, "latitude": 33.42083096, "longitude": -86.65774986 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 480000, "latitude": 33.42127571, "longitude": -86.65748625 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 420000, "latitude": 33.420968369, "longitude": -86.6576433 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 540000, "latitude": 33.42166918, "longitude": -86.65743878 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 480000, "latitude": 33.42127571, "longitude": -86.65748625 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 600000, "latitude": 33.42221665, "longitude": -86.657197359 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 540000, "latitude": 33.42166918, "longitude": -86.65743878 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 660000, "latitude": 33.42276769, "longitude": -86.65665526 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 600000, "latitude": 33.42221665, "longitude": -86.657197359 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 720000, "latitude": 33.423160709, "longitude": -86.65620066 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 660000, "latitude": 33.42276769, "longitude": -86.65665526 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 780000, "latitude": 33.42356737, "longitude": -86.65574093 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 720000, "latitude": 33.423160709, "longitude": -86.65620066 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 840000, "latitude": 33.42403647, "longitude": -86.65528065 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 780000, "latitude": 33.42356737, "longitude": -86.65574093 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 900000, "latitude": 33.42466719, "longitude": -86.65481363 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 840000, "latitude": 33.42403647, "longitude": -86.65528065 }
+            }
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "value": { "time": 960000, "latitude": 33.42515413, "longitude": -86.65444451 },
+            "previous": {
+              "org_id": 2,
+              "device_id": 1,
+              "date": "2020-01-01",
+              "value": { "time": 900000, "latitude": 33.42466719, "longitude": -86.65481363 }
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 120000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 180000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 240000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 300000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 360000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 420000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 480000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 540000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 600000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 660000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 720000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 780000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 840000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 900000,
+          "distance": 1.0
+        },
+        {
+          "org_id": 2,
+          "date": "2020-01-01",
+          "device_id": 1,
+          "time": 960000,
+          "distance": 1.0
+        }
+      ]
+    }
+  ]
+}

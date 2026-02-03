@@ -1,0 +1,47 @@
+{
+  "view": "avg_weekly_accuracy_by_stat",
+  "database": "ksdifftool",
+  "owner": "DataPlatform",
+  "regions": ["us-west-2"],
+  "description": "The average weekly accuracy of each stat in the Data Lake as outputted by the KS Diff Tool, across all weeks since we started measuring differences. Only takes average from data points after 10/25/2021 since we didn't track received_delta_seconds in the data lake until then.",
+  "schema": [
+    {
+      "name": "table_name",
+      "type": "string",
+      "description": "The name of the table in the Data Lake under the kinesisstats schema (i.e the name of the stat type) that this weekly accuracy is for"
+    },
+    {
+      "name": "avg_weekly_accuracy",
+      "type": "double",
+      "description": "The average weekly accuracy across all weeks measured, as a percent in range of 0-1 (e.g .95 means 95%)"
+    },
+    {
+      "name": "std_deviation_across_weeks",
+      "type": "double",
+      "nullable": false,
+      "description": "The standard deviation of the accuracy across each of the weeks. If this number is high, it could help realize that we just had outlier weeks where accuracy was good or bad."
+    },
+    {
+      "name": "start_date",
+      "type": "date",
+      "description": "The first date for any data point collected in the sample across all weeks"
+    },
+    {
+      "name": "end_date",
+      "type": "date",
+      "description": "The last date for any data point collected in the sample across all weeks"
+    },
+    {
+      "name": "total_count",
+      "type": "long",
+      "description": "The total number of data points (i.e rows) sampled across all weeks"
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "ksdifftool",
+      "tablename": "weekly_accuracy_by_stat",
+      "type": "table"
+    }
+  ]
+}

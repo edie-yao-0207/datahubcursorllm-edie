@@ -1,0 +1,12 @@
+{
+  "perFile": [
+    {
+      "owners": [
+        "samsara-dev/data-platform"
+      ],
+      "description": "Changes to DB Registry should be reviewed by data platform and DB deletions should be done with care",
+      "filePattern": "TestSetEmptyStringsCastToNullFlag.snapshots.json",
+      "prComment": "This snapshot contains a list of tables that need to maintain some legacy behavior. @samsara-dev/data-platform, please take a very careful look as we should never be adding new things to this list."
+    }
+  ]
+}

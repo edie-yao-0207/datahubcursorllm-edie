@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`driver_id` BIGINT,
+`driver_last_message_read_at` TIMESTAMP,
+`driver_last_message_sent_at` TIMESTAMP,
+`org_last_message_read_at` TIMESTAMP,
+`org_last_message_sent_at` TIMESTAMP,
+`driver_last_message_seen_at` TIMESTAMP,
+`partition` STRING

@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "TestParseFieldNamesOnType",
+    "Values": [
+      [
+        "map_field",
+        "array_field",
+        "struct_field",
+        "struct_field.nested_int_field",
+        "struct_field.nested_string_field",
+        "int_field",
+        "string_field"
+      ]
+    ]
+  }
+]

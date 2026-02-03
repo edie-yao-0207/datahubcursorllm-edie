@@ -1,0 +1,91 @@
+{
+  "test_cases": [
+    {
+      "label": "distance that overlaps with spotty ECU segment is filtered out",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "fuel_energy_efficiency_report.ecu_filter_segments": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 100,
+            "segment_start": 1641021000000,
+            "segment_end": 1641021600000,
+            "pct_bad_ecu": 0.95
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 101,
+            "segment_start": 1641022800000,
+            "segment_end": 1641023400000,
+            "pct_bad_ecu": 0.9
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 100,
+            "time_ms": 1641021000000,
+            "distance": 100.74
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 100,
+            "time_ms": 1641022500000,
+            "distance": 50
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 101,
+            "time_ms": 1641023400000,
+            "distance": 72.06
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 101,
+            "time_ms": 1641022500000,
+            "distance": 20
+          }
+        ],
+        "fuel_energy_efficiency_report.driver_assignments": [
+          {
+            "date": "2022-01-01",
+            "driver_id": 500,
+            "org_id": 1,
+            "device_id": 100,
+            "start_time": 1641015300000,
+            "end_time": 1641036900000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "object_id": 100,
+          "driver_id": 500,
+          "interval_start": "2022-01-01 07:00:00",
+          "interval_end": "2022-01-01 08:00:00",
+          "distance_traveled_m": 150.74
+        },
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "object_id": 101,
+          "driver_id": 0,
+          "interval_start": "2022-01-01 07:00:00",
+          "interval_end": "2022-01-01 08:00:00",
+          "distance_traveled_m": 20
+        }
+      ]
+    }
+  ]
+}

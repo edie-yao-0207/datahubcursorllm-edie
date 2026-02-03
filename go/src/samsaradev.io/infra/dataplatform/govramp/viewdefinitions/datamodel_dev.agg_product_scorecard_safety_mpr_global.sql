@@ -1,0 +1,57 @@
+(
+  select
+    'week' as period,
+    date,
+    period_start,
+    period_end,
+    cloud_region,
+    region,
+    account_size_segment,
+    account_arr_segment,
+    account_industry,
+    industry_vertical,
+    is_paid_safety_customer,
+    is_paid_telematics_customer,
+    is_paid_stce_customer,
+    total_customers,
+    completed_coaching_session_users,
+    total_coaching_session_users,
+    video_requests,
+    video_requests_successful_retrieval,
+    ser_license_customers,
+    total_camera_distance,
+    active_cm31_devices,
+    active_cm32_devices,
+    active_cm33_devices,
+    active_cm34_devices
+  from
+    datamodel_dev.agg_product_scorecard_safety_mpr_global_weekly
+  union all
+  select
+    'month' as period,
+    date_month as date,
+    period_start,
+    period_end,
+    cloud_region,
+    region,
+    account_size_segment,
+    account_arr_segment,
+    account_industry,
+    industry_vertical,
+    is_paid_safety_customer,
+    is_paid_telematics_customer,
+    is_paid_stce_customer,
+    total_customers,
+    completed_coaching_session_users,
+    total_coaching_session_users,
+    video_requests,
+    video_requests_successful_retrieval,
+    ser_license_customers,
+    total_camera_distance,
+    active_cm31_devices,
+    active_cm32_devices,
+    active_cm33_devices,
+    active_cm34_devices
+  from
+    datamodel_dev.agg_product_scorecard_safety_mpr_global_monthly
+)

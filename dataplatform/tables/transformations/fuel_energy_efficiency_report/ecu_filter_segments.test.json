@@ -1,0 +1,462 @@
+{
+  "test_cases": [
+    {
+      "label": "two 10 minute segments are created for ranges with 100% spotty ECU points and 90% spotty ECU points",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021180000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021190000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021200000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021210000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641052800000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": true
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1641020400000,
+          "segment_end": 1641021000000,
+          "pct_bad_ecu": 1
+        },
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1641021000000,
+          "segment_end": 1641021600000,
+          "pct_bad_ecu": 0.75
+        }
+      ]
+    },
+    {
+      "label": "no segments are created for segments with < 70% spotty ECU points, segment is created for the 100% spotty ECU segment",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021180000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021190000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021200000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021210000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641052800000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": true
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1641020400000,
+          "segment_end": 1641021000000,
+          "pct_bad_ecu": 1
+        }
+      ]
+    },
+    {
+      "label": "no segments are created when no ECU is reported in the day",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": null
+            }
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "location points on segment boundaries go into the correct buckets",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1640995200000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020400000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020999999,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021600000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641080400000,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641081599999,
+            "value": {
+              "gps_speed_meters_per_second": 7,
+              "has_ecu_speed": null
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1640995200000,
+          "segment_end": 1640995800000,
+          "pct_bad_ecu": 1
+        },
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1641020400000,
+          "segment_end": 1641021000000,
+          "pct_bad_ecu": 1
+        },
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1641021600000,
+          "segment_end": 1641022200000,
+          "pct_bad_ecu": 1
+        },
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 10,
+          "segment_start": 1641081000000,
+          "segment_end": 1641081600000,
+          "pct_bad_ecu": 1
+        }
+      ]
+    },
+    {
+      "label": "null gps speed is not spotty ECU",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": null,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641021580000,
+            "value": {
+              "gps_speed_meters_per_second": 14,
+              "has_ecu_speed": true
+            }
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "multiple devices works correctly",
+      "parameters": {
+        "start_date": "'2022-01-01'",
+        "end_date": "'2022-01-04'"
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 10,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 20,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 20,
+            "time": 1641021580000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 30,
+            "time": 1641020580000,
+            "value": {
+              "gps_speed_meters_per_second": 3,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 30,
+            "time": 1641021580000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 40,
+            "time": 1641020581000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 40,
+            "time": 1641020582000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 40,
+            "time": 1641020583000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": null
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 40,
+            "time": 1641020582400,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          },
+          {
+            "date": "2022-01-01",
+            "org_id": 1,
+            "device_id": 40,
+            "time": 1641021585000,
+            "value": {
+              "gps_speed_meters_per_second": 11,
+              "has_ecu_speed": true
+            }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 20,
+          "segment_start": 1641020400000,
+          "segment_end": 1641021000000,
+          "pct_bad_ecu": 1
+        },
+        {
+          "org_id": 1,
+          "date": "2022-01-01",
+          "device_id": 40,
+          "segment_start": 1641020400000,
+          "segment_end": 1641021000000,
+          "pct_bad_ecu": 0.75
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "owner": "safetyeventdetection-group",
+  "region": ["us-west-2", "eu-west-1"],
+  "sql_warehouse": "safetyproductgroup",
+  "name": "eventdetection_konmari_e2e_latency_alert",
+  "description": "Query to power the Konmari E2E latency alert",
+  "run_as_role": "owner",
+  "permissions": [
+    {
+      "level": "CAN_RUN",
+      "group_name": "dev-group"
+    }
+  ]
+}

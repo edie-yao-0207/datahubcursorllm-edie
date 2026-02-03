@@ -1,0 +1,266 @@
+[
+  {
+    "Name": "Non-Sharded DB",
+    "Values": [
+      {
+        "CanReadBiztechGroups": null,
+        "CanReadGroups": null,
+        "CdcThroughputMonitors": null,
+        "InternalOverrides": {
+          "AuroraDatabaseEngine": "",
+          "DmsEngineVersion": "",
+          "EnableKinesisStreamDestination": false,
+          "ServerlessConfig": null
+        },
+        "MySqlDb": "alertsdb",
+        "Name": "alertsdb",
+        "RdsPasswordKey": "alerts_database_password",
+        "RegionToShards": {
+          "ca-central-1": [
+            "prod-alertsdb"
+          ],
+          "eu-west-1": [
+            "prod-alertsdb"
+          ],
+          "us-west-2": [
+            "prod-alertsdb"
+          ]
+        },
+        "RegistryName": "alerts",
+        "SchemaPath": "test_schema_path",
+        "Sharded": false,
+        "SkipSyncToHms": false,
+        "Tables": {
+          "alert_events": {
+            "AllowedRegions": null,
+            "CdcVersion_DO_NOT_SET": 0,
+            "ColumnDescriptions": {
+              "alert_id": "I describe an alert id"
+            },
+            "CustomCombineShardsSelect": false,
+            "DataModelTable": false,
+            "DisableServerless": false,
+            "EmptyStringsCastToNull_DO_NOT_SET": false,
+            "ExcludeColumns": null,
+            "InternalOverrides": {
+              "CronHourSchedule": "",
+              "DatabaseSchemaOverride": "",
+              "JsonpbInt64AsDecimalString": false,
+              "LegacyUint64AsBigint": false,
+              "RegionToJobOverrides": null
+            },
+            "PartitionKeyAttribute": "",
+            "PartitionStrategy": {
+              "Expr": "'0'",
+              "Key": "partition",
+              "SourceColumnName": "",
+              "SourceColumnType": ""
+            },
+            "PrimaryKeys": [
+              "alert_id",
+              "started_at",
+              "object_ids",
+              "output_key"
+            ],
+            "Production": false,
+            "ProtoSchema": null,
+            "ServerlessConfig": null,
+            "TableName": "alert_events",
+            "Tags": null,
+            "VersionInfo": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "Name": "Non-Sharded DB-get-all-descriptions",
+    "Values": [
+      [
+        "_filename Internal column for Data Lake replication purposes",
+        "_rowid Internal column for Data Lake replication purposes",
+        "_timestamp Internal column for Data Lake replication purposes",
+        "alert_id I describe an alert id"
+      ]
+    ]
+  },
+  {
+    "Name": "Sharded DB",
+    "Values": [
+      {
+        "CanReadBiztechGroups": null,
+        "CanReadGroups": null,
+        "CdcThroughputMonitors": null,
+        "InternalOverrides": {
+          "AuroraDatabaseEngine": "",
+          "DmsEngineVersion": "",
+          "EnableKinesisStreamDestination": false,
+          "ServerlessConfig": null
+        },
+        "MySqlDb": "safetydb",
+        "Name": "safetydb",
+        "RdsPasswordKey": "safety_database_password",
+        "RegionToShards": {
+          "ca-central-1": [
+            "prod-safetydb"
+          ],
+          "eu-west-1": [
+            "prod-safetydb",
+            "prod-safety-shard-1db"
+          ],
+          "us-west-2": [
+            "prod-safetydb",
+            "prod-safety-shard-1db",
+            "prod-safety-shard-2db",
+            "prod-safety-shard-3db",
+            "prod-safety-shard-4db",
+            "prod-safety-shard-5db"
+          ]
+        },
+        "RegistryName": "safety",
+        "SchemaPath": "test_schema_path",
+        "Sharded": true,
+        "SkipSyncToHms": false,
+        "Tables": {
+          "safety_events": {
+            "AllowedRegions": null,
+            "CdcVersion_DO_NOT_SET": 0,
+            "ColumnDescriptions": {
+              "device_id": "Unique id associated with an device",
+              "event_id": "Unique id associated with an event"
+            },
+            "CustomCombineShardsSelect": true,
+            "DataModelTable": false,
+            "DisableServerless": false,
+            "EmptyStringsCastToNull_DO_NOT_SET": false,
+            "ExcludeColumns": null,
+            "InternalOverrides": {
+              "CronHourSchedule": "",
+              "DatabaseSchemaOverride": "",
+              "JsonpbInt64AsDecimalString": false,
+              "LegacyUint64AsBigint": false,
+              "RegionToJobOverrides": null
+            },
+            "PartitionKeyAttribute": "",
+            "PartitionStrategy": {
+              "Expr": "date(from_unixtime(event_ms / 1e3))",
+              "Key": "date",
+              "SourceColumnName": "event_ms",
+              "SourceColumnType": "milliseconds"
+            },
+            "PrimaryKeys": [
+              "org_id",
+              "device_id",
+              "event_ms"
+            ],
+            "Production": false,
+            "ProtoSchema": null,
+            "ServerlessConfig": null,
+            "TableName": "safety_events",
+            "Tags": null,
+            "VersionInfo": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "Name": "Sharded DB-get-all-descriptions",
+    "Values": [
+      [
+        "_filename Internal column for Data Lake replication purposes",
+        "_rowid Internal column for Data Lake replication purposes",
+        "_timestamp Internal column for Data Lake replication purposes",
+        "date This partition column is derived from the event_ms column",
+        "device_id Unique id associated with an device",
+        "event_id Unique id associated with an event",
+        "shard_name Name of the database shard this row is from"
+      ]
+    ]
+  },
+  {
+    "Name": "EU only table",
+    "Values": [
+      {
+        "CanReadBiztechGroups": null,
+        "CanReadGroups": null,
+        "CdcThroughputMonitors": null,
+        "InternalOverrides": {
+          "AuroraDatabaseEngine": "",
+          "DmsEngineVersion": "",
+          "EnableKinesisStreamDestination": false,
+          "ServerlessConfig": null
+        },
+        "MySqlDb": "api2db",
+        "Name": "api2db",
+        "RdsPasswordKey": "api2_database_password",
+        "RegionToShards": {
+          "ca-central-1": [
+            "prod-api2db"
+          ],
+          "eu-west-1": [
+            "prod-api2db"
+          ],
+          "us-west-2": [
+            "prod-api2db"
+          ]
+        },
+        "RegistryName": "api2",
+        "SchemaPath": "test_schema_path",
+        "Sharded": false,
+        "SkipSyncToHms": false,
+        "Tables": {
+          "api_events": {
+            "AllowedRegions": [
+              "eu-west-1"
+            ],
+            "CdcVersion_DO_NOT_SET": 0,
+            "ColumnDescriptions": {
+              "event_id": "Unique id associated with an event"
+            },
+            "CustomCombineShardsSelect": false,
+            "DataModelTable": false,
+            "DisableServerless": false,
+            "EmptyStringsCastToNull_DO_NOT_SET": false,
+            "ExcludeColumns": null,
+            "InternalOverrides": {
+              "CronHourSchedule": "",
+              "DatabaseSchemaOverride": "",
+              "JsonpbInt64AsDecimalString": false,
+              "LegacyUint64AsBigint": false,
+              "RegionToJobOverrides": null
+            },
+            "PartitionKeyAttribute": "",
+            "PartitionStrategy": {
+              "Expr": "'0'",
+              "Key": "partition",
+              "SourceColumnName": "",
+              "SourceColumnType": ""
+            },
+            "PrimaryKeys": [
+              "org_id",
+              "event_id"
+            ],
+            "Production": false,
+            "ProtoSchema": null,
+            "ServerlessConfig": null,
+            "TableName": "api_events",
+            "Tags": null,
+            "VersionInfo": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "Name": "EU only table-get-all-descriptions",
+    "Values": [
+      [
+        "_filename Internal column for Data Lake replication purposes",
+        "_rowid Internal column for Data Lake replication purposes",
+        "_timestamp Internal column for Data Lake replication purposes",
+        "event_id Unique id associated with an event"
+      ]
+    ]
+  }
+]

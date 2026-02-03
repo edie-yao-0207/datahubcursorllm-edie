@@ -1,0 +1,19 @@
+{
+  "owner": "PlatformOperations",
+  "email_notifications": ["platops-notebook-aler-aaaad6yplk2cd33xw6iwfq3kxi@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "uat-netsuite-deletion",
+      "cron": "0 */30 * * * ?",
+      "parameters": {
+        "NOTEBOOK_NAME": "uat_netsuite_deleter",
+        "DATADOG_NAMESPACE": "uat_deleted_licenses",
+        "NETSUITE_DELETION_VIEW": "netsuite_data.transformed_uat_netsuite_deletion",
+        "TRANSACTIONS_VIEW": "biztech_edw_netsuite_sb1.transactions",
+        "LATEST_ROW_SYNCED_KEY": "uat_latest_row_synced.timestamp"
+      },
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "owner": "DataScience",
+  "email_notifications": [
+    "alerts-data-science-aaaad6bedydugbard3qih3m3ci@samsara.org.slack.com",
+    "alex.puzyk@samsara.com"
+  ],
+  "jobs": [
+    {
+      "name": "daily_crash_classifier_for_sampling",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

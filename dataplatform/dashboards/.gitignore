@@ -1,0 +1,10 @@
+# Generated dashboard files
+*.lvdash.json
+
+# Output directory for generated dashboards
+output/
+
+# Python cache
+__pycache__/
+*.pyc
+

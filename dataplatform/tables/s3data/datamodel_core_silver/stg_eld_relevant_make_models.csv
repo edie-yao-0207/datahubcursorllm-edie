@@ -1,0 +1,308 @@
+chevrolet,silverado,2
+chevrolet,express,2
+ford,transit,2
+ford,f-150,2
+gmc,sierra,2
+chevrolet,silverado hd,2
+ford,e-350,2
+gmc,savana,2
+blue bird,bb conventional,2
+ford,e-450,2
+blue bird,all american / all canada,2
+ford,transit/tourneo custom,2
+kalmar industries llc,ottawa t2,2
+ford,f-650,2
+toyota,tundra,2
+ford,e-150,2
+gmc,sierra hd,2
+ford,e-250,2
+gmc,silverado medium duty (gm515),2
+ford,transit/tourneo connect,2
+gmc,c7,2
+chevrolet,3500 / 4500,2
+ford,f-250,2
+ford,f-350,2
+mercedes-benz,sprinter,2
+chevrolet,4500,2
+ford,commercial chassis,2
+chevrolet,4500hd,2
+chevrolet,silverado ld,2
+ford,f-550,2
+ford,transit connect,2
+volvo,9700,2
+ford,f-750,1
+ford,f-450,1
+ford,f-super duty,1
+ford,f-600,1
+chevrolet,silverado medium duty (gm515),1
+nissan,nv,1
+nissan,nv200,1
+ram,1500,1
+ram,2500,1
+ram,3500,1
+ram,4500,1
+ram,5500,1
+ram,promaster 1500,1
+ram,promaster 2500,1
+ram,promaster 3500,1
+ram,promaster city,1
+freightliner,cascadia,1
+volvo truck,vnl,1
+freightliner,m2,1
+freightliner,"new cascadia 126"" sleepercab",1
+kenworth,t680,1
+peterbilt,579,1
+international,lt625,1
+international,ma025,1
+kenworth,t880,1
+peterbilt,389,1
+kenworth,t8 series,1
+freightliner,"new cascadia 126"" day cab",1
+international,lf687,1
+peterbilt,567,1
+kenworth,t3 series,1
+mack,cxu,1
+hino,conventional type truck,1
+freightliner,columbia,1
+mack,anthem,1
+international,mv607,1
+freightliner,"new cascadia 116"" day cab",1
+volvo truck,vnr,1
+volvo truck,vnm,1
+ic bus,pb105,1
+kenworth,t6 series,1
+freightliner,b2 bus chassis,1
+kenworth,w9 series,1
+peterbilt,337,1
+mack,gu,1
+freightliner,114sd,1
+peterbilt,379,1
+western star,4900,1
+mack,granite,1
+western star,4700,1
+peterbilt,348,1
+peterbilt,367,1
+isuzu,nqr/nrr,1
+isuzu,npr/npr-hd,1
+isuzu,npr/ npr-hd/ npr-xd,1
+peterbilt,365,1
+mack,chu,1
+freightliner,coronado,1
+peterbilt,386,1
+hino,incomplete vehicle,1
+freightliner,cst120,1
+international,rh613,1
+freightliner,sd122,1
+peterbilt,388,1
+motor coach industries,j4500 intercity,1
+mack,pinnacle,1
+international,ma035,1
+isuzu,nrr,1
+international,lf627,1
+volvo truck,vhd,1
+international,ra027,1
+western star,5700,1
+mack,cv,1
+kenworth,t800,1
+international,rf027,1
+mack,mru,1
+prevost,h3 passenger coach,1
+volvo truck,vah,1
+kenworth,w900,1
+international,mh025,1
+freightliner,sprinter,1
+international,l9427,1
+isuzu,npr-hd,1
+sterling truck,l9500 series,1
+autocar,xpeditor,1
+kenworth,t4 series,1
+peterbilt,384,1
+peterbilt,320,1
+kenworth,t300,1
+peterbilt,378,1
+peterbilt,520,1
+freightliner,"new cascadia 116"" sleepercab",1
+mack,terrapro,1
+peterbilt,387,1
+international,sf625,1
+international,sr515,1
+hino,xjc740 / xfc740,1
+isuzu,npr,1
+international,hv507,1
+new flyer,xcelsior,1
+thomas built,hdx,1
+freightliner,108sd,1
+peterbilt,587,1
+peterbilt,335,1
+freightliner,fld120,1
+international,l9227,1
+prevost,h3 coach,1
+international,mf035,1
+international,hx620,1
+sterling truck,a9500 series,1
+mack,cxn,1
+freightliner,long conv.,1
+western star,new 4900 chassis,1
+freightliner,fs 65 chassis,1
+peterbilt,330,1
+freightliner,fld132,1
+isuzu,ftr,1
+international,sf647,1
+mack,ch,1
+hino,xjc720 / xfc720,1
+international,hv607,1
+international,3000ic,1
+peterbilt,357,1
+isuzu,nqr,1
+international,ma065,1
+international,lf517,1
+international,sf667,1
+freightliner,mt 45 chassis,1
+international,ls532,1
+international,sf637,1
+mack,md,1
+international,pc025,1
+sterling truck,acterra,1
+isuzu,npr-xd,1
+freightliner,fl70,1
+mack,chn,1
+kenworth,t600,1
+motor coach industries,d4505,1
+international,hv613,1
+mack,lr,1
+capacity trucks,tj5000,1
+international,hx520,1
+international,9400i,1
+mack,mr,1
+kenworth,t7 series,1
+ic bus,pb405,1
+hino,xjc710 / xfc710,1
+motor coach industries,102dl3 intercity/d4500,1
+international,lf677,1
+international,l9327,1
+international,df567,1
+international,4700,1
+gillig,low floor bus,1
+ic bus,pb305,1
+international,la687,1
+sterling truck,l7500 series,1
+mack,leu,1
+international,sa625,1
+freightliner,cc conventional,1
+caterpillar,cf7aa,1
+international,la677,1
+kenworth,k270/k370,1
+international,ta005,1
+international,4300,1
+international,sa525,1
+peterbilt,220,1
+nabi,416,1
+international,sx525,1
+international,9200i,1
+peterbilt,340,1
+kenworth,c5 series,1
+international,3800,1
+international,l9217,1
+freightliner,s2g conventional full cab and chassis,1
+international,4900,1
+sterling truck,l8500 series,1
+freightliner,s2c 106 conventional cab & chassis,1
+international,sa515,1
+freightliner,mt 55 chassis,1
+kenworth,t2 series,1
+western star,4800,1
+autocar industries,terminal tractor (xspotter) on-highway,1
+mack,ctp,1
+thomas built,mvp-ef (engine front),1
+international,l9377,1
+autocar,xspotter on-hwy,1
+peterbilt,375,1
+peterbilt,382,1
+freightliner,fl80,1
+international,ma015,1
+peterbilt,385,1
+kenworth,t2000,1
+international,sf525,1
+international,sf567,1
+freightliner,classic,1
+international,9100i,1
+autocar,wx,1
+international,7400,1
+international,sf547,1
+autocar industries,terminal tractor (xspotter) off-highway,1
+international,sr525,1
+international,hx615,1
+international,df677,1
+international,hv513,1
+international,9900i,1
+ic bus,pc505,1
+international,df557,1
+international,ma045,1
+freightliner,fl112,1
+international,lf637,1
+international,l9357,1
+prevost,x3 passenger coach,1
+international,lf617,1
+freightliner,c120,1
+international,df597,3
+international,sa615,3
+international,7600,3
+international,4400,3
+motor coach industries,102el3 intercity/e4500,3
+international,8600,3
+freightliner,fld112,3
+international,sx537,3
+isuzu,t7f,3
+kenworth,w990,3
+sterling truck,sc8000,3
+freightliner,fl60,3
+freightliner,argosy,3
+ic bus,pc105,3
+autocar,xspotter off-hwy,3
+freightliner,med. conv.,3
+international,df697,3
+hino,xjc730/xfc730,3
+international,hx515,3
+freightliner,xbs straight rail rear engine shuttle bus chassis,3
+international,f-4900,3
+ic bus,pc515,3
+international,f-2674,3
+international,7300,3
+international,mh065,3
+volvo truck,wheb,3
+ic bus,pc015,3
+freightliner,mc front engine motor home chassis,3
+peterbilt,377,3
+caterpillar,cf7ab,3
+freightliner,s2 106 bus chassis,3
+ic bus,pc305,3
+prevost,xl2-45 entertainer,3
+prevost,x3 converted coach shell,3
+international,sf537,3
+hino,xjc700,3
+international,sr537,3
+international,dx567,3
+grande west,vicinity,3
+international,8100,3
+volvo truck,wg,3
+new flyer,midi,3
+international,la627,3
+volvo truck,vt,3
+freightliner,fl50,3
+international,f-8100,3
+prevost,x3-45 v.i.p. entertainer,3
+autocar,wxll,3
+capacity trucks,sabre5,3
+freightliner,cst112,3
+international,sa667,3
+freightliner,mbc front engine commercial bus chassis,3
+international,lf657,3
+peterbilt,325,3
+motor coach industries,j3500,3
+prevost,xl2 coach,3
+international,ra017,3
+western star,4900e,3
+ic bus,pc805,3
+freightliner,usf-1e,1
+western star,47x chassis,1
+western star,49x chassis,1

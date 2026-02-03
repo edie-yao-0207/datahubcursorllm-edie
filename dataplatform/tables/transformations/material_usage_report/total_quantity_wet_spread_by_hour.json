@@ -1,0 +1,48 @@
+{
+  "name": "material_usage_report.total_quantity_wet_spread_by_hour",
+  "owner": "DiagnosticsTools",
+  "description": "Calculates total quantity of wet material spread, using delta object stats, for each vehicle by hour",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdsaltspreaderquantityspreadwetmilliliters",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "material_usage_report",
+    "tablename": "total_quantity_wet_spread_by_hour",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "hour_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "hour_start",
+        "type": "timestamp"
+      },
+      {
+        "name": "total_quantity_spread",
+        "type": "long"
+      }
+    ],
+    "write_mode": "overwrite"
+  },
+  "expectation": {
+    "batch_mode": "KEEP_ALL"
+  },
+  "backfill_start_date": "2021-12-01"
+}

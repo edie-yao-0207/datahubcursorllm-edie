@@ -1,0 +1,121 @@
+{
+  "name": "dispatch_routes_report.selected_routes_and_jobs",
+  "owner": "Routing",
+  "description": "Select the routes and jobs for the dispatch routes reports.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dispatchdb_shards",
+      "tablename": "shardable_dispatch_routes",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "dispatchdb_shards",
+      "tablename": "shardable_dispatch_jobs",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "dispatch_routes_report",
+    "tablename": "selected_routes_and_jobs",
+    "type": "table",
+    "partition": ["route_scheduled_or_updated_date"],
+    "primary_key": [
+      "route_scheduled_or_updated_date",
+      "org_id",
+      "route_id",
+      "job_id",
+      "object_type",
+      "object_id",
+      "scheduled_start_ms"
+    ],
+    "schema": [
+      {
+        "name": "job_id",
+        "type": "long"
+      },
+      {
+        "name": "route_id",
+        "type": "long"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "nullable": false
+      },
+      {
+        "name": "object_id",
+        "type": "long"
+      },
+      {
+        "name": "start_location_lat",
+        "type": "double"
+      },
+      {
+        "name": "start_location_lng",
+        "type": "double"
+      },
+      {
+        "name": "destination_lat",
+        "type": "double"
+      },
+      {
+        "name": "destination_lng",
+        "type": "double"
+      },
+      {
+        "name": "en_route_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "arrived_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "completed_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "skipped_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "scheduled_meters",
+        "type": "long"
+      },
+      {
+        "name": "scheduled_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "route_scheduled_or_updated_date",
+        "type": "date"
+      },
+      {
+        "name": "scheduled_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "scheduled_arrival_time",
+        "type": "timestamp"
+      },
+      {
+        "name": "complete_last_stop_on_departure",
+        "type": "byte"
+      },
+      {
+        "name": "job_state",
+        "type": "integer"
+      }
+    ],
+    "write_mode": "merge"
+  },
+  "nonproduction": true,
+  "disabled_regions": ["us-west-2", "eu-west-1", "ca-central-1"]
+}

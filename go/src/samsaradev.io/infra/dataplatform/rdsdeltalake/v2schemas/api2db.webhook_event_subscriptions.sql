@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`webhook_id` BIGINT,
+`event_subscription_type` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

@@ -1,0 +1,53 @@
+source:
+    type: dbt
+    config:
+    # Coordinates
+    # To use this as-is, set the environment variable DBT_PROJECT_ROOT to the root folder of your dbt project
+        manifest_path: "biztech_manifest.json"
+        catalog_path: "biztech_catalog.json"
+        sources_path: "biztech_sources.json" # optional for freshness
+        run_results_paths:
+        - "biztech_run_results.json"
+        target_platform: databricks
+        platform_instance: bted_edw
+        include_compiled_code: true
+        include_column_lineage: true
+        incremental_lineage: false
+        stateful_ingestion:
+            enabled: true
+        skip_sources_in_lineage: true
+        entities_enabled:
+            sources: 'NO'
+            seeds: 'NO'
+            test_definitions: 'YES'
+            test_results: 'YES'
+        node_name_pattern:
+            deny:
+                - '.*stg_.*$'
+                - '.*int_.*$'
+                - '.*_eu$'
+                - '.*_formula_vw$'
+        meta_mapping:
+            owner:
+                match: ".*"
+                operation: "add_owner"
+                config:
+                    owner_type: group
+                    owner_category: TECHNICAL_OWNER
+            term:
+                match: ".*"
+                operation: "add_term"
+                config:
+                    term: "{{ $match }}"
+            terms_list:
+                match: ".*"
+                operation: "add_terms"
+                config:
+                    separator: ","
+        column_meta_mapping:
+            term:
+                match: ".*"
+                operation: "add_term"
+                config:
+                    term: "{{ $match }}"
+pipeline_name: bted_dbt

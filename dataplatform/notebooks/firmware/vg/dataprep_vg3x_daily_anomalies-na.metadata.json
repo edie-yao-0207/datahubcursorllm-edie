@@ -1,0 +1,78 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "dataprep_vg3x_daily_anomalies",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "product_type",
+        "type": "string"
+      },
+      {
+        "name": "product_version",
+        "type": "string"
+      },
+      {
+        "name": "rollout_stage_id",
+        "type": "integer"
+      },
+      {
+        "name": "product_program_id",
+        "type": "integer"
+      },
+      {
+        "name": "product_program_id_type",
+        "type": "string"
+      },
+      {
+        "name": "latest_build_on_day",
+        "type": "string"
+      },
+      {
+        "name": "can_bus_type",
+        "type": "string"
+      },
+      {
+        "name": "has_modi",
+        "type": "boolean"
+      },
+      {
+        "name": "has_baxter",
+        "type": "boolean"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "anomaly_event_service",
+        "type": "string"
+      },
+      {
+        "name": "ae_count",
+        "type": "long"
+      }
+    ]
+  }
+}

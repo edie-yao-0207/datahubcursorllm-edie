@@ -1,0 +1,13 @@
+{
+  "name": "device_dormancy",
+  "owner": "DataEngineering",
+  "assets": ["us-west-2:dataengineering.device_dormancy_global"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 10 * * *",
+      "backfill_window": 7,
+      "backfill_batch_size": 1
+    }
+  ]
+}

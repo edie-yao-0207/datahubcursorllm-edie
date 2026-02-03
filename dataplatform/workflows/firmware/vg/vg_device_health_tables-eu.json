@@ -1,0 +1,752 @@
+{
+  "name": "vg_device_health_tables-eu",
+  "email_notifications": {
+    "on_failure": ["vg-release-metrics-pi-aaaalc4nyooyfyfswpeimh7nme@samsara.org.slack.com"],
+    "no_alert_for_skipped_runs": false
+  },
+  "timeout_seconds": 0,
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "dataprep_vg_modi_days",
+      "depends_on": [
+        {
+          "task_key": "vg_modi_attached_ranges"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg_modi_days",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg3x_daily_summary",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg_modi_days"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg3x_daily_summary",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "spi_uptime",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/spi_uptime",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg_cpu_usage",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg_cpu_usage",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg_trip_diag_resets",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg_trip_diag_resets",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "health_metrics_vg_gps_uptime",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/health_metrics_vg_gps_uptime",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_trip_distances",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_trip_distances",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_vg3x_daily_health_metrics_extended",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        },
+        {
+          "task_key": "health_metrics_vg_gps_uptime"
+        },
+        {
+          "task_key": "dataprep_trip_distances"
+        },
+        {
+          "task_key": "vg_cpu_usage"
+        },
+        {
+          "task_key": "vg_trip_diag_resets"
+        },
+        {
+          "task_key": "vg_tacho_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_daily_health_metrics_extended",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg3x_gps_fix_times",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg3x_gps_fix_times",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_vg_daily_compromised_batts",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg_daily_compromised_batts",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg_memory_usage",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg_memory_usage",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_vg3x_daily_health_metrics",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        },
+        {
+          "task_key": "vg3x_gps_fix_times"
+        },
+        {
+          "task_key": "spi_uptime"
+        },
+        {
+          "task_key": "vg_memory_usage"
+        },
+        {
+          "task_key": "dataprep_vg_daily_compromised_batts"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_daily_health_metrics",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "cumulative_disconnectivity_by_device_vg3x-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/cumulative_disconnectivity_by_device_vg3x-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "fleetfwhealth_vg34_flash_devices-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/fleetfwhealth_vg34_flash_devices-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "chrisfiore_3dpowerstate-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/chrisfiore_3dpowerstate-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg3x_network_operator_time-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg3x_network_operator_time-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_vg3x_daily_mcu_events-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_daily_mcu_events-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_vg3x_daily_anomalies-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_daily_anomalies-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "dataprep_vg3x_harsh_events-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_harsh_events-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg_tacho_metrics",
+      "depends_on": [
+        {
+          "task_key": "vg3x_daily_summary"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg_tacho_metrics",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "notification_settings": {
+        "no_alert_for_skipped_runs": false,
+        "no_alert_for_canceled_runs": false,
+        "alert_on_last_attempt": false
+      }
+    },
+    {
+      "task_key": "vg_cable_id_cache_metrics-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vgapps/vg_cable_id_cache_metrics",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "vg_low_battery_and_wake_reasons-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vgapps/vg_low_battery_and_wake_reasons",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "vg_release_metrics",
+      "depends_on": [
+        {
+          "task_key": "vg_modi_attached_ranges"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_firmware.vg_release_metrics",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "vg_modi_attached_ranges",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg_modi_attached_ranges",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "dataprep_vg_daily_internal_batteries-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg_daily_internal_batteries-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "description": ""
+    },
+    {
+      "task_key": "dataprep_vg3x_health_metrics_by_day-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_health_metrics_by_day-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "dataprep_vg3x_anomaly_events_by_day-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_anomalies-eu"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_anomaly_events_by_day-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "dataprep_vg3x_flash_reset_by_day-eu",
+      "depends_on": [
+        {
+          "task_key": "fleetfwhealth_vg34_flash_devices-eu"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_flash_reset_by_day-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "vg_wake_reason_distributions-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg_wake_reason_distributions-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "vg3x_harsh_events_by_day-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_harsh_events-eu"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/vg3x_harsh_events_by_day-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "dataprep_vg3x_mcuevents_by_day-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_mcu_events-eu"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_mcuevents_by_day-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "dataprep_vg3x_health_metrics_by_day_extended-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics_extended"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_health_metrics_by_day_extended-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    },
+    {
+      "task_key": "dataprep_vg3x_avg_sim_switches-eu",
+      "depends_on": [
+        {
+          "task_key": "dataprep_vg3x_daily_health_metrics"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/firmware/vg/dataprep_vg3x_avg_sim_switches-eu",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {}
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "vg_device_health_tables-eu_job_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-eu-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "eu-west-1a",
+          "instance_profile_arn": "arn:aws:iam::353964698255:instance-profile/dataanalytics-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "rd-fleet.4xlarge",
+        "driver_node_type_id": "rd-fleet.4xlarge",
+        "custom_tags": {
+          "samsara:product-group": "aianddata",
+          "samsara:team": "dataanalytics",
+          "samsara:service": "databricksjobcluster-dataanalytics",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-eu-databricks-cluster-logs/dataanalytics",
+            "region": "eu-west-1",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "eu-west-1",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "eu-west-1"
+        },
+        "enable_elastic_disk": false,
+        "init_scripts": [
+          {
+            "s3": {
+              "destination": "s3://samsara-eu-dataplatform-deployed-artifacts/init_scripts/load-bigquery-credentials.sh",
+              "region": "eu-west-1"
+            }
+          }
+        ],
+        "policy_id": "A961EF4EA300026F",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 2,
+          "max_workers": 12
+        }
+      }
+    }
+  ]
+}

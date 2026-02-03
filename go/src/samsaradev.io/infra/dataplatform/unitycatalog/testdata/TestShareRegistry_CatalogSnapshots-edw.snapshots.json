@@ -1,0 +1,41 @@
+[
+  {
+    "Name": "edw tables shared in a delta share",
+    "Values": [
+      [
+        "edw.netsuite_sterling.currency",
+        "edw.netsuite_sterling.item_product_group",
+        "edw.netsuite_sterling.netsuite_customer",
+        "edw.netsuite_sterling.netsuite_transaction_lines",
+        "edw.netsuite_sterling.netsuite_transactions",
+        "edw.netsuite_sterling.transaction_inventory_numbers",
+        "edw.netsuite_sterling.transactions",
+        "edw.netsuite_sterling.transactions_extended",
+        "edw.salesforce_sterling.account",
+        "edw.salesforce_sterling.campaign",
+        "edw.salesforce_sterling.campaign_member",
+        "edw.salesforce_sterling.case",
+        "edw.salesforce_sterling.opportunity",
+        "edw.salesforce_sterling.opportunity_feature_assignment",
+        "edw.salesforce_sterling.plm_product_hierarchy",
+        "edw.salesforce_sterling.sfdc_contract",
+        "edw.salesforce_sterling.sfdc_plm_product_hierarchy",
+        "edw.salesforce_sterling.user",
+        "edw.silver.contract_totals",
+        "edw.silver.dim_account_enriched",
+        "edw.silver.dim_currency",
+        "edw.silver.dim_customer",
+        "edw.silver.dim_customer_issues",
+        "edw.silver.dim_device_transaction",
+        "edw.silver.dim_org_sam_sfdc_account_mapping",
+        "edw.silver.dim_products",
+        "edw.silver.employee_hierarchy_hst",
+        "edw.silver.fct_license_orders",
+        "edw.silver.fct_license_orders_daily_snapshot",
+        "edw.silver.fct_orders",
+        "edw.silver.license_hw_sku_xref",
+        "edw.silver.sam_account_org_xref"
+      ]
+    ]
+  }
+]

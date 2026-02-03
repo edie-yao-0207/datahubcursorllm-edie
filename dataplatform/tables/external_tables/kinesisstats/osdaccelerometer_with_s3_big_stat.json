@@ -1,0 +1,1355 @@
+{
+  "table": "osdaccelerometer_with_s3_big_stat",
+  "owner": "DataEngineering",
+  "description": "",
+  "database": "kinesisstats",
+  "schema": [
+    { "name": "date", "type": "string", "nullable": true, "metadata": {} },
+    { "name": "stat_type", "type": "integer", "nullable": true, "metadata": {} },
+    { "name": "org_id", "type": "long", "nullable": true, "metadata": {} },
+    { "name": "object_type", "type": "integer", "nullable": true, "metadata": {} },
+    { "name": "object_id", "type": "long", "nullable": true, "metadata": {} },
+    { "name": "time", "type": "long", "nullable": true, "metadata": {} },
+    {
+      "name": "value",
+      "type": {
+        "type": "struct",
+        "fields": [
+          { "name": "date", "type": "string", "nullable": true, "metadata": {} },
+          { "name": "time", "type": "long", "nullable": true, "metadata": {} },
+          { "name": "received_delta_seconds", "type": "long", "nullable": true, "metadata": {} },
+          { "name": "is_start", "type": "boolean", "nullable": true, "metadata": {} },
+          { "name": "is_end", "type": "boolean", "nullable": true, "metadata": {} },
+          { "name": "is_databreak", "type": "boolean", "nullable": true, "metadata": {} },
+          { "name": "int_value", "type": "long", "nullable": true, "metadata": {} },
+          { "name": "double_value", "type": "double", "nullable": true, "metadata": {} },
+          {
+            "name": "proto_value",
+            "type": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "accelerometer_event",
+                  "type": {
+                    "type": "struct",
+                    "fields": [
+                      { "name": "crash_thresh_gs", "type": "double", "nullable": true, "metadata": {} },
+                      { "name": "max_accel_gs", "type": "double", "nullable": true, "metadata": {} },
+                      { "name": "event_duration_ms", "type": "long", "nullable": true, "metadata": {} },
+                      {
+                        "name": "last_gps",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "latitude", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "longitude", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "speed", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "heading", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "fix", "type": "boolean", "nullable": true, "metadata": {} },
+                            { "name": "altitude", "type": "integer", "nullable": true, "metadata": {} },
+                            { "name": "hdop", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "vdop", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "ts", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "recent_data",
+                        "type": {
+                          "type": "array",
+                          "elementType": {
+                            "type": "struct",
+                            "fields": [
+                              { "name": "latitude", "type": "long", "nullable": true, "metadata": {} },
+                              { "name": "longitude", "type": "long", "nullable": true, "metadata": {} },
+                              { "name": "speed", "type": "long", "nullable": true, "metadata": {} },
+                              { "name": "heading", "type": "long", "nullable": true, "metadata": {} },
+                              { "name": "fix", "type": "boolean", "nullable": true, "metadata": {} },
+                              { "name": "altitude", "type": "integer", "nullable": true, "metadata": {} },
+                              { "name": "hdop", "type": "long", "nullable": true, "metadata": {} },
+                              { "name": "vdop", "type": "long", "nullable": true, "metadata": {} },
+                              { "name": "ts", "type": "long", "nullable": true, "metadata": {} }
+                            ]
+                          },
+                          "containsNull": true
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      { "name": "is_debug", "type": "boolean", "nullable": true, "metadata": {} },
+                      { "name": "brake_thresh_gs", "type": "double", "nullable": true, "metadata": {} },
+                      { "name": "event_id", "type": "long", "nullable": true, "metadata": {} },
+                      { "name": "harsh_accel_type", "type": "integer", "nullable": true, "metadata": {} },
+                      { "name": "initial_rke", "type": "double", "nullable": true, "metadata": {} },
+                      { "name": "gateway_id", "type": "long", "nullable": true, "metadata": {} },
+                      { "name": "vision_config_proto_bytes", "type": "binary", "nullable": true, "metadata": {} },
+                      { "name": "vision_config_md5", "type": "string", "nullable": true, "metadata": {} },
+                      {
+                        "name": "harsh_accel_metadata",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "severity", "type": "integer", "nullable": true, "metadata": {} },
+                            { "name": "distracted_ms", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "distracted_calibration_ms", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "speed_limit_metadata",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "way_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "speed_limit_kmph", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "match_info",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "way_id", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "speed_limit_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "distance_meters", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "unix_time_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    {
+                                      "name": "received_at_monotonic_ms",
+                                      "type": "long",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    },
+                                    {
+                                      "name": "speed_limit_vehicle_type",
+                                      "type": "long",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "match_input",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "heading_degrees", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "unix_time_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    {
+                                      "name": "received_at_monotonic_ms",
+                                      "type": "long",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    },
+                                    { "name": "speed_source_used", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "speed_limit_vehicle_type", "type": "long", "nullable": true, "metadata": {} },
+                            {
+                              "name": "current_tile_info",
+                              "type": {
+                                "type": "struct",
+                                "fields": [
+                                  { "name": "slippy_tile", "type": "string", "nullable": true, "metadata": {} },
+                                  { "name": "version", "type": "string", "nullable": true, "metadata": {} },
+                                  { "name": "server_last_modified", "type": "long", "nullable": true, "metadata": {} }
+                                ]
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "speeds",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "source", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "recorded_at_ms", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "distracted_policy_detector_metadata",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "policy_type", "type": "integer", "nullable": true, "metadata": {} },
+                            { "name": "start_ms", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "duration_ms", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "successive_detections", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "tile_rolling_stop_sign_metadata",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "node_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "way_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                            { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                            { "name": "lowest_speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "input_data",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "utc_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "way_id", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "match_input",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "heading_degrees", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "unix_time_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    {
+                                      "name": "received_at_monotonic_ms",
+                                      "type": "long",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    },
+                                    { "name": "speed_source_used", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "current_tile_info",
+                              "type": {
+                                "type": "struct",
+                                "fields": [
+                                  { "name": "slippy_tile", "type": "string", "nullable": true, "metadata": {} },
+                                  { "name": "version", "type": "string", "nullable": true, "metadata": {} },
+                                  { "name": "server_last_modified", "type": "long", "nullable": true, "metadata": {} }
+                                ]
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "stop_zone_enter_radius_meters",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "crossing_distance_meters", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "stop_zone_exit_radius_meters",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "distance_to_current_meters", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "speed_lookback_distance_meters",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "speed_lookback_match_input_indices",
+                              "type": { "type": "array", "elementType": "long", "containsNull": true },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "process_result", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "bearing_degrees", "type": "float", "nullable": true, "metadata": {} },
+                            { "name": "bearing_direction", "type": "long", "nullable": true, "metadata": {} },
+                            {
+                              "name": "speeds",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "source", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "recorded_at_ms", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "tile_rolling_railroad_crossing_metadata",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "node_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "way_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                            { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                            { "name": "lowest_speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "input_data",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "utc_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "way_id", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "match_input",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "lat", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "lng", "type": "double", "nullable": true, "metadata": {} },
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "heading_degrees", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "unix_time_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    {
+                                      "name": "received_at_monotonic_ms",
+                                      "type": "long",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    },
+                                    { "name": "speed_source_used", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "current_tile_info",
+                              "type": {
+                                "type": "struct",
+                                "fields": [
+                                  { "name": "slippy_tile", "type": "string", "nullable": true, "metadata": {} },
+                                  { "name": "version", "type": "string", "nullable": true, "metadata": {} },
+                                  { "name": "server_last_modified", "type": "long", "nullable": true, "metadata": {} }
+                                ]
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "stop_zone_enter_radius_meters",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "crossing_distance_meters", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "stop_zone_exit_radius_meters",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "distance_to_current_meters", "type": "float", "nullable": true, "metadata": {} },
+                            {
+                              "name": "speed_lookback_distance_meters",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "speed_lookback_match_input_indices",
+                              "type": { "type": "array", "elementType": "long", "containsNull": true },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "process_result", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "bearing_degrees", "type": "float", "nullable": true, "metadata": {} },
+                            { "name": "bearing_direction", "type": "long", "nullable": true, "metadata": {} },
+                            {
+                              "name": "speeds",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "source", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "speed_kmph", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "recorded_at_ms", "type": "long", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "tailgating_metadata",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "start_ms", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "duration_ms", "type": "long", "nullable": true, "metadata": {} },
+                            {
+                              "name": "min_following_distance_seconds",
+                              "type": "float",
+                              "nullable": true,
+                              "metadata": {}
+                            }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "dashcam_seatbelt_data",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "label", "type": "integer", "nullable": true, "metadata": {} },
+                            { "name": "warning_count", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "confidence", "type": "float", "nullable": true, "metadata": {} },
+                            { "name": "gateway_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "event_id", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "dashcam_mask_data",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "label", "type": "integer", "nullable": true, "metadata": {} },
+                            { "name": "warning_count", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "confidence", "type": "float", "nullable": true, "metadata": {} },
+                            { "name": "gateway_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "event_id", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "dashcam_driver_obstruction_data",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "label", "type": "integer", "nullable": true, "metadata": {} },
+                            { "name": "warning_count", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "confidence", "type": "float", "nullable": true, "metadata": {} },
+                            { "name": "gateway_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "event_id", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "dashcam_passenger_detections",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "passenger_status", "type": "integer", "nullable": true, "metadata": {} },
+                            {
+                              "name": "faces_detected",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "x_frac", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "y_frac", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "w_frac", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "h_frac", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "confidence", "type": "float", "nullable": true, "metadata": {} }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "warning_count", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "gateway_id", "type": "long", "nullable": true, "metadata": {} },
+                            { "name": "event_id", "type": "long", "nullable": true, "metadata": {} }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      {
+                        "name": "oriented_harsh_detector_triggered",
+                        "type": "boolean",
+                        "nullable": true,
+                        "metadata": {}
+                      },
+                      { "name": "event_source", "type": "integer", "nullable": true, "metadata": {} },
+                      { "name": "ingestion_tag", "type": "long", "nullable": true, "metadata": {} },
+                      { "name": "customer_visible_ingestion_tag", "type": "long", "nullable": true, "metadata": {} },
+                      { "name": "hidden_to_customer", "type": "boolean", "nullable": true, "metadata": {} },
+                      {
+                        "name": "imu_harsh_event",
+                        "type": {
+                          "type": "struct",
+                          "fields": [
+                            { "name": "algorithm_version", "type": "long", "nullable": true, "metadata": {} },
+                            {
+                              "name": "config",
+                              "type": {
+                                "type": "struct",
+                                "fields": [
+                                  { "name": "vehicle_type", "type": "integer", "nullable": true, "metadata": {} },
+                                  {
+                                    "name": "accel",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        {
+                                          "name": "debounce_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "debounce_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "cooldown_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "fw_threshold_multiplier",
+                                          "type": "float",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_filter_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "brake",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        {
+                                          "name": "debounce_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "debounce_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "cooldown_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "fw_threshold_multiplier",
+                                          "type": "float",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_filter_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "turn",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        {
+                                          "name": "debounce_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "debounce_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "cooldown_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "fw_threshold_multiplier",
+                                          "type": "float",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_filter_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "crash",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        {
+                                          "name": "debounce_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "debounce_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "cooldown_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "fw_threshold_multiplier",
+                                          "type": "float",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_thresholds_g",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              {
+                                                "name": "passenger",
+                                                "type": "float",
+                                                "nullable": true,
+                                                "metadata": {}
+                                              },
+                                              { "name": "light", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "heavy", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "customer_filter_min_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "rollover",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        {
+                                          "name": "window_size_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "window_period_sample_count",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "threshold_degrees",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "max_accel_norm_g",
+                                          "type": "float",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "max_std_dev_accel_g",
+                                          "type": "float",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "gravity_change_within_crash_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "muxer",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        {
+                                          "name": "bundling_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "finalizing_timeout_ms",
+                                          "type": "long",
+                                          "nullable": true,
+                                          "metadata": {}
+                                        },
+                                        {
+                                          "name": "max_event_duration_ms",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              { "name": "accel", "type": "long", "nullable": true, "metadata": {} },
+                                              { "name": "brake", "type": "long", "nullable": true, "metadata": {} },
+                                              { "name": "turn", "type": "long", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "data_start_offset_ms",
+                                    "type": "integer",
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  { "name": "data_end_offset_ms", "type": "integer", "nullable": true, "metadata": {} },
+                                  {
+                                    "name": "enable_accel_dc_offset_removal",
+                                    "type": "integer",
+                                    "nullable": true,
+                                    "metadata": {}
+                                  }
+                                ]
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "orientation",
+                              "type": {
+                                "type": "struct",
+                                "fields": [
+                                  {
+                                    "name": "gravity_vector",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        { "name": "x", "type": "float", "nullable": true, "metadata": {} },
+                                        { "name": "y", "type": "float", "nullable": true, "metadata": {} },
+                                        { "name": "z", "type": "float", "nullable": true, "metadata": {} }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  { "name": "yaw_angle_degrees", "type": "float", "nullable": true, "metadata": {} },
+                                  { "name": "calibration_index", "type": "long", "nullable": true, "metadata": {} },
+                                  {
+                                    "name": "rotation_quaternion",
+                                    "type": {
+                                      "type": "struct",
+                                      "fields": [
+                                        { "name": "w", "type": "float", "nullable": true, "metadata": {} },
+                                        {
+                                          "name": "v",
+                                          "type": {
+                                            "type": "struct",
+                                            "fields": [
+                                              { "name": "x", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "y", "type": "float", "nullable": true, "metadata": {} },
+                                              { "name": "z", "type": "float", "nullable": true, "metadata": {} }
+                                            ]
+                                          },
+                                          "nullable": true,
+                                          "metadata": {}
+                                        }
+                                      ]
+                                    },
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  {
+                                    "name": "is_loaded_from_disk",
+                                    "type": "boolean",
+                                    "nullable": true,
+                                    "metadata": {}
+                                  },
+                                  { "name": "lock_valid", "type": "integer", "nullable": true, "metadata": {} }
+                                ]
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "secondary_events",
+                              "type": {
+                                "type": "array",
+                                "elementType": {
+                                  "type": "struct",
+                                  "fields": [
+                                    { "name": "start_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "duration_ms", "type": "long", "nullable": true, "metadata": {} },
+                                    { "name": "max_accel_g", "type": "float", "nullable": true, "metadata": {} },
+                                    { "name": "type", "type": "integer", "nullable": true, "metadata": {} },
+                                    {
+                                      "name": "triggered_audio_alert",
+                                      "type": "boolean",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    },
+                                    {
+                                      "name": "triggered_customer_threshold",
+                                      "type": "boolean",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    },
+                                    {
+                                      "name": "num_samples_above_customer_threshold",
+                                      "type": "long",
+                                      "nullable": true,
+                                      "metadata": {}
+                                    }
+                                  ]
+                                },
+                                "containsNull": true
+                              },
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            { "name": "triggered_audio_alert", "type": "boolean", "nullable": true, "metadata": {} },
+                            {
+                              "name": "triggered_customer_threshold",
+                              "type": "boolean",
+                              "nullable": true,
+                              "metadata": {}
+                            },
+                            {
+                              "name": "num_samples_above_customer_threshold",
+                              "type": "long",
+                              "nullable": true,
+                              "metadata": {}
+                            }
+                          ]
+                        },
+                        "nullable": true,
+                        "metadata": {}
+                      }
+                    ]
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                }
+              ]
+            },
+            "nullable": true,
+            "metadata": {}
+          }
+        ]
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "s3_proto_value",
+      "type": {
+        "type": "struct",
+        "fields": [
+          {
+            "name": "accel_event_data",
+            "type": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "recent_accel",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "x_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "y_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "z_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                { "name": "sample_rate_hz", "type": "double", "nullable": true, "metadata": {} },
+                {
+                  "name": "recent_gps",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "latitude", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "longitude", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "speed", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "heading", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "fix", "type": "boolean", "nullable": true, "metadata": {} },
+                        { "name": "altitude", "type": "integer", "nullable": true, "metadata": {} },
+                        { "name": "hdop", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "vdop", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "ts", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "event_offset_ms", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "ecu_speed", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "ecu_speed_valid", "type": "boolean", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                { "name": "is_debug", "type": "boolean", "nullable": true, "metadata": {} },
+                {
+                  "name": "accel_pedal",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "position", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "brake",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "brake_on", "type": "boolean", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "recent_gyro",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "x_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "y_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "z_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "ecu_speed",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "speed_milliknots", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "cruise_control",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "cruise_control_activated", "type": "boolean", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "forward_vehicle_speed",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "speed_milliknots", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "forward_vehicle_distance",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "distance_meters", "type": "long", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                { "name": "oriented_harsh_detector_triggered", "type": "boolean", "nullable": true, "metadata": {} },
+                {
+                  "name": "oriented_accel_raw",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "x_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "y_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "z_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "oriented_gyro_raw",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "x_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "y_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "z_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "oriented_accel_lp_filtered",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "x_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "y_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "z_f", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "oriented_gyro_lp_filtered",
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": [
+                        { "name": "x_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "y_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "z_dps", "type": "float", "nullable": true, "metadata": {} },
+                        { "name": "offset_from_event_ms", "type": "long", "nullable": true, "metadata": {} }
+                      ]
+                    },
+                    "containsNull": true
+                  },
+                  "nullable": true,
+                  "metadata": {}
+                }
+              ]
+            },
+            "nullable": true,
+            "metadata": {}
+          }
+        ]
+      },
+      "nullable": true,
+      "metadata": {}
+    }
+  ]
+}

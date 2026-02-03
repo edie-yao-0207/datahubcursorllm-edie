@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`id` INT,
+`shortname` STRING,
+`version` BIGINT,
+`value` STRING,
+`clicks` BIGINT,
+`partition` STRING

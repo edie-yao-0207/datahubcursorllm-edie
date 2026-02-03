@@ -1,0 +1,160 @@
+{
+  "name": "agg_product_scorecard_telematics_mpr_global_monthly",
+  "owner": "DataEngineering",
+  "description": "Monthly Platform MPR for SAM groupings",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date_month",
+      "type": "string"
+    },
+    {
+      "name": "period_start",
+      "type": "string"
+    },
+    {
+      "name": "period_end",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "industry_vertical",
+      "type": "string"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "account_csm_email",
+      "type": "string"
+    },
+    {
+      "name": "account_name",
+      "type": "string"
+    },
+    {
+      "name": "account_id",
+      "type": "string"
+    },
+    {
+      "name": "account_renewal_12mo",
+      "type": "boolean"
+    },
+    {
+      "name": "routes",
+      "type": "long"
+    },
+    {
+      "name": "completed_routes",
+      "type": "long"
+    },
+    {
+      "name": "vg_trips",
+      "type": "long"
+    },
+    {
+      "name": "active_vgs",
+      "type": "long"
+    },
+    {
+      "name": "idle_duration_ms",
+      "type": "long"
+    },
+    {
+      "name": "on_duration_ms",
+      "type": "long"
+    },
+    {
+      "name": "unproductive_idle_duration_ms",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers_using_app_month",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers_using_app",
+      "type": "long"
+    },
+    {
+      "name": "violation_duration_ms",
+      "type": "long"
+    },
+    {
+      "name": "possible_driver_ms",
+      "type": "long"
+    },
+    {
+      "name": "unassigned_driver_time_hours",
+      "type": "decimal(38,7)"
+    },
+    {
+      "name": "assigned_driver_time_hours",
+      "type": "decimal(38,7)"
+    },
+    {
+      "name": "driver_time_hours",
+      "type": "decimal(38,6)"
+    },
+    {
+      "name": "p50_mpg",
+      "type": "double"
+    },
+    {
+      "name": "vehicles_ev",
+      "type": "long"
+    },
+    {
+      "name": "vehicles_ice",
+      "type": "long"
+    },
+    {
+      "name": "vehicles_hybrid",
+      "type": "long"
+    },
+    {
+      "name": "sleeper_berth_split_violations",
+      "type": "long"
+    },
+    {
+      "name": "yard_move_miles",
+      "type": "double"
+    },
+    {
+      "name": "total_miles",
+      "type": "double"
+    }
+  ]
+}

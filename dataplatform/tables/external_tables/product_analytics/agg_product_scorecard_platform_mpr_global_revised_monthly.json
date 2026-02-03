@@ -1,0 +1,216 @@
+{
+  "name": "agg_product_scorecard_platform_mpr_global_revised_monthly",
+  "owner": "DataEngineering",
+  "description": "Monthly Platform MPR for SAM groupings",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date_month",
+      "type": "string"
+    },
+    {
+      "name": "period_start",
+      "type": "string"
+    },
+    {
+      "name": "period_end",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "industry_vertical",
+      "type": "string"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "account_csm_email",
+      "type": "string"
+    },
+    {
+      "name": "account_name",
+      "type": "string"
+    },
+    {
+      "name": "account_id",
+      "type": "string"
+    },
+    {
+      "name": "full_admin_account",
+      "type": "long"
+    },
+    {
+      "name": "full_admin_users",
+      "type": "long"
+    },
+    {
+      "name": "custom_role_account",
+      "type": "long"
+    },
+    {
+      "name": "custom_role_users",
+      "type": "long"
+    },
+    {
+      "name": "account_with_two_plus_users",
+      "type": "long"
+    },
+    {
+      "name": "total_users",
+      "type": "long"
+    },
+    {
+      "name": "device_tags_account",
+      "type": "long"
+    },
+    {
+      "name": "device_tags",
+      "type": "long"
+    },
+    {
+      "name": "device_attributes_account",
+      "type": "long"
+    },
+    {
+      "name": "device_attributes",
+      "type": "long"
+    },
+    {
+      "name": "device_account",
+      "type": "long"
+    },
+    {
+      "name": "total_devices",
+      "type": "long"
+    },
+    {
+      "name": "driver_tags_account",
+      "type": "long"
+    },
+    {
+      "name": "driver_tags",
+      "type": "long"
+    },
+    {
+      "name": "driver_attributes_account",
+      "type": "long"
+    },
+    {
+      "name": "driver_attributes",
+      "type": "long"
+    },
+    {
+      "name": "driver_account",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long"
+    },
+    {
+      "name": "installed_vg",
+      "type": "long"
+    },
+    {
+      "name": "installed_at",
+      "type": "long"
+    },
+    {
+      "name": "installed_ag",
+      "type": "long"
+    },
+    {
+      "name": "installed_cm",
+      "type": "long"
+    },
+    {
+      "name": "at_with_photo",
+      "type": "long"
+    },
+    {
+      "name": "ag_with_photo",
+      "type": "long"
+    },
+    {
+      "name": "vg_with_photo",
+      "type": "long"
+    },
+    {
+      "name": "complete_flow_ag",
+      "type": "long"
+    },
+    {
+      "name": "complete_flow_vg",
+      "type": "long"
+    },
+    {
+      "name": "complete_flow_cm",
+      "type": "long"
+    },
+    {
+      "name": "complete_flow_at",
+      "type": "long"
+    },
+    {
+      "name": "total_time_to_install_vg",
+      "type": "long"
+    },
+    {
+      "name": "total_time_to_install_ag",
+      "type": "long"
+    },
+    {
+      "name": "total_time_to_install_at",
+      "type": "long"
+    },
+    {
+      "name": "total_time_to_install_cm",
+      "type": "long"
+    },
+    {
+      "name": "correctly_installed_vg",
+      "type": "long"
+    },
+    {
+      "name": "correctly_installed_cm",
+      "type": "long"
+    },
+    {
+      "name": "csv_upload_failures",
+      "type": "long"
+    },
+    {
+      "name": "csv_uploads",
+      "type": "long"
+    }
+  ]
+}

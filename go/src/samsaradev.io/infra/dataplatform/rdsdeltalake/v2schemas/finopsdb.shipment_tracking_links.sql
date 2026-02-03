@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`sam_number` STRING,
+`record_number` STRING,
+`uuid` STRING,
+`shipping_group_uuid` STRING,
+`delivery_tracking_number` STRING,
+`delivery_carrier` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`date` STRING

@@ -1,0 +1,9 @@
+enable-ev-alarm-fix,True,https://app.launchdarkly.com/projects/samsara/flags/enable-ev-alarm-fix/targeting?env=production&selected-env=production,False,
+enable-aggregated-engine-hours-read-path,False,https://app.launchdarkly.com/projects/samsara/flags/enable-aggregated-engine-hours-read-path/targeting?env=production&selected-env=production,False,
+j1939-listen-only,True,https://app.launchdarkly.com/projects/samsara/flags/j1939-listen-only/targeting?env=production&selected-env=production,True,
+disable-obd-diagnostic,True,https://app.launchdarkly.com/projects/samsara/flags/disable-obd-diagnostics/targeting?env=production&selected-env=production,True,
+disable-ev-active-requests-while-stationary,True,https://app.launchdarkly.com/projects/samsara/flags/disable-ev-active-requests-while-stationary/targeting?env=production&selected-env=production,False,
+enable-uvl-baud-and-j1939-protocol-autodetect,False,https://app.launchdarkly.com/projects/samsara/flags/enable-uvl-baud-and-j1939-protocol-autodetect?context=approvalRequesterMessage&env=production&env=production&selected-env=production&source=slack-app,False,"ChangeBehavior:
+There is an EV startup where they are using an OBD-II connector with J1939 250k baudrate. This is causing all their vehicles to derate and malfunction since passenger vehicles are not capable of 250k by default. This FF will help in this scenario since rather than assuming a 500k primary bus when running the UVL we'll instead run the baud autodetect  to confirm the correct baud rate. Additionally, rather than assuming only OBDII protocols exist on this primary bus we'll also probe if J1939 message are seen on the bus and enable J1939 accordingly if so.
+
+Intended Rollout Audience: Developer,Support"

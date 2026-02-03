@@ -1,0 +1,124 @@
+633613480498380787,CHEVROLET,CHEVY,2009,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+-3571260001475028319,CHEVROLET,SILVERADO HD,2023,,0,0,WORK TRUCK,1,Update VIN decoding,False,Daniel Ribbers
+-6372155879977955312,CHEVROLET,SILVERADO HD,2024,,0,0,WORK TRUCK,1,Update VIN decoding,False,Daniel Ribbers
+2950269522514342052,CHEVROLET,TORNADO,2020,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-1490196504923531305,CHEVROLET,TORNADO,2024,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+-2425901134289675811,CHEVROLET,TORNADO,2024,,1,1,,157,MMY doesn't support global promotion,False,Daniel Ribbers
+6984079930823615424,CHEVROLET,TORNADO,2025,,1,1,,157,MMY doesn't support global promotion,False,Daniel Ribbers
+6288042260014844736,CHEVROLET,TRAX,2024,,1,1,,157,MY extension - investigation required,True,Daniel Ribbers
+3681129880167260444,CITROEN,JUMPER,2024,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+3681129880167260444,CITROEN,JUMPER,2024,,0,0,,5,Update VIN decoding,True,Daniel Ribbers
+-5349839161533949659,DODGE,ATTITUDE,2016,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+-2874395129600854606,DODGE,ATTITUDE,2018,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+-5732832087928327297,DODGE,ATTITUDE,2015,,1,1,,5,[MX] MY extension - investigation required,True,Daniel Ribbers
+-5349839161533949659,DODGE,ATTITUDE,2016,,1,1,,5,[MX] MY extension - investigation required,True,Daniel Ribbers
+-2874395129600854606,DODGE,ATTITUDE,2018,,1,1,,5,[MX] MY extension - investigation required,True,Daniel Ribbers
+2825704412978931575,FORD,COMMERCIAL CHASSIS,2020,,1,1,,157,No GAP - Supports 0x17F,False,Daniel Ribbers
+3836404565560646782,FORD,COMMERCIAL CHASSIS,2021,,1,1,,157,No GAP - Supports 0x17F,False,Daniel Ribbers
+-7886335372006109428,FORD,F-150,2014,,0,0,,6,Update VIN decoding,False,Daniel Ribbers
+-1445241103828493008,FORD,F-150,2017,,0,0,,6,Update VIN decoding,False,Daniel Ribbers
+-1420626861121444876,FORD,F-150,2018,,0,0,,6,Update VIN decoding,False,Daniel Ribbers
+-5581469226531123171,FORD,F-150,2013,,1,1,,6,MMY doesn't support global promotion,True,Daniel Ribbers
+-4828385265925349637,FORD,F-150,2014,,1,1,,6,MMY doesn't support global promotion,True,Daniel Ribbers
+-3154737712606878180,FORD,F-150,2022,,2,4,SUPERCREW,208,No GAP - Doesn't work on EV F-150,False,Daniel Ribbers
+-6915898736433072282,FORD,F-250,2011,,1,2,,157,No GAP - Supports 0x22F47F,False,Daniel Ribbers
+-1433207533443550479,FORD,F-250,2012,,1,2,,157,No GAP - Supports 0x22F47F,False,Daniel Ribbers
+-4102190631932373806,FORD,F-350,2003,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+-1712406519861904070,FORD,F-350,2004,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+-2730929563714697691,FORD,F-350,2004,,1,2,,157,No GAP - Doesn't support 0x226103,False,Daniel Ribbers
+-7963596514870927620,FORD,F-350,2011,,1,2,,157,No GAP - Supports 0x22F47F and 0x17F,False,Daniel Ribbers
+4226066096533840707,FORD,F-350,2012,,1,2,,157,No GAP - Supports 0x22F47F,False,Daniel Ribbers
+-4930353030088064761,FORD,MAVERICK,2025,,4,1,XL,217,MY extension - investigation required,True,Daniel Ribbers
+-1200065452441677382,FORD,TRANSIT CONNECT,2014,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-3683017827382331313,FORD,TRANSIT CONNECT,2015,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-2340043780432540449,HYUNDAI,GRAND I10,2020,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-5600437427371511628,HYUNDAI,GRAND I10,2024,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+4512035522262615994,HYUNDAI,GRAND I10,2022,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+8725417382608746862,ISUZU,FORWARD 800,2023,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+-7735781580057755735,IVECO,DAILY,2020,,0,0,,4,Update VIN decoding,False,Daniel Ribbers
+-5880981463187454410,IVECO,DAILY,2021,,0,0,,4,Update VIN decoding,False,Daniel Ribbers
+-7735781580057755735,IVECO,DAILY,2020,,0,0,,18,Update VIN decoding,False,Daniel Ribbers
+-5880981463187454410,IVECO,DAILY,2021,,0,0,,18,Update VIN decoding,False,Daniel Ribbers
+-7735781580057755735,IVECO,DAILY,2020,,0,0,,21,Update VIN decoding,False,Daniel Ribbers
+-5880981463187454410,IVECO,DAILY,2021,,0,0,,21,Update VIN decoding,False,Daniel Ribbers
+-7735781580057755735,IVECO,DAILY,2020,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+-5880981463187454410,IVECO,DAILY,2021,,0,0,,157,Update VIN decoding,False,Daniel Ribbers
+7327103710238978373,MAN,TGE,2024,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+-7514546947417053952,MERCEDES-BENZ,MBO,2017,,1,2,,1,No valid recommendation,False,Daniel Ribbers
+-7937771076344501644,MERCEDES-BENZ,MBO,2018,,1,2,,1,No valid recommendation,False,Daniel Ribbers
+-76828426383997885,MERCEDES-BENZ,METRIS,2016,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+3474583368015702788,MERCEDES-BENZ,SPRINTER,2025,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-8526111234066122959,MERCEDES-BENZ,SPRINTER,2023,,0,0,,4,Update VIN decoding,False,Daniel Ribbers
+-2214311276993347772,MERCEDES-BENZ,SPRINTER,2024,,0,0,,4,Update VIN decoding,False,Daniel Ribbers
+3474583368015702788,MERCEDES-BENZ,SPRINTER,2025,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+-4542693844847713005,MERCEDES-BENZ,SPRINTER,2019,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+-1996306009023239533,MERCEDES-BENZ,SPRINTER,2020,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+302616036851573343,MERCEDES-BENZ,SPRINTER,2024,,1,2,,4,MY extension - investigation required,True,Daniel Ribbers
+-5241292395406752545,MERCEDES-BENZ,SPRINTER,2023,,1,2,,22,MY extension - investigation required,True,Daniel Ribbers
+302616036851573343,MERCEDES-BENZ,SPRINTER,2024,,1,2,,22,MY extension - investigation required,True,Daniel Ribbers
+-5241292395406752545,MERCEDES-BENZ,SPRINTER,2023,,1,2,,34,MY extension - investigation required,True,Daniel Ribbers
+302616036851573343,MERCEDES-BENZ,SPRINTER,2024,,1,2,,34,MY extension - investigation required,True,Daniel Ribbers
+-5241292395406752545,MERCEDES-BENZ,SPRINTER,2023,,1,2,,83,MY extension - investigation required,True,Daniel Ribbers
+302616036851573343,MERCEDES-BENZ,SPRINTER,2024,,1,2,,83,MY extension - investigation required,True,Daniel Ribbers
+-2149231294191174795,MERCEDES-BENZ,"SPRINTER, ESPRINTER",2023,,0,0,,4,Update VIN decoding,False,Daniel Ribbers
+4870274125848467493,MERCEDES-BENZ,V,2025,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+4870274125848467493,MERCEDES-BENZ,V,2025,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+-4282071221425896584,MERCEDES-BENZ,"V, V-CLASS",2022,,0,0,,4,Update VIN decoding,False,Daniel Ribbers
+7572204472345740813,MERCEDES-BENZ,V-CLASS,2023,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+9049854576950504778,MERCEDES-BENZ,V-CLASS,2025,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+4956938138945810348,MERCEDES-BENZ,V-CLASS,2026,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+7572204472345740813,MERCEDES-BENZ,V-CLASS,2023,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+9049854576950504778,MERCEDES-BENZ,V-CLASS,2025,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+4956938138945810348,MERCEDES-BENZ,V-CLASS,2026,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+2469391435691473807,MITSUBISHI,L 200,2015,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-427892138982933019,MITSUBISHI,L 200,2024,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-7418788816348169869,MITSUBISHI,L 200,2025,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+2469391435691473807,MITSUBISHI,L 200,2015,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+4511204104161059401,MITSUBISHI,L 200,2016,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+-7418788816348169869,MITSUBISHI,L 200,2025,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+-4228449428700034944,MITSUBISHI,OUTLANDER,2023,,3,1,,1,No GAP - Supports 0x1A6,False,Daniel Ribbers
+228125098995449208,NISSAN,KICKS,2022,,4,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+228125098995449208,NISSAN,KICKS,2022,,4,1,,47,[MX] MY extension - investigation required,True,Daniel Ribbers
+-7782207794954246830,NISSAN,MARCH,2015,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+5455787246591503887,NISSAN,MARCH,2016,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+8854503116056479798,NISSAN,MARCH,2025,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+-7782207794954246830,NISSAN,MARCH,2015,,1,1,,44,[MX] MY extension - investigation required,True,Daniel Ribbers
+5455787246591503887,NISSAN,MARCH,2016,,1,1,,44,[MX] MY extension - investigation required,True,Daniel Ribbers
+8854503116056479798,NISSAN,MARCH,2025,,1,1,,44,[MX] MY extension - investigation required,True,Daniel Ribbers
+6784190275956000130,NISSAN,"NP300, FRONTIER",2022,,1,2,,44,Wrong recommendation - already promoted,False,Daniel Ribbers
+1031069802128292199,NISSAN,"NP300, FRONTIER",2023,,1,2,,44,Wrong recommendation - already promoted,False,Daniel Ribbers
+5426156698463361397,NISSAN,NV,2013,,1,1,,1,No GAP - Supports 0x05C5,False,Daniel Ribbers
+-6777366655096146911,NISSAN,NV,2014,,1,1,,1,No GAP - Supports 0x05C5,False,Daniel Ribbers
+-6158314975019944437,NISSAN,URVAN,2025,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+-6158314975019944437,NISSAN,URVAN,2025,,1,1,,44,No GAP - Supports 0x12F,False,Daniel Ribbers
+-2626180479077494202,NISSAN,VERSA MX,2013,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+3605579964966262240,NISSAN,VERSA MX,2014,,1,1,,1,[MX] MY extension - investigation required,True,Daniel Ribbers
+2526768909740355281,NISSAN,VERSA MX,2018,,1,1,,44,[MX] MY extension - investigation required,True,Daniel Ribbers
+-7548782275954746092,NISSAN,VERSA MX,2019,,1,1,,44,[MX] MY extension - investigation required,True,Daniel Ribbers
+5156849270846582725,OPEL,MOVANO,2017,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+-6316087660890116420,OPEL,MOVANO,2021,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+-1814410190629174955,PEUGEOT,BOXER,2025,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-1814410190629174955,PEUGEOT,BOXER,2025,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+-6124064854408881634,PEUGEOT,EXPERT,2025,,0,0,,5,Update VIN decoding,False,Daniel Ribbers
+3664356557673798935,RAM,2500,2024,,1,1,,6,MY extension - investigation required,True,Daniel Ribbers
+-1904104130629503534,RAM,PROMASTER CITY,2020,,1,1,,1,No GAP - Supports 0x01A6,False,Daniel Ribbers
+-7149179473690695634,RAM,PROMASTER CITY,2021,,1,1,,1,No GAP - Supports 0x01A6 Odometer,False,Daniel Ribbers
+-679023795772522181,RENAULT,MASTER,2013,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+3958165271599871140,RENAULT,TRAFIC,2023,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-8219724042013632337,RENAULT,TRAFIC,2024,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+7564488548915232415,SEAT,IBIZA,2018,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-593608736629060674,SKODA,OCTAVIA,2015,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-1509959520670006887,VOLKSWAGEN,CADDY,2022,,0,0,,2,Update VIN decoding,False,Daniel Ribbers
+-8459170255907691855,VOLKSWAGEN,CADDY,2021,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+-1509959520670006887,VOLKSWAGEN,CADDY,2022,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+7118579649516581517,VOLKSWAGEN,CRAFTER,2018,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-6453171660989684034,VOLKSWAGEN,CRAFTER,2019,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-6712564395996500145,VOLKSWAGEN,CRAFTER,2023,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+5470261800610136198,VOLKSWAGEN,CRAFTER,2024,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+6191907269030601229,VOLKSWAGEN,PASSAT,2016,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+309075387717496461,VOLKSWAGEN,TRANSPORTER,2009,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+-4930215349302560662,VOLKSWAGEN,TRANSPORTER,2021,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+166582771203560620,VOLKSWAGEN,TRANSPORTER,2022,,0,0,,1,Update VIN decoding,False,Daniel Ribbers
+309075387717496461,VOLKSWAGEN,TRANSPORTER,2009,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+166582771203560620,VOLKSWAGEN,TRANSPORTER,2022,,0,0,,44,Update VIN decoding,False,Daniel Ribbers
+-5007118830300088264,VOLKSWAGEN,TRANSPORTER,2023,,0,0,,44,Update VIN decoding,False,Daniel Ribbers

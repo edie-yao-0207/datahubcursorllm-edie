@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`field_key` STRING,
+`selected_option_uuid` STRING,
+`form_submission_uuid` STRING,
+`partition` STRING

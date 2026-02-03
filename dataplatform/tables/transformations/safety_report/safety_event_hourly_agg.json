@@ -1,0 +1,105 @@
+{
+  "name": "safety_report.safety_event_hourly_agg",
+  "owner": "SafetyScoringInsights",
+  "nonproduction": false,
+  "description": "Safety event count aggregated for each object hourly",
+  "disabled_regions": ["eu-west-1", "us-west-2", "ca-central-1"],
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "safety_events_deduplicated_report_v3",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2018-01-01",
+  "parameters": ["start_date", "end_date"],
+  "unsharded_backfills": true,
+  "output": {
+    "dbname": "safety_report",
+    "tablename": "safety_event_hourly_agg",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": [
+      "org_id",
+      "object_id",
+      "object_type",
+      "interval_start",
+      "trip_version",
+      "in_dismissed_states",
+      "in_recognition_states",
+      "in_coaching_states",
+      "in_triage_states",
+      "release_stage"
+    ],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "nullable": true,
+        "type": "long",
+        "metadata": {
+          "comment": "an id that can represent a driver_id or device_id"
+        }
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "nullable": false,
+        "metadata": {
+          "comment": "determine the object representation of object_id, 1 for device and 5 for driver"
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "Start time of the hourly aggregation"
+        }
+      },
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "trip_version",
+        "type": "integer"
+      },
+      {
+        "name": "in_dismissed_states",
+        "type": "byte"
+      },
+      {
+        "name": "in_recognition_states",
+        "type": "byte"
+      },
+      {
+        "name": "in_coaching_states",
+        "type": "byte"
+      },
+      {
+        "name": "in_triage_states",
+        "type": "byte"
+      },
+      {
+        "name": "release_stage",
+        "type": "short"
+      },
+      {
+        "name": "total_event_count",
+        "type": "long",
+        "nullable": false
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  }
+}

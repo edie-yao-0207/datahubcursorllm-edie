@@ -1,0 +1,106 @@
+{
+  "test_cases": [
+    {
+      "label": "adds leg end",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "ifta_report.annotated_location_segments": [
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "device_id": 1,
+            "start_ms": 1577913392960,
+            "end_ms": 1577913392980,
+            "start_value": { "jurisdiction": "CA" },
+            "end_value": { "jurisdiction": "GA" }
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "device_id": 1,
+            "start_ms": 1577913392980,
+            "end_ms": 1577913393000,
+            "start_value": { "jurisdiction": "GA" },
+            "end_value": { "jurisdiction": "GA" }
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "device_id": 1,
+            "start_ms": 1577913393000,
+            "end_ms": 1577913393010,
+            "start_value": { "jurisdiction": "GA" },
+            "end_value": { "jurisdiction": "AZ" }
+          },
+          {
+            "date": "2020-01-01",
+            "org_id": 5,
+            "device_id": 1,
+            "start_ms": 1577913393010,
+            "end_ms": 1577913393020,
+            "start_value": { "jurisdiction": "AZ" },
+            "end_value": { "jurisdiction": "NY" }
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 5,
+            "device_id": 1,
+            "proto": { "start": { "time": 1577913391960 }, "end": { "time": 1577913393005 } },
+            "date": "2020-01-01",
+            "version": 101
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "device_id": 1,
+          "start_ms": 1577913392960,
+          "end_ms": 1577913392980,
+          "start_value": { "jurisdiction": "CA" },
+          "end_value": { "jurisdiction": "GA" },
+          "leg_end": false,
+          "canonical_distance_meters": 0.0
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "device_id": 1,
+          "start_ms": 1577913392980,
+          "end_ms": 1577913393000,
+          "start_value": { "jurisdiction": "GA" },
+          "end_value": { "jurisdiction": "GA" },
+          "leg_end": false,
+          "canonical_distance_meters": 0.0
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "device_id": 1,
+          "start_ms": 1577913393000,
+          "end_ms": 1577913393010,
+          "start_value": { "jurisdiction": "GA" },
+          "end_value": { "jurisdiction": "AZ" },
+          "leg_end": true,
+          "canonical_distance_meters": 0.0
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 5,
+          "device_id": 1,
+          "start_ms": 1577913393010,
+          "end_ms": 1577913393020,
+          "start_value": { "jurisdiction": "AZ" },
+          "end_value": { "jurisdiction": "NY" },
+          "leg_end": false,
+          "canonical_distance_meters": 0.0
+        }
+      ]
+    }
+  ]
+}

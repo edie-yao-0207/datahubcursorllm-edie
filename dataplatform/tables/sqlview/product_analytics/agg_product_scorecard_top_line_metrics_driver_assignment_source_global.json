@@ -1,0 +1,76 @@
+{
+  "view": "agg_product_scorecard_top_line_metrics_driver_assignment_source_global",
+  "owner": "DataEngineering",
+  "description": "This view contains the driver assignment source data",
+  "database": "product_analytics",
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "date", "type": "string", "description": "Date partition" },
+    { "name": "period_start", "type": "string", "description": "Start of period" },
+    { "name": "period_end", "type": "string", "description": "End of period" },
+    { "name": "sam_number", "type": "string", "description": "SAM number for set of orgs" },
+    { "name": "account_size_segment", "type": "string", "description": "Account size segment of grouping" },
+    { "name": "account_arr_segment", "type": "string", "description": "Account ARR segment of grouping" },
+    { "name": "account_billing_country", "type": "string", "description": "Billing country of the account" },
+    { "name": "account_industry", "type": "string", "description": "Account industry of grouping" },
+    { "name": "industry_vertical", "type": "string", "description": "Industry vertical of grouping" },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Safety licenses or not"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Telematics licenses or not"
+    },
+    { "name": "is_paid_stce_customer", "type": "boolean", "description": "Whether the SAM has STCE licenses or not" },
+    { "name": "account_csm_email", "type": "string", "description": "CSM email of the account" },
+    { "name": "account_name", "type": "string", "description": "Name of the account" },
+    { "name": "account_id", "type": "string", "description": "ID of the account" },
+    { "name": "driver_assignment_source", "type": "string", "description": "Source of driver assignment" },
+    {
+      "name": "sign_in_reminder_enabled",
+      "type": "boolean",
+      "description": "Whether the account is enabled for sign-in reminders or not"
+    },
+    {
+      "name": "inward_assigned_trip_duration",
+      "type": "double",
+      "description": "Total number of VG trip minutes assigned to a driver with an inward CM"
+    },
+    {
+      "name": "inward_total_trip_duration",
+      "type": "double",
+      "description": "Total number of VG trip minutes with an inward CM"
+    },
+    {
+      "name": "outward_assigned_trip_duration",
+      "type": "double",
+      "description": "Total number of VG trip minutes assigned to a driver with an outward CM"
+    },
+    {
+      "name": "outward_total_trip_duration",
+      "type": "double",
+      "description": "Total number of VG trip minutes with an outward CM"
+    },
+    {
+      "name": "no_cm_assigned_trip_duration",
+      "type": "double",
+      "description": "Total number of VG trip minutes assigned to a driver with no CM"
+    },
+    {
+      "name": "no_cm_total_trip_duration",
+      "type": "double",
+      "description": "Total number of VG trip minutes with no CM"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_scorecard_top_line_metrics_driver_assignment_source_global_monthly",
+      "type": "table"
+    }
+  ]
+}

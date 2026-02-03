@@ -1,0 +1,404 @@
+{
+  "name": "safety_report.score_event_report_v4",
+  "owner": "SafetyScoringInsights",
+  "nonproduction": false,
+  "description": "Trip and safety event labels data for safety report",
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "trip_with_safety_event_labels_hourly_agg_v2",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "trip_stats_hourly_agg",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "safety_event_labels_hourly_agg_v2",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "safety_event_count_hourly_agg",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2018-01-01",
+  "daily_run_config": {
+    "start_date_offset": 90
+  },
+  "parameters": ["start_date", "end_date"],
+  "unsharded_backfills": true,
+  "sqlite_report_config": {
+    "report_name": "score_event_report_v4",
+    "staleness_monitors": [
+      {
+        "hours": 7,
+        "urgency": "HIGH"
+      }
+    ]
+  },
+  "output": {
+    "dbname": "safety_report",
+    "tablename": "score_event_report_v4",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["org_id", "object_id", "object_type", "interval_start"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "nullable": true,
+        "type": "long",
+        "metadata": {
+          "comment": "an id that can represent a driver_id or device_id"
+        }
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "nullable": true,
+        "metadata": {
+          "comment": "determine the object representation of object_id, 1 for device and 5 for driver"
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "Start time of the hourly aggregation"
+        }
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": true
+      },
+      {
+        "name": "trip_count",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of trips"
+        },
+        "nullable": false
+      },
+      {
+        "name": "harsh_event_trigger_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "total_event_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "engine_idle_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "distance_meters",
+        "type": "double",
+        "nullable": false
+      },
+      {
+        "name": "driving_time_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "seatbelt_reporting_present_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "seatbelt_unbuckled_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "not_speeding_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "light_speeding_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "moderate_speeding_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "heavy_speeding_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "severe_speeding_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "not_speeding_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "light_speeding_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "moderate_speeding_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "heavy_speeding_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "severe_speeding_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "max_speed_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "acceleration_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "braking_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "harsh_turn_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "crash_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "rolling_stop_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "near_collision_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "rollover_protection_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "yaw_control_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "generic_distraction_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "drowsy_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "late_response_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "mobile_usage_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "did_not_yield_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "no_seatbelt_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "ran_red_light_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "speeding_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "following_distance_severe_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "following_distance_moderate_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "generic_tailgating_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "forward_collision_warning_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "obstructed_camera_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "lane_departure_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "eating_drinking_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "smoking_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "policy_violation_mask_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "following_distance_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "defensive_driving_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "edge_distracted_driving_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "edge_mobile_usage_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "obstructed_camera_trip_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "no_seatbelt_trip_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "no_mask_trip_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "manual_drowsy_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "manual_lane_departure_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "max_speed_duration",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "vulnerable_road_user_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "edge_railroad_crossing_violation_count",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "outward_camera_distance_meters",
+        "type": "double",
+        "nullable": false
+      },
+      {
+        "name": "inward_outward_camera_distance_meters",
+        "type": "double",
+        "nullable": false
+      },
+      {
+        "name": "outward_camera_driving_time_ms",
+        "type": "long",
+        "nullable": false
+      },
+      {
+        "name": "inward_outward_camera_driving_time_ms",
+        "type": "long",
+        "nullable": false
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  }
+}

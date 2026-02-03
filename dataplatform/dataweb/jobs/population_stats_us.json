@@ -1,0 +1,13 @@
+{
+  "name": "population_stats_us",
+  "owner": "FirmwareVDP",
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 19 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": -1
+    }
+  ],
+  "assets": ["us-west-2:product_analytics.agg_population_metrics"]
+}

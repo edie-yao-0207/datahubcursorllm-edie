@@ -1,0 +1,47 @@
+EMEA_VIN_1,EU,daf,,2000,,,,,1,1,6,"XLRAD8,XLRAE4,XLRAE5,XLRAE6,XLRAE7,XLRAE8,XLRAS7,XLRAT7,XLRTE7,XLRTG4,XLRTG8",,8,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_1,EU,daf,,2000,,,,,2,1,6,"XLRATM,XLRACM,XLRADM,XLRAEH,XLRAEL,XLRAEM,XLRAKM,XLRASH,XLRASM,XLRASM,XLRTE4,XLRADM,XLRACH,XLRADF",,8,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_1,EU,daf,,2000,,,,,3,1,4,XLR0,,8,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_1,EU,daf,,2000,,,,,4,1,4,XLRT,,8,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_1,EU,daf,,2013,,,,,5,1,3,XLR,,8,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_1,EU,daf,,,2012,,,,5,1,3,XLR,,8,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_2,EU,mercedes-benz,,2000,,,,,1,1,5,"WDB90,WDB91",,8,,CBL-VG-COBDII-Y0,CBL-VG-COBDII-Y0,CBL-VG-DTDC-Y0,False,False,False,True,
+EMEA_VIN_2,EU,mercedes-benz,,2000,,,,,2,1,5,"WDB93,WDB95,WDB96,WDB97",,8,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,
+EMEA_VIN_2,EU,mercedes-benz,,2000,,,,,3,1,6,"WDB168,WDB370,WDB670,WDB668,WDB667,WDB767,WDB990",,8,,CBL-VG-COBDII-Y0,CBL-VG-COBDII-Y0,CBL-VG-DTDC-Y0,False,False,False,True,
+EMEA_VIN_2,EU,mercedes-benz,,2000,,,,,4,1,4,"WDB1,WDB4,WDF4,WDF6",,8,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_2,EU,mercedes-benz,,2000,,,,,5,1,3,WDB,,8,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,
+EMEA_VIN_3,EU,iveco,,2000,,,,,1,1,8,"ZCFA71MF,ZCFA81MF,ZCFA71AD,ZCFA81AD,ZCFA71VM,ZCFA81VM,ZCFAG1ED,ZCFA61MF,ZCFAR1MF,ZCFA81JD,ZCFA61VM,ZCFA71EF,ZCFA61AD,ZCFAH1ED,ZCFAG1EG,ZCFJ63MS,ZCFJ63MT,WJMS2NUH,WJMS2NTH,ZCFA81MG",,8,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_3,EU,iveco,,2000,,,,,2,1,8,"ZCFA75B0,ZCFA1MG0",,8,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_3,EU,iveco,,2000,,,,,3,1,5,"WJMM6,WJME6,WJMMG,WJMS6,WJMA6,WJMAG,WJMEG",,8,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_3,EU,iveco,,2000,,,,,4,1,4,ZCFA,,8,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,
+EMEA_VIN_3,EU,iveco,,2000,,,,,5,1,3,WJM,,8,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,
+EMEA_VIN_4,EU,mercedes-benz,,2000,,,,,1,1,6,"WKK628,WKK353",,8,,CBL-VG-CPC,,,False,False,True,True,Analog Tacho
+EMEA_VIN_4,EU,setra,,2000,,,,,1,1,6,"WKK628,WKK353",,8,,CBL-VG-CPC,,,False,False,True,True,Analog Tacho
+EMEA_VIN_4,EU,mercedes-benz,,2000,,,,,2,1,3,WKK,,8,,CBL-VG-DHGV,,,False,False,False,True,Send CBL-VG-CPC as well
+EMEA_VIN_4,EU,setra,,2000,,,,,2,1,3,WKK,,8,,CBL-VG-DHGV,,,False,False,False,True,Send CBL-VG-CPC as well
+EMEA_VIN_5,EU,man,,2000,,,,,1,1,6,WMAA01,,8,,CBL-VG-CPC,,,False,False,True,True,Analog Tacho
+EMEA_VIN_5,EU,man,,2000,,,,,2,6,1,V,,8,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_5,EU,knaus,,2000,,,,,2,6,1,V,,8,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_5,EU,man,,2025,,,,,3,1,3,WMA,,8,,CBL-VG-DFMS,,,False,False,False,True,CBL-VG-DHGV has no fuel
+EMEA_VIN_5,EU,man,,2000,2024,,,,4,1,3,WMA,,9,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_99,EU,mitsubishi,,2000,,,,,,1,3,"TYA,TYB",,7,,CBL-VG-COBDII-Y0,CBL-VG-COBDII-Y0,CBL-VG-DTDC-Y0,False,False,False,True,
+EMEA_VIN_99,EU,renault,,2000,,,,,,1,7,VF640JE,,7,,CBL-VG-DTDC-Y0,,,False,False,False,True,
+EMEA_VIN_99,EU,ford,,2000,,,,,,1,5,NM0KC,,7,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_99,EU,iveco,,2023,,,,,,1,4,"ZCFE,ZCFM,ZCFS",,7,,CBL-VG-DFMS,,,False,False,False,True,
+EMEA_VIN_99,EU,iveco,,2000,,,,,,1,4,"ZCEC,ZCF0,ZCFK",,7,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_99,EU,iveco,,2000,,,,,,1,4,ZCFB,,7,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_99,EU,iveco,,2000,,,,,,1,4,ZCFC,,7,,CBL-VG-COBDII-Y0,CBL-VG-COBDII-Y0,CBL-VG-DTDC-Y0,False,False,False,True,
+EMEA_VIN_99,EU,mercedes-benz,,2000,,,,,,1,4,WDF9,,7,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,Can't implement on what Munaaf did
+EMEA_VIN_99,EU,dacia,,2000,,,,,,1,3,VF1,,7,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_99,EU,evobus,,2000,,,,,,1,3,WEB,,7,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_99,EU,mercedes-benz,,2000,,,,,,1,3,"W1K,W1N,W1V,WDC,WDD",,7,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_99,EU,mercedes-benz,,2000,,,,,,1,3,W1T,,7,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,Can't implement on what Munaaf did
+EMEA_VIN_99,EU,mercedes-benz,,2000,,,,,,1,3,WEB,,7,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_99,EU,nissan,,2000,,,,,,1,3,VF1,,7,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_99,EU,renault,,2000,,,,,,1,3,VF1,,7,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_99,EU,renault,,2000,,,,,,1,4,"VF6M,VF6S,VF6V, VF6T, VF65",,7,,CBL-VG-COBDII-Y0,CBL-VG-COBDII-Y0,CBL-VG-DTDC-Y0,False,False,False,True,
+EMEA_VIN_99,EU,renault,,2000,,,,,,1,4,"VF61,VF62,VF63,VF64,VF6W",,7,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,
+EMEA_VIN_99,EU,scania,,2000,,,,,,1,3,"VLU,XLE",,7,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,
+EMEA_VIN_99,EU,scania,,2000,,,,,,1,3,YS2,,7,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_99,EU,volvo,,2000,,,,,,1,3,YV1,,7,,CBL-VG-COBDII-Y0,,,False,False,True,True,
+EMEA_VIN_99,EU,volvo,,2000,,,,,,1,3,YV3,,7,,CBL-VG-DHGV,,,False,False,False,True,
+EMEA_VIN_99,EU,volvo,,2000,,,,,,1,3,YV2,,7,ASK_SE_LONDON,NO_CABLE,,,False,False,True,True,Can't implement on what Munaaf did

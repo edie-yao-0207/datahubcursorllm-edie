@@ -1,0 +1,16 @@
+{
+  "name": "benchmarking_daily_metrics_backfill",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:product_analytics_staging.stg_organization_benchmark_metrics_daily",
+    "eu-west-1:product_analytics_staging.stg_organization_benchmark_metrics_daily"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 18 * * *",
+      "backfill_window": 15,
+      "backfill_batch_size": 1
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "owner": "EUCompliance",
+  "description": "VDP Tachograph health analyzer",
+  "admin_teams": ["DataAnalytics"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "0 0 16 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 3600,
+      "workflow_overrides": {
+        "email_notifications": {
+          "on_failure": ["alerts-tachograph-fw-aaaarfj77e32dmjg7kxxzbxpv4@samsara.org.slack.com"],
+          "no_alert_for_skipped_runs": false
+        }
+      }
+    }
+  ],
+  "python_libraries": ["boto3", "datadog"],
+  "spark_confs": {
+    "spark.sql.sources.partitionOverwriteMode": "dynamic"
+  }
+}

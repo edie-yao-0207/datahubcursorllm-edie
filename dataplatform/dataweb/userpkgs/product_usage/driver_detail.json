@@ -1,0 +1,25 @@
+{
+  "feature_name": "Driver Detail",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17888065/Driver+Detail+Page",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "serves_all": true,
+      "release_types": ["Early Adopter", "Phase 1"]
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "route_names": ["driver_show"]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["driver.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "table": "alert_action_types",
+  "owner": "DataEngineering",
+  "description": "Mappings for Platform alerts action type IDs to names (source: go/src/samsaradev.io/platform/workflows/actiontypes/action_types.go)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/action_types/alert_action_types.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/action_types/alert_action_types.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/action_types/alert_action_types.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "action_type_id",
+      "type": "bigint",
+      "description": "The ID for the alert action type"
+    },
+    {
+      "name": "action_type",
+      "type": "string",
+      "description": "The internal name associated with the alert action type ID"
+    }
+  ]
+}

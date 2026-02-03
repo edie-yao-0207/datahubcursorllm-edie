@@ -1,0 +1,12 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["datascience@samsara.com", "kalyan.vejalla@samsara.com", "steven.matson@samsara.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 16 ? * THU *",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

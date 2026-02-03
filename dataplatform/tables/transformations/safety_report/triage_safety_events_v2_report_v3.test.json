@@ -1,0 +1,2037 @@
+{
+  "test_cases": [
+    {
+      "label": "returns valid safety event v2 in triage events v1 table",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 1
+        }
+      ]
+    },
+    {
+      "label": "returns valid safety event v2 in triage events v2 table",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        }
+      ]
+    },
+    {
+      "label": "returns valid safety event v2 in triage events v2 table where 2 events are the same minus the behavior label and event id",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se2",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 2,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "uuid": "te2",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se2",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          },
+          {
+            "event_uuid": "te2",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 2,
+          "triage_uuid": "te2",
+          "triage_version": 2
+        }
+      ]
+    },
+    {
+      "label": "if safety event v2 referred to in both triage event v1 and v2 table, return both",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 1
+        }
+      ]
+    },
+    {
+      "label": "return two safety event v2 events that are in both triage v1 and v2",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se2",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 2,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se2",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343592000,
+          "event_duration": 1000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 2,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 1
+        }
+      ]
+    },
+    {
+      "label": "filters out org_id = 1 and org_id = 562949953421343",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 562949953421343,
+            "device_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se2",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 562949953421343,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se2",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          },
+          {
+            "org_id": 562949953421343,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 1
+          },
+          {
+            "organization_id": 562949953421343
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "return safety events in all possible states when backed by triage events v1",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se2",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343593000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se3",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "uuid": "te2",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343592000,
+            "source_event_uuid": "se2",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 3,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "uuid": "te3",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343593000,
+            "source_event_uuid": "se3",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          },
+          {
+            "event_uuid": "te2",
+            "org_id": 456,
+            "release_stage": 100
+          },
+          {
+            "event_uuid": "te3",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 1
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "event_ms": 1641343592000,
+          "event_duration": 1000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te2",
+          "triage_version": 1
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 1,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 0,
+          "event_ms": 1641343593000,
+          "event_duration": 0,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te3",
+          "triage_version": 1
+        }
+      ]
+    },
+    {
+      "label": "return safety events in all possible states when backed by triage events v2",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se2",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343593000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se3",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "uuid": "te2",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se2",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 3,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "uuid": "te3",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343593000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se3",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 4,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          },
+          {
+            "event_uuid": "te2",
+            "org_id": 456,
+            "release_stage": 100
+          },
+          {
+            "event_uuid": "te3",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "event_ms": 1641343592000,
+          "event_duration": 1000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te2",
+          "triage_version": 2
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 1,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 0,
+          "event_ms": 1641343593000,
+          "event_duration": 0,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te3",
+          "triage_version": 2
+        }
+      ]
+    },
+    {
+      "label": "filters out trip with a non-101 version id",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se2",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343592000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se2",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": -1
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "reads driver_id from trips2db.driver_id_exclude_0_drivers",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 2,
+            "driver_id_exclude_0_drivers": 3,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 1
+        }
+      ]
+    },
+    {
+      "label": "filters out events where trip ended outside of parameter date range",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 2,
+            "driver_id_exclude_0_drivers": 3,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1741361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "filters out events where event start ms is outside of parameter date range",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1541343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1541343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1541343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 2,
+            "driver_id_exclude_0_drivers": 3,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1741361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "Filters out triage events in the v2 table that are backing v1 safety events",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 1,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "returns not in reporting release stage value",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [
+          {
+            "uuid": "te1",
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "source_event_uuid": "se1",
+            "end_ms": 1641343593000,
+            "trigger_label": 32,
+            "aggregated_event_uuid": "ae1",
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events_v2": [],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 1
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 1,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 1
+        }
+      ]
+    },
+    {
+      "label": "filters out events when corresponding event not found in triage_events_reporting_release_stage",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 1,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": []
+      },
+      "expected_data": []
+    },
+    {
+      "label": "returns in_dismissed_states = 1 in output table when triage_state = 4 in triage events v2 table ",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safetyeventingestiondb_shards.safety_events_v2": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "detection_label": 32,
+            "uuid": "se1",
+            "customer_facing_labels": null,
+            "customer_launch_release_stage": 0,
+            "event_id": 1,
+            "event_id_source": 1,
+            "trip_start_ms": 1641343592000,
+            "driver_id": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "safetyeventtriagedb_shards.triage_events": [],
+        "safetyeventtriagedb_shards.triage_events_v2": [
+          {
+            "org_id": 456,
+            "uuid": "te1",
+            "version": 2,
+            "device_id": 1,
+            "driver_id": 1,
+            "start_ms": 1641343591000,
+            "end_ms": 1641343593000,
+            "trip_start_ms": 1641343592000,
+            "source_event_uuid": "se1",
+            "trigger_label": 32,
+            "behavior_labels": [],
+            "release_stage": 4,
+            "triage_state": 4,
+            "is_dismissed": 0,
+            "coach_id": 1,
+            "coaching_state": "COACHED",
+            "priority": 1,
+            "created_at_ms": 1641343593000,
+            "updated_at_ms": 1641343593000
+          }
+        ],
+        "trips2db_shards.trips": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id_exclude_0_drivers": 1,
+            "date": "2022-01-05",
+            "start_ms": 1641343592000,
+            "end_ms": 1641361592000,
+            "version": 101
+          }
+        ],
+        "clouddb.groups": [
+          {
+            "organization_id": 456
+          }
+        ],
+        "safetyreportingdb_shards.triage_events_reporting_release_stage": [
+          {
+            "event_uuid": "te1",
+            "org_id": 456,
+            "release_stage": 100
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 1,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 0,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "additional_labels": [
+            {
+              "label_type": 32,
+              "label_source": 1,
+              "last_added_ms": 1641343593000,
+              "user_id": 0
+            }
+          ],
+          "date": "2022-01-05",
+          "event_id": 1,
+          "triage_uuid": "te1",
+          "triage_version": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`tag_id` BIGINT,
+`org_id` BIGINT,
+`workforce_site_uuid` STRING,
+`created_by` BIGINT,
+`created_at` TIMESTAMP,
+`partition` STRING

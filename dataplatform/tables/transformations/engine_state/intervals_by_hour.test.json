@@ -1,0 +1,259 @@
+{
+  "test_cases": [
+    {
+      "label": "Carry through intervals that are already split on the hour",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643133600000,
+            "state": "ON"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643133600000,
+            "end_ms": 1643135400000,
+            "state": "OFF"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643135400000,
+            "end_ms": 1643137200000,
+            "state": "IDLE"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643131800000,
+          "end_ms": 1643133600000,
+          "state": "ON"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643133600000,
+          "end_ms": 1643135400000,
+          "state": "OFF"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643135400000,
+          "end_ms": 1643137200000,
+          "state": "IDLE"
+        }
+      ]
+    },
+    {
+      "label": "Split intervals that cross hours (starting at the hour)",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643130000000,
+            "end_ms": 1643137200000,
+            "state": "ON"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643137200000,
+            "end_ms": 1643144400000,
+            "state": "OFF"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643144400000,
+            "end_ms": 1643151600000,
+            "state": "IDLE"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643130000000,
+          "end_ms": 1643133600000,
+          "state": "ON"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643133600000,
+          "end_ms": 1643137200000,
+          "state": "ON"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643137200000,
+          "end_ms": 1643140800000,
+          "state": "OFF"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643140800000,
+          "end_ms": 1643144400000,
+          "state": "OFF"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643144400000,
+          "end_ms": 1643148000000,
+          "state": "IDLE"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643148000000,
+          "end_ms": 1643151600000,
+          "state": "IDLE"
+        }
+      ]
+    },
+    {
+      "label": "Split intervals that cross hours (starting mid hour)",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643139000000,
+            "state": "ON"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643139000000,
+            "end_ms": 1643146200000,
+            "state": "OFF"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643146200000,
+            "end_ms": 1643153400000,
+            "state": "IDLE"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643131800000,
+          "end_ms": 1643133600000,
+          "state": "ON"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643133600000,
+          "end_ms": 1643137200000,
+          "state": "ON"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643137200000,
+          "end_ms": 1643139000000,
+          "state": "ON"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643139000000,
+          "end_ms": 1643140800000,
+          "state": "OFF"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643140800000,
+          "end_ms": 1643144400000,
+          "state": "OFF"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643144400000,
+          "end_ms": 1643146200000,
+          "state": "OFF"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643146200000,
+          "end_ms": 1643148000000,
+          "state": "IDLE"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643148000000,
+          "end_ms": 1643151600000,
+          "state": "IDLE"
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "object_id": 200,
+          "start_ms": 1643151600000,
+          "end_ms": 1643153400000,
+          "state": "IDLE"
+        }
+      ]
+    }
+  ]
+}

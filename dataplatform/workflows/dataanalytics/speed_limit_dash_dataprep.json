@@ -1,0 +1,285 @@
+{
+  "name": "Speed Limit Dashboard Dataprep",
+  "email_notifications": {
+    "no_alert_for_skipped_runs": false
+  },
+  "webhook_notifications": {},
+  "timeout_seconds": 0,
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "Alerts_Two",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speed_alert_two",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Alerts_Two_Distance",
+      "depends_on": [
+        {
+          "task_key": "Alerts_Two"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speed_alert_two_distance",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "InCab_Alert",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speed_incab_alert",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "InCab_Alert_Distance",
+      "depends_on": [
+        {
+          "task_key": "InCab_Alert"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speed_incab_alert_distance",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Speeding_Events",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speeding_events",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Speeding_Events_Distance",
+      "depends_on": [
+        {
+          "task_key": "Speeding_Events"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speeding_events_distance",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Traveled_Ways",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/traveled_ways",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Dataset_Integration",
+      "depends_on": [
+        {
+          "task_key": "Traveled_Ways"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/dataset_integration",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Overrides",
+      "depends_on": [
+        {
+          "task_key": "Traveled_Ways"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speed_limit_overrides",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "Overrides_Distance",
+      "depends_on": [
+        {
+          "task_key": "Overrides"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/backend/dataanalytics/safety/speed_limit_dash/speed_limit_overrides_distance",
+        "base_parameters": {
+          "start_date": "",
+          "end_date": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "Job_cluster",
+      "new_cluster": {
+        "cluster_name": "",
+        "spark_version": "15.4.x-scala2.12",
+        "spark_conf": {
+          "spark.samsara.partitionFilterRule.enabled": "false",
+          "spark.sql.warehouse.dir": "s3://samsara-databricks-playground/warehouse/",
+          "spark.databricks.service.server.enabled": "true",
+          "spark.storage.decommission.rddBlocks.enabled": "true",
+          "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+          "spark.driver.maxResultSize": "8000000000",
+          "spark.hadoop.google.cloud.auth.service.account.json.keyfile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.databricks.delta.optimizeWrite.enabled": "true",
+          "spark.databricks.delta.autoCompact.enabled": "true",
+          "spark.databricks.delta.properties.defaults.logRetentionDuration": "INTERVAL 30 DAYS",
+          "spark.hadoop.fs.s3a.canned.acl": "BucketOwnerFullControl",
+          "spark.storage.decommission.shuffleBlocks.enabled": "true",
+          "spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes": "256MB",
+          "spark.decommission.enabled": "true",
+          "viewsEnabled": "true",
+          "credentialsFile": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "spark.sql.adaptive.skewJoin.skewedPartitionFactor": "2",
+          "spark.default.parallelism": "4096",
+          "spark.storage.decommission.enabled": "true",
+          "spark.hadoop.fs.s3a.acl.default": "BucketOwnerFullControl",
+          "spark.hadoop.fs.gs.project.id": "samsara-data",
+          "databricks.loki.fileStatusCache.enabled": "false",
+          "spark.databricks.delta.properties.defaults.checkpointRetentionDuration": "INTERVAL 30 DAYS",
+          "viewMaterializationDataset": "spark_view_materialization",
+          "spark.databricks.delta.stalenessLimit": "1h",
+          "spark.databricks.delta.history.metricsEnabled": "true",
+          "spark.databricks.sql.initial.catalog.name": "default",
+          "spark.sql.extensions": "com.samsara.dataplatform.sparkrules.Extension",
+          "spark.sql.sources.default": "delta",
+          "spark.databricks.scan.modTimeCheck.enabled": "false",
+          "spark.hadoop.databricks.loki.fileStatusCache.enabled": "false",
+          "temporaryGcsBucket": "samsara-bigquery-spark-connector",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "us-west-2b",
+          "instance_profile_arn": "arn:aws:iam::492164655156:instance-profile/dataanalytics-cluster",
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "md-fleet.2xlarge",
+        "driver_node_type_id": "rd-fleet.xlarge",
+        "custom_tags": {
+          "samsara:product-group": "aianddata",
+          "samsara:team": "dataanalytics",
+          "samsara:service": "databricksjobcluster-dataanalytics",
+          "samsara:rnd-allocation": "1"
+        },
+        "cluster_log_conf": {
+          "s3": {
+            "destination": "s3://samsara-databricks-cluster-logs/dataanalytics",
+            "region": "us-west-2",
+            "enable_encryption": true,
+            "canned_acl": "bucket-owner-full-control"
+          }
+        },
+        "spark_env_vars": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/databricks/samsara-data-5142c7cd3ba2.json",
+          "GOOGLE_CLOUD_PROJECT": "samsara-data",
+          "AWS_DEFAULT_REGION": "us-west-2",
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+          "AWS_REGION": "us-west-2"
+        },
+        "enable_elastic_disk": false,
+        "policy_id": "E063D86F5F000153",
+        "data_security_mode": "SINGLE_USER",
+        "runtime_engine": "STANDARD",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 16
+        }
+      }
+    }
+  ],
+  "format": "MULTI_TASK"
+}

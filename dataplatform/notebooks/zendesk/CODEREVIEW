@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to Zendesk notebooks should be cleared with Data Engineering."
+}

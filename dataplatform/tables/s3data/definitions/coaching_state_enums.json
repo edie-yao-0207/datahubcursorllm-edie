@@ -1,0 +1,19 @@
+{
+  "table": "coaching_state_enums",
+  "owner": "DataEngineering",
+  "description": "Maps coaching state ID to coaching state name /n/n[Coaching States](https://github.com/samsara-dev/backend/blob/435bfaab97d313e1c7bfc096f72c556ca7164129/go/src/samsaradev.io/fleet/safety/safetyproto/safetyeventmetadata.pb.go#L156)",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "enum",
+      "type": "bigint",
+      "description": "The numerical value for a coaching state"
+    },
+    {
+      "name": "coaching_type",
+      "type": "string",
+      "description": "The name of the associated coaching state"
+    }
+  ]
+}

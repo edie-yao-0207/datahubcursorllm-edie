@@ -1,0 +1,83 @@
+{
+  "name": "customer360.device_activations",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Determine the number of devices activated per day across each product type.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "device_heartbeats_extended",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "definitions",
+      "tablename": "products",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "sfdc_accounts",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "org_sfdc_accounts",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "device_activations",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "sam_number"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "The SAM Number (internal Samsara ID) of a Customer"
+        }
+      },
+      {
+        "name": "num_ag_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of activated AG devices on the specified date"
+        }
+      },
+      {
+        "name": "num_vg_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of activated VG devices on the specified date"
+        }
+      },
+      {
+        "name": "num_cm_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of activated CM devices on the specified date"
+        }
+      },
+      {
+        "name": "num_ig_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of activated IG devices on the specified date"
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

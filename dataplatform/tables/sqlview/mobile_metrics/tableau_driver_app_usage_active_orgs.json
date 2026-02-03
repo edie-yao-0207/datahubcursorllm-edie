@@ -1,0 +1,55 @@
+{
+  "view": "tableau_driver_app_usage_active_orgs",
+  "owner": "Mobile",
+  "description": "Populates 'active orgs' data for the Driver App Usage tableau dashboard",
+  "database": "mobile_metrics",
+  "schema": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "device_count",
+      "type": "long"
+    },
+    {
+      "name": "internal_type",
+      "type": "long"
+    },
+    {
+      "name": "size_class",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "industry",
+      "type": "string",
+      "nullable": false
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "customer_metadata",
+      "schema_path": "dataprep/business/customer_metadata.metadata.json",
+      "type": "table"
+    }
+  ]
+}

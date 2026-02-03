@@ -1,0 +1,11 @@
+{
+  "owner": "FleetSec",
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 12 ? * * *",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

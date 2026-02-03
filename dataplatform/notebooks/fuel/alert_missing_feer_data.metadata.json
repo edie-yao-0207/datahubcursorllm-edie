@@ -1,0 +1,10 @@
+{
+  "owner": "Sustainability",
+  "jobs": [
+    {
+      "name": "run",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

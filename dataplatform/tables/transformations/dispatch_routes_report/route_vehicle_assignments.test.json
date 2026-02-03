@@ -1,0 +1,841 @@
+{
+  "test_cases": [
+    {
+      "label": "simple vehicle route",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-17' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597629600000,
+            "actual_end_ms": 1597676400000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 1,
+            "object_id": 111111111111111,
+            "org_id": 1
+          },
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597690800000,
+            "actual_end_ms": 1597744800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-16",
+            "object_type": 1,
+            "object_id": 111111111111111,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": []
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597629600000,
+          "assignment_end_ms": 1597676400000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-16",
+          "assignment_start_ms": 1597690800000,
+          "assignment_end_ms": 1597744800000
+        }
+      ]
+    },
+    {
+      "label": "simple driver route with closed vehicle assignment and no assignment overlap",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597604400000,
+            "actual_end_ms": 1597658400000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 19:30:00",
+            "end_at": "2020-08-17 08:30:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-17",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-17 09:00:00",
+            "end_at": "2020-08-17 09:30:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597606200000,
+          "assignment_end_ms": 1597653000000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597654800000,
+          "assignment_end_ms": 1597656600000
+        }
+      ]
+    },
+    {
+      "label": "simple driver route with open vehicle assignment",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597604400000,
+            "actual_end_ms": 1597654800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 19:30:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597606200000,
+          "assignment_end_ms": 1597654800000
+        }
+      ]
+    },
+    {
+      "label": "simple driver route no assignment and actual time overlap",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597600800000,
+            "actual_end_ms": 1597606200000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          },
+          {
+            "route_id": 11,
+            "actual_start_ms": 1597653000000,
+            "actual_end_ms": 1597654800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 19:30:00",
+            "end_at": "2020-08-17 08:30:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "driver route, multiple VAs, partially overlapping, VA with higher id wins tie",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "end_at": "2020-08-16 12:30:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "end_at": "2020-08-16 12:40:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597580400000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597580400000,
+          "assignment_end_ms": 1597581600000
+        }
+      ]
+    },
+    {
+      "label": "driver route, multiple VAs, partially overlapping, Driver VA wins vs. Passenger",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "end_at": "2020-08-16 12:30:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "end_at": "2020-08-16 12:40:00",
+            "is_passenger": 1,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597581000000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597581000000,
+          "assignment_end_ms": 1597581600000
+        }
+      ]
+    },
+    {
+      "label": "driver route, multiple VAs, one VA completely contains another, one of the VAs open ended",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "end_at": "2020-08-16 12:30:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597580400000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597580400000,
+          "assignment_end_ms": 1597581000000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597581000000,
+          "assignment_end_ms": 1597582800000
+        }
+      ]
+    },
+    {
+      "label": "multiple driver routes, multiple VAs, one VA completely contains another, one of the VAs open ended",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          },
+          {
+            "route_id": 11,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22223,
+            "org_id": 2
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "end_at": "2020-08-16 12:30:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          },
+          {
+            "id": 92,
+            "date": "2020-08-16",
+            "driver_id": 22223,
+            "vehicle_id": 111111111111113,
+            "org_id": 2,
+            "start_at": "2020-08-16 12:10:00",
+            "is_passenger": 0,
+            "session_uuid": "c3a88e1f-3eaa-4b29-9349-50c9b1bd4abe"
+          },
+          {
+            "id": 93,
+            "date": "2020-08-16",
+            "driver_id": 22223,
+            "vehicle_id": 111111111111114,
+            "org_id": 2,
+            "start_at": "2020-08-16 12:20:00",
+            "end_at": "2020-08-16 12:30:00",
+            "is_passenger": 0,
+            "session_uuid": "57cf176c-a3c8-41f5-9cc8-25dd221e2fd6"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597580400000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597580400000,
+          "assignment_end_ms": 1597581000000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597581000000,
+          "assignment_end_ms": 1597582800000
+        },
+        {
+          "route_id": 11,
+          "org_id": 2,
+          "vehicle_id": 111111111111113,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597580400000
+        },
+        {
+          "route_id": 11,
+          "org_id": 2,
+          "vehicle_id": 111111111111114,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597580400000,
+          "assignment_end_ms": 1597581000000
+        },
+        {
+          "route_id": 11,
+          "org_id": 2,
+          "vehicle_id": 111111111111113,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597581000000,
+          "assignment_end_ms": 1597582800000
+        }
+      ]
+    },
+    {
+      "label": "driver route, multiple VAs, one VA completely contains another, both VAs open ended",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597580400000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597580400000,
+          "assignment_end_ms": 1597582800000
+        }
+      ]
+    },
+    {
+      "label": "driver route, multiple VAs, one VA completely contains another, both VAs open ended, VA with higher id wins tie",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597582800000
+        }
+      ]
+    },
+    {
+      "label": "multiple driver routes, more than two VAs overlapping, Driver VA wins tie vs. Passegner, when two VAs are both Drivers or Passengers, VA with highest id wins tie",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597583400000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          },
+          {
+            "route_id": 11,
+            "actual_start_ms": 1597582200000,
+            "actual_end_ms": 1597583400000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:10:00",
+            "end_at": "2020-08-16 12:40:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 91,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111112,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:20:00",
+            "end_at": "2020-08-16 12:50:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          },
+          {
+            "id": 92,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111113,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:30:00",
+            "end_at": "2020-08-16 13:00:00",
+            "is_passenger": 1,
+            "session_uuid": "c3a88e1f-3eaa-4b29-9349-50c9b1bd4abe"
+          },
+          {
+            "id": 93,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111114,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:40:00",
+            "end_at": "2020-08-16 13:10:00",
+            "is_passenger": 1,
+            "session_uuid": "57cf176c-a3c8-41f5-9cc8-25dd221e2fd6"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579800000,
+          "assignment_end_ms": 1597580400000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597580400000,
+          "assignment_end_ms": 1597582200000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111114,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597582200000,
+          "assignment_end_ms": 1597583400000
+        },
+        {
+          "route_id": 11,
+          "org_id": 1,
+          "vehicle_id": 111111111111114,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597582200000,
+          "assignment_end_ms": 1597583400000
+        }
+      ]
+    },
+    {
+      "label": "driver route, two VAs overlapping, va not consolidated due to different session_uuid",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "dispatch_routes_report.actual_route_times": [
+          {
+            "route_id": 10,
+            "actual_start_ms": 1597579200000,
+            "actual_end_ms": 1597582800000,
+            "scheduled_start_ms": 1597474800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "object_type": 0,
+            "object_id": 22222,
+            "org_id": 1
+          }
+        ],
+        "compliancedb_shards.driver_hos_vehicle_assignments": [
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:00:00",
+            "end_at": "2020-08-16 12:30:00",
+            "is_passenger": 0,
+            "session_uuid": "4ad29ba9-2d35-496e-b318-8d629dc7e30d"
+          },
+          {
+            "id": 90,
+            "date": "2020-08-16",
+            "driver_id": 22222,
+            "vehicle_id": 111111111111111,
+            "org_id": 1,
+            "start_at": "2020-08-16 12:30:00",
+            "end_at": "2020-08-16 13:00:00",
+            "is_passenger": 0,
+            "session_uuid": "3011ecc6-df9d-44b7-8e0a-b58063cf7eeb"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597579200000,
+          "assignment_end_ms": 1597581000000
+        },
+        {
+          "route_id": 10,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "scheduled_start_ms": 1597474800000,
+          "route_scheduled_or_updated_date": "2020-08-15",
+          "assignment_start_ms": 1597581000000,
+          "assignment_end_ms": 1597582800000
+        }
+      ]
+    }
+  ]
+}

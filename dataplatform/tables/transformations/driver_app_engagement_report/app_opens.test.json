@@ -1,0 +1,153 @@
+{
+  "test_cases": [
+    {
+      "label": "test app_opens capturing correct events",
+      "parameters": {
+        "start_date": " '2020-01-01' ",
+        "end_date": " '2020-01-02' "
+      },
+      "input_data": {
+        "datastreams.mobile_logs": [
+          {
+            "org_id": 0,
+            "driver_id": 0,
+            "event_type": "DRIVER_WAIT_FOR_APP_TO_LOAD",
+            "json_params": "",
+            "timestamp": "2020-01-01 13:12:30",
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-01 16:14:30",
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 2,
+            "driver_id": 234,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"inactive\"",
+            "timestamp": "2020-01-01 18:32:30",
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "DRIVER_WAIT_FOR_APP_TO_LOAD",
+            "json_params": "",
+            "timestamp": "2020-01-01 16:35:30",
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-01 18:14:30",
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 4,
+            "driver_id": 456,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-01 04:32:30",
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-03 04:32:30",
+            "date": "2020-01-03"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "driver_id": 123,
+          "interval_start": "2020-01-01 16:00:00",
+          "num_app_opens": 2
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "driver_id": 123,
+          "interval_start": "2020-01-01 18:00:00",
+          "num_app_opens": 1
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 4,
+          "driver_id": 456,
+          "interval_start": "2020-01-01 04:00:00",
+          "num_app_opens": 1
+        }
+      ]
+    },
+    {
+      "label": "test app_opens capturing events with dates being earlier and later than the timestamp as long as the date is within 7 days",
+      "parameters": {
+        "start_date": " '2020-01-01' ",
+        "end_date": " '2020-01-02' "
+      },
+      "input_data": {
+        "datastreams.mobile_logs": [
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-01 16:14:30",
+            "date": "2019-12-31"
+          },
+          {
+            "org_id": 2,
+            "driver_id": 234,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-01 18:32:30",
+            "date": "2020-01-04"
+          },
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "DRIVER_WAIT_FOR_APP_TO_LOAD",
+            "json_params": "",
+            "timestamp": "2020-01-01 16:35:30",
+            "date": "2020-01-05"
+          },
+          {
+            "org_id": 1,
+            "driver_id": 123,
+            "event_type": "GLOBAL_UPDATE_APP_STATE",
+            "json_params": "\"active\"",
+            "timestamp": "2020-01-01 19:20:30",
+            "date": "2020-01-09"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-01",
+          "org_id": 1,
+          "driver_id": 123,
+          "interval_start": "2020-01-01 16:00:00",
+          "num_app_opens": 2
+        },
+        {
+          "date": "2020-01-01",
+          "org_id": 2,
+          "driver_id": 234,
+          "interval_start": "2020-01-01 18:00:00",
+          "num_app_opens": 1
+        }
+      ]
+    }
+  ]
+}

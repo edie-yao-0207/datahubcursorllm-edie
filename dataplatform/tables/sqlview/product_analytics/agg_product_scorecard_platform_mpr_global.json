@@ -1,0 +1,155 @@
+{
+  "view": "agg_product_scorecard_platform_mpr_global",
+  "owner": "DataEngineering",
+  "description": "This view contains both weekly and monthly Platform MPR metrics",
+  "database": "product_analytics",
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "period", "type": "string", "nullable": false, "description": "Period type (week or month)" },
+    { "name": "date", "type": "string", "description": "Date partition" },
+    { "name": "period_start", "type": "string", "description": "Start of period" },
+    { "name": "period_end", "type": "string", "description": "End of period" },
+    { "name": "cloud_region", "type": "string", "description": "Cloud region of SAM grouping" },
+    { "name": "region", "type": "string", "description": "Region of SAM grouping (USA - Midwest, USA - West, etc.)" },
+    { "name": "account_size_segment", "type": "string", "description": "Account size segment of grouping" },
+    { "name": "account_arr_segment", "type": "string", "description": "Account ARR segment of grouping" },
+    { "name": "account_industry", "type": "string", "description": "Account industry of grouping" },
+    { "name": "industry_vertical", "type": "string", "description": "Industry vertical of grouping" },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Safety licenses or not"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Telematics licenses or not"
+    },
+    { "name": "is_paid_stce_customer", "type": "boolean", "description": "Whether the SAM has STCE licenses or not" },
+    {
+      "name": "full_admin_orgs",
+      "type": "long",
+      "description": "Total number of orgs having all users as admins"
+    },
+    {
+      "name": "custom_role_orgs",
+      "type": "long",
+      "description": "Total number of orgs having at least one user with a custom role"
+    },
+    {
+      "name": "total_orgs",
+      "type": "long",
+      "description": "Total number of orgs with 2+ users at the end of the period"
+    },
+    {
+      "name": "device_attributes",
+      "type": "long",
+      "description": "Total number of devices having at least one attribute"
+    },
+    {
+      "name": "device_attributes_orgs",
+      "type": "long",
+      "description": "Total number of orgs having a device with at least one attribute"
+    },
+    {
+      "name": "device_tags",
+      "type": "long",
+      "description": "Total number of devices having at least one tag"
+    },
+    {
+      "name": "device_tags_orgs",
+      "type": "long",
+      "description": "Total number of orgs having a device with at least one tag"
+    },
+    {
+      "name": "device_tags_attributes",
+      "type": "long",
+      "description": "Total number of devices having at least one tag and at least one attribute"
+    },
+    {
+      "name": "total_devices",
+      "type": "long",
+      "description": "Number of devices within the grouping"
+    },
+    {
+      "name": "total_device_orgs",
+      "type": "long",
+      "description": "Number of orgs with a device within the grouping"
+    },
+    {
+      "name": "driver_tags",
+      "type": "long",
+      "description": "Total number of drivers having at least one tag"
+    },
+    {
+      "name": "driver_tags_orgs",
+      "type": "long",
+      "description": "Total number of orgs having a driver with at least one tag"
+    },
+    {
+      "name": "driver_attributes",
+      "type": "long",
+      "description": "Total number of drivers having at least one attribute"
+    },
+    {
+      "name": "driver_attributes_orgs",
+      "type": "long",
+      "description": "Total number of orgs having a driver with at least one attribute"
+    },
+    {
+      "name": "driver_tags_attributes",
+      "type": "long",
+      "description": "Total number of drivers having at least one tag and at least one attribute"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long",
+      "description": "Number of drivers within the grouping"
+    },
+    {
+      "name": "total_driver_orgs",
+      "type": "long",
+      "description": "Number of orgs with a driver within the grouping"
+    },
+    {
+      "name": "csv_upload_failures",
+      "type": "long",
+      "description": "Number of CSV uploads with at least one error row"
+    },
+    { "name": "csv_uploads", "type": "long", "description": "Number of CSV uploads" },
+    {
+      "name": "average_row_error_rate",
+      "type": "decimal(38,20)",
+      "description": "Average error rate (rows errored/rows submitted) for CSV uploads"
+    },
+    {
+      "name": "active_cloud_dashboard_users",
+      "type": "long",
+      "description": "Number of users who have logged into the Cloud Dashboard within the period"
+    },
+    {
+      "name": "active_cloud_dashboard_orgs",
+      "type": "long",
+      "description": "Number of orgs who have logged into the Cloud Dashboard within the period"
+    },
+    {
+      "name": "total_possible_cloud_dashboard_users",
+      "type": "long",
+      "description": "Number of users who were a part of the org during the period"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_scorecard_platform_mpr_global_weekly",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_scorecard_platform_mpr_global_monthly",
+      "type": "table"
+    }
+  ]
+}

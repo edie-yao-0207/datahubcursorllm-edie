@@ -1,0 +1,661 @@
+{
+  "dashboard": {
+    "name": "Signal Promotion Metrics",
+    "default_date_range": "90d"
+  },
+  "global_filters": [
+    {
+      "name": "date",
+      "type": "date_range",
+      "title": "Date Range",
+      "width": 4,
+      "default": { "min": "-90d", "max": "today" }
+    },
+    {
+      "name": "data_source",
+      "type": "select",
+      "title": "Data Source",
+      "width": 2,
+      "default": null,
+      "comment": "Data source ID - values from definitions.promotion_data_source_to_name"
+    },
+    {
+      "name": "current_stage",
+      "type": "select",
+      "title": "Current Stage",
+      "width": 2,
+      "default": null,
+      "options": [
+        { "value": 0, "label": "INITIAL" },
+        { "value": 1, "label": "FAILED" },
+        { "value": 2, "label": "PRE_ALPHA" },
+        { "value": 3, "label": "ALPHA" },
+        { "value": 4, "label": "BETA" },
+        { "value": 5, "label": "GA" }
+      ]
+    },
+    {
+      "name": "promotion_outcome",
+      "type": "select",
+      "title": "Outcome",
+      "width": 2,
+      "default": null,
+      "options": ["SUCCESS", "PRODUCTION_FAILURE", "ALPHA_ROLLBACK", "IN_PROGRESS"]
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Overview",
+      "widgets": [
+        {
+          "sql": "queries/overview/metrics_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Total Trials",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "monthly_total_trials" }
+        },
+        {
+          "sql": "queries/overview/metrics_snapshot.sql",
+          "type": "counter",
+          "title": "30-Day Graduation Rate",
+          "width": 3,
+          "height": 2,
+          "config": {
+            "value_field": "monthly_graduation_rate",
+            "format": "number-plain",
+            "abbreviation": "compact",
+            "decimal_places": 2
+          }
+        },
+        {
+          "sql": "queries/overview/metrics_snapshot.sql",
+          "type": "counter",
+          "title": "Daily Unique Signals",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "daily_unique_signals" }
+        },
+        {
+          "sql": "queries/overview/metrics_snapshot.sql",
+          "type": "counter",
+          "title": "Avg Time to Graduation (days)",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "avg_time_to_graduation_days", "format": "number-plain" }
+        },
+        {
+          "sql": "queries/overview/cumulative_stats.sql",
+          "type": "counter",
+          "title": "Cumulative Trials",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "all_time_trials" }
+        },
+        {
+          "sql": "queries/overview/cumulative_stats.sql",
+          "type": "counter",
+          "title": "Cumulative Graduations",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "all_time_graduations" }
+        },
+        {
+          "sql": "queries/overview/cumulative_stats.sql",
+          "type": "counter",
+          "title": "Cumulative Graduation Rate",
+          "width": 3,
+          "height": 2,
+          "config": {
+            "value_field": "all_time_graduation_rate",
+            "format": "number-plain",
+            "abbreviation": "compact",
+            "decimal_places": 2
+          }
+        },
+        {
+          "sql": "queries/overview/cumulative_stats.sql",
+          "type": "counter",
+          "title": "Cumulative Beta Rollbacks",
+          "width": 3,
+          "height": 2,
+          "config": { "value_field": "all_time_beta_rollbacks" }
+        },
+        {
+          "sql": "queries/overview/outcome_breakdown.sql",
+          "type": "bar",
+          "title": "Outcome Distribution (30-Day)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "outcome",
+            "y_fields": ["count"],
+            "y_label": "Promotions"
+          }
+        },
+        {
+          "sql": "queries/overview/stage_distribution.sql",
+          "type": "bar",
+          "title": "Current Stage Distribution",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "current_stage",
+            "y_fields": ["count"],
+            "y_label": "Promotions"
+          }
+        },
+        {
+          "sql": "queries/velocity/throughput_trends.sql",
+          "type": "line",
+          "title": "Promotion Throughput (Rolling Windows)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["daily_trials", "weekly_trials", "monthly_trials"],
+            "y_label": "Total Trials"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Depth",
+      "widgets": [
+        {
+          "sql": "queries/depth/signal_diversity.sql",
+          "type": "line",
+          "title": "Unique Signals Promoted (Rolling Windows)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": [
+              "daily_unique_signals",
+              "weekly_unique_signals",
+              "monthly_unique_signals",
+              "quarterly_unique_signals"
+            ],
+            "y_label": "Unique Signals"
+          }
+        },
+        {
+          "sql": "queries/depth/population_coverage.sql",
+          "type": "line",
+          "title": "Unique Populations (Rolling Windows)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": [
+              "daily_unique_populations",
+              "weekly_unique_populations",
+              "monthly_unique_populations",
+              "quarterly_unique_populations"
+            ],
+            "y_label": "Unique Populations"
+          }
+        },
+        {
+          "sql": "queries/depth/volume_by_data_source.sql",
+          "type": "line",
+          "title": "Promotion Volume by Data Source (30-Day Rolling)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["monthly_trials"],
+            "y_label": "Total Trials",
+            "color_by": "data_source"
+          }
+        },
+        {
+          "sql": "queries/depth/depth_by_data_source.sql",
+          "type": "table",
+          "title": "Signal Diversity by Data Source (30-Day)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "columns": {
+              "graduation_rate": { "format": "percent", "decimals": 1 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Velocity",
+      "widgets": [
+        {
+          "sql": "queries/velocity/throughput_trends.sql",
+          "type": "line",
+          "title": "Promotion Volume (Rolling Windows)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["daily_trials", "weekly_trials", "monthly_trials"],
+            "y_label": "Total Trials"
+          }
+        },
+        {
+          "sql": "queries/velocity/failure_analysis.sql",
+          "type": "line",
+          "title": "Rollback Rates (30-Day Rolling)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["beta_rollback_rate", "alpha_rollback_rate"],
+            "y_label": "Rollback Rate",
+            "y_format": "percent"
+          }
+        },
+        {
+          "sql": "queries/velocity/time_to_success.sql",
+          "type": "line",
+          "title": "Average Time to Graduation (Days)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["daily_avg_days", "weekly_avg_days", "monthly_avg_days"],
+            "y_label": "Days to Graduation"
+          }
+        },
+        {
+          "sql": "queries/velocity/success_rate_trends.sql",
+          "type": "line",
+          "title": "Graduation Rate Trends (Reference)",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["monthly_graduation_rate", "quarterly_graduation_rate"],
+            "y_label": "Graduation Rate",
+            "y_format": "percent"
+          }
+        },
+        {
+          "sql": "queries/velocity/throughput_by_user.sql",
+          "type": "table",
+          "title": "Top Users by Promotion Volume (30-Day)",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "graduation_rate": { "format": "percent", "decimals": 1 },
+              "avg_days_to_graduation": { "format": "number", "decimals": 1 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transitions",
+      "widgets": [
+        {
+          "sql": "queries/transitions/transition_trends.sql",
+          "type": "line",
+          "title": "Transition Volume Over Time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "x_label": "Date",
+            "y_fields": ["daily_transitions", "weekly_transitions", "monthly_transitions"],
+            "y_label": "Transitions"
+          }
+        },
+        {
+          "sql": "queries/transitions/transition_matrix.sql",
+          "type": "table",
+          "title": "Stage Transition Matrix (30-Day)",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 20
+          }
+        },
+        {
+          "sql": "queries/transitions/promotion_flow.sql",
+          "type": "table",
+          "title": "Forward Promotions (30-Day)",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 20
+          }
+        },
+        {
+          "sql": "queries/transitions/top_transitions.sql",
+          "type": "table",
+          "title": "Top Transitions by Volume (30-Day)",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "items_per_page": 25
+          }
+        },
+        {
+          "sql": "queries/transitions/rollback_analysis.sql",
+          "type": "pie",
+          "title": "Rollbacks by Source Stage (30-Day)",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "from_stage",
+            "value_field": "rollbacks_30d"
+          }
+        },
+        {
+          "sql": "queries/transitions/transitions_by_source.sql",
+          "type": "pie",
+          "title": "Transitions by Data Source (30-Day)",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "data_source_name",
+            "value_field": "transitions_30d"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Promotions",
+      "widgets": [
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Total AI Promotions",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "total_ai_promotions" }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Successful",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "successful" }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Success Rate",
+          "width": 1,
+          "height": 2,
+          "config": {
+            "value_field": "success_rate_pct",
+            "format": "percent",
+            "decimal_places": 1
+          }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "In Progress",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "in_progress" }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Pending Approval",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "pending_approval" }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Failures (Total)",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "production_failures" }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Avg Days in Stage",
+          "width": 1,
+          "height": 2,
+          "config": {
+            "value_field": "avg_days_in_current_stage",
+            "format": "number-plain",
+            "decimal_places": 1
+          }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Avg Total Review Days",
+          "width": 1,
+          "height": 2,
+          "config": {
+            "value_field": "avg_total_days_in_review",
+            "format": "number-plain",
+            "decimal_places": 1
+          }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Max Days Waiting",
+          "width": 1,
+          "height": 2,
+          "config": {
+            "value_field": "max_days_waiting",
+            "format": "number-plain",
+            "decimal_places": 1
+          }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Label Accuracy",
+          "width": 1,
+          "height": 2,
+          "config": {
+            "value_field": "label_accuracy_pct",
+            "format": "percent",
+            "decimal_places": 1
+          }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Valid Labels",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "valid_labels" }
+        },
+        {
+          "sql": "queries/ai/ai_overview_snapshot.sql",
+          "type": "counter",
+          "title": "Invalid Labels",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "invalid_labels" }
+        },
+        {
+          "sql": "queries/ai/ai_stage_distribution.sql",
+          "type": "pie",
+          "title": "AI Promotions by Pipeline Stage",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "stage",
+            "value_field": "count"
+          }
+        },
+        {
+          "sql": "queries/ai/ai_review_status.sql",
+          "type": "pie",
+          "title": "Active Review Status (Excluding Terminal States)",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "status",
+            "value_field": "count"
+          }
+        },
+        {
+          "sql": "queries/ai/ai_failure_tags.sql",
+          "type": "pie",
+          "title": "Top Failure Reasons (Tags)",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "failure_reason",
+            "value_field": "promotion_count"
+          }
+        },
+        {
+          "sql": "queries/ai/ai_label_validation.sql",
+          "type": "pie",
+          "title": "Label Validation Status",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "label_field": "label_status",
+            "value_field": "count"
+          }
+        },
+        {
+          "sql": "queries/ai/ai_failure_labels.sql",
+          "type": "table",
+          "title": "Labels Applied to Failures",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "columns": {
+              "validity_rate_pct": { "format": "number", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/ai/ai_pending_review_list.sql",
+          "type": "table",
+          "title": "AI Promotions Pending Review",
+          "width": 3,
+          "height": 5,
+          "config": {
+            "items_per_page": 20,
+            "columns": {
+              "days_in_stage": { "format": "number", "decimals": 1 },
+              "total_days_since_creation": { "format": "number", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/ai/ai_failures_detailed.sql",
+          "type": "table",
+          "title": "Failed AI Promotions (with Failure Reasons)",
+          "width": 6,
+          "height": 7,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "days_to_failure": { "format": "number", "decimals": 1 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Operations",
+      "widgets": [
+        {
+          "sql": "queries/operations/scorecard_summary.sql",
+          "type": "counter",
+          "title": "30-Day Trials",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "monthly_trials" }
+        },
+        {
+          "sql": "queries/operations/scorecard_summary.sql",
+          "type": "counter",
+          "title": "30-Day Graduations",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "monthly_graduations" }
+        },
+        {
+          "sql": "queries/operations/scorecard_summary.sql",
+          "type": "counter",
+          "title": "Graduation Rate",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "graduation_rate", "format": "percent", "decimal_places": 1 }
+        },
+        {
+          "sql": "queries/operations/scorecard_summary.sql",
+          "type": "counter",
+          "title": "Stuck Promotions (>7d)",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "stuck_promotions" }
+        },
+        {
+          "sql": "queries/operations/scorecard_summary.sql",
+          "type": "counter",
+          "title": "Avg Days to Graduation",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "avg_days_to_graduation", "format": "number-plain", "decimal_places": 1 }
+        },
+        {
+          "sql": "queries/operations/scorecard_summary.sql",
+          "type": "counter",
+          "title": "Daily Unique Signals",
+          "width": 1,
+          "height": 2,
+          "config": { "value_field": "daily_unique_signals" }
+        },
+        {
+          "sql": "queries/operations/stuck_promotions.sql",
+          "type": "table",
+          "title": "Stuck Promotions (>7 Days in Stage)",
+          "description": "Promotions waiting in review stages for extended periods - all data sources",
+          "width": 6,
+          "height": 7,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "days_in_stage": { "format": "number", "decimals": 1 },
+              "total_days_since_creation": { "format": "number", "decimals": 1 }
+            }
+          }
+        },
+        {
+          "sql": "queries/operations/recent_promotions.sql",
+          "type": "table",
+          "title": "Recent Promotions (Latest 100)",
+          "description": "Most recently updated promotions with full details",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "items_per_page": 25,
+            "columns": {
+              "days_in_stage": { "format": "number", "decimals": 1 },
+              "total_days": { "format": "number", "decimals": 1 }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

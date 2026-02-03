@@ -1,0 +1,80 @@
+{
+  "name": "fuel_energy_efficiency_report.regen_by_hour",
+  "owner": "Sustainability",
+  "description": "Tracks a device's regenerated energy (through regenerative braking) in an hour.",
+  "tags": ["telematics", "fuel", "ev"],
+  "dependencies": [
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "regen",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "driver_assignments",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2022-06-16",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "fuel_energy_efficiency_report",
+    "tablename": "regen_by_hour",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "object_id", "driver_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The device id of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The driver id of this hour of aggregated data. This value comes from driver assignments derived from tripsdb."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The starting timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The ending timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "energy_regen_kwh",
+        "type": "decimal(30,9)",
+        "metadata": {
+          "comment": "The amount of energy regenerated in kilowatt-hours for this hour of data."
+        }
+      }
+    ]
+  }
+}

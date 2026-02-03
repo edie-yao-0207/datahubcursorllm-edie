@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`aggregated_event_uuid` STRING,
+`metadata_type` BYTE,
+`version` SHORT,
+`search` BIGINT,
+`data` STRING,
+`created_at_ms` BIGINT,
+`updated_at_ms` BIGINT,
+`date` STRING

@@ -1,0 +1,13 @@
+{
+  "name": "device_activity",
+  "owner": "DataEngineering",
+  "assets": ["us-west-2:dataengineering.device_activity_global"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 10 * * *",
+      "backfill_window": 7,
+      "backfill_batch_size": 7
+    }
+  ]
+}

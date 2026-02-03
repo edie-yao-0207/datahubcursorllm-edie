@@ -1,0 +1,616 @@
+{
+  "table": "ticket",
+  "owner": "DataEngineering",
+  "description": "Zendesk Ticket Table from Fivetran",
+  "database": "samsara_zendesk",
+  "schema": [
+    {
+      "name": "custom_total_time_spent_sec_",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_sites_ticket_area",
+      "type": "string"
+    },
+    {
+      "name": "custom_product_group",
+      "type": "string"
+    },
+    {
+      "name": "custom_is_transfer_ticket_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_device_already_activated_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_solution_group",
+      "type": "string"
+    },
+    {
+      "name": "custom_case_reason",
+      "type": "string"
+    },
+    {
+      "name": "custom_dashboard_area_",
+      "type": "string"
+    },
+    {
+      "name": "via_source_to_address",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "system_raw_email_identifier",
+      "type": "string"
+    },
+    {
+      "name": "custom_p_i_category",
+      "type": "string"
+    },
+    {
+      "name": "custom_return_approver_",
+      "type": "string"
+    },
+    {
+      "name": "custom_ticket_language",
+      "type": "string"
+    },
+    {
+      "name": "custom_product_team",
+      "type": "string"
+    },
+    {
+      "name": "due_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "priority",
+      "type": "string"
+    },
+    {
+      "name": "custom_stella_connect_response_received_at",
+      "type": "string"
+    },
+    {
+      "name": "custom_request_area_customer_submitted_",
+      "type": "string"
+    },
+    {
+      "name": "custom_child_ticket_type",
+      "type": "string"
+    },
+    {
+      "name": "system_location",
+      "type": "string"
+    },
+    {
+      "name": "custom_out_of_stock_item",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_needs_investigation_historic",
+      "type": "boolean"
+    },
+    {
+      "name": "via_followup_source_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_stella_connect_additional_question_answer_string_",
+      "type": "string"
+    },
+    {
+      "name": "has_incidents",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_is_prospective_customer_",
+      "type": "boolean"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "system_json_email_identifier",
+      "type": "string"
+    },
+    {
+      "name": "custom_is_child_ticket_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_admin_app_area",
+      "type": "string"
+    },
+    {
+      "name": "custom_industrial_assignee",
+      "type": "string"
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "custom_progress_status",
+      "type": "string"
+    },
+    {
+      "name": "external_id",
+      "type": "string"
+    },
+    {
+      "name": "custom_stella_connect_star_rating",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_follow_up_needed_",
+      "type": "boolean"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "custom_onboarding",
+      "type": "boolean"
+    },
+    {
+      "name": "system_ip_address",
+      "type": "string"
+    },
+    {
+      "name": "custom_child_ticket_priority",
+      "type": "string"
+    },
+    {
+      "name": "custom_samsara_dashboard_url",
+      "type": "string"
+    },
+    {
+      "name": "custom_video_irretrievable",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_tier_1_category_",
+      "type": "string"
+    },
+    {
+      "name": "custom_priority",
+      "type": "string"
+    },
+    {
+      "name": "custom_stella_connect_additional_question_answer_numeric_",
+      "type": "bigint"
+    },
+    {
+      "name": "assignee_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_possible_knowledge_",
+      "type": "boolean"
+    },
+    {
+      "name": "via_source_from_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_industrial_segment",
+      "type": "string"
+    },
+    {
+      "name": "custom_product_manager_approval_received_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_webstore_ticket_type",
+      "type": "string"
+    },
+    {
+      "name": "custom_csat_categories",
+      "type": "string"
+    },
+    {
+      "name": "custom_industrial_area",
+      "type": "string"
+    },
+    {
+      "name": "custom_stella_connect_comment",
+      "type": "string"
+    },
+    {
+      "name": "custom_internal_escalation",
+      "type": "boolean"
+    },
+    {
+      "name": "url",
+      "type": "string"
+    },
+    {
+      "name": "custom_n_i_category",
+      "type": "string"
+    },
+    {
+      "name": "custom_org_segment",
+      "type": "string"
+    },
+    {
+      "name": "custom_jira_link_associated_with_escalation",
+      "type": "string"
+    },
+    {
+      "name": "custom_inbound_type_ind_",
+      "type": "string"
+    },
+    {
+      "name": "custom_has_merged_tickets_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_product_serial_number_s_",
+      "type": "string"
+    },
+    {
+      "name": "followup_ids",
+      "type": "string"
+    },
+    {
+      "name": "is_public",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_os",
+      "type": "string"
+    },
+    {
+      "name": "custom_priority_level",
+      "type": "string"
+    },
+    {
+      "name": "custom_preferred_network_provider",
+      "type": "string"
+    },
+    {
+      "name": "subject",
+      "type": "string"
+    },
+    {
+      "name": "custom_hardware_area_customer_submitted_",
+      "type": "string"
+    },
+    {
+      "name": "via_source_from_address",
+      "type": "string"
+    },
+    {
+      "name": "custom_order_ops_required_rma_return_promo_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_jira_issues_",
+      "type": "string"
+    },
+    {
+      "name": "custom_customer_type_internal_",
+      "type": "string"
+    },
+    {
+      "name": "custom_order_admin_assignee",
+      "type": "string"
+    },
+    {
+      "name": "custom_jira_ticket_status",
+      "type": "string"
+    },
+    {
+      "name": "custom_vehicle_replacement_v_2",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_docebo_issue",
+      "type": "string"
+    },
+    {
+      "name": "custom_citation_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_hardware_area_internal_",
+      "type": "string"
+    },
+    {
+      "name": "custom_device",
+      "type": "string"
+    },
+    {
+      "name": "custom_ticket_via",
+      "type": "string"
+    },
+    {
+      "name": "allow_channelback",
+      "type": "boolean"
+    },
+    {
+      "name": "via_source_rel",
+      "type": "string"
+    },
+    {
+      "name": "custom_ticket_priority_",
+      "type": "string"
+    },
+    {
+      "name": "custom_reason_for_return_",
+      "type": "string"
+    },
+    {
+      "name": "custom_sales_order_number",
+      "type": "string"
+    },
+    {
+      "name": "system_latitude",
+      "type": "double"
+    },
+    {
+      "name": "merged_ticket_ids",
+      "type": "string"
+    },
+    {
+      "name": "brand_id",
+      "type": "bigint"
+    },
+    {
+      "name": "organization_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_connected_driver_team_usage_only_drive_time_drop_",
+      "type": "string"
+    },
+    {
+      "name": "custom_ticket_request_area",
+      "type": "string"
+    },
+    {
+      "name": "system_longitude",
+      "type": "double"
+    },
+    {
+      "name": "custom_manual_ticket_update",
+      "type": "boolean"
+    },
+    {
+      "name": "requester_id",
+      "type": "bigint"
+    },
+    {
+      "name": "via_channel",
+      "type": "string"
+    },
+    {
+      "name": "custom_keep_ticket_open",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_eu_cloud",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_possible_issue_historic",
+      "type": "boolean"
+    },
+    {
+      "name": "description",
+      "type": "string"
+    },
+    {
+      "name": "via_source_to_name",
+      "type": "string"
+    },
+    {
+      "name": "custom_do_not_send_stella_survey",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_initial_group_assignment",
+      "type": "string"
+    },
+    {
+      "name": "via_source_from_title",
+      "type": "string"
+    },
+    {
+      "name": "custom_auto_closed_",
+      "type": "boolean"
+    },
+    {
+      "name": "problem_id",
+      "type": "bigint"
+    },
+    {
+      "name": "system_message_id",
+      "type": "string"
+    },
+    {
+      "name": "custom_time_spent_last_update_sec_",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_rma_from_gateway_csv",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_customer_type_customer_submitted_",
+      "type": "string"
+    },
+    {
+      "name": "custom_interposer_cable_needed_",
+      "type": "boolean"
+    },
+    {
+      "name": "system_client",
+      "type": "string"
+    },
+    {
+      "name": "custom_customer_org_industrial_",
+      "type": "string"
+    },
+    {
+      "name": "forum_topic_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_driver_app_area_",
+      "type": "string"
+    },
+    {
+      "name": "submitter_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_stella_connect_request_id",
+      "type": "string"
+    },
+    {
+      "name": "custom_complexity",
+      "type": "string"
+    },
+    {
+      "name": "ticket_form_id",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_global_geography_ticket_",
+      "type": "string"
+    },
+    {
+      "name": "custom_sn_ticket_data",
+      "type": "string"
+    },
+    {
+      "name": "group_id",
+      "type": "bigint"
+    },
+    {
+      "name": "recipient",
+      "type": "string"
+    },
+    {
+      "name": "custom_product_area_sales_escalations",
+      "type": "string"
+    },
+    {
+      "name": "system_machine_generated",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_of_vs_2_controllers_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_gw_22_or_ig_11_s_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_vs_2_cams_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_ig_61_s_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_em_21_22_s_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_ig_21_s_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_antennas_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_other_devices_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_hm_11_s_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_hmi_10_tablets_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_legacy_sensors_rma_d_em_11_im_31_etc_",
+      "type": "bigint"
+    },
+    {
+      "name": "system_ccs",
+      "type": "string"
+    },
+    {
+      "name": "custom_of_gateways_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_of_sensors_rma_d",
+      "type": "bigint"
+    },
+    {
+      "name": "custom_t_1_scope_t_2_cd_queue_usage_only_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_t_1_scope_",
+      "type": "boolean"
+    },
+    {
+      "name": "custom_resolution_scope_",
+      "type": "string"
+    },
+    {
+      "name": "custom_feedback_theme_",
+      "type": "string"
+    },
+    {
+      "name": "custom_billing_team_solved",
+      "type": "string"
+    },
+    {
+      "name": "custom_l_2_cd_usage_only_case_reason_v_2",
+      "type": "string"
+    },
+    {
+      "name": "custom_l_2_cd_usage_only_ticket_theme_",
+      "type": "string"
+    },
+    {
+      "name": "custom_l_2_cd_usage_only_resolution_",
+      "type": "string"
+    },
+    {
+      "name": "custom_l_2_cd_usage_only_symptom_",
+      "type": "string"
+    },
+    {
+      "name": "custom_l_2_cd_usage_only_jira_",
+      "type": "string"
+    }
+  ]
+}

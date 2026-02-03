@@ -1,0 +1,15 @@
+{
+  "owner": "DataEngineering",
+  "jobs": [
+    {
+      "name": "restate-weekly",
+      "cron": "0 0 0 ? * 2 *",
+      "regions": ["us-west-2"],
+      "driver_node_type_id": "rd-fleet.2xlarge",
+      "node_type_id": "rd-fleet.xlarge",
+      "max_workers": 15,
+      "timeout_seconds": 18000,
+      "spark_version": "default"
+    }
+  ]
+}

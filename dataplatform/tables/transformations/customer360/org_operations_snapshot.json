@@ -1,0 +1,191 @@
+{
+  "name": "customer360.org_operations_snapshot",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Determine the overall operation metrics for a customer",
+  "dependencies": [
+    {
+      "dbname": "dataprep",
+      "tablename": "customer_metadata",
+      "type": "table",
+      "schema_path": "dataprep/business/customer_metadata.metadata.json",
+      "external": true
+    },
+    {
+      "dbname": "dataprep",
+      "tablename": "device_cables",
+      "schema_path": "dataprep/ingestion/device_cables.metadata.json",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "dataprep",
+      "tablename": "active_devices",
+      "type": "table"
+    },
+    {
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "definitions",
+      "tablename": "products",
+      "type": "table",
+      "external": true
+    }
+  ],
+  "spark_execution_environment": {
+    "spark_version": "13.3.x-scala2.12",
+    "spark_conf_overrides": {
+      "spark.network.timeout": "600s"
+    }
+  },
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "org_operations_snapshot",
+    "type": "table",
+    "primary_key": ["org_id"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "This Internal ID for the customer's Samsara Org"
+        }
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "metadata": {
+          "comment": "This Internal Samsara Customer ID"
+        }
+      },
+      {
+        "name": "num_vg_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of VG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_cm_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of CM devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_ag_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of AG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_ig_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of IG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_vg_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of VG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_cm_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of CM devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_ag_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of AG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_ig_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of IG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_passenger_vehicles",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of passenger vehicles the customer has"
+        }
+      },
+      {
+        "name": "num_non_passenger_vehicles",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of non-passenger vehicles the customer has"
+        }
+      },
+      {
+        "name": "num_sg_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SG devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_sc_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SC devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_em_activated",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of EM devices activated by the customer"
+        }
+      },
+      {
+        "name": "num_sg_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SG devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_sc_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of SC devices that sent a heartbeat in the last 30 days"
+        }
+      },
+      {
+        "name": "num_em_active",
+        "type": "long",
+        "metadata": {
+          "comment": "The number of EM devices that sent a heartbeat in the last 30 days"
+        }
+      }
+    ],
+    "write_mode": "merge"
+  },
+  "replication": {
+    "replicate_to_us_from_regions": ["eu-west-1"]
+  }
+}

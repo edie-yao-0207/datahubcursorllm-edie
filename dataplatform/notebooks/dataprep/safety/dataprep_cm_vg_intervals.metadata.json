@@ -1,0 +1,106 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": [],
+  "jobs": [],
+  "output": {
+    "external": true,
+    "dbname": "dataprep_safety",
+    "tablename": "cm_vg_intervals",
+    "type": "table",
+    "primary_key": ["date", "device_id", "org_id", "cm_device_id"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "cm_device_id",
+        "type": "long"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "product_id",
+        "type": "long"
+      },
+      {
+        "name": "cm_product_id",
+        "type": "long"
+      },
+      {
+        "name": "start_date",
+        "type": "date"
+      },
+      {
+        "name": "end_date",
+        "type": "date"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      },
+      {
+        "name": "duration_ms",
+        "type": "long"
+      },
+      {
+        "name": "distance_meters",
+        "type": "double"
+      },
+      {
+        "name": "start_lat",
+        "type": "double"
+      },
+      {
+        "name": "start_lon",
+        "type": "double"
+      },
+      {
+        "name": "start_city",
+        "type": "string"
+      },
+      {
+        "name": "start_state",
+        "type": "string"
+      },
+      {
+        "name": "end_lat",
+        "type": "double"
+      },
+      {
+        "name": "end_lon",
+        "type": "double"
+      },
+      {
+        "name": "end_city",
+        "type": "string"
+      },
+      {
+        "name": "end_state",
+        "type": "string"
+      },
+      {
+        "name": "on_trip",
+        "type": "boolean"
+      }
+    ]
+  }
+}

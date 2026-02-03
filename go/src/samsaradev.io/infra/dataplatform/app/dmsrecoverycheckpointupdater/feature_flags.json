@@ -1,0 +1,21 @@
+{
+  "feature_flags": [
+    {
+      "key": "update-dms-recovery-checkpoint-cron-job",
+      "custom_targeting_attributes": [
+        {
+          "name": "ShardedDatabaseName",
+          "type": "string"
+        },
+        {
+          "name": "ShardSpecificDatabaseName",
+          "type": "string"
+        },
+        {
+          "name": "UnshardedDatabaseName",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

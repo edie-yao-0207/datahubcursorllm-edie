@@ -1,0 +1,90 @@
+{
+  "test_cases": [
+    {
+      "label": "returns only distance that isn't matched with a location segment",
+      "parameters": {
+        "start_date": "'2021-03-01'",
+        "end_date": "'2021-03-02'"
+      },
+      "input_data": {
+        "canonical_distance.total_distance": [
+          {
+            "org_id": 2,
+            "date": "2021-03-01",
+            "device_id": 1,
+            "time_ms": 1614556801000,
+            "distance": 10,
+            "interpolated": 1
+          },
+          {
+            "org_id": 2,
+            "date": "2021-03-01",
+            "device_id": 1,
+            "time_ms": 1614556801010,
+            "distance": 10,
+            "interpolated": 1
+          },
+          {
+            "org_id": 2,
+            "date": "2021-03-01",
+            "device_id": 1,
+            "time_ms": 1614556802000,
+            "distance": 10,
+            "interpolated": 1
+          },
+          {
+            "org_id": 2,
+            "date": "2021-03-01",
+            "device_id": 1,
+            "time_ms": 1614556802010,
+            "distance": 10,
+            "interpolated": 1
+          },
+          {
+            "org_id": 2,
+            "date": "2021-03-01",
+            "device_id": 1,
+            "time_ms": 1614556802011,
+            "distance": 10,
+            "interpolated": 1
+          }
+        ],
+        "ifta_report.annotated_location_segments": [
+          {
+            "org_id": 2,
+            "date": "2021-03-01",
+            "device_id": 1,
+            "start_ms": 1614556802000,
+            "end_ms": 1614556802011
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 2,
+          "date": "2021-03-01",
+          "device_id": 1,
+          "time_ms": 1614556801000,
+          "distance": 10,
+          "interpolated": 1
+        },
+        {
+          "org_id": 2,
+          "date": "2021-03-01",
+          "device_id": 1,
+          "time_ms": 1614556801010,
+          "distance": 10,
+          "interpolated": 1
+        },
+        {
+          "org_id": 2,
+          "date": "2021-03-01",
+          "device_id": 1,
+          "time_ms": 1614556802011,
+          "distance": 10,
+          "interpolated": 1
+        }
+      ]
+    }
+  ]
+}

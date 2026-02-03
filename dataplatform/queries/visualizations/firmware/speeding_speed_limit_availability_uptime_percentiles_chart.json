@@ -1,0 +1,116 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-",
+      "title": {
+        "text": "speed limit availability uptime"
+      }
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "column_156f9f3591706": {
+      "name": "p1",
+      "yAxis": 0,
+      "type": "line"
+    },
+    "column_69adfea843199": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p10"
+    },
+    "column_69adfea843201": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "median"
+    },
+    "column_69adfea843203": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p90"
+    },
+    "column_69adfea843205": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "p99"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_156f9f3591704"
+    },
+    "y": [
+      {
+        "column": "p1",
+        "transform": "SUM",
+        "id": "column_156f9f3591706"
+      },
+      {
+        "id": "column_69adfea843199",
+        "column": "p10",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_69adfea843201",
+        "column": "median",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_69adfea843203",
+        "column": "p90",
+        "transform": "SUM"
+      },
+      {
+        "id": "column_69adfea843205",
+        "column": "p99",
+        "transform": "SUM"
+      }
+    ]
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

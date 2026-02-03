@@ -1,0 +1,144 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["kalyan.vejalla@samsara.com", "steven.matson@samsara.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 0 ? * *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ],
+  "output": {
+    "dbname": "dataprep",
+    "tablename": "customer_metadata_tracker",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "sfdc_id",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "sam_number",
+        "type": "string"
+      },
+      {
+        "name": "industry",
+        "type": "string"
+      },
+      {
+        "name": "ae_id",
+        "type": "string"
+      },
+      {
+        "name": "ae_name",
+        "type": "string"
+      },
+      {
+        "name": "ae_email",
+        "type": "string"
+      },
+      {
+        "name": "first_purchase_date",
+        "type": "date"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "segment",
+        "type": "string"
+      },
+      {
+        "name": "region",
+        "type": "string"
+      },
+      {
+        "name": "billingcity",
+        "type": "string"
+      },
+      {
+        "name": "billingpostalcode",
+        "type": "string"
+      },
+      {
+        "name": "billingcountry",
+        "type": "string"
+      },
+      {
+        "name": "billingcountrycode",
+        "type": "string"
+      },
+      {
+        "name": "date_first_trial_shipped",
+        "type": "date"
+      },
+      {
+        "name": "last_modified_date",
+        "type": "date"
+      },
+      {
+        "name": "lifetime_acv",
+        "type": "double"
+      },
+      {
+        "name": "delinquent",
+        "type": "boolean"
+      },
+      {
+        "name": "org_size",
+        "type": "string"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "implementation_consultant",
+        "type": "string"
+      },
+      {
+        "name": "csm_rating",
+        "type": "string"
+      },
+      {
+        "name": "csm_notes",
+        "type": "string"
+      },
+      {
+        "name": "csm_trend",
+        "type": "string"
+      },
+      {
+        "name": "csm_sentiment_cause",
+        "type": "string"
+      },
+      {
+        "name": "csm",
+        "type": "string"
+      },
+      {
+        "name": "csm_name",
+        "type": "string"
+      },
+      {
+        "name": "csm_tier",
+        "type": "string"
+      }
+    ],
+    "primary_key": ["date", "org_id"]
+  }
+}

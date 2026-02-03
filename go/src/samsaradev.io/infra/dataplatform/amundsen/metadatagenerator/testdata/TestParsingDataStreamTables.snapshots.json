@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "TestPartitionStrategyDataStreamsFirehoseIngestionDate",
+    "Values": [
+      "Date derived from firehose ingestion date"
+    ]
+  },
+  {
+    "Name": "TestPartitionStrategyDataStreamsDateOverride",
+    "Values": [
+      "Date derived from timestamp"
+    ]
+  },
+  {
+    "Name": "TestPartitionStrategyDataStreamsDateOverrideExpression",
+    "Values": [
+      "Date derived from expression date(from_unixtime(event_ms / 1e3))"
+    ]
+  }
+]

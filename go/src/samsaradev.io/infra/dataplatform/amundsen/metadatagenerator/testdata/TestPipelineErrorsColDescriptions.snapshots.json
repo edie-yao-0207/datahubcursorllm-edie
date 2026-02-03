@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "TestParsingPipelineErrorsColumnDescriptions",
+    "Values": [
+      {
+        "testdbname.pipeline_errors": {
+          "date": "The date the error occurred. (yyyy-mm-dd).",
+          "execution_id": "​​A unique ID that represents the data pipeline run. Each invocation of a data pipeline run has a unique execution_id.",
+          "execution_time": "The time the error occurred (utc) example: 2021-06-17T08:42:19.165+0000.",
+          "job_type": "The type of job that produced failing rows (eg BATCH).",
+          "row": "The row that didn’t match the expected output for that row.",
+          "transform": "The name of the pipeline and node that failed formatted like “\u003cpipeline_name\u003e.\u003cnode_name\u003e”."
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "view": "vehicle_utilization",
+  "owner": "DataScience",
+  "description": "Get vehicle utilization by org by day",
+  "database": "datascience",
+  "schema": [
+    { "name": "org_id", "type": "long" },
+    { "name": "date", "type": "date" },
+    { "name": "driving_hours", "type": "long", "nullable": false },
+    { "name": "total_hours", "type": "long", "nullable": false }
+  ],
+  "dependencies": [
+    {
+      "dbname": "trips2db_shards",
+      "tablename": "trips",
+      "type": "table"
+    },
+    {
+      "dbname": "productsdb",
+      "tablename": "gateways",
+      "type": "table"
+    },
+    {
+      "dbname": "definitions",
+      "tablename": "445_calendar",
+      "type": "table"
+    },
+    {
+      "dbname": "clouddb",
+      "tablename": "organizations",
+      "type": "table"
+    }
+  ]
+}

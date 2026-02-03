@@ -1,0 +1,176 @@
+{
+  "feature_name": "Group Coaching",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17888214/Group+Coaching",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM1-ENT",
+          "LIC-CM1-EXPRESS",
+          "LIC-CM2-ENT",
+          "LIC-CM2-EXPRESS"
+        ],
+        "license_required": true
+      },
+      "feature_flag_name": ["group-coaching-enable-fc"],
+      "release_phase": "Open Beta"
+    },
+    {
+      "effective_date": "2025-09-23",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-D-ESS-PLTFM-ESS",
+          "LIC-CM-D-ESS-PLTFM-PREM",
+          "LIC-CM-D-PREM-PLTFM-ESS",
+          "LIC-CM-D-PREM-PLTFM-PREM",
+          "LIC-CM-D-PREMIER",
+          "LIC-CM-D-PREMIER-PLTFM-ESS",
+          "LIC-CM-D-PREMIER-PLTFM-PREM",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM-S-ESS-PLTFM-ESS",
+          "LIC-CM-S-ESS-PLTFM-PREM",
+          "LIC-CM-S-PREM-PLTFM-ESS",
+          "LIC-CM-S-PREM-PLTFM-PREM",
+          "LIC-CM-S-PREMIER",
+          "LIC-CM-S-PREMIER-PLTFM-ESS",
+          "LIC-CM-S-PREMIER-PLTFM-PREM",
+          "LIC-CM1-ENT",
+          "LIC-CM1-EXPRESS",
+          "LIC-CM2-ENT",
+          "LIC-CM2-EXPRESS"
+        ],
+        "license_required": true
+      },
+      "release_phase": "GA",
+      "feature_flag_name": ["group-coaching-enable-fc"],
+      "release_types": ["Early Adopter", "Phase 1"]
+    },
+    {
+      "effective_date": "2025-11-20",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-D-ESS-PLTFM-ESS",
+          "LIC-CM-D-ESS-PLTFM-PREM",
+          "LIC-CM-D-PREM-PLTFM-ESS",
+          "LIC-CM-D-PREM-PLTFM-PREM",
+          "LIC-CM-D-PREMIER",
+          "LIC-CM-D-PREMIER-PLTFM-ESS",
+          "LIC-CM-D-PREMIER-PLTFM-PREM",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM-S-ESS-PLTFM-ESS",
+          "LIC-CM-S-ESS-PLTFM-PREM",
+          "LIC-CM-S-PREM-PLTFM-ESS",
+          "LIC-CM-S-PREM-PLTFM-PREM",
+          "LIC-CM-S-PREMIER",
+          "LIC-CM-S-PREMIER-PLTFM-ESS",
+          "LIC-CM-S-PREMIER-PLTFM-PREM",
+          "LIC-CM1-ENT",
+          "LIC-CM1-EXPRESS",
+          "LIC-CM2-ENT",
+          "LIC-CM2-EXPRESS",
+          "LIC-NVR10-2",
+          "LIC-NVR10",
+          "LIC-CM-ANLG",
+          "LIC-CM25-ENT",
+          "LIC-NVR10-6",
+          "LIC-NVR10-3"
+        ],
+        "license_required": true
+      },
+      "release_phase": "GA"
+    },
+    {
+      "effective_date": "2026-01-07",
+      "licenses": {
+        "skus": [
+          "LIC-CM-D-ENT-PLTFM-ESS",
+          "LIC-CM-D-ENT-PLTFM-PREM",
+          "LIC-CM-D-ENTERPRISE",
+          "LIC-CM-D-ESS-PLTFM-ESS",
+          "LIC-CM-D-ESS-PLTFM-PREM",
+          "LIC-CM-D-PREM-PLTFM-ESS",
+          "LIC-CM-D-PREM-PLTFM-PREM",
+          "LIC-CM-D-PREMIER",
+          "LIC-CM-D-PREMIER-PLTFM-ESS",
+          "LIC-CM-D-PREMIER-PLTFM-PREM",
+          "LIC-CM-S-ENT-PLTFM-ESS",
+          "LIC-CM-S-ENT-PLTFM-PREM",
+          "LIC-CM-S-ENTERPRISE",
+          "LIC-CM-S-ESS-PLTFM-ESS",
+          "LIC-CM-S-ESS-PLTFM-PREM",
+          "LIC-CM-S-PREM-PLTFM-ESS",
+          "LIC-CM-S-PREM-PLTFM-PREM",
+          "LIC-CM-S-PREMIER",
+          "LIC-CM-S-PREMIER-PLTFM-ESS",
+          "LIC-CM-S-PREMIER-PLTFM-PREM",
+          "LIC-CM1-ENT",
+          "LIC-CM1-EXPRESS",
+          "LIC-CM2-ENT",
+          "LIC-CM2-EXPRESS",
+          "LIC-VG-PREMIER",
+          "LIC-VG-ENTERPRISE",
+          "LIC-VG-PREMIER-PS",
+          "LIC-VG-ESS-PLTFM-ESS",
+          "LIC-VG-ESS-PLUS-PLTFM-ESS",
+          "LIC-VG-ESS-PLTFM-PREM",
+          "LIC-VG-ESS-PLUS-PLTFM-PREM",
+          "LIC-VG-PREM-PLTFM-ESS",
+          "LIC-VG-PREM-PLTFM-PREM",
+          "LIC-VG-PREMIER-PLTFM-ESS",
+          "LIC-VG-PREMIER-PLTFM-PREM",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-ENT",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PS",
+          "LIC-NVR10-2",
+          "LIC-NVR10",
+          "LIC-CM-ANLG",
+          "LIC-CM25-ENT",
+          "LIC-NVR10-6",
+          "LIC-NVR10-3"
+        ],
+        "license_required": true
+      },
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "group_coaching.sql",
+        "eu_sql_file": "group_coaching_eu.sql",
+        "filter_internal_usage": true,
+        "has_user_id_field": true
+      }
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["driver.coaching.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

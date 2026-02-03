@@ -1,0 +1,30 @@
+source:
+  type: tableau
+  config:
+    # Coordinates
+    connect_uri: https://10az.online.tableau.com/
+    site: samsaradashboards
+    platform_instance: databricks
+
+    # Credentials
+    token_name: "datahub"
+    token_value: "${DATAHUB_TABLEAU_TOKEN}"
+
+    # Options
+    ingest_tags: True
+    ingest_owner: True
+    ingest_embed_url: true
+    extract_usage_stats: true
+    stateful_ingestion:
+      enabled: true
+    project_pattern:
+      deny:
+        - "^default.*"
+        - "^ARCHIVE.*"
+        - "^STAGING.*"
+        - "^External Assets Default Project.*"
+      allow:
+        - "Biztech Data/prod.*"
+        - "EXPLORATORY/Finance/KPIs & Metrics Dev.*"
+      ignoreCase: True
+pipeline_name: bted_tableau

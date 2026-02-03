@@ -1,0 +1,764 @@
+{
+  "test_cases": [
+    {
+      "label": "returns one safety event when there is only one",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "event_ms": 1641350792000,
+          "event_duration": 0,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "additional_labels": [
+            {
+              "label_type": 17,
+              "label_source": 1,
+              "last_added_ms": 1641350792000
+            }
+          ],
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "triage_uuid": null,
+          "event_id": 222
+        }
+      ]
+    },
+    {
+      "label": "returns two safety event when they have the same start time but are different labels",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 18,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 223
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "event_ms": 1641350792000,
+          "event_duration": 0,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "additional_labels": [
+            {
+              "label_type": 17,
+              "label_source": 1,
+              "last_added_ms": 1641350792000
+            }
+          ],
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "triage_uuid": null,
+          "event_id": 222
+        },
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "event_ms": 1641350792000,
+          "event_duration": 0,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "additional_labels": [
+            {
+              "label_type": 18,
+              "label_source": 1,
+              "last_added_ms": 1641350792000
+            }
+          ],
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "triage_uuid": null,
+          "event_id": 223
+        }
+      ]
+    },
+    {
+      "label": "returns one safety event when there are two, but they are duplicates",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "event_ms": 1641350792000,
+          "event_duration": 0,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "additional_labels": [
+            {
+              "label_type": 17,
+              "label_source": 1,
+              "last_added_ms": 1641350792000
+            }
+          ],
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "triage_uuid": null,
+          "event_id": 222
+        }
+      ]
+    },
+    {
+      "label": "returns two safety event when there are three, but two of them are duplicates of each other",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 1,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641350792001,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 223
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "event_ms": 1641350792000,
+          "event_duration": 0,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "additional_labels": [
+            {
+              "label_type": 17,
+              "label_source": 1,
+              "last_added_ms": 1641350792000
+            }
+          ],
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "triage_uuid": null,
+          "event_id": 222
+        },
+        {
+          "org_id": 123,
+          "device_id": 1,
+          "driver_id": 1,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "additional_labels": [
+            {
+              "label_type": 17,
+              "label_source": 1,
+              "last_added_ms": 1641350792000
+            }
+          ],
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641350792001,
+          "event_duration": 0,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "triage_uuid": null,
+          "event_id": 223
+        }
+      ]
+    },
+    {
+      "label": "returns one safety event when there are three, but they are all duplicates of each other from different tables, with the event with the triage_version of 2 returned ",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 1,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1
+              }
+            ]
+          }
+        ],
+        "safety_report.triage_safety_events": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "event_duration": 2000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 1,
+            "additional_labels": [
+              {
+                "label_type": 18,
+                "label_source": 1,
+                "last_added_ms": 1641350792000,
+                "user_id": 0
+              }
+            ],
+            "triage_uuid": "tr2",
+            "triage_version": 2
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "event_duration": 3000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 1,
+            "additional_labels": [
+              {
+                "label_type": 19,
+                "label_source": 1,
+                "last_added_ms": 1641350792000,
+                "user_id": 0
+              }
+            ],
+            "triage_uuid": "tr1",
+            "triage_version": 1
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "event_id": 1,
+          "date": "2022-01-05",
+          "triage_uuid": "tr2",
+          "additional_labels": [
+            {
+              "label_type": 18,
+              "label_source": 1,
+              "last_added_ms": 1641350792000,
+              "user_id": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "returns triage event v2 when there are two that are duplicate - one is a safety v1 event and one is a triage event v2",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "release_stage": 4,
+            "date": "2022-01-05",
+            "event_id": 1,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1
+              }
+            ]
+          }
+        ],
+        "safety_report.triage_safety_events": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "event_duration": 2000,
+            "release_stage": 4,
+            "date": "2022-01-05",
+            "event_id": 1,
+            "additional_labels": [
+              {
+                "label_type": 18,
+                "label_source": 1,
+                "last_added_ms": 1641350792000,
+                "user_id": 0
+              }
+            ],
+            "triage_uuid": "tr2",
+            "triage_version": 2
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 4,
+          "event_id": 1,
+          "date": "2022-01-05",
+          "additional_labels": [
+            {
+              "label_type": 18,
+              "label_source": 1,
+              "last_added_ms": 1641350792000,
+              "user_id": 0
+            }
+          ],
+          "triage_uuid": "tr2",
+          "triage_version": 2
+        }
+      ]
+    },
+    {
+      "label": "returns all safety events from different tables if they are not duplicates",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_v1": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 1,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1
+              }
+            ]
+          }
+        ],
+        "safety_report.triage_safety_events": [
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "event_duration": 2000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 2,
+            "additional_labels": [
+              {
+                "label_type": 18,
+                "label_source": 1,
+                "last_added_ms": 1641350792000,
+                "user_id": 0
+              }
+            ],
+            "triage_uuid": "tr2",
+            "triage_version": 2
+          },
+          {
+            "org_id": 456,
+            "device_id": 1,
+            "driver_id": 3,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "event_ms": 1641343591000,
+            "event_duration": 3000,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 3,
+            "additional_labels": [
+              {
+                "label_type": 19,
+                "label_source": 1,
+                "last_added_ms": 1641350792000,
+                "user_id": 0
+              }
+            ],
+            "triage_uuid": "tr1",
+            "triage_version": 1
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 0,
+          "release_stage": 100,
+          "event_id": 1,
+          "date": "2022-01-05",
+          "additional_labels": [
+            {
+              "label_type": 17,
+              "label_source": 1
+            }
+          ]
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 2000,
+          "release_stage": 100,
+          "date": "2022-01-05",
+          "event_id": 2,
+          "triage_uuid": "tr2",
+          "additional_labels": [
+            {
+              "label_type": 18,
+              "label_source": 1,
+              "last_added_ms": 1641350792000,
+              "user_id": 0
+            }
+          ]
+        },
+        {
+          "org_id": 456,
+          "device_id": 1,
+          "driver_id": 3,
+          "trip_start_ms": 1641343592000,
+          "trip_end_ms": 1641361592000,
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "event_ms": 1641343591000,
+          "event_duration": 3000,
+          "release_stage": 100,
+          "event_id": 3,
+          "date": "2022-01-05",
+          "triage_uuid": "tr1",
+          "additional_labels": [
+            {
+              "label_type": 19,
+              "label_source": 1,
+              "last_added_ms": 1641350792000,
+              "user_id": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "feature_name": "Utilization v2",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5902251/Asset+Utilization+v2",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": [
+          "LIC-VG-ENT",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-ENTERPRISE",
+          "LIC-VG-ESS-PLTFM-ESS",
+          "LIC-VG-ESS-PLTFM-PREM",
+          "LIC-VG-ESS-PLUS-PLTFM-ESS",
+          "LIC-VG-ESS-PLUS-PLTFM-PREM",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PREM-PLTFM-ESS",
+          "LIC-VG-PREM-PLTFM-PREM",
+          "LIC-VG-PREMIER",
+          "LIC-VG-PREMIER-PLTFM-ESS",
+          "LIC-VG-PREMIER-PLTFM-PREM",
+          "LIC-VG-PREMIER-PS",
+          "LIC-VG-PS"
+        ],
+        "license_required": false
+      },
+      "feature_flag_name": ["asset-utilization-v2-enabled"],
+      "release_phase": "Open Beta",
+      "release_types": ["Early Adopter", "Phase 1"]
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "route_names": ["fleet_asset_utilization_use_cases", "fleet_asset_utilization_vehicle_engine_runtime"]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["device.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

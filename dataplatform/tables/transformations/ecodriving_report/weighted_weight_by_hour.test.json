@@ -1,0 +1,518 @@
+{
+  "test_cases": [
+    {
+      "label": "Generate data when engine is on the whole time.",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643135400000,
+            "value": {
+              "int_value": 5000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643136300000,
+            "value": {
+              "int_value": 6000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643137800000,
+            "value": {
+              "int_value": 1000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643139000000,
+            "state": "ON"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "device_id": 200,
+          "interval_start": "2022-01-25 18:00:00",
+          "interval_end": "2022-01-25 19:00:00",
+          "org_id": 100,
+          "weight_time": 1800000,
+          "weighted_weight": 9900000000
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "interval_start": "2022-01-25 19:00:00",
+          "interval_end": "2022-01-25 20:00:00",
+          "weight_time": 600000,
+          "weighted_weight": 3600000000
+        }
+      ]
+    },
+    {
+      "label": "Generate data when engine is on part of the time.",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643135400000,
+            "value": {
+              "int_value": 5000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643136300000,
+            "value": {
+              "int_value": 6000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643137800000,
+            "value": {
+              "int_value": 1000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643136600000,
+            "state": "ON"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643136900000,
+            "end_ms": 1643137800000,
+            "state": "ON"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "device_id": 200,
+          "interval_start": "2022-01-25 18:00:00",
+          "interval_end": "2022-01-25 19:00:00",
+          "org_id": 100,
+          "weight_time": 1500000,
+          "weighted_weight": 8100000000
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "interval_start": "2022-01-25 19:00:00",
+          "interval_end": "2022-01-25 20:00:00",
+          "weight_time": 600000,
+          "weighted_weight": 3600000000
+        }
+      ]
+    },
+    {
+      "label": "No data generated when there isn't any engine ON",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643135400000,
+            "value": {
+              "int_value": 5000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643136300000,
+            "value": {
+              "int_value": 6000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643137800000,
+            "value": {
+              "int_value": 1000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643136600000,
+            "state": "OTHER"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643136900000,
+            "end_ms": 1643137800000,
+            "state": "OFF"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643136900000,
+            "end_ms": 1643138800000,
+            "state": "IDLE"
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "No data generated when there is only zeroed weights",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643135400000,
+            "value": {
+              "int_value": 0,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643136300000,
+            "value": {
+              "int_value": 0,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643137800000,
+            "value": {
+              "int_value": 0,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643136600000,
+            "state": "ON"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643136900000,
+            "end_ms": 1643137800000,
+            "state": "ON"
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643136900000,
+            "end_ms": 1643138800000,
+            "state": "ON"
+          }
+        ]
+      },
+      "expected_data": []
+    },
+
+    {
+      "label": "Generate data when engine is ON from day before.",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643069400000,
+            "value": {
+              "int_value": 5000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643070000000,
+            "value": {
+              "int_value": 6000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643080000000,
+            "value": {
+              "int_value": 1000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-24",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643067000000,
+            "end_ms": 1643070600000,
+            "state": "ON"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "device_id": 200,
+          "interval_start": "2022-01-25 00:00:00",
+          "interval_end": "2022-01-25 01:00:00",
+          "org_id": 100,
+          "weight_time": 1200000,
+          "weighted_weight": 6600000000
+        }
+      ]
+    },
+    {
+      "label": "Generate data when first weight measured is from day before.",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-24",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643067000000,
+            "value": {
+              "int_value": 5000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643070600000,
+            "value": {
+              "int_value": 1000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-24",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643069400000,
+            "end_ms": 1643070600000,
+            "state": "ON"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "device_id": 200,
+          "interval_start": "2022-01-25 00:00:00",
+          "interval_end": "2022-01-25 01:00:00",
+          "org_id": 100,
+          "weight_time": 1200000,
+          "weighted_weight": 6000000000
+        }
+      ]
+    },
+    {
+      "label": "Generate data and filter out invalid stats (weight > 100,000 kg).",
+      "parameters": {
+        "start_date": " '2022-01-25' ",
+        "end_date": " '2022-01-26' "
+      },
+      "input_data": {
+        "kinesisstats.osdj1939cvwgrosscombinationvehicleweightkilograms": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643135400000,
+            "value": {
+              "int_value": 5000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643136300000,
+            "value": {
+              "int_value": 100000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643137200000,
+            "value": {
+              "int_value": 0,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643138100000,
+            "value": {
+              "int_value": 100000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          },
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "time": 1643139000000,
+            "value": {
+              "int_value": 10000,
+              "is_end": false,
+              "is_databreak": false
+            }
+          }
+        ],
+        "engine_state.intervals": [
+          {
+            "date": "2022-01-25",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1643131800000,
+            "end_ms": 1643139900000,
+            "state": "ON"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2022-01-25",
+          "device_id": 200,
+          "interval_start": "2022-01-25 18:00:00",
+          "interval_end": "2022-01-25 19:00:00",
+          "org_id": 100,
+          "weight_time": 1800000,
+          "weighted_weight": 9000000000
+        },
+        {
+          "date": "2022-01-25",
+          "org_id": 100,
+          "device_id": 200,
+          "interval_start": "2022-01-25 19:00:00",
+          "interval_end": "2022-01-25 20:00:00",
+          "weight_time": 1800000,
+          "weighted_weight": 9000000000
+        }
+      ]
+    }
+  ]
+}

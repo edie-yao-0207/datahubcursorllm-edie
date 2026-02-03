@@ -1,0 +1,17 @@
+{
+  "table": "protocol_to_signals",
+  "owner": "FirmwareVdp",
+  "description": "This table contains a mapping of a diagnostic bus type to protocols supported on that bus type",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "protocol",
+      "type": "string"
+    },
+    {
+      "name": "signal_type",
+      "type": "string"
+    }
+  ]
+}

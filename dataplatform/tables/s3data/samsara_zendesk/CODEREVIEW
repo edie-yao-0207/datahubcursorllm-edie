@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to Samsara_Zendesk S3 data should be cleared with Data Engineering."
+}

@@ -1,0 +1,12 @@
+{
+  "owner": "OEM",
+  "email_notifications": ["alerts-oem-low-urgenc-aaaag62iemr2mz7i6mz55tqmre@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "every_6_hours",
+      "cron": "0 0 0/6 ? * *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "product_review_metrics_weekly_backfill",
+  "owner": "DataEngineering",
+  "container_config": {
+    "resources": {
+      "requests": {
+        "cpu": "4000m",
+        "memory": "4096Mi"
+      }
+    }
+  },
+  "max_concurrent": 10,
+  "assets": [
+    "us-west-2:dataengineering.cloud_dashboard_user_activity_global",
+    "us-west-2:dataengineering.safety_api_usage_global",
+    "us-west-2:dataengineering.safety_event_coaching_sessions_global",
+    "us-west-2:dataengineering.safety_event_review_results_details",
+    "us-west-2:dataengineering.safety_event_review_results_details_region",
+    "eu-west-1:dataengineering.safety_event_review_results_details_region",
+    "us-west-2:dataengineering.safety_event_reviews_details",
+    "us-west-2:dataengineering.safety_event_reviews_details_region",
+    "eu-west-1:dataengineering.safety_event_reviews_details_region",
+    "us-west-2:dataengineering.safety_event_surveys_global",
+    "us-west-2:dataengineering.safety_event_surveys",
+    "eu-west-1:dataengineering.safety_event_surveys",
+    "us-west-2:dataengineering.safety_inbox_events_status_global",
+    "us-west-2:dataengineering.safety_inbox_events_status",
+    "eu-west-1:dataengineering.safety_inbox_events_status",
+    "us-west-2:dataengineering.video_requests_global",
+    "us-west-2:dataengineering.video_requests",
+    "eu-west-1:dataengineering.video_requests"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 12 * * *",
+      "backfill_window": 14,
+      "backfill_batch_size": 14
+    }
+  ]
+}

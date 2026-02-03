@@ -1,0 +1,11 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`created_at` TIMESTAMP,
+`param_key` BIGINT,
+`config_option` BIGINT,
+`config_value` DOUBLE,
+`profile_id` STRING,
+`partition` STRING

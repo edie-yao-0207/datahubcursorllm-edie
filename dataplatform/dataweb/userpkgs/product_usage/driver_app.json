@@ -1,0 +1,23 @@
+{
+  "feature_name": "Driver App",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17797212/Driver+app",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "serves_all": true
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "driver_app.sql",
+        "eu_sql_file": "driver_app_eu.sql",
+        "has_user_id_field": true,
+        "filter_internal_usage": false,
+        "usage_field": "event_count",
+        "operation": "SUM"
+      }
+    }
+  ]
+}

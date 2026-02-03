@@ -1,0 +1,56 @@
+{
+  "name": "pto_input.productive_pto",
+  "owner": "Sustainability",
+  "description": "Computes the union of the digio inputs that have productive PTO input types.",
+  "dependencies": [
+    {
+      "dbname": "pto_input",
+      "tablename": "transitions",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "pto_input",
+    "tablename": "productive_pto",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "start_ms"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": false
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      },
+      {
+        "name": "value",
+        "type": "long"
+      },
+      {
+        "name": "original_interval_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds of the original interval from which this interval is derived."
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

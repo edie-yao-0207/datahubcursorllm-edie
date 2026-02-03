@@ -1,0 +1,13 @@
+{
+  "owner": "DataScience",
+  "email_notifications": ["abhishyant.khare@samsara.com"],
+  "jobs": [
+    {
+      "name": "metric_forecast_alerts_test",
+      "cron": "0 0 9 ? * * *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ],
+  "python_libraries": ["pytest"]
+}

@@ -1,0 +1,139 @@
+{
+  "name": "engine_state_report.combined_location_intervals",
+  "owner": "Sustainability",
+  "description": "Combines location with engine state + PTO + fuel intervals",
+  "dependencies": [
+    {
+      "dbname": "engine_state_report",
+      "tablename": "engine_state_driver_intervals",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "location",
+      "type": "table"
+    }
+  ],
+  "spark_execution_environment": {
+    "spark_conf_overrides": {
+      "spark.databricks.optimizer.rangeJoin.binSize": "3600000"
+    }
+  },
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-10-01",
+  "sqlite_report_config": {
+    "report_name": "engine_state_report",
+    "staleness_monitors": [
+      {
+        "hours": 9,
+        "urgency": "LOW"
+      },
+      {
+        "hours": 13,
+        "urgency": "LOW"
+      },
+      {
+        "hours": 19,
+        "urgency": "HIGH"
+      }
+    ],
+    "team_runbook_url": "https://samsaradev.atlassian.net/wiki/x/XaMZmQ"
+  },
+  "output": {
+    "dbname": "engine_state_report",
+    "tablename": "combined_location_intervals",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "object_type", "object_id", "start_ms"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "nullable": false
+      },
+      {
+        "name": "object_id",
+        "type": "long"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      },
+      {
+        "name": "fuel_consumed_ml",
+        "type": "double"
+      },
+      {
+        "name": "gaseous_fuel_consumed_grams",
+        "type": "double"
+      },
+      {
+        "name": "avg_air_temp_c",
+        "type": "long"
+      },
+      {
+        "name": "driver_id",
+        "type": "long"
+      },
+      {
+        "name": "engine_state",
+        "type": "integer",
+        "nullable": false
+      },
+      {
+        "name": "pto_state",
+        "type": "long"
+      },
+      {
+        "name": "starting_latitude",
+        "type": "double"
+      },
+      {
+        "name": "starting_longitude",
+        "type": "double"
+      },
+      {
+        "name": "starting_house_number",
+        "type": "string"
+      },
+      {
+        "name": "starting_neighborhood",
+        "type": "string"
+      },
+      {
+        "name": "starting_street",
+        "type": "string"
+      },
+      {
+        "name": "starting_city",
+        "type": "string"
+      },
+      {
+        "name": "starting_state",
+        "type": "string"
+      },
+      {
+        "name": "starting_country",
+        "type": "string"
+      },
+      {
+        "name": "starting_post_code",
+        "type": "string"
+      }
+    ]
+  }
+}

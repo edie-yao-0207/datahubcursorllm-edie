@@ -1,0 +1,17 @@
+{
+  "name": "user_permissions",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:datamodel_platform.dim_users_organizations_permissions",
+    "eu-west-1:datamodel_platform.dim_users_organizations_permissions",
+    "ca-central-1:datamodel_platform.dim_users_organizations_permissions"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 06 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ]
+}

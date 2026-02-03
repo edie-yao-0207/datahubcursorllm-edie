@@ -1,0 +1,27 @@
+{
+  "name": "device_derived_stats_ca",
+  "owner": "FirmwareVDP",
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 16 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ],
+  "container_config": {
+    "resources": {
+      "requests": {
+        "cpu": "4000m",
+        "memory": "4096Mi"
+      }
+    }
+  },
+  "max_concurrent": 10,
+  "assets": [
+    "ca-central-1:product_analytics.agg_device_stats_secondary_consistency",
+    "ca-central-1:product_analytics.agg_device_stats_secondary_coverage",
+    "ca-central-1:product_analytics.agg_device_stats_secondary_response_ratio",
+    "ca-central-1:product_analytics.agg_device_stats_secondary_ratio"
+  ]
+}

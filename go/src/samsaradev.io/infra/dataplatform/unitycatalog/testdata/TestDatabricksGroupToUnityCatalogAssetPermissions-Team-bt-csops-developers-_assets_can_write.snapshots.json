@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "bt-csops-developers: assets can write",
+    "Values": [
+      {
+        "databases": [
+          "default.biztech_njaton"
+        ]
+      }
+    ]
+  }
+]

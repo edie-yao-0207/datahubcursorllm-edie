@@ -1,0 +1,66 @@
+{
+  "test_cases": [
+    {
+      "label": "retrieve all api logs in a certain time interval",
+      "parameters": {
+        "start_date": " '2021-08-29' ",
+        "end_date": " '2021-08-30' "
+      },
+      "input_data": {
+        "datastreams.api_logs": [
+          {
+            "date": "2021-08-29",
+            "org_id": 0,
+            "timestamp": "2021-08-29 18:00:00",
+            "status_code": "400",
+            "http_method": "GET",
+            "path_template": "v1/fleet/drivers/documents",
+            "access_token_id": "3920130",
+            "oauth_token_id": "",
+            "access_token_name": "test_token",
+            "oauth_token_uuid": ""
+          },
+          {
+            "date": "2021-08-29",
+            "org_id": 0,
+            "timestamp": "2021-08-29 18:10:00",
+            "status_code": "400",
+            "http_method": "GET",
+            "path_template": "v1/fleet/drivers/documents",
+            "access_token_id": "3920130",
+            "oauth_token_id": "",
+            "access_token_name": "test_token",
+            "oauth_token_uuid": ""
+          },
+          {
+            "date": "2021-08-29",
+            "org_id": 0,
+            "timestamp": "2021-08-29 18:20:00",
+            "status_code": "400",
+            "http_method": "GET",
+            "path_template": "v1/fleet/drivers/documents",
+            "access_token_id": "3920130",
+            "oauth_token_id": "",
+            "access_token_name": "test_token",
+            "oauth_token_uuid": ""
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2021-08-29",
+          "org_id": 0,
+          "status_code": "400",
+          "http_method": "GET",
+          "path_template": "v1/fleet/drivers/documents",
+          "access_token_id": "3920130",
+          "oauth_token_id": "",
+          "access_token_name": "test_token",
+          "oauth_token_uuid": "",
+          "interval_start": "2021-08-29 18:00:00",
+          "count": 3
+        }
+      ]
+    }
+  ]
+}

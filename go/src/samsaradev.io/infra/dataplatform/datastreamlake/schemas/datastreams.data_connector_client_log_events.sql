@@ -1,0 +1,11 @@
+`org_id` BIGINT,
+`run_id` STRING,
+`event_type` STRING,
+`metric_name` STRING,
+`metric_value` DOUBLE,
+`log` STRING,
+`tags` ARRAY<STRING>,
+`connector_type` STRING,
+`connector_version` STRING,
+`timestamp` TIMESTAMP,
+`date` DATE

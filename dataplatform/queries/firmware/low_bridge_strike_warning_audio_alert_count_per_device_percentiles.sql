@@ -1,0 +1,78 @@
+create or replace temp view cohort as (
+	select
+    org_id,
+    cm_device_id
+	from dataprep_firmware.cm_device_daily_metadata
+	where date = least(('{{ date_range.end }}'), (select string(max(date)) from dataprep_firmware.cm_device_daily_metadata))
+    and ('all' in ({{ org_type }}) or lower(org_type) in ({{ org_type }}))
+    and ('all' in ({{ org_id }}) or org_id in ({{ org_id }}))
+    and ('all' in ({{ vg_product_name }}) or vg_product_name in ({{ vg_product_name }}))
+    and ('all' in ({{ vg_firmware }}) or last_reported_vg_build in ({{ vg_firmware }}))
+    and ('all' in ({{ cm_product_name }}) or cm_product_name in ({{ cm_product_name }}))
+    and ('all' in ({{ cm_firmware }}) or last_reported_cm_build in ({{ cm_firmware }}))
+    and ('all' in ({{ cm_product_program_id }}) or cm_product_program_id in ({{ cm_product_program_id }}))
+    and ('all' in ({{ cm_rollout_stage_id }}) or cm_rollout_stage_id in ({{ cm_rollout_stage_id }}))
+    and ('all' in ({{ cm_feature_flag }}) or exists(cm_feature_flags, x -> concat(x.key, ":", x.value) in ({{ cm_feature_flag }})))
+    and ('all' in ({{ vg_feature_flag }}) or exists(vg_feature_flags, x -> concat(x.key, ":", x.value) in ({{ vg_feature_flag }})))
+    and ('all' in ({{ org_cell }}) or org_cell in ({{ org_cell }}))
+    and ('all' in ({{ org_release_track }}) or org_release_track in ({{ org_release_track }}))
+);
+
+create or replace temp view daily_cohort as (
+  select
+    a.date,
+    a.org_id,
+    a.cm_device_id,
+    a.vg_device_id
+  from dataprep_firmware.cm_device_daily_metadata as a
+  join cohort as b
+    on a.org_id = b.org_id
+    and a.cm_device_id = b.cm_device_id
+  where a.date between ('{{ date_range.start }}') and ('{{ date_range.end }}')
+    and ('all' in ({{ vg_firmware }}) or a.last_reported_vg_build in ({{ vg_firmware }}))
+    and ('all' in ({{ cm_firmware }}) or a.last_reported_cm_build in ({{ cm_firmware }}))
+);
+
+create or replace temp view filtered_devices as (
+  select
+    a.date,
+    a.org_id,
+    a.cm_device_id as device_id
+  from
+    daily_cohort as a
+    join dataprep_firmware.low_bridge_strike_daily_active_devices as b
+      on a.date = b.date
+      and a.cm_device_id = b.device_id
+      and a.org_id = b.org_id
+);
+
+create or replace temp view count_per_device as (
+  select
+    b.date,
+    b.org_id,
+    b.device_id,
+    coalesce(sum(a.count), 0) as count
+  from
+    dataprep_firmware.low_bridge_strike_warning_audio_alert_count as a
+    right join filtered_devices as b
+      on a.date = b.date
+      and a.org_id = b.org_id
+      and a.device_id = b.device_id
+  group by
+    b.date,
+    b.org_id,
+    b.device_id
+);
+
+select
+  date,
+  percentile_approx(count, 0.5) as median,
+  percentile_approx(count, 0.75) as p75,
+  percentile_approx(count, 0.90) as p90,
+  percentile_approx(count, 0.99) as p99
+from
+  count_per_device
+group by
+  date
+order by
+  date desc

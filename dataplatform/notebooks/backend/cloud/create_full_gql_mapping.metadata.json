@@ -1,0 +1,12 @@
+{
+  "owner": "Cloud",
+  "jobs": [
+    {
+      "name": "gqlmapping-full-csv",
+      "cron": "0 0 8 ? * * *",
+      "regions": ["us-west-2"],
+      "timeout_seconds": 7200,
+      "spark_version": "default"
+    }
+  ]
+}

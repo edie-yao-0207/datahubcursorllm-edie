@@ -1,0 +1,40 @@
+{
+  "view": "transaction_addresses",
+  "owner": "PlatformOperations",
+  "description": "Selects a single address for every transaction / invoice",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "transaction_id", "type": "double" },
+    { "name": "bill_address_line_1", "type": "string" },
+    { "name": "bill_address_line_2", "type": "string" },
+    { "name": "bill_address_line_3", "type": "string" },
+    { "name": "bill_city", "type": "string" },
+    { "name": "bill_company", "type": "string" },
+    { "name": "bill_country", "type": "string" },
+    { "name": "bill_name", "type": "string" },
+    { "name": "bill_phone_number", "type": "string" },
+    { "name": "bill_state", "type": "string" },
+    { "name": "bill_zip", "type": "string" },
+    { "name": "ship_address_line_1", "type": "string" },
+    { "name": "ship_address_line_2", "type": "string" },
+    { "name": "ship_address_line_3", "type": "string" },
+    { "name": "ship_attention", "type": "string" },
+    { "name": "ship_city", "type": "string" },
+    { "name": "ship_company", "type": "string" },
+    { "name": "ship_country", "type": "string" },
+    { "name": "ship_name", "type": "string" },
+    { "name": "ship_phone_number", "type": "string" },
+    { "name": "ship_state", "type": "string" },
+    { "name": "ship_zip", "type": "string" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transaction_address",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

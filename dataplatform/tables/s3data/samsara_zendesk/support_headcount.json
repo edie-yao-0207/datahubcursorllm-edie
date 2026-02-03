@@ -1,0 +1,148 @@
+{
+  "table": "supportops_workday_employees",
+  "owner": "Support",
+  "description": "Table with support team headcount information. This gets updated manually from an export via workday. This has a very specific use case, it's unlikely you want to use this unless you already know what it is. Contact Evelyn Wang or Sadhana Ganeshan.",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-databricks-workspace/managed_tables/support/supportops_headcount.csv"
+  },
+  "csv": {
+    "header": true
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "employee_id",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Employee ID"
+      }
+    },
+    {
+      "name": "position",
+      "type": "string",
+      "metadata": {
+        "comment": "Position"
+      }
+    },
+    {
+      "name": "active_status",
+      "type": "string",
+      "metadata": {
+        "comment": "Active Status"
+      }
+    },
+    {
+      "name": "cost_center",
+      "type": "string",
+      "metadata": {
+        "comment": "Cost Center"
+      }
+    },
+    {
+      "name": "cost_center_hierarchy",
+      "type": "string",
+      "metadata": {
+        "comment": "Cost Center Hierarchy"
+      }
+    },
+    {
+      "name": "cost_center_parent",
+      "type": "string",
+      "metadata": {
+        "comment": "Cost Center Parent"
+      }
+    },
+    {
+      "name": "department",
+      "type": "string",
+      "metadata": {
+        "comment": "Department"
+      }
+    },
+    {
+      "name": "supervisory_organization",
+      "type": "string",
+      "metadata": {
+        "comment": "Supervisory Organization"
+      }
+    },
+    {
+      "name": "worker",
+      "type": "string",
+      "metadata": {
+        "comment": "Worker"
+      }
+    },
+    {
+      "name": "worker_type",
+      "type": "string",
+      "metadata": {
+        "comment": "Worker Type"
+      }
+    },
+    {
+      "name": "job_profile",
+      "type": "string",
+      "metadata": {
+        "comment": "Job Profile"
+      }
+    },
+    {
+      "name": "business_title",
+      "type": "string",
+      "metadata": {
+        "comment": "Business Title"
+      }
+    },
+    {
+      "name": "email_primary_work",
+      "type": "string",
+      "metadata": {
+        "comment": "Email"
+      }
+    },
+    {
+      "name": "location",
+      "type": "string",
+      "metadata": {
+        "comment": "Location"
+      }
+    },
+    {
+      "name": "manager",
+      "type": "string",
+      "metadata": {
+        "comment": "Manager"
+      }
+    },
+    {
+      "name": "manager_id",
+      "type": "string",
+      "metadata": {
+        "comment": "manager_id"
+      }
+    },
+    {
+      "name": "sign_date",
+      "type": "string",
+      "metadata": {
+        "comment": "Sign Date"
+      }
+    },
+    {
+      "name": "hire_date",
+      "type": "string",
+      "metadata": {
+        "comment": "Hire Date"
+      }
+    },
+    {
+      "name": "termination_date",
+      "type": "string",
+      "metadata": {
+        "comment": "Termination Date"
+      }
+    }
+  ]
+}

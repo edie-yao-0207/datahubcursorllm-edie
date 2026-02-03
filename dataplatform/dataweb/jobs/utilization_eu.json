@@ -1,0 +1,13 @@
+{
+  "name": "utilization_eu",
+  "owner": "DataEngineering",
+  "assets": ["eu-west-1:product_analytics_staging.fct_device_utilization"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "30 10 * * *",
+      "backfill_window": 7,
+      "backfill_batch_size": 1
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "apptelematics.tracking_sessions",
+  "owner": "AppTelematics",
+  "description": "Generate metrics for every app telematics tracking session logged from Driver App",
+  "nonproduction": true,
+  "disabled_regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+  "dependencies": [
+    {
+      "dbname": "datastreams",
+      "tablename": "mobile_logs",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "kinesisstats",
+      "tablename": "location",
+      "type": "table",
+      "external": true
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "apptelematics",
+    "tablename": "tracking_sessions",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "driver_id", "device_id", "tracking_start"],
+    "write_mode": "overwrite",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "$date_default_description"
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "org ID associated with driver who logged the trip"
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$device_id_default_description"
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "metadata": {
+          "comment": "Driver ID who logged the tracking session"
+        }
+      },
+      {
+        "name": "num_loc_points",
+        "type": "long",
+        "metadata": {
+          "comment": "Number of location points ingested during the tracking session defined by (device_id, tracking_start, tracking_end"
+        },
+        "nullable": false
+      },
+      {
+        "name": "tracking_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "datetime the ABT tracking session started"
+        }
+      },
+      {
+        "name": "tracking_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "datetime the ABT tracking session ended"
+        }
+      }
+    ]
+  }
+}

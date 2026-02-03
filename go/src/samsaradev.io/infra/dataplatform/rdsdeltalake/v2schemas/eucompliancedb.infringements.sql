@@ -1,0 +1,22 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`driver_id` BIGINT,
+`violation_id` INT,
+`timestamp_ms` BIGINT,
+`uuid` STRING,
+`metadata` STRUCT<
+  `primary_timestamp_ms`: BIGINT,
+  `secondary_timestamp_ms`: BIGINT,
+  `primary_duration_ms`: BIGINT,
+  `secondary_duration_ms`: BIGINT,
+  `count`: BIGINT
+>,
+`_raw_metadata` STRING,
+`duration_ms` BIGINT,
+`acknowledge_timestamp_ms` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`date` STRING

@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/data-platform"
+  ],
+  "description": "Changes the Databricks Billing asset should be cleared with Data Platform."
+}

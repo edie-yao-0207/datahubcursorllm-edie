@@ -1,0 +1,102 @@
+{
+  "table": "global_obd_config_passenger_signal_defs",
+  "owner": "FirmwareVdp",
+  "description": "Passenger signal definitions parsed and converted from global_obd_configuration.go",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-databricks-workspace/managed_tables/vdp/global_obd_config_20250930.csv",
+    "eu-west-1": "s3://samsara-eu-databricks-workspace/managed_tables/vdp/global_obd_config_20250930.csv"
+  },
+  "datatype": "csv",
+  "csv": {
+    "header": true,
+    "multiline": true,
+    "escape": "\""
+  },
+  "schema": [
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year",
+      "type": "bigint"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "fuel_type",
+      "type": "string"
+    },
+    {
+      "name": "obd_value",
+      "type": "bigint"
+    },
+    {
+      "name": "bus_id",
+      "type": "bigint"
+    },
+    {
+      "name": "source",
+      "type": "bigint"
+    },
+    {
+      "name": "electrification_type",
+      "type": "string"
+    },
+    {
+      "name": "bit_start",
+      "type": "bigint"
+    },
+    {
+      "name": "bit_length",
+      "type": "bigint"
+    },
+    {
+      "name": "sign",
+      "type": "bigint"
+    },
+    {
+      "name": "endian",
+      "type": "bigint"
+    },
+    {
+      "name": "scale",
+      "type": "double"
+    },
+    {
+      "name": "offset",
+      "type": "double"
+    },
+    {
+      "name": "minimum",
+      "type": "double"
+    },
+    {
+      "name": "maximum",
+      "type": "double"
+    },
+    {
+      "name": "data_identifier",
+      "type": "bigint"
+    },
+    {
+      "name": "passive_response_mask",
+      "type": "bigint"
+    },
+    {
+      "name": "response_id",
+      "type": "bigint"
+    },
+    {
+      "name": "request_id",
+      "type": "bigint"
+    }
+  ]
+}

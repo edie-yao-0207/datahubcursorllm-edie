@@ -1,0 +1,11 @@
+{
+  "owners": [
+    "samsara-dev/connectedequipment"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-platform",
+    "samsara-dev/platform-reports",
+    "samsara-dev/stce"
+  ],
+  "description": "Tag @samsara-dev/connectedequipment for a code review and message the #ask-connected-equipment slack channel."
+}

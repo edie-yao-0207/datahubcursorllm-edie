@@ -1,0 +1,38 @@
+{
+  "owner": "FirmwareTelematicsPlatform",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "dataprep_trip_distances",
+    "type": "table",
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "90th_percentile",
+        "type": "double"
+      },
+      {
+        "name": "75th_percentile",
+        "type": "double"
+      },
+      {
+        "name": "50th_percentile",
+        "type": "double"
+      },
+      {
+        "name": "total_trips",
+        "type": "long"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/data-platform"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/dev"
+  ],
+  "description": "Anyone should be able to commit the auto generated files."
+}

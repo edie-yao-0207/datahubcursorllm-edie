@@ -1,0 +1,55 @@
+{
+  "name": "data_analytics.telematics_daily_modi_attached_devices",
+  "owner": "DataAnalytics",
+  "description": "This table reports which VG devices have a modi attached on a given day.",
+  "nonproduction": true,
+  "dependencies": [
+    { "external": true, "dbname": "productsdb", "tablename": "gateways", "type": "table" },
+    { "external": true, "dbname": "productsdb", "tablename": "devices", "type": "table" },
+    { "external": true, "dbname": "kinesisstats", "tablename": "osdattachedusbdevices", "type": "table" }
+  ],
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  },
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2020-01-01",
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "telematics_daily_modi_attached_devices",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id"],
+    "schema": [
+      {
+        "name": "date",
+        "nullable": false,
+        "type": "date",
+        "metadata": {
+          "comment": "Date that data was considered."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "Associated organization ID for each device."
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "VG device ID."
+        }
+      },
+      {
+        "name": "has_modi",
+        "type": "boolean",
+        "metadata": {
+          "comment": "True if the device has a modi attached to it on given date."
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

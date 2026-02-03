@@ -1,0 +1,86 @@
+{
+  "name": "ecodriving_report.weighted_weight_by_hour",
+  "owner": "Sustainability",
+  "description": "Determines the average weight of a vehicle and buckets by hour.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdj1939cvwgrosscombinationvehicleweightkilograms",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "engine_state",
+      "tablename": "intervals",
+      "type": "table"
+    }
+  ],
+  "tags": ["ecodriving"],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "ecodriving_report",
+    "tablename": "weighted_weight_by_hour",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": false,
+        "metadata": {
+          "comment": "The date of the hourly interval."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$device_id_default_description"
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "nullable": false,
+        "metadata": {
+          "comment": "The timestamp at the beginning of this hourly bucket."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "nullable": false,
+        "metadata": {
+          "comment": "The timestamp at the end of this hourly bucket."
+        }
+      },
+      {
+        "name": "weight_time",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "Sum of the millisecond duration within hourly interval for a device when we had weight reported."
+        }
+      },
+      {
+        "name": "weighted_weight",
+        "type": "long",
+        "nullable": true,
+        "metadata": {
+          "comment": "Average weight reported on the interval multiplied by the duration of that interval (weight_time). This value is reported in Kilograms * milliseconds. The average weight can be calculated as weighted_weight/weight_time."
+        }
+      }
+    ]
+  }
+}

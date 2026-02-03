@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`uuid` STRING,
+`email` STRING,
+`user_id` BIGINT,
+`details` STRUCT<`org_id`: BIGINT>,
+`_raw_details` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

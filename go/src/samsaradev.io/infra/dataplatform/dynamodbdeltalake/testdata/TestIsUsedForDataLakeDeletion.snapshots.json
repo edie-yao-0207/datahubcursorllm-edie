@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "tables with IsUsedForDataLakeDeletion set",
+    "Values": [
+      [
+        "ks0-kinesisstats-deleter-journal",
+        "ks1-kinesisstats-deleter-journal",
+        "ks2-kinesisstats-deleter-journal",
+        "ks3-kinesisstats-deleter-journal",
+        "ks4-kinesisstats-deleter-journal",
+        "ks5-kinesisstats-deleter-journal"
+      ]
+    ]
+  }
+]

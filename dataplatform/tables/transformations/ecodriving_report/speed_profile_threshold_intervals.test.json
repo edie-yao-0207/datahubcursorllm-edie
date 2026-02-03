@@ -1,0 +1,144 @@
+{
+  "test_cases": [
+    {
+      "label": "expect intervals to start at first setting (21:30) and then be modified at second setting (22:30)",
+      "parameters": {
+        "start_date": " '2020-01-25' ",
+        "end_date": " '2020-01-26' "
+      },
+      "input_data": {
+        "fueldb_shards.profile_speed_thresholds": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "profile_id": 200,
+            "meters_per_second": 300,
+            "created_at": 1579987800000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "profile_id": 200,
+            "meters_per_second": 400,
+            "created_at": 1579991400000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 200,
+          "interval_start": "2020-01-25 21:00:00",
+          "interval_end": "2020-01-25 22:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 300.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 200,
+          "interval_start": "2020-01-25 22:00:00",
+          "interval_end": "2020-01-25 23:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 350.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 200,
+          "interval_start": "2020-01-25 23:00:00",
+          "interval_end": "2020-01-26 00:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 400.0
+        }
+      ]
+    },
+    {
+      "label": "handle two profiles",
+      "parameters": {
+        "start_date": " '2020-01-25' ",
+        "end_date": " '2020-01-26' "
+      },
+      "input_data": {
+        "fueldb_shards.profile_speed_thresholds": [
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "profile_id": 200,
+            "meters_per_second": 300,
+            "created_at": 1579987800000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "profile_id": 300,
+            "meters_per_second": 600,
+            "created_at": 1579987800000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "profile_id": 200,
+            "meters_per_second": 400,
+            "created_at": 1579991400000
+          },
+          {
+            "date": "2020-01-25",
+            "org_id": 100,
+            "profile_id": 300,
+            "meters_per_second": 900,
+            "created_at": 1579991400000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 200,
+          "interval_start": "2020-01-25 21:00:00",
+          "interval_end": "2020-01-25 22:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 300.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 300,
+          "interval_start": "2020-01-25 21:00:00",
+          "interval_end": "2020-01-25 22:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 600.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 200,
+          "interval_start": "2020-01-25 22:00:00",
+          "interval_end": "2020-01-25 23:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 350.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 300,
+          "interval_start": "2020-01-25 22:00:00",
+          "interval_end": "2020-01-25 23:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 750.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 200,
+          "interval_start": "2020-01-25 23:00:00",
+          "interval_end": "2020-01-26 00:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 400.0
+        },
+        {
+          "date": "2020-01-25",
+          "org_id": 100,
+          "profile_id": 300,
+          "interval_start": "2020-01-25 23:00:00",
+          "interval_end": "2020-01-26 00:00:00",
+          "custom_speed_profile_threshold_meters_per_second": 900.0
+        }
+      ]
+    }
+  ]
+}

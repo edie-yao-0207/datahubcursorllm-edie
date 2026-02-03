@@ -1,0 +1,214 @@
+[
+  {
+    "Name": "job_id:400",
+    "Values": [
+      [
+        {
+          "metric": "dev.databricks.jobs.task.run.finish",
+          "points": [
+            [
+              1640991600,
+              1
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "existing_cluster_id:cluster-that-does-not-exist-anymore",
+            "existing_cluster_name:",
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "spark_version:unknown",
+            "status:failure",
+            "task_name:"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.setup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "existing_cluster_id:cluster-that-does-not-exist-anymore",
+            "existing_cluster_name:",
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "spark_version:unknown",
+            "status:failure",
+            "task_name:"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.execution_duration",
+          "points": [
+            [
+              1640991600,
+              90
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "existing_cluster_id:cluster-that-does-not-exist-anymore",
+            "existing_cluster_name:",
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "spark_version:unknown",
+            "status:failure",
+            "task_name:"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.cleanup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "existing_cluster_id:cluster-that-does-not-exist-anymore",
+            "existing_cluster_name:",
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "spark_version:unknown",
+            "status:failure",
+            "task_name:"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.task.run.duration",
+          "points": [
+            [
+              1640991600,
+              18000000
+            ]
+          ],
+          "tags": [
+            "attempt_number:0",
+            "existing_cluster_id:cluster-that-does-not-exist-anymore",
+            "existing_cluster_name:",
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "spark_version:unknown",
+            "status:failure",
+            "task_name:"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.finish",
+          "points": [
+            [
+              1640991600,
+              1
+            ]
+          ],
+          "tags": [
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "status:failure"
+          ],
+          "type": "rate"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.setup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "status:failure"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.execution_duration",
+          "points": [
+            [
+              1640991600,
+              90
+            ]
+          ],
+          "tags": [
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "status:failure"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.cleanup_duration",
+          "points": [
+            [
+              1640991600,
+              5
+            ]
+          ],
+          "tags": [
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "status:failure"
+          ],
+          "type": "gauge"
+        },
+        {
+          "metric": "dev.databricks.jobs.run.duration",
+          "points": [
+            [
+              1640991600,
+              18000000
+            ]
+          ],
+          "tags": [
+            "failure_type:canceled",
+            "job_id:400",
+            "job_name:test_job_4",
+            "region:us-west-2",
+            "serverless:true",
+            "status:failure"
+          ],
+          "type": "gauge"
+        }
+      ]
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+`timestamp` TIMESTAMP,
+`org_device_identifier` STRING,
+`settings_type_identifier` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`updated_at` TIMESTAMP,
+`settings_type` INT,
+`settings_data` BINARY,
+`date` DATE

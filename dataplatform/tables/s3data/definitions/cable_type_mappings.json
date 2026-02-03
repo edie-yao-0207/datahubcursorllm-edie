@@ -1,0 +1,34 @@
+{
+  "table": "cable_type_mappings",
+  "owner": "FirmwareVdp",
+  "description": "Maps VG type and Cable ID to a Cable Type",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "description": "The internal ID of the Samsara product"
+    },
+    {
+      "name": "cable_id",
+      "type": "bigint",
+      "description": "The cable id for the onboard diagnostic port (OBD) /n/n [Cable IDs](https://github.com/samsara-dev/firmware/blob/5c4bcb202d56008af10811b383afe14b07ce2840/samsara/go/src/firmware.samsaradev.io/platform/cableid.go#L138)"
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "description": "The name of the cable for the Samsara product. Note: In some cases for older cables, one or more cable types can map to a cable_id depending on factors like make, model etc.,"
+    },
+    {
+      "name": "has_modi_or_override",
+      "type": "boolean",
+      "description": "A boolean flag (i.e., 'true' or 'false) indicating whether a modi hw or a device/org JSON override is required for the cable type to operate with the product"
+    },
+    {
+      "name": "diagnostics_capable",
+      "type": "boolean",
+      "description": "A boolean flag indicating if a given cable and product combination support diagnostics. Power only cables, for example, do not support diagnostics."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`uuid` STRING,
+`org_id` BIGINT,
+`android_device_id` STRING,
+`last_location_updated_at` TIMESTAMP,
+`last_location_lat` DOUBLE,
+`last_location_lng` DOUBLE,
+`last_driver_ids` STRING,
+`last_vehicle_id` BIGINT,
+`partition` STRING

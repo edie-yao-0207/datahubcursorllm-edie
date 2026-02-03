@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`collection_uuid` STRING,
+`device_id` BIGINT,
+`product_id` BIGINT,
+`start_at` TIMESTAMP,
+`end_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

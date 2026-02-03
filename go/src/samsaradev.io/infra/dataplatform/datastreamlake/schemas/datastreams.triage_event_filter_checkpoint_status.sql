@@ -1,0 +1,12 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`event_ms` BIGINT,
+`event_id` BIGINT,
+`filter_name` STRING,
+`version` BIGINT,
+`accel_type` STRING,
+`coaching_state` STRING,
+`trip_start_ms` BIGINT,
+`status` STRING,
+`date` DATE

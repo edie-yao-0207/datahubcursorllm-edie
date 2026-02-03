@@ -1,0 +1,7 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to Dataprep notebooks should be cleared with Data Engineering.",
+  "noParent": true
+}

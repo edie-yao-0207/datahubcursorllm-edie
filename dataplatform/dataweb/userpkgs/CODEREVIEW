@@ -1,0 +1,10 @@
+{
+  "owners": [
+    "samsara-dev/data-tools"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/dev"
+  ],
+  "description": "Changes to dataweb/userpkgs directory must be approved by DataTools",
+  "noParent": true
+}

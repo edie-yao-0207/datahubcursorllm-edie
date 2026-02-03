@@ -1,0 +1,221 @@
+{
+  "view": "agg_product_scorecard_platform_mpr_revised_global",
+  "owner": "DataEngineering",
+  "description": "This view contains all Platform MPR metrics data",
+  "database": "product_analytics",
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "date", "type": "string", "description": "Date partition" },
+    { "name": "period_start", "type": "string", "description": "Start of period" },
+    { "name": "period_end", "type": "string", "description": "End of period" },
+    { "name": "sam_number", "type": "string", "description": "SAM number for set of orgs" },
+    { "name": "account_size_segment", "type": "string", "description": "Account size segment of grouping" },
+    { "name": "account_arr_segment", "type": "string", "description": "Account ARR segment of grouping" },
+    { "name": "account_billing_country", "type": "string", "description": "Billing country of the account" },
+    { "name": "account_industry", "type": "string", "description": "Account industry of grouping" },
+    { "name": "industry_vertical", "type": "string", "description": "Industry vertical of grouping" },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Safety licenses or not"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Telematics licenses or not"
+    },
+    { "name": "is_paid_stce_customer", "type": "boolean", "description": "Whether the SAM has STCE licenses or not" },
+    { "name": "account_csm_email", "type": "string", "description": "CSM email of the account" },
+    { "name": "account_name", "type": "string", "description": "Name of the account" },
+    { "name": "account_id", "type": "string", "description": "ID of the account" },
+    {
+      "name": "full_admin_account",
+      "type": "long",
+      "description": "Whether account has all users as admins or not"
+    },
+    {
+      "name": "full_admin_users",
+      "type": "long",
+      "description": "Total number of users in account with full admin role"
+    },
+    {
+      "name": "custom_role_account",
+      "type": "long",
+      "description": "Whether account has at least one user with a custom role or not"
+    },
+    {
+      "name": "custom_role_users",
+      "type": "long",
+      "description": "Total number of users in account with a custom role"
+    },
+    {
+      "name": "account_with_two_plus_users",
+      "type": "long",
+      "description": "Whether account has at least two users or not"
+    },
+    {
+      "name": "total_users",
+      "type": "long",
+      "description": "Total number of users in account"
+    },
+    {
+      "name": "device_tags_account",
+      "type": "long",
+      "description": "Whether account has at least one device with a tag or not"
+    },
+    {
+      "name": "device_tags",
+      "type": "long",
+      "description": "Total number of devices in account with a tag"
+    },
+    {
+      "name": "device_attributes_account",
+      "type": "long",
+      "description": "Whether account has at least one device with an attribute or not"
+    },
+    {
+      "name": "device_attributes",
+      "type": "long",
+      "description": "Total number of devices in account with an attribute"
+    },
+    {
+      "name": "device_account",
+      "type": "long",
+      "description": "Whether account has at least one device or not"
+    },
+    {
+      "name": "total_devices",
+      "type": "long",
+      "description": "Total number of devices in account"
+    },
+    {
+      "name": "driver_tags_account",
+      "type": "long",
+      "description": "Whether account has at least one driver with a tag or not"
+    },
+    {
+      "name": "driver_tags",
+      "type": "long",
+      "description": "Total number of drivers in account with a tag"
+    },
+    {
+      "name": "driver_attributes_account",
+      "type": "long",
+      "description": "Whether account has at least one driver with an attribute or not"
+    },
+    {
+      "name": "driver_attributes",
+      "type": "long",
+      "description": "Total number of devices in account with an attribute"
+    },
+    {
+      "name": "driver_account",
+      "type": "long",
+      "description": "Whether account has at least one driver or not"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long",
+      "description": "Total number of drivers in account"
+    },
+    {
+      "name": "installed_vg",
+      "type": "long",
+      "description": "Number of installed VG devices during the period"
+    },
+    {
+      "name": "installed_at",
+      "type": "long",
+      "description": "Number of installed AT devices during the period"
+    },
+    {
+      "name": "installed_ag",
+      "type": "long",
+      "description": "Number of installed AG devices during the period"
+    },
+    {
+      "name": "installed_cm",
+      "type": "long",
+      "description": "Number of installed CM devices during the period"
+    },
+    {
+      "name": "at_with_photo",
+      "type": "long",
+      "description": "Number of AT devices installed during the period with a photo attached"
+    },
+    {
+      "name": "ag_with_photo",
+      "type": "long",
+      "description": "Number of AG devices installed during the period with a photo attached"
+    },
+    {
+      "name": "vg_with_photo",
+      "type": "long",
+      "description": "Number of VG devices installed during the period with a photo attached"
+    },
+    {
+      "name": "complete_flow_ag",
+      "type": "long",
+      "description": "Number of AG devices that completed the installation flow"
+    },
+    {
+      "name": "complete_flow_vg",
+      "type": "long",
+      "description": "Number of VG devices that completed the installation flow"
+    },
+    {
+      "name": "complete_flow_cm",
+      "type": "long",
+      "description": "Number of CM devices that completed the installation flow"
+    },
+    {
+      "name": "complete_flow_at",
+      "type": "long",
+      "description": "Number of AT devices that completed the installation flow"
+    },
+    {
+      "name": "total_time_to_install_vg",
+      "type": "long",
+      "description": "Total time taken to install VG devices (seconds)"
+    },
+    {
+      "name": "total_time_to_install_ag",
+      "type": "long",
+      "description": "Total time taken to install AG devices (seconds)"
+    },
+    {
+      "name": "total_time_to_install_at",
+      "type": "long",
+      "description": "Total time taken to install AT devices (seconds)"
+    },
+    {
+      "name": "total_time_to_install_cm",
+      "type": "long",
+      "description": "Total time taken to install CM devices (seconds)"
+    },
+    {
+      "name": "correctly_installed_vg",
+      "type": "long",
+      "description": "Number of VG devices that were correctly installed"
+    },
+    {
+      "name": "correctly_installed_cm",
+      "type": "long",
+      "description": "Number of CM devices that were correctly installed"
+    },
+    {
+      "name": "csv_upload_failures",
+      "type": "long",
+      "description": "Number of CSV uploads with at least one error row"
+    },
+    { "name": "csv_uploads", "type": "long", "description": "Number of CSV uploads" }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_scorecard_platform_mpr_global_revised_monthly",
+      "type": "table"
+    }
+  ]
+}

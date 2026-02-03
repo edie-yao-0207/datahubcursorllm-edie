@@ -1,0 +1,10 @@
+{
+  "owners": [
+    "samsara-dev/firmwaretelematicsplatform"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/firmwaretelematicsapps",
+    "samsara-dev/firmwarecore"
+  ],
+  "description": "VG release metric pipelines."
+}

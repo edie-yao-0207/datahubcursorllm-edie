@@ -1,0 +1,60 @@
+{
+  "name": "objectstat_diffs.limited_accel_engine_torque_over_limit",
+  "owner": "Sustainability",
+  "description": "Calculate limited accel diffs from kinesisstats.osdderivedaccelenginetorqueoverlimitwhilenotoncruisecontrolms object stat",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdderivedaccelenginetorqueoverlimitwhilenotoncruisecontrolms",
+      "type": "table"
+    }
+  ],
+  "tags": ["ecodriving"],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "objectstat_diffs",
+    "tablename": "limited_accel_engine_torque_over_limit",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "object_id", "time"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date when limited accel engine torque over limit time was reported."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The ID of the Samsara device from which limited accel engine torque over limit time was recorded."
+        }
+      },
+      {
+        "name": "time",
+        "type": "long",
+        "metadata": {
+          "comment": "The end time in milliseconds at which limited accel engine torque over limit time was recorded."
+        }
+      },
+      {
+        "name": "limited_accel_engine_torque_over_limit_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Summed total time engine torque over limit while cruise control disabled (ms)."
+        }
+      }
+    ]
+  }
+}

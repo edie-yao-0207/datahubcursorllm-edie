@@ -1,0 +1,120 @@
+{
+  "name": "agg_product_scorecard_safety_mpr_global_revised_monthly",
+  "owner": "DataEngineering",
+  "description": "Monthly Safety MPR metrics for SAM groupings",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date_month",
+      "type": "string"
+    },
+    {
+      "name": "period_start",
+      "type": "string"
+    },
+    {
+      "name": "period_end",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "industry_vertical",
+      "type": "string"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "account_csm_email",
+      "type": "string"
+    },
+    {
+      "name": "account_name",
+      "type": "string"
+    },
+    {
+      "name": "account_id",
+      "type": "string"
+    },
+    {
+      "name": "account_created_date",
+      "type": "string"
+    },
+    {
+      "name": "dual_facing_cam",
+      "type": "boolean"
+    },
+    {
+      "name": "account_renewal_12mo",
+      "type": "boolean"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers_using_app_month",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers_using_app",
+      "type": "long"
+    },
+    {
+      "name": "assigned_trainings",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers_assigned_training",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers_completing_training_on_time",
+      "type": "long"
+    },
+    {
+      "name": "drivers_completing_manager_led_coaching",
+      "type": "long"
+    },
+    {
+      "name": "drivers_completing_self_coaching",
+      "type": "long"
+    },
+    {
+      "name": "drivers_completing_coaching",
+      "type": "long"
+    },
+    {
+      "name": "miles",
+      "type": "double"
+    }
+  ]
+}

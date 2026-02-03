@@ -1,0 +1,9 @@
+`session_uuid` STRING,
+`offset_from_start_ms` BIGINT,
+`client_recorded_timestamp_ms` BIGINT,
+`server_recorded_timestamp_ms` BIGINT,
+`session_state` STRING,
+`org_id` BIGINT,
+`user_id` BIGINT,
+`cell` STRING,
+`date` DATE

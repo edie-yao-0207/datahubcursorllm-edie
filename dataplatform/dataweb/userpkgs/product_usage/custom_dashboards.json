@@ -1,0 +1,25 @@
+{
+  "feature_name": "Custom Dashboards",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17777356/Custom+Dashboards",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "feature_flag_name": ["custom-dashboards-enabled"],
+      "release_phase": "Closed Beta"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "route_names": ["custom_dashboard_view"]
+    }
+  ],
+  "user_eligibility_array": [
+    {
+      "effective_date": "2024-01-01",
+      "actions": ["custom_reports.read"],
+      "action_logic": "AND",
+      "tag_roles_supported": true
+    }
+  ]
+}

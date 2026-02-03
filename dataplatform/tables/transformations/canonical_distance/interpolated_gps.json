@@ -1,0 +1,42 @@
+{
+  "name": "canonical_distance.interpolated_gps",
+  "owner": "TelematicsData",
+  "description": "Calculate a higher granularity osdgpsdistance stat by interpolating between points using location gps distance",
+  "dependencies": [
+    { "dbname": "objectstat_diffs", "tablename": "location", "type": "table" },
+    { "dbname": "kinesisstats_window", "tablename": "osdgpsdistance", "type": "table" }
+  ],
+  "parameters": ["start_date", "end_date", "pipeline_execution_time"],
+  "backfill_start_date": "2021-01-31",
+  "output": {
+    "dbname": "canonical_distance",
+    "tablename": "interpolated_gps",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "time_ms"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      { "name": "date", "type": "string" },
+      { "name": "device_id", "type": "long" },
+      { "name": "time_ms", "type": "long" },
+      { "name": "gps_distance", "type": "double" },
+      {
+        "name": "previous",
+        "type": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "time_ms",
+              "type": "long"
+            },
+            {
+              "name": "gps_distance",
+              "type": "double"
+            }
+          ]
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

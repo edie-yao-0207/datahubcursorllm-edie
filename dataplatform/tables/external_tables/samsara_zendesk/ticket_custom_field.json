@@ -1,0 +1,20 @@
+{
+  "table": "ticket_custom_field",
+  "owner": "DataEngineering",
+  "description": "Zendesk Ticket Custom Field Table from Fivetran",
+  "database": "samsara_zendesk",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "title",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    }
+  ]
+}

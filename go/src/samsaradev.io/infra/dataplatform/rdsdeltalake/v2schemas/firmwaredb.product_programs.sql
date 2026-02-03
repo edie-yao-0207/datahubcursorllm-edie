@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`id` SHORT,
+`product_id` BIGINT,
+`name` STRING,
+`description` STRING,
+`state` SHORT,
+`jira_ticket` STRING,
+`contact_person` STRING,
+`partition` STRING

@@ -1,0 +1,53 @@
+{
+  "name": "customer360.customer_health_tracker",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Create a row for each date customer and their health ratings from SFDC",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "customer_health_tracking",
+      "schema_path": "dataprep/business/customer_metadata_tracker.metadata.json",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-01-01",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "customer_health_tracker",
+    "type": "table",
+    "primary_key": ["org_id", "date"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "csm_trend",
+        "type": "string"
+      },
+      {
+        "name": "csm_rating",
+        "type": "string"
+      },
+      {
+        "name": "csm_sentiment_cause",
+        "type": "string"
+      },
+      {
+        "name": "csm_notes",
+        "type": "string"
+      }
+    ],
+    "write_mode": "merge"
+  },
+  "replication": {
+    "replicate_to_us_from_regions": ["eu-west-1"]
+  }
+}

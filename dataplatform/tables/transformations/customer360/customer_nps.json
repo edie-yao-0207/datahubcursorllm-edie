@@ -1,0 +1,59 @@
+{
+  "name": "customer360.customer_nps",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Create a row for each date customer first had a heartbeat to the current date",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "dataprep",
+      "tablename": "customer_nps",
+      "schema_path": "dataprep/support/customer_nps.metadata.json",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-06-19",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "customer360",
+    "tablename": "customer_nps",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "sam_number"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": true,
+        "metadata": {
+          "comment": "This is the date the data in the row was recorded."
+        }
+      },
+      {
+        "name": "sam_number",
+        "type": "string",
+        "nullable": true,
+        "metadata": {
+          "comment": "The SAM Number (internal Samsara ID) of a Customer."
+        }
+      },
+      {
+        "name": "avg_raw_score",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The average raw NPS Score for the customer on a specific day."
+        }
+      },
+      {
+        "name": "avg_nps_score",
+        "type": "double",
+        "nullable": true,
+        "metadata": {
+          "comment": "The average NPS Score for the customer on a specific day."
+        }
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

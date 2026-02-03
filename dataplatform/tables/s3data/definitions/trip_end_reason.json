@@ -1,0 +1,24 @@
+{
+  "table": "trip_end_reason",
+  "owner": "DataEngineering",
+  "description": "This table maps trip end reason IDs to their respective reason description (based on https://github.com/samsara-dev/backend/blob/master/go/src/samsaradev.io/stats/trips/tripsproto/trips.proto)",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/trips/trip_end_reason.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/trips/trip_end_reason.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/trips/trip_end_reason.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "trip_end_reason_id",
+      "type": "bigint",
+      "description": "The id of the trip end reason."
+    },
+    {
+      "name": "trip_end_reason",
+      "type": "string",
+      "description": "The name of the trip end reason."
+    }
+  ]
+}

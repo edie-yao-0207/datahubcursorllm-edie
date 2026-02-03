@@ -1,0 +1,19 @@
+{
+  "table": "driver_risk_factor_map",
+  "owner": "DataEngineering",
+  "description": "This table maps driver risk factor enums to names of risk factors.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "description": "The id of the risk factor."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The name of the risk factor."
+    }
+  ]
+}

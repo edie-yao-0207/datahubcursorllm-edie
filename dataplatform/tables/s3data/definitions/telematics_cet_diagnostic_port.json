@@ -1,0 +1,101 @@
+{
+  "table": "telematics_cet_diagnostic_port",
+  "owner": "FirmwareVdp",
+  "description": "Table 'diagnosticPort' generated from 'Cable Recommendation CST Set (New Format).xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "regions",
+      "type": "string"
+    },
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year_start",
+      "type": "bigint"
+    },
+    {
+      "name": "year_end",
+      "type": "bigint"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "powertrain",
+      "type": "string"
+    },
+    {
+      "name": "fuel_group",
+      "type": "string"
+    },
+    {
+      "name": "exclude_models",
+      "type": "string"
+    },
+    {
+      "name": "row_count",
+      "type": "bigint"
+    },
+    {
+      "name": "cable",
+      "type": "string"
+    },
+    {
+      "name": "6pin_or9pin_9_pin_or_j1939",
+      "type": "string"
+    },
+    {
+      "name": "6pin_or9pin_6_pin",
+      "type": "string"
+    },
+    {
+      "name": "9pin_or_obd_9_pin_or_j1939",
+      "type": "string"
+    },
+    {
+      "name": "9pin_or_obd_16_pin_obdii",
+      "type": "string"
+    },
+    {
+      "name": "9pin_or_obd_vm_9_pin_or_j1939",
+      "type": "string"
+    },
+    {
+      "name": "9pin_or_obd_vm_16_pin_obdii_vm",
+      "type": "string"
+    },
+    {
+      "name": "vg34",
+      "type": "boolean"
+    },
+    {
+      "name": "vg54_nah",
+      "type": "boolean"
+    },
+    {
+      "name": "vg54_na_eu",
+      "type": "boolean"
+    },
+    {
+      "name": "vg55",
+      "type": "boolean"
+    },
+    {
+      "name": "ae_notes",
+      "type": "string"
+    }
+  ]
+}

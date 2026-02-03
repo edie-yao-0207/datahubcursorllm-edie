@@ -1,0 +1,20 @@
+{
+  "owner": "Firmware",
+  "email_notifications": ["databricks-job-failur-aaaan3y27utpo2tcwuqqlho23q@samsara.org.slack.com"],
+  "description": "Safety firmware metrics DAG.",
+  "admin_teams": ["DataEngineering"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "0 30 8 ? * * *",
+      "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+      "timeout_seconds": 86400,
+      "workflow_overrides": {
+        "email_notifications": {
+          "on_failure": ["databricks-job-failur-aaaan3y27utpo2tcwuqqlho23q@samsara.org.slack.com"],
+          "no_alert_for_skipped_runs": false
+        }
+      }
+    }
+  ]
+}

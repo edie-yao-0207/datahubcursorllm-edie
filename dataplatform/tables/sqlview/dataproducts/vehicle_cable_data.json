@@ -1,0 +1,30 @@
+{
+  "view": "vehicle_cable_data",
+  "owner": "DataScience",
+  "description": "Fleet composition data to get num passenger vehicles per org",
+  "database": "dataproducts",
+  "schema": [
+    { "name": "org_id", "type": "long", "description": "$org_id_default_description" },
+    { "name": "device_id", "type": "long", "description": "Vehicle ID" },
+    { "name": "cable_id", "type": "long", "description": "ID of cable within vehicle" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "dataprep",
+      "tablename": "active_devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdobdcableid",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    }
+  ]
+}

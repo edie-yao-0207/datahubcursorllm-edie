@@ -1,0 +1,11 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`interval_uuid` STRING,
+`interval_start_ms` BIGINT,
+`interval_end_ms` BIGINT,
+`interval_ml_inference` STRING,
+`date` STRING

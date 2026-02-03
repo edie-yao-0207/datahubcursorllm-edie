@@ -1,0 +1,2362 @@
+{
+  "test_cases": [
+    {
+      "label": "identify uphill and downhill durations within a single hourly interval",
+      "parameters": {
+        "start_date": " '2024-04-15' ",
+        "end_date": " '2024-04-16' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1713150000000,
+            "end_ms": 1713153600000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151385012,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1713151380012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151391003,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1713151385012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151396001,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1713151391003
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151401012,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1713151396001
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151407005,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1713151401012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151413149,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1713151407005
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151419008,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1713151413149
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151424019,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1713151419008
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151430002,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1713151424019
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151436114,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1713151430002
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151385012,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151391003,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151396001,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151401012,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151407005,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151413149,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151419008,
+            "distance": 0
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151424019,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151430002,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151436114,
+            "distance": 82.60372203375975
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-04-15",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 0,
+          "interval_start": "2024-04-15 03:00:00",
+          "interval_end": "2024-04-15 04:00:00",
+          "uphill_duration_ms": 5011,
+          "downhill_duration_ms": 6112
+        }
+      ]
+    },
+    {
+      "label": "identify no uphill and downhill durations when there is no inclined drive time above the grade threshold",
+      "parameters": {
+        "start_date": " '2024-03-11' ",
+        "end_date": " '2024-03-12' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1710133200000,
+            "end_ms": 1710136800000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1710136466004,
+            "value": {
+              "altitude_meters": 464.18,
+              "gps_speed_meters_per_second": 20.6477422222222
+            },
+            "previous": {
+              "date": "2024-03-11",
+              "org_id": 100,
+              "device_id": 200,
+              "time": 1710136460998,
+              "value": {
+                "altitude_meters": 462.771
+              }
+            }
+          },
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1710136471004,
+            "value": {
+              "altitude_meters": 463.787,
+              "gps_speed_meters_per_second": 19.6054777777778
+            },
+            "previous": {
+              "date": "2024-03-11",
+              "org_id": 100,
+              "device_id": 200,
+              "time": 1710136466004,
+              "value": {
+                "altitude_meters": 464.18
+              }
+            }
+          },
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1710136477005,
+            "value": {
+              "altitude_meters": 462.23,
+              "gps_speed_meters_per_second": 19.9697044444444
+            },
+            "previous": {
+              "date": "2024-03-11",
+              "org_id": 100,
+              "device_id": 200,
+              "time": 1710136471004,
+              "value": {
+                "altitude_meters": 463.787
+              }
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1710136466004,
+            "distance": 103.769978796439
+          },
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1710136471004,
+            "distance": 97.1413568082426
+          },
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1710136477005,
+            "distance": 115.750130422226
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "identify no data when there is no drive time above the minimum speed threshold",
+      "parameters": {
+        "start_date": " '2024-03-11' ",
+        "end_date": " '2024-03-12' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1710129600000,
+            "end_ms": 1710133200000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1710132543005,
+            "value": {
+              "altitude_meters": 480.034,
+              "gps_speed_meters_per_second": 0.6199055555555556
+            },
+            "previous": {
+              "date": "2024-03-11",
+              "org_id": 100,
+              "device_id": 200,
+              "time": 1710117315184,
+              "value": {
+                "altitude_meters": 478.463
+              }
+            }
+          },
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1710132553003,
+            "value": {
+              "altitude_meters": 479.353,
+              "gps_speed_meters_per_second": 0.6698066666666668
+            },
+            "previous": {
+              "date": "2024-03-11",
+              "org_id": 100,
+              "device_id": 200,
+              "time": 1710132543005,
+              "value": {
+                "altitude_meters": 480.034
+              }
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1710132543005,
+            "distance": 13.149839089938872
+          },
+          {
+            "date": "2024-03-11",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1710132553003,
+            "distance": 5.192177016275307
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "filter out locations with more than 60 seconds time difference between consecutive locations",
+      "parameters": {
+        "start_date": " '2024-04-15' ",
+        "end_date": " '2024-04-16' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1713150000000,
+            "end_ms": 1713153600000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151324007,
+            "value": {
+              "altitude_meters": 473.998,
+              "gps_speed_meters_per_second": 7.405942222222222
+            },
+            "previous": {
+              "time": 1713151319007
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151334011,
+            "value": {
+              "altitude_meters": 473.002,
+              "gps_speed_meters_per_second": 10.834200000000001
+            },
+            "previous": {
+              "time": 1713151324007
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151385012,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1713151334011
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151391003,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1713151385012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151396001,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1713151391003
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151401012,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1713151396001
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151407005,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1713151401012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151413149,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1713151407005
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151419008,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1713151413149
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151424019,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1713151419008
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151430002,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1713151424019
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151436114,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1713151430002
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151324007,
+            "distance": 41.42299057009969
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151334011,
+            "distance": 63.53191845778324
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151385012,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151391003,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151396001,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151401012,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151407005,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151413149,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151419008,
+            "distance": 0
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151424019,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151430002,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151436114,
+            "distance": 82.60372203375975
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-04-15",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 0,
+          "interval_start": "2024-04-15 03:00:00",
+          "interval_end": "2024-04-15 04:00:00",
+          "uphill_duration_ms": 5011,
+          "downhill_duration_ms": 6112
+        }
+      ]
+    },
+    {
+      "label": "identify no data before year 2024 when run window is before year 2024",
+      "parameters": {
+        "start_date": " '2023-04-15' ",
+        "end_date": " '2023-04-17' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1713150000000,
+            "end_ms": 1713153600000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151324007,
+            "value": {
+              "altitude_meters": 473.998,
+              "gps_speed_meters_per_second": 7.405942222222222
+            },
+            "previous": {
+              "time": 1713151319007
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151334011,
+            "value": {
+              "altitude_meters": 473.002,
+              "gps_speed_meters_per_second": 10.834200000000001
+            },
+            "previous": {
+              "time": 1713151324007
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151385012,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1713151334011
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151391003,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1713151385012
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151396001,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1713151391003
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151401012,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1713151396001
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151407005,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1713151401012
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151413149,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1713151407005
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151419008,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1713151413149
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151424019,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1713151419008
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151430002,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1713151424019
+            }
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151436114,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1713151430002
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151324007,
+            "distance": 41.42299057009969
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151334011,
+            "distance": 63.53191845778324
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151385012,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151391003,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151396001,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151401012,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151407005,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151413149,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151419008,
+            "distance": 0
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151424019,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151430002,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2023-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151436114,
+            "distance": 82.60372203375975
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "identify only data from 2024 when run window covers data from 2023 and 2024",
+      "parameters": {
+        "start_date": " '2023-12-30' ",
+        "end_date": " '2024-01-02' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1703908800000,
+            "end_ms": 1703912400000,
+            "state": "ON"
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1704081600000,
+            "end_ms": 1704085200000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910124000,
+            "value": {
+              "altitude_meters": 473.998,
+              "gps_speed_meters_per_second": 7.405942222222222
+            },
+            "previous": {
+              "time": 1703910114000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910134000,
+            "value": {
+              "altitude_meters": 473.002,
+              "gps_speed_meters_per_second": 10.834200000000001
+            },
+            "previous": {
+              "time": 1703910124000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910144000,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1703910134000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910154000,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1703910144000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910164000,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1703910154000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910174000,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1703910164000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910184000,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1703910174000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910194000,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1703910184000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910214000,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1703910194000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910224000,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1703910214000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910234000,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1703910224000
+            }
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1703910244000,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1703910234000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082924000,
+            "value": {
+              "altitude_meters": 473.998,
+              "gps_speed_meters_per_second": 7.405942222222222
+            },
+            "previous": {
+              "time": 1704082919000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082934000,
+            "value": {
+              "altitude_meters": 473.002,
+              "gps_speed_meters_per_second": 10.834200000000001
+            },
+            "previous": {
+              "time": 1704082924000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082944000,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1704082934000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082954000,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1704082944000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082964000,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1704082954000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082974000,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1704082964000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082984000,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1704082974000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082994000,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1704082984000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704083014000,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1704082994000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704083024000,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1704083014000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704083034000,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1704083024000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704083044000,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1704083034000
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910124000,
+            "distance": 41.42299057009969
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910134000,
+            "distance": 63.53191845778324
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910144000,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910154000,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910164000,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910174000,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910184000,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910194000,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910214000,
+            "distance": 0
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910224000,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910234000,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2023-12-30",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1703910244000,
+            "distance": 82.60372203375975
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082924000,
+            "distance": 41.42299057009969
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082934000,
+            "distance": 63.53191845778324
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082944000,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082954000,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082964000,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082974000,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082984000,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082994000,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704083014000,
+            "distance": 0
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704083024000,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704083034000,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704083044000,
+            "distance": 82.60372203375975
+          }
+        ]
+      },
+      "expected_data": [
+        [
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 0,
+            "interval_start": "2024-01-01 04:00:00",
+            "interval_end": "2024-01-01 05:00:00",
+            "uphill_duration_ms": 0,
+            "downhill_duration_ms": 10000
+          }
+        ]
+      ]
+    },
+    {
+      "label": "identify only data in the hour where engine state is ON",
+      "parameters": {
+        "start_date": " '2024-04-15' ",
+        "end_date": " '2024-04-16' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1713150000000,
+            "end_ms": 1713153600000,
+            "state": "ON"
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1713157200000,
+            "end_ms": 1713160800000,
+            "state": "OFF"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151385012,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1713151380012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151391003,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1713151385012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151396001,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1713151391003
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151401012,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1713151396001
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151407005,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1713151401012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151413149,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1713151407005
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151419008,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1713151413149
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151424019,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1713151419008
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151430002,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1713151424019
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151436114,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1713151430002
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158585000,
+            "value": {
+              "altitude_meters": 907.126,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1713158580000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158591000,
+            "value": {
+              "altitude_meters": 894.268,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1713158585000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158596000,
+            "value": {
+              "altitude_meters": 895.606,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1713158591000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158601000,
+            "value": {
+              "altitude_meters": 902.414,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1713158596000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158607000,
+            "value": {
+              "altitude_meters": 903.95,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1713158601000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158613000,
+            "value": {
+              "altitude_meters": 903.812,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1713158607000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158619000,
+            "value": {
+              "altitude_meters": 903.336,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1713158613000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158624000,
+            "value": {
+              "altitude_meters": 901.024,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1713158619000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158630000,
+            "value": {
+              "altitude_meters": 895.338,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1713158624000
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713158636000,
+            "value": {
+              "altitude_meters": 884.98,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1713158630000
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151385012,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151391003,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151396001,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151401012,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151407005,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151413149,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151419008,
+            "distance": 0
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151424019,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151430002,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713151436114,
+            "distance": 82.60372203375975
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158585000,
+            "distance": 89.77845366009059
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158591000,
+            "distance": 111.99136873234721
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158596000,
+            "distance": 93.80608632206929
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158601000,
+            "distance": 76.38046142730333
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158607000,
+            "distance": 64.62950089326893
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158613000,
+            "distance": 60.28783358661242
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158619000,
+            "distance": 0
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158624000,
+            "distance": 90.06115559963628
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158630000,
+            "distance": 120.02150992048237
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1713158636000,
+            "distance": 82.60372203375975
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2024-04-15",
+          "org_id": 100,
+          "device_id": 200,
+          "driver_id": 0,
+          "interval_start": "2024-04-15 03:00:00",
+          "interval_end": "2024-04-15 04:00:00",
+          "uphill_duration_ms": 5011,
+          "downhill_duration_ms": 6112
+        }
+      ]
+    },
+    {
+      "label": "identify np data when there are no relevant distance data",
+      "parameters": {
+        "start_date": " '2024-04-15' ",
+        "end_date": " '2024-04-16' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1713150000000,
+            "end_ms": 1713153600000,
+            "state": "ON"
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151385012,
+            "value": {
+              "altitude_meters": 453.563,
+              "gps_speed_meters_per_second": 17.655733333333334
+            },
+            "previous": {
+              "time": 1713151380012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151391003,
+            "value": {
+              "altitude_meters": 447.134,
+              "gps_speed_meters_per_second": 17.727241111111113
+            },
+            "previous": {
+              "time": 1713151385012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151396001,
+            "value": {
+              "altitude_meters": 447.803,
+              "gps_speed_meters_per_second": 16.930366666666668
+            },
+            "previous": {
+              "time": 1713151391003
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151401012,
+            "value": {
+              "altitude_meters": 451.207,
+              "gps_speed_meters_per_second": 11.835308888888889
+            },
+            "previous": {
+              "time": 1713151396001
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151407005,
+            "value": {
+              "altitude_meters": 451.975,
+              "gps_speed_meters_per_second": 5.748402222222222
+            },
+            "previous": {
+              "time": 1713151401012
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151413149,
+            "value": {
+              "altitude_meters": 451.906,
+              "gps_speed_meters_per_second": 6.8518855555555565
+            },
+            "previous": {
+              "time": 1713151407005
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151419008,
+            "value": {
+              "altitude_meters": 451.668,
+              "gps_speed_meters_per_second": 10.625850000000002
+            },
+            "previous": {
+              "time": 1713151413149
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151424019,
+            "value": {
+              "altitude_meters": 450.512,
+              "gps_speed_meters_per_second": 13.162061111111111
+            },
+            "previous": {
+              "time": 1713151419008
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151430002,
+            "value": {
+              "altitude_meters": 447.669,
+              "gps_speed_meters_per_second": 14.545402222222224
+            },
+            "previous": {
+              "time": 1713151424019
+            }
+          },
+          {
+            "date": "2024-04-15",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1713151436114,
+            "value": {
+              "altitude_meters": 442.49,
+              "gps_speed_meters_per_second": 15.388576666666667
+            },
+            "previous": {
+              "time": 1713151430002
+            }
+          }
+        ],
+        "canonical_distance.total_distance": []
+      },
+      "expected_data": []
+    },
+    {
+      "label": "returns data for each driver where there are multiple driver assingments within an hour",
+      "parameters": {
+        "start_date": " '2024-01-01' ",
+        "end_date": " '2024-01-02' "
+      },
+      "input_data": {
+        "engine_state.intervals": [
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "object_id": 200,
+            "start_ms": 1704081600000,
+            "end_ms": 1704085200000,
+            "state": "ON"
+          }
+        ],
+        "fuel_energy_efficiency_report.driver_assignments": [
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "start_time": 1704082923000,
+            "end_time": 1704082959000
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 400,
+            "start_time": 1704082959000,
+            "end_time": 1704083964000
+          }
+        ],
+        "kinesisstats_window.location": [
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082924000,
+            "value": {
+              "altitude_meters": 473.998,
+              "gps_speed_meters_per_second": 7.405942222222222
+            },
+            "previous": {
+              "time": 1704082919000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082929000,
+            "value": {
+              "altitude_meters": 470.002,
+              "gps_speed_meters_per_second": 10.834200000000001
+            },
+            "previous": {
+              "time": 1704082924000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082934000,
+            "value": {
+              "altitude_meters": 472.002,
+              "gps_speed_meters_per_second": 14.888
+            },
+            "previous": {
+              "time": 1704082929000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082939000,
+            "value": {
+              "altitude_meters": 467.002,
+              "gps_speed_meters_per_second": 14.888
+            },
+            "previous": {
+              "time": 1704082934000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082944000,
+            "value": {
+              "altitude_meters": 471.002,
+              "gps_speed_meters_per_second": 18.888
+            },
+            "previous": {
+              "time": 1704082939000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082949000,
+            "value": {
+              "altitude_meters": 465.002,
+              "gps_speed_meters_per_second": 18.888
+            },
+            "previous": {
+              "time": 1704082944000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082954000,
+            "value": {
+              "altitude_meters": 470.002,
+              "gps_speed_meters_per_second": 22.888
+            },
+            "previous": {
+              "time": 1704082949000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082959000,
+            "value": {
+              "altitude_meters": 465.002,
+              "gps_speed_meters_per_second": 22.888
+            },
+            "previous": {
+              "time": 1704082954000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082964000,
+            "value": {
+              "altitude_meters": 471.002,
+              "gps_speed_meters_per_second": 18.888
+            },
+            "previous": {
+              "time": 1704082959000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082969000,
+            "value": {
+              "altitude_meters": 466.002,
+              "gps_speed_meters_per_second": 18.888
+            },
+            "previous": {
+              "time": 1704082964000
+            }
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time": 1704082974000,
+            "value": {
+              "altitude_meters": 471.002,
+              "gps_speed_meters_per_second": 18.888
+            },
+            "previous": {
+              "time": 1704082969000
+            }
+          }
+        ],
+        "canonical_distance.total_distance": [
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082924000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082929000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082934000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082939000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082944000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082949000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082954000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082959000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082964000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082969000,
+            "distance": 100
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "time_ms": 1704082974000,
+            "distance": 100
+          }
+        ]
+      },
+      "expected_data": [
+        [
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 300,
+            "interval_start": "2024-01-01 04:00:00",
+            "interval_end": "2024-01-01 05:00:00",
+            "uphill_duration_ms": 0,
+            "downhill_duration_ms": 10000
+          },
+          {
+            "date": "2024-01-01",
+            "org_id": 100,
+            "device_id": 200,
+            "driver_id": 400,
+            "interval_start": "2024-01-01 04:00:00",
+            "interval_end": "2024-01-01 05:00:00",
+            "uphill_duration_ms": 0,
+            "downhill_duration_ms": 5000
+          }
+        ]
+      ]
+    }
+  ]
+}

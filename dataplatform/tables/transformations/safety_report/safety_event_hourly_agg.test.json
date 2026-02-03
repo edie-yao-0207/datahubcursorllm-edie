@@ -1,0 +1,314 @@
+{
+  "test_cases": [
+    {
+      "label": "Returns one row per object type (driver and vehicle), grouped by coaching stage + release stage.",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_deduplicated_report_v3": [
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 2,
+            "event_ms": 1641350792000,
+            "event_duration": 0,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 2,
+            "event_ms": 1641350792000,
+            "event_duration": 0,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 223
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 2,
+            "event_ms": 1641350792000,
+            "event_duration": 0,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 1,
+            "in_triage_states": 0,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 224
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 2,
+            "event_ms": 1641350792000,
+            "event_duration": 0,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 1,
+            "in_triage_states": 0,
+            "release_stage": 3,
+            "date": "2022-01-05",
+            "event_id": 225
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "object_id": 1,
+          "object_type": 1,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "total_event_count": 2,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 2,
+          "object_type": 5,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "total_event_count": 2,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 1,
+          "object_type": 1,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "release_stage": 100,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 2,
+          "object_type": 5,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "release_stage": 100,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 1,
+          "object_type": 1,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "release_stage": 3,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 2,
+          "object_type": 5,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "release_stage": 3,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        }
+      ]
+    },
+    {
+      "label": "Returns one row per object type (driver and vehicle), for each time interval",
+      "parameters": {
+        "start_date": " '2022-01-01' ",
+        "end_date": " '2022-02-01' "
+      },
+      "input_data": {
+        "safety_report.safety_events_deduplicated_report_v3": [
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 2,
+            "event_ms": 1641350792000,
+            "event_duration": 0,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641361592000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 0,
+            "in_triage_states": 1,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 223
+          },
+          {
+            "org_id": 123,
+            "device_id": 1,
+            "driver_id": 2,
+            "event_ms": 1641350792000,
+            "event_duration": 0,
+            "trip_start_ms": 1641343592000,
+            "trip_end_ms": 1641365192000,
+            "trip_version": 101,
+            "additional_labels": [
+              {
+                "label_type": 17,
+                "label_source": 1,
+                "last_added_ms": 1641350792000
+              }
+            ],
+            "in_dismissed_states": 0,
+            "in_recognition_states": 0,
+            "in_coaching_states": 1,
+            "in_triage_states": 0,
+            "release_stage": 100,
+            "date": "2022-01-05",
+            "event_id": 222
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 123,
+          "object_id": 1,
+          "object_type": 1,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 2,
+          "object_type": 5,
+          "interval_start": "2022-01-05 05:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 0,
+          "in_triage_states": 1,
+          "release_stage": 100,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 1,
+          "object_type": 1,
+          "interval_start": "2022-01-05 06:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "release_stage": 100,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        },
+        {
+          "org_id": 123,
+          "object_id": 2,
+          "object_type": 5,
+          "interval_start": "2022-01-05 06:00:00",
+          "trip_version": 101,
+          "in_dismissed_states": 0,
+          "in_recognition_states": 0,
+          "in_coaching_states": 1,
+          "in_triage_states": 0,
+          "release_stage": 100,
+          "total_event_count": 1,
+          "date": "2022-01-05"
+        }
+      ]
+    }
+  ]
+}

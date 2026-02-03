@@ -1,0 +1,109 @@
+{
+  "name": "activity_report.report_v5",
+  "owner": "AssetFoundations",
+  "description": "Final report with merged driver and device rows. Also includes columns for canonical distance.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "trips2db_shards",
+      "tablename": "trips",
+      "type": "table"
+    },
+    {
+      "dbname": "kinesisstats_window",
+      "tablename": "osdgpsdistance",
+      "type": "table"
+    },
+    {
+      "dbname": "canonical_distance",
+      "tablename": "filtered_odometer",
+      "type": "table"
+    },
+    {
+      "dbname": "canonical_distance",
+      "tablename": "total_distance",
+      "type": "table"
+    },
+    {
+      "dbname": "activity_report",
+      "tablename": "manual_odometer_2",
+      "type": "table"
+    }
+  ],
+  "sqlite_report_config": {
+    "report_name": "activity_report_v5",
+    "staleness_monitors": [
+      {
+        "hours": 12,
+        "urgency": "LOW"
+      },
+      {
+        "hours": 24,
+        "urgency": "HIGH"
+      }
+    ]
+  },
+  "backfill_start_date": "2015-05-31",
+  "parameters": ["start_date", "end_date", "pipeline_execution_time"],
+  "output": {
+    "dbname": "activity_report",
+    "tablename": "report_v5",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "object_type", "object_id", "interval_start"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "object_id",
+        "type": "long"
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "nullable": false
+      },
+      {
+        "name": "object_type",
+        "type": "integer",
+        "nullable": false
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "nullable": false
+      },
+      {
+        "name": "gps_distance_m",
+        "type": "double"
+      },
+      {
+        "name": "canonical_distance_m",
+        "type": "double"
+      },
+      {
+        "name": "distance_interpolated",
+        "type": "integer"
+      },
+      {
+        "name": "engine_ms",
+        "type": "long"
+      },
+      {
+        "name": "stops_count",
+        "type": "long"
+      },
+      {
+        "name": "start_odometer_m",
+        "type": "long"
+      },
+      {
+        "name": "end_odometer_m",
+        "type": "long"
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

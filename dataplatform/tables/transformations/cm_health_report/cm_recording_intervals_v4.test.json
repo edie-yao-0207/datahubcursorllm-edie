@@ -1,0 +1,274 @@
+{
+  "test_cases": [
+    {
+      "label": "If cm2x is on_trip it is returned",
+      "parameters": {
+        "start_date": " '2022-02-14' ",
+        "end_date": " '2022-02-22' ",
+        "pipeline_execution_time": " '2022-02-22 11:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_recording_intervals_cm2x": [
+          {
+            "device_id": 1,
+            "cm_device_id": 1,
+            "product_id": 24,
+            "cm_product_id": 30,
+            "date": "2022-02-15",
+            "org_id": 1,
+            "start_ms": 1644947425235,
+            "end_ms": 1644947425239,
+            "duration_ms": 4,
+            "interval_connected_duration_ms": 0,
+            "interval_recording_start_ms": 1644947425235,
+            "on_trip": true,
+            "grace_recording_duration_ms": 0,
+            "recording_duration_ms": 0,
+            "vg_bootcount": 0,
+            "vg_build": null,
+            "cm_bootcount": 0,
+            "cm_build": null
+          }
+        ],
+        "cm_health_report.cm_recording_intervals_cm3x": []
+      },
+      "expected_data": [
+        {
+          "device_id": 1,
+          "cm_device_id": 1,
+          "product_id": 24,
+          "cm_product_id": 30,
+          "date": "2022-02-15",
+          "org_id": 1,
+          "start_ms": 1644947425235,
+          "end_ms": 1644947425239,
+          "duration_ms": 4,
+          "interval_connected_duration_ms": 0,
+          "interval_recording_start_ms": 1644947425235,
+          "grace_recording_duration_ms": 0,
+          "recording_duration_ms": 0,
+          "vg_bootcount": 0,
+          "vg_build": null,
+          "cm_bootcount": 0,
+          "cm_build": null
+        }
+      ]
+    },
+    {
+      "label": "If cm2x is not on_trip it is not returned",
+      "parameters": {
+        "start_date": " '2022-02-14' ",
+        "end_date": " '2022-02-22' ",
+        "pipeline_execution_time": " '2022-02-22 11:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_recording_intervals_cm2x": [
+          {
+            "device_id": 1,
+            "cm_device_id": 1,
+            "product_id": 24,
+            "cm_product_id": 30,
+            "date": "2022-02-15",
+            "org_id": 1,
+            "start_ms": 1644947425235,
+            "end_ms": 1644947425239,
+            "duration_ms": 4,
+            "interval_connected_duration_ms": 0,
+            "interval_recording_start_ms": 1644947425235,
+            "on_trip": false,
+            "grace_recording_duration_ms": 0,
+            "recording_duration_ms": 0,
+            "vg_bootcount": 0,
+            "vg_build": null,
+            "cm_bootcount": 0,
+            "cm_build": null
+          }
+        ],
+        "cm_health_report.cm_recording_intervals_cm3x": []
+      },
+      "expected_data": []
+    },
+    {
+      "label": "If cm3x is recording_expected it is returned",
+      "parameters": {
+        "start_date": " '2022-02-14' ",
+        "end_date": " '2022-02-22' ",
+        "pipeline_execution_time": " '2022-02-22 11:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_recording_intervals_cm2x": [],
+        "cm_health_report.cm_recording_intervals_cm3x": [
+          {
+            "vg_device_id": 1,
+            "cm_device_id": 1,
+            "vg_product_id": 24,
+            "cm_product_id": 43,
+            "date": "2022-02-15",
+            "org_id": 1,
+            "start_ms": 1644947425235,
+            "end_ms": 1644947425239,
+            "duration_ms": 4,
+            "interval_connected_duration_ms": 0,
+            "interval_recording_start_ms": 1644947425235,
+            "recording_expected": true,
+            "grace_recording_duration_ms": 0,
+            "recording_duration_ms": 0,
+            "vg_bootcount": 0,
+            "vg_build": null,
+            "cm_bootcount": 0,
+            "cm_build": null
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "device_id": 1,
+          "cm_device_id": 1,
+          "product_id": 24,
+          "cm_product_id": 43,
+          "date": "2022-02-15",
+          "org_id": 1,
+          "start_ms": 1644947425235,
+          "end_ms": 1644947425239,
+          "duration_ms": 4,
+          "interval_connected_duration_ms": 0,
+          "interval_recording_start_ms": 1644947425235,
+          "grace_recording_duration_ms": 0,
+          "recording_duration_ms": 0,
+          "vg_bootcount": 0,
+          "vg_build": null,
+          "cm_bootcount": 0,
+          "cm_build": null
+        }
+      ]
+    },
+    {
+      "label": "If cm3x is not recording_expected it is not returned",
+      "parameters": {
+        "start_date": " '2022-02-14' ",
+        "end_date": " '2022-02-22' ",
+        "pipeline_execution_time": " '2022-02-22 11:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_recording_intervals_cm2x": [],
+        "cm_health_report.cm_recording_intervals_cm3x": [
+          {
+            "vg_device_id": 1,
+            "cm_device_id": 1,
+            "vg_product_id": 24,
+            "cm_product_id": 43,
+            "date": "2022-02-15",
+            "org_id": 1,
+            "start_ms": 1644947425235,
+            "end_ms": 1644947425239,
+            "duration_ms": 4,
+            "interval_connected_duration_ms": 0,
+            "interval_recording_start_ms": 1644947425235,
+            "recording_expected": false,
+            "grace_recording_duration_ms": 0,
+            "recording_duration_ms": 0,
+            "vg_bootcount": 0,
+            "vg_build": null,
+            "cm_bootcount": 0,
+            "cm_build": null
+          }
+        ]
+      },
+      "expected_data": []
+    },
+    {
+      "label": "If cm2x is on_trip and cm3x is recording_expected both are returned",
+      "parameters": {
+        "start_date": " '2022-02-14' ",
+        "end_date": " '2022-02-22' ",
+        "pipeline_execution_time": " '2022-02-22 11:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_recording_intervals_cm2x": [
+          {
+            "device_id": 1,
+            "cm_device_id": 1,
+            "product_id": 24,
+            "cm_product_id": 30,
+            "date": "2022-02-15",
+            "org_id": 1,
+            "start_ms": 1644947425235,
+            "end_ms": 1644947425239,
+            "duration_ms": 4,
+            "interval_connected_duration_ms": 0,
+            "interval_recording_start_ms": 1644947425235,
+            "on_trip": true,
+            "grace_recording_duration_ms": 0,
+            "recording_duration_ms": 0,
+            "vg_bootcount": 0,
+            "vg_build": null,
+            "cm_bootcount": 0,
+            "cm_build": null
+          }
+        ],
+        "cm_health_report.cm_recording_intervals_cm3x": [
+          {
+            "vg_device_id": 1,
+            "cm_device_id": 1,
+            "vg_product_id": 24,
+            "cm_product_id": 43,
+            "date": "2022-02-15",
+            "org_id": 1,
+            "start_ms": 1644947425235,
+            "end_ms": 1644947425239,
+            "duration_ms": 4,
+            "interval_connected_duration_ms": 0,
+            "interval_recording_start_ms": 1644947425235,
+            "recording_expected": true,
+            "grace_recording_duration_ms": 0,
+            "recording_duration_ms": 0,
+            "vg_bootcount": 0,
+            "vg_build": null,
+            "cm_bootcount": 0,
+            "cm_build": null
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "device_id": 1,
+          "cm_device_id": 1,
+          "product_id": 24,
+          "cm_product_id": 30,
+          "date": "2022-02-15",
+          "org_id": 1,
+          "start_ms": 1644947425235,
+          "end_ms": 1644947425239,
+          "duration_ms": 4,
+          "interval_connected_duration_ms": 0,
+          "interval_recording_start_ms": 1644947425235,
+          "grace_recording_duration_ms": 0,
+          "recording_duration_ms": 0,
+          "vg_bootcount": 0,
+          "vg_build": null,
+          "cm_bootcount": 0,
+          "cm_build": null
+        },
+        {
+          "device_id": 1,
+          "cm_device_id": 1,
+          "product_id": 24,
+          "cm_product_id": 43,
+          "date": "2022-02-15",
+          "org_id": 1,
+          "start_ms": 1644947425235,
+          "end_ms": 1644947425239,
+          "duration_ms": 4,
+          "interval_connected_duration_ms": 0,
+          "interval_recording_start_ms": 1644947425235,
+          "grace_recording_duration_ms": 0,
+          "recording_duration_ms": 0,
+          "vg_bootcount": 0,
+          "vg_build": null,
+          "cm_bootcount": 0,
+          "cm_build": null
+        }
+      ]
+    }
+  ]
+}

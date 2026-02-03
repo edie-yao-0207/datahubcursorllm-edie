@@ -1,0 +1,81 @@
+{
+  "name": "fuel_energy_efficiency_report.driver_assignments",
+  "owner": "Sustainability",
+  "description": "Driver assignments for the FEER report. This data is derived from trips2db: a driver assignment starts when a trip starts, and ends when a trip ends. However, some data manipulation is performed. Namely, if the gap between trips is 6+ hours, the difference between trips is split equally between driver assignments.",
+  "tags": ["telematics", "fuel", "ev"],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "helpers",
+      "tablename": "ignored_org_ids",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "trips2db_shards",
+      "tablename": "trips",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "fuel_energy_efficiency_report",
+    "tablename": "driver_assignments",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "start_time"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of this driver assignment."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The id of this driver."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The id of the device this driver was assigned to."
+        }
+      },
+      {
+        "name": "start_time",
+        "type": "long",
+        "metadata": {
+          "comment": "The starting time in milliseconds of this driver assignment. This is the start time of a trip from tripsdb."
+        }
+      },
+      {
+        "name": "end_time",
+        "type": "long",
+        "metadata": {
+          "comment": "The ending time in milliseconds of this driver assignment. This is the start time of this device's next trip."
+        }
+      }
+    ]
+  }
+}

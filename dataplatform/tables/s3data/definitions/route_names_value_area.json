@@ -1,0 +1,19 @@
+{
+  "table": "route_names_value_area",
+  "owner": "DataEngineering",
+  "description": "Maps routeload names to the Customer Success valuea area",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "route_name",
+      "type": "string",
+      "description": "The name that uniquely identifies the type of URI path of an endpoint."
+    },
+    {
+      "name": "value_area",
+      "type": "string",
+      "description": "The name of the mapped customer success value area."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+`session_uuid` STRING,
+`stream_page_session_uuid` STRING,
+`playback_speed` STRING,
+`org_id` BIGINT,
+`cell` STRING,
+`playback_duration_ms` BIGINT,
+`stall_duration_ms` BIGINT,
+`stall_count` BIGINT,
+`date` DATE

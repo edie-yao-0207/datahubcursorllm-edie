@@ -1,0 +1,11 @@
+{
+  "owner": "Navigation",
+  "jobs": [
+    {
+      "name": "commercial_navigation_daily_driver_usage_report",
+      "regions": ["us-west-2"],
+      "cron": "0 0 0 * * ?",
+      "spark_version": "default"
+    }
+  ]
+}

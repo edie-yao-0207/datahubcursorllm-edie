@@ -1,0 +1,141 @@
+{
+  "name": "cm_health_report.cm_health_output_v4",
+  "owner": "MediaExperience",
+  "description": "Output CM Health report, broken down into 5 segments of 10 hrs of drive time and overall across 50 hrs of drive time. This V4 version of camera health report is based on the V2 but supports Engine State Recording",
+  "dependencies": [
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_2x_3x_linked_vgs", "type": "table" },
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_recording_intervals_v4", "type": "table" },
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_obstructions", "type": "table" },
+    { "external": false, "dbname": "cm_health_report", "tablename": "cm_obstructed_last_trip", "type": "table" }
+  ],
+  "expectation": {
+    "batch_mode": "REMOVE_UNEXPECTED"
+  },
+  "backfill_start_date": "2024-08-01",
+  "parameters": ["end_date"],
+  "sqlite_report_config": {
+    "report_name": "cm_health_report_v4",
+    "_comment": "Hack: In order to support a snapshot report, the interval start is fixed to 1/1/2021. In order for those rows to be queried, fix the start/end date to include 1/1/2021.\nNOTE: Remember to update the config value of CustomMonthToProload in SQLite report registry whenever the final output month is changed.",
+    "hardcoded_start_date": "DATE(\"2020-12-31\")",
+    "hardcoded_end_date": "DATE(\"2021-01-02\")",
+    "staleness_monitors": [
+      {
+        "hours": 12,
+        "urgency": "HIGH"
+      }
+    ],
+    "team_runbook_url": "https://samsaradev.atlassian.net/wiki/x/IwAndg"
+  },
+  "output": {
+    "dbname": "cm_health_report",
+    "tablename": "cm_health_output_v4",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["org_id", "device_id", "overall_start_ms"],
+    "schema": [
+      { "name": "org_id", "type": "long" },
+      { "name": "device_id", "type": "long" },
+      { "name": "cm_device_id", "type": "long" },
+      { "name": "cm_product_id", "type": "long" },
+      { "name": "upper_camera_serial", "type": "string" },
+      { "name": "date", "nullable": false, "type": "date" },
+      { "name": "s1_trip_ms", "nullable": false, "type": "long" },
+      { "name": "s1_connected_ms", "nullable": false, "type": "long" },
+      { "name": "s1_recording_ms", "nullable": false, "type": "long" },
+      { "name": "s1_uptime_pct", "nullable": false, "type": "double" },
+      { "name": "s2_trip_ms", "nullable": false, "type": "long" },
+      { "name": "s2_connected_ms", "nullable": false, "type": "long" },
+      { "name": "s2_recording_ms", "nullable": false, "type": "long" },
+      { "name": "s2_uptime_pct", "nullable": false, "type": "double" },
+      { "name": "s3_trip_ms", "nullable": false, "type": "long" },
+      { "name": "s3_connected_ms", "nullable": false, "type": "long" },
+      { "name": "s3_recording_ms", "nullable": false, "type": "long" },
+      { "name": "s3_uptime_pct", "nullable": false, "type": "double" },
+      { "name": "s4_trip_ms", "nullable": false, "type": "long" },
+      { "name": "s4_connected_ms", "nullable": false, "type": "long" },
+      { "name": "s4_recording_ms", "nullable": false, "type": "long" },
+      { "name": "s4_uptime_pct", "nullable": false, "type": "double" },
+      { "name": "s5_trip_ms", "nullable": false, "type": "long" },
+      { "name": "s5_connected_ms", "nullable": false, "type": "long" },
+      { "name": "s5_recording_ms", "nullable": false, "type": "long" },
+      { "name": "s5_uptime_pct", "nullable": false, "type": "double" },
+      { "name": "overall_trip_ms", "nullable": false, "type": "long" },
+      { "name": "overall_connected_ms", "nullable": false, "type": "long" },
+      { "name": "overall_recording_ms", "nullable": false, "type": "long" },
+      { "name": "overall_uptime_pct", "nullable": false, "type": "double" },
+      { "name": "s1_vg_bootcount", "nullable": false, "type": "long" },
+      { "name": "s1_vg_build_earliest", "type": "string" },
+      { "name": "s1_vg_build_latest", "type": "string" },
+      { "name": "s1_cm_bootcount", "nullable": false, "type": "long" },
+      { "name": "s1_cm_build_earliest", "type": "string" },
+      { "name": "s1_cm_build_latest", "type": "string" },
+      { "name": "s2_vg_bootcount", "nullable": false, "type": "long" },
+      { "name": "s2_vg_build_earliest", "type": "string" },
+      { "name": "s2_vg_build_latest", "type": "string" },
+      { "name": "s2_cm_bootcount", "nullable": false, "type": "long" },
+      { "name": "s2_cm_build_earliest", "type": "string" },
+      { "name": "s2_cm_build_latest", "type": "string" },
+      { "name": "s3_vg_bootcount", "nullable": false, "type": "long" },
+      { "name": "s3_vg_build_earliest", "type": "string" },
+      { "name": "s3_vg_build_latest", "type": "string" },
+      { "name": "s3_cm_bootcount", "nullable": false, "type": "long" },
+      { "name": "s3_cm_build_earliest", "type": "string" },
+      { "name": "s3_cm_build_latest", "type": "string" },
+      { "name": "s4_vg_bootcount", "nullable": false, "type": "long" },
+      { "name": "s4_vg_build_earliest", "type": "string" },
+      { "name": "s4_vg_build_latest", "type": "string" },
+      { "name": "s4_cm_bootcount", "nullable": false, "type": "long" },
+      { "name": "s4_cm_build_earliest", "type": "string" },
+      { "name": "s4_cm_build_latest", "type": "string" },
+      { "name": "s5_vg_bootcount", "nullable": false, "type": "long" },
+      { "name": "s5_vg_build_earliest", "type": "string" },
+      { "name": "s5_vg_build_latest", "type": "string" },
+      { "name": "s5_cm_bootcount", "nullable": false, "type": "long" },
+      { "name": "s5_cm_build_earliest", "type": "string" },
+      { "name": "s5_cm_build_latest", "type": "string" },
+      { "name": "overall_vg_bootcount", "nullable": false, "type": "long" },
+      { "name": "overall_vg_build_earliest", "type": "string" },
+      { "name": "overall_vg_build_latest", "type": "string" },
+      { "name": "overall_cm_bootcount", "nullable": false, "type": "long" },
+      { "name": "overall_cm_build_earliest", "type": "string" },
+      { "name": "overall_cm_build_latest", "type": "string" },
+      {
+        "name": "outward_detection_ms",
+        "nullable": false,
+        "type": "long",
+        "metadata": {
+          "comment": "The event_ms of the outward obstruction event detected on the last completed trip"
+        }
+      },
+      {
+        "name": "inward_detection_ms",
+        "nullable": false,
+        "type": "long",
+        "metadata": {
+          "comment": "The event_ms of the inward obstruction event detected on the last completed trip"
+        }
+      },
+      {
+        "name": "misaligned_detection_ms",
+        "nullable": false,
+        "type": "long",
+        "metadata": {
+          "comment": "The event_ms of the cm misaligned event detected on the last completed trip"
+        }
+      },
+      { "name": "s1_start_ms", "nullable": false, "type": "long" },
+      { "name": "s1_end_ms", "nullable": false, "type": "long" },
+      { "name": "s2_start_ms", "nullable": false, "type": "long" },
+      { "name": "s2_end_ms", "nullable": false, "type": "long" },
+      { "name": "s3_start_ms", "nullable": false, "type": "long" },
+      { "name": "s3_end_ms", "nullable": false, "type": "long" },
+      { "name": "s4_start_ms", "nullable": false, "type": "long" },
+      { "name": "s4_end_ms", "nullable": false, "type": "long" },
+      { "name": "s5_start_ms", "nullable": false, "type": "long" },
+      { "name": "s5_end_ms", "nullable": false, "type": "long" },
+      { "name": "overall_start_ms", "nullable": false, "type": "long" },
+      { "name": "overall_end_ms", "nullable": false, "type": "long" }
+    ],
+    "write_mode": "overwrite"
+  }
+}

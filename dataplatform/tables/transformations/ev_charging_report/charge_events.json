@@ -1,0 +1,29 @@
+{
+  "name": "ev_charging_report.charge_events",
+  "owner": "Sustainability",
+  "description": "Charge events where each charge event is a period greater than 5 minutes where the vehicle was charging.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdevchargingstatus",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "ev_charging_report",
+    "tablename": "charge_events",
+    "type": "table",
+    "write_mode": "overwrite",
+    "partition": ["date"],
+    "primary_key": ["org_id", "object_id", "start_ms"],
+    "schema": [
+      { "name": "date", "type": "string" },
+      { "name": "org_id", "type": "long" },
+      { "name": "object_id", "type": "long" },
+      { "name": "start_ms", "type": "long" },
+      { "name": "end_ms", "type": "long" }
+    ]
+  }
+}

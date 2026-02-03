@@ -1,0 +1,1176 @@
+{
+  "table": "transaction_lines",
+  "owner": "PlatformOperations",
+  "description": "transaction_lines table from database netsuite_suiteanalytics in s3bucket netsuite-delta-tables",
+  "database": "netsuite_suiteanalytics",
+  "schema": [
+    {
+      "name": "transaction_id",
+      "type": "double"
+    },
+    {
+      "name": "transaction_line_id",
+      "type": "double"
+    },
+    {
+      "name": "account_id",
+      "type": "double"
+    },
+    {
+      "name": "acs___open",
+      "type": "double"
+    },
+    {
+      "name": "acs___refurbished",
+      "type": "double"
+    },
+    {
+      "name": "acs___serial_numbers",
+      "type": "string"
+    },
+    {
+      "name": "acs___write_off",
+      "type": "double"
+    },
+    {
+      "name": "allocation_id",
+      "type": "double"
+    },
+    {
+      "name": "alt_sales_amount",
+      "type": "double"
+    },
+    {
+      "name": "amortization_residual",
+      "type": "string"
+    },
+    {
+      "name": "amount",
+      "type": "double"
+    },
+    {
+      "name": "amount_foreign",
+      "type": "double"
+    },
+    {
+      "name": "amount_foreign_linked",
+      "type": "double"
+    },
+    {
+      "name": "amount_linked",
+      "type": "double"
+    },
+    {
+      "name": "amount_net_discount",
+      "type": "double"
+    },
+    {
+      "name": "amount_pending",
+      "type": "double"
+    },
+    {
+      "name": "amount_settlement",
+      "type": "double"
+    },
+    {
+      "name": "amount_taxable",
+      "type": "double"
+    },
+    {
+      "name": "amount_taxed",
+      "type": "double"
+    },
+    {
+      "name": "apply_wh_tax",
+      "type": "string"
+    },
+    {
+      "name": "billing_schedule_id",
+      "type": "double"
+    },
+    {
+      "name": "billing_subsidiary_id",
+      "type": "double"
+    },
+    {
+      "name": "bill_variance_status",
+      "type": "string"
+    },
+    {
+      "name": "bom_quantity",
+      "type": "double"
+    },
+    {
+      "name": "catch_up_period_id",
+      "type": "double"
+    },
+    {
+      "name": "charge_rule_id",
+      "type": "double"
+    },
+    {
+      "name": "charge_type",
+      "type": "double"
+    },
+    {
+      "name": "claim_item",
+      "type": "string"
+    },
+    {
+      "name": "class_id",
+      "type": "double"
+    },
+    {
+      "name": "company_id",
+      "type": "double"
+    },
+    {
+      "name": "company_id_0",
+      "type": "double"
+    },
+    {
+      "name": "component_id",
+      "type": "double"
+    },
+    {
+      "name": "component_yield",
+      "type": "double"
+    },
+    {
+      "name": "contract_item_end_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "contract_item_price_level",
+      "type": "double"
+    },
+    {
+      "name": "contract_item_start_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "contract_item_term",
+      "type": "double"
+    },
+    {
+      "name": "contract_item_uplift",
+      "type": "double"
+    },
+    {
+      "name": "cost_basis_amount",
+      "type": "double"
+    },
+    {
+      "name": "cost_basis_price",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_hierarchy_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_center_parent_id",
+      "type": "double"
+    },
+    {
+      "name": "cost_estimate_type",
+      "type": "string"
+    },
+    {
+      "name": "country_id",
+      "type": "double"
+    },
+    {
+      "name": "date_cleared",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_closed",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_created",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_last_modified",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_last_modified_gmt",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_requested",
+      "type": "timestamp"
+    },
+    {
+      "name": "date_revenue_committed",
+      "type": "timestamp"
+    },
+    {
+      "name": "dcl_line_number",
+      "type": "string"
+    },
+    {
+      "name": "dcl_new_line",
+      "type": "string"
+    },
+    {
+      "name": "dcl_order_number",
+      "type": "string"
+    },
+    {
+      "name": "delay_rev_rec",
+      "type": "string"
+    },
+    {
+      "name": "department_id",
+      "type": "double"
+    },
+    {
+      "name": "discount__ra",
+      "type": "double"
+    },
+    {
+      "name": "do_not_display_line",
+      "type": "string"
+    },
+    {
+      "name": "do_not_print_line",
+      "type": "string"
+    },
+    {
+      "name": "do_restock",
+      "type": "string"
+    },
+    {
+      "name": "eccn",
+      "type": "string"
+    },
+    {
+      "name": "end_date_je",
+      "type": "timestamp"
+    },
+    {
+      "name": "estimated_cost",
+      "type": "double"
+    },
+    {
+      "name": "estimated_cost_foreign",
+      "type": "double"
+    },
+    {
+      "name": "expected_receipt_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "expense_category_id",
+      "type": "double"
+    },
+    {
+      "name": "from_contract_item",
+      "type": "string"
+    },
+    {
+      "name": "gl_number",
+      "type": "string"
+    },
+    {
+      "name": "gl_sequence",
+      "type": "string"
+    },
+    {
+      "name": "gl_sequence_id",
+      "type": "double"
+    },
+    {
+      "name": "gross_amount",
+      "type": "double"
+    },
+    {
+      "name": "has_cost_line",
+      "type": "string"
+    },
+    {
+      "name": "hs_code",
+      "type": "string"
+    },
+    {
+      "name": "inline_discount",
+      "type": "double"
+    },
+    {
+      "name": "invoice_end_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "invoice_start_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "isbillable",
+      "type": "string"
+    },
+    {
+      "name": "iscleared",
+      "type": "string"
+    },
+    {
+      "name": "isnonreimbursable",
+      "type": "string"
+    },
+    {
+      "name": "istaxable",
+      "type": "string"
+    },
+    {
+      "name": "is_allocation",
+      "type": "string"
+    },
+    {
+      "name": "is_amortization_rev_rec",
+      "type": "string"
+    },
+    {
+      "name": "is_commitment_confirmed",
+      "type": "string"
+    },
+    {
+      "name": "is_cost_line",
+      "type": "string"
+    },
+    {
+      "name": "is_custom_line",
+      "type": "string"
+    },
+    {
+      "name": "is_exclude_from_rate_request",
+      "type": "string"
+    },
+    {
+      "name": "is_fx_variance",
+      "type": "string"
+    },
+    {
+      "name": "is_item_value_adjustment",
+      "type": "string"
+    },
+    {
+      "name": "is_landed_cost",
+      "type": "string"
+    },
+    {
+      "name": "is_scrap",
+      "type": "string"
+    },
+    {
+      "name": "is_vsoe_allocation_line",
+      "type": "string"
+    },
+    {
+      "name": "item_count",
+      "type": "double"
+    },
+    {
+      "name": "item_id",
+      "type": "double"
+    },
+    {
+      "name": "item_received",
+      "type": "string"
+    },
+    {
+      "name": "item_source",
+      "type": "string"
+    },
+    {
+      "name": "item_unit_price",
+      "type": "string"
+    },
+    {
+      "name": "kit_part_number",
+      "type": "double"
+    },
+    {
+      "name": "landed_cost_source_line_id",
+      "type": "double"
+    },
+    {
+      "name": "license_term_mo",
+      "type": "double"
+    },
+    {
+      "name": "list_price_ra",
+      "type": "double"
+    },
+    {
+      "name": "list_rate",
+      "type": "double"
+    },
+    {
+      "name": "location_copy_id",
+      "type": "double"
+    },
+    {
+      "name": "location_id",
+      "type": "double"
+    },
+    {
+      "name": "maintenancesupport_type_hid_id",
+      "type": "double"
+    },
+    {
+      "name": "maintenancesupport__hidden",
+      "type": "double"
+    },
+    {
+      "name": "match_bill_to_receipt",
+      "type": "string"
+    },
+    {
+      "name": "memo",
+      "type": "string"
+    },
+    {
+      "name": "ms_basis_amount",
+      "type": "double"
+    },
+    {
+      "name": "ms_pricing_option_id",
+      "type": "double"
+    },
+    {
+      "name": "needs_revenue_element",
+      "type": "string"
+    },
+    {
+      "name": "net_amount",
+      "type": "double"
+    },
+    {
+      "name": "net_amount_foreign",
+      "type": "double"
+    },
+    {
+      "name": "non_posting_line",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs___net_invoice_qty",
+      "type": "double"
+    },
+    {
+      "name": "ns_acs___net_so_qty",
+      "type": "double"
+    },
+    {
+      "name": "ns_acs___po_internal_id",
+      "type": "string"
+    },
+    {
+      "name": "ns_acs___po_transaction_id",
+      "type": "string"
+    },
+    {
+      "name": "ns_gdc___item_id",
+      "type": "double"
+    },
+    {
+      "name": "ns_gdc___useful_life_months",
+      "type": "string"
+    },
+    {
+      "name": "number_billed",
+      "type": "double"
+    },
+    {
+      "name": "office_location_id",
+      "type": "double"
+    },
+    {
+      "name": "operation_sequence_number",
+      "type": "double"
+    },
+    {
+      "name": "optout_ms",
+      "type": "string"
+    },
+    {
+      "name": "order_number",
+      "type": "string"
+    },
+    {
+      "name": "order_priority",
+      "type": "double"
+    },
+    {
+      "name": "original_list_rate",
+      "type": "double"
+    },
+    {
+      "name": "original_price_level",
+      "type": "double"
+    },
+    {
+      "name": "original_quantity",
+      "type": "double"
+    },
+    {
+      "name": "original_warranty_expiration",
+      "type": "timestamp"
+    },
+    {
+      "name": "originator_journal_tran_typ_id",
+      "type": "double"
+    },
+    {
+      "name": "originator_transaction_intern",
+      "type": "string"
+    },
+    {
+      "name": "payment_method_id",
+      "type": "double"
+    },
+    {
+      "name": "payroll_item_id",
+      "type": "double"
+    },
+    {
+      "name": "payroll_wage_base_amount",
+      "type": "double"
+    },
+    {
+      "name": "payroll_year_to_date_amount",
+      "type": "double"
+    },
+    {
+      "name": "period_closed",
+      "type": "timestamp"
+    },
+    {
+      "name": "period_hidden_id",
+      "type": "double"
+    },
+    {
+      "name": "po_line_id",
+      "type": "string"
+    },
+    {
+      "name": "price_type_id",
+      "type": "double"
+    },
+    {
+      "name": "product_group_id",
+      "type": "double"
+    },
+    {
+      "name": "projected_receive_date",
+      "type": "string"
+    },
+    {
+      "name": "project_task_id",
+      "type": "double"
+    },
+    {
+      "name": "purchase_contract_id",
+      "type": "double"
+    },
+    {
+      "name": "quantity_allocated",
+      "type": "double"
+    },
+    {
+      "name": "quantity_committed",
+      "type": "double"
+    },
+    {
+      "name": "quantity_packed",
+      "type": "double"
+    },
+    {
+      "name": "quantity_picked",
+      "type": "double"
+    },
+    {
+      "name": "quantity_received_in_shipment",
+      "type": "double"
+    },
+    {
+      "name": "receipt_url",
+      "type": "string"
+    },
+    {
+      "name": "receivebydate",
+      "type": "timestamp"
+    },
+    {
+      "name": "registered_inventory_details_",
+      "type": "string"
+    },
+    {
+      "name": "register_flag_hidden",
+      "type": "string"
+    },
+    {
+      "name": "register_warranty",
+      "type": "string"
+    },
+    {
+      "name": "reimbursement_type",
+      "type": "string"
+    },
+    {
+      "name": "related_company_id",
+      "type": "double"
+    },
+    {
+      "name": "renewals_exclusion",
+      "type": "string"
+    },
+    {
+      "name": "renewal_reset_data_hidden",
+      "type": "string"
+    },
+    {
+      "name": "replace_by_kit_item",
+      "type": "string"
+    },
+    {
+      "name": "replacing_kit_item_id",
+      "type": "double"
+    },
+    {
+      "name": "returned_quantity",
+      "type": "double"
+    },
+    {
+      "name": "returned_quantity_exceeded",
+      "type": "string"
+    },
+    {
+      "name": "revenue_element_id",
+      "type": "double"
+    },
+    {
+      "name": "rev_rec_end_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "rev_rec_rule_id",
+      "type": "double"
+    },
+    {
+      "name": "rev_rec_start_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "salesforce_discount_item_id",
+      "type": "double"
+    },
+    {
+      "name": "salesforce_discount_rate",
+      "type": "double"
+    },
+    {
+      "name": "salesforce_line_id",
+      "type": "string"
+    },
+    {
+      "name": "sales_rep_territory_id",
+      "type": "double"
+    },
+    {
+      "name": "sample_column_approver_id",
+      "type": "double"
+    },
+    {
+      "name": "schedule_id",
+      "type": "double"
+    },
+    {
+      "name": "sent_to_fulfilment",
+      "type": "string"
+    },
+    {
+      "name": "sfdc_product_line_id",
+      "type": "string"
+    },
+    {
+      "name": "shipdate",
+      "type": "timestamp"
+    },
+    {
+      "name": "shipment_received",
+      "type": "timestamp"
+    },
+    {
+      "name": "shipper",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_addre",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_atten",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_city",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_count",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_id",
+      "type": "double"
+    },
+    {
+      "name": "shipping_address_lookup_line_",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_line_0",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_state",
+      "type": "string"
+    },
+    {
+      "name": "shipping_address_lookup_zip",
+      "type": "string"
+    },
+    {
+      "name": "shipping_carrier__actual",
+      "type": "string"
+    },
+    {
+      "name": "shipping_email",
+      "type": "string"
+    },
+    {
+      "name": "shipping_group_id",
+      "type": "double"
+    },
+    {
+      "name": "ship_method",
+      "type": "string"
+    },
+    {
+      "name": "sn_billing_schedule_populated",
+      "type": "string"
+    },
+    {
+      "name": "sn_substituted_billing_sche_id",
+      "type": "double"
+    },
+    {
+      "name": "source_subsidiary_id",
+      "type": "double"
+    },
+    {
+      "name": "start_date_je",
+      "type": "timestamp"
+    },
+    {
+      "name": "subscription_line_id",
+      "type": "double"
+    },
+    {
+      "name": "subsidiary_id",
+      "type": "double"
+    },
+    {
+      "name": "synced_to_salesforce",
+      "type": "string"
+    },
+    {
+      "name": "tax_item_id",
+      "type": "double"
+    },
+    {
+      "name": "tax_type",
+      "type": "string"
+    },
+    {
+      "name": "terms_hidden",
+      "type": "double"
+    },
+    {
+      "name": "term_in_months",
+      "type": "double"
+    },
+    {
+      "name": "term_in_months_ra",
+      "type": "double"
+    },
+    {
+      "name": "term_type_hidden_id",
+      "type": "double"
+    },
+    {
+      "name": "tobeemailed",
+      "type": "string"
+    },
+    {
+      "name": "tobefaxed",
+      "type": "string"
+    },
+    {
+      "name": "tobeprinted",
+      "type": "string"
+    },
+    {
+      "name": "tracking_",
+      "type": "string"
+    },
+    {
+      "name": "track_warranty_hidden",
+      "type": "string"
+    },
+    {
+      "name": "transaction_discount_line",
+      "type": "string"
+    },
+    {
+      "name": "transaction_order",
+      "type": "double"
+    },
+    {
+      "name": "transfer_cost_ra",
+      "type": "double"
+    },
+    {
+      "name": "transfer_order_item_line",
+      "type": "double"
+    },
+    {
+      "name": "transfer_order_line_type",
+      "type": "string"
+    },
+    {
+      "name": "unique_key",
+      "type": "double"
+    },
+    {
+      "name": "unit_cost_override",
+      "type": "double"
+    },
+    {
+      "name": "unit_of_measure_id",
+      "type": "double"
+    },
+    {
+      "name": "vendor_hidden_id",
+      "type": "double"
+    },
+    {
+      "name": "vertex_product_class_id",
+      "type": "double"
+    },
+    {
+      "name": "vertex_unspsc_code_id",
+      "type": "double"
+    },
+    {
+      "name": "view_registration",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_allocation",
+      "type": "double"
+    },
+    {
+      "name": "vsoe_amt",
+      "type": "double"
+    },
+    {
+      "name": "vsoe_deferral",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_delivered",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_discount",
+      "type": "string"
+    },
+    {
+      "name": "vsoe_price",
+      "type": "double"
+    },
+    {
+      "name": "warranty_begin_hidden",
+      "type": "timestamp"
+    },
+    {
+      "name": "warranty_expiration_hidden",
+      "type": "timestamp"
+    },
+    {
+      "name": "warranty_terms_hidden_id",
+      "type": "double"
+    },
+    {
+      "name": "warranty_terms_id",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_amount",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_amount__expen",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_base_amount",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_base_amount__",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_code_id",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_code__expen_id",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_line",
+      "type": "string"
+    },
+    {
+      "name": "withholding_tax_line__expense",
+      "type": "string"
+    },
+    {
+      "name": "withholding_tax_rate",
+      "type": "double"
+    },
+    {
+      "name": "withholding_tax_rate__expense",
+      "type": "double"
+    },
+    {
+      "name": "wt_customer_id",
+      "type": "double"
+    },
+    {
+      "name": "wt_employee_id",
+      "type": "double"
+    },
+    {
+      "name": "wt_vendor_id",
+      "type": "double"
+    },
+    {
+      "name": "_fivetran_deleted",
+      "type": "boolean"
+    },
+    {
+      "name": "date_deleted",
+      "type": "timestamp"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    },
+    {
+      "name": "project_id",
+      "type": "double"
+    },
+    {
+      "name": "renewal",
+      "type": "string"
+    },
+    {
+      "name": "mulesoft_error__line",
+      "type": "string"
+    },
+    {
+      "name": "notc_id",
+      "type": "double"
+    },
+    {
+      "name": "statistical_procedure_for_s_id",
+      "type": "double"
+    },
+    {
+      "name": "code_of_supply_id",
+      "type": "double"
+    },
+    {
+      "name": "statistical_value",
+      "type": "double"
+    },
+    {
+      "name": "adjustment_tax_code_id",
+      "type": "double"
+    },
+    {
+      "name": "adjustment_field",
+      "type": "string"
+    },
+    {
+      "name": "emirate_id",
+      "type": "double"
+    },
+    {
+      "name": "eu_triangulation",
+      "type": "string"
+    },
+    {
+      "name": "country_of_origin_code",
+      "type": "string"
+    },
+    {
+      "name": "country_of_origin_3",
+      "type": "string"
+    },
+    {
+      "name": "statistical_value__base_curre",
+      "type": "double"
+    },
+    {
+      "name": "counterparty_vat_number",
+      "type": "string"
+    },
+    {
+      "name": "statistical_procedure_for_p_id",
+      "type": "double"
+    },
+    {
+      "name": "expense_account_id",
+      "type": "double"
+    },
+    {
+      "name": "service_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "vendor_id",
+      "type": "double"
+    },
+    {
+      "name": "sat_customs_request_number",
+      "type": "string"
+    },
+    {
+      "name": "annual_prorate",
+      "type": "double"
+    },
+    {
+      "name": "sat_item_code_id",
+      "type": "double"
+    },
+    {
+      "name": "establishment_code",
+      "type": "string"
+    },
+    {
+      "name": "details_of_subject_and_exem_id",
+      "type": "double"
+    },
+    {
+      "name": "operation_type_id",
+      "type": "double"
+    },
+    {
+      "name": "sat_cadastre_id",
+      "type": "string"
+    },
+    {
+      "name": "order_allocation_strategy_id",
+      "type": "double"
+    },
+    {
+      "name": "line_changed",
+      "type": "string"
+    },
+    {
+      "name": "old_amount",
+      "type": "double"
+    },
+    {
+      "name": "old_account_id",
+      "type": "double"
+    },
+    {
+      "name": "partner_id",
+      "type": "string"
+    },
+    {
+      "name": "old_department_id",
+      "type": "double"
+    },
+    {
+      "name": "n_3pl_import_ids",
+      "type": "string"
+    },
+    {
+      "name": "n_3pl_order_number",
+      "type": "string"
+    },
+    {
+      "name": "n_3pl_fulfillment_error",
+      "type": "string"
+    },
+    {
+      "name": "rebate_oppty_amount",
+      "type": "double"
+    },
+    {
+      "name": "n_3pl_order_number_override",
+      "type": "string"
+    },
+    {
+      "name": "rebate_sales_price",
+      "type": "double"
+    },
+    {
+      "name": "transaction_level_acv_impacti",
+      "type": "string"
+    },
+    {
+      "name": "end_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "start_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "tax_exemption_details_id",
+      "type": "double"
+    },
+    {
+      "name": "tax_object_id",
+      "type": "double"
+    },
+    {
+      "name": "zip_change_order_id",
+      "type": "string"
+    },
+    {
+      "name": "zip_id",
+      "type": "string"
+    },
+    {
+      "name": "is_tax_line",
+      "type": "string"
+    }
+  ]
+}

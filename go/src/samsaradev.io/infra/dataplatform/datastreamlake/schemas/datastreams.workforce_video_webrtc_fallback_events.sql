@@ -1,0 +1,10 @@
+`org_id` BIGINT,
+`user_id` BIGINT,
+`stream_page_session_uuid` STRING,
+`fallback_time_ms` BIGINT,
+`original_livestream_uuid` STRING,
+`original_media_stream_id` STRING,
+`fallback_livestream_uuid` STRING,
+`fallback_media_stream_id` STRING,
+`event_type` STRING,
+`date` DATE

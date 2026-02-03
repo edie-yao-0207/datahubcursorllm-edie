@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/platform-operations"
+  ],
+  "description": "Changes to scheduled notebooks for transforming Netsuite data should be reviewed by platops"
+}

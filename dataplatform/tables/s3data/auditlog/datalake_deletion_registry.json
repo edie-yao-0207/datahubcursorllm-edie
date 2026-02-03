@@ -1,0 +1,38 @@
+{
+  "table": "datalake_deletion_registry",
+  "owner": "DataEngineering",
+  "description": "The tables in the data lake that are registered in the Data Lake Deletion Framework",
+  "database": "auditlog",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-dataplatform-deployed-artifacts/tmp/delta-lake-deletion/deletion_registry.csv",
+    "eu-west-1": "s3://samsara-eu-dataplatform-deployed-artifacts/tmp/delta-lake-deletion/deletion_registry.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "database",
+      "type": "string",
+      "description": "The name of database in the data lake"
+    },
+    {
+      "name": "table",
+      "type": "string",
+      "description": "The name of the table in the data lake"
+    },
+    {
+      "name": "customer_identification_column",
+      "type": "string",
+      "description": "The name of the column that references a Samsara customer"
+    },
+    {
+      "name": "group",
+      "type": "string",
+      "description": "The deletion group of the table. This is used for deletion prioritization"
+    },
+    {
+      "name": "format",
+      "type": "string",
+      "description": "The format of the table's physical data (e.g., 'delta', 'parquet', 'csv', 'json')"
+    }
+  ]
+}

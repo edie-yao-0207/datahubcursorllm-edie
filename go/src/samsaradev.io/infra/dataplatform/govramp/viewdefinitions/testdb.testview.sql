@@ -1,0 +1,1 @@
+SELECT * FROM anotherdb.underlying_table

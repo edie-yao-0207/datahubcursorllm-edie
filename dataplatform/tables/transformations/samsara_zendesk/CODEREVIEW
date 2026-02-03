@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/data-science"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to the Zendesk Pipeline Directory should be cleared with Data Science/Engineering."
+}

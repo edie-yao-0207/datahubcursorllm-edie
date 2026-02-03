@@ -1,0 +1,84 @@
+{
+  "name": "material_usage_report.aggr_prewet_material_spread_by_hour_v2",
+  "owner": "DiagnosticsTools",
+  "description": "Joins total prewet material spread computed using deltas, spread rate, and mix rate into one node, aggregated by hour",
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "material_usage_report",
+      "tablename": "prewet_spread_rate_ml_per_meter_event_intervals_v2",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "material_usage_report",
+      "tablename": "prewet_mix_spread_rate_event_intervals_v2",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "material_usage_report",
+      "tablename": "total_quantity_prewet_from_deltas_by_hour",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "material_usage_report",
+    "tablename": "aggr_prewet_material_spread_by_hour_v2",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp"
+      },
+      {
+        "name": "material_spread_ml_from_deltas",
+        "type": "long"
+      },
+      {
+        "name": "material_spread_ml_from_spread_rate",
+        "type": "double"
+      },
+      {
+        "name": "distance_spread_meters_from_spread_rate",
+        "type": "double"
+      },
+      {
+        "name": "duration_spread_ms_from_spread_rate",
+        "type": "long"
+      },
+      {
+        "name": "material_spread_ml_from_mix_rate",
+        "type": "double"
+      },
+      {
+        "name": "distance_spread_meters_from_mix_rate",
+        "type": "double"
+      },
+      {
+        "name": "duration_spread_ms_from_mix_rate",
+        "type": "long"
+      }
+    ],
+    "write_mode": "overwrite"
+  },
+  "expectation": {
+    "batch_mode": "KEEP_ALL"
+  },
+  "backfill_start_date": "2021-12-01"
+}

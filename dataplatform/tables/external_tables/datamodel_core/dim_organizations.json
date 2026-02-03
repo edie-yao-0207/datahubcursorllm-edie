@@ -1,0 +1,162 @@
+{
+  "name": "dim_organizations",
+  "owner": "DataEngineering",
+  "description": "Metadata for all organizations updated daily.",
+  "database": "datamodel_core",
+  "schema": [
+    {
+      "name": "org_id",
+      "type": "long"
+    },
+    {
+      "name": "org_name",
+      "type": "string"
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp"
+    },
+    {
+      "name": "locale",
+      "type": "string"
+    },
+    {
+      "name": "internal_type",
+      "type": "long"
+    },
+    {
+      "name": "internal_type_name",
+      "type": "string"
+    },
+    {
+      "name": "quarantine_enabled",
+      "type": "integer"
+    },
+    {
+      "name": "account_id",
+      "type": "string"
+    },
+    {
+      "name": "parent_account_id",
+      "type": "string"
+    },
+    {
+      "name": "account_name",
+      "type": "string"
+    },
+    {
+      "name": "sam_number",
+      "type": "string"
+    },
+    {
+      "name": "parent_sam_number",
+      "type": "string"
+    },
+    {
+      "name": "account_created_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "account_last_activity_date",
+      "type": "date"
+    },
+    {
+      "name": "account_actual_deactivate_date",
+      "type": "date"
+    },
+    {
+      "name": "account_last_modified_date",
+      "type": "timestamp"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "account_sub_industry",
+      "type": "string"
+    },
+    {
+      "name": "account_cs_tier",
+      "type": "string"
+    },
+    {
+      "name": "account_csm_email",
+      "type": "string",
+      "nullable": true,
+      "metadata": { "comment": "Email for the CSM of the org" }
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment_name",
+      "type": "string"
+    },
+    {
+      "name": "account_customer_in_trial_mode",
+      "type": "boolean"
+    },
+    {
+      "name": "is_account_delinquent",
+      "type": "boolean"
+    },
+    {
+      "name": "account_delinquency_status",
+      "type": "string"
+    },
+    {
+      "name": "account_delinquent_as_of",
+      "type": "timestamp"
+    },
+    {
+      "name": "account_first_purchase_date",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_country",
+      "type": "string"
+    },
+    {
+      "name": "account_billing_state",
+      "type": "string"
+    },
+    {
+      "name": "account_auto_renewal",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "date",
+      "type": "string"
+    },
+    {
+      "name": "is_simulated_org",
+      "type": "boolean"
+    },
+    {
+      "name": "release_type",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    }
+  ]
+}

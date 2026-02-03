@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`uuid` STRING,
+`org_id` BIGINT,
+`shared_by_id` BIGINT,
+`positive_recognition_share_uuid` STRING,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`comment` STRING,
+`date` STRING

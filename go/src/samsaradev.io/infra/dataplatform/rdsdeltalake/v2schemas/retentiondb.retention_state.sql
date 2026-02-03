@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`data_type` INT,
+`system_type` INT,
+`requested_cutoff_ms` BIGINT,
+`finished_cutoff_ms` BIGINT,
+`next` STRING,
+`created_at_ms` BIGINT,
+`updated_at_ms` BIGINT,
+`partition` STRING

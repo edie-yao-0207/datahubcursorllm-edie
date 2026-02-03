@@ -1,0 +1,17 @@
+{
+  "table": "telematics_wmi_issues",
+  "owner": "FirmwareVdp",
+  "description": "Table 'telematics_wmi_issues' generated from 'Dataweb Configurations.xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "wmi",
+      "type": "string"
+    },
+    {
+      "name": "reason",
+      "type": "string"
+    }
+  ]
+}

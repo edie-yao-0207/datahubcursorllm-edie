@@ -1,0 +1,16 @@
+{
+  "owner": "CoreServices",
+  "email_notifications": [
+    "alerts-ingestion-aaaad7ndq3nzakgbegyy7z6xwi@samsara.org.slack.com",
+    "thor-variants-ingest-databricks-notebook-job-email.yve8utex@samsara.pagerduty.com"
+  ],
+  "jobs": [
+    {
+      "name": "thor-variant-ingest",
+      "cron": "0 0 10/12 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ],
+  "python_libraries": ["paramiko", "openpyxl"]
+}

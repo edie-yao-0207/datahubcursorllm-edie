@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/platform-operations"
+  ],
+  "description": "Changes to PlatOps View definitions should be cleared with PlatOps."
+}

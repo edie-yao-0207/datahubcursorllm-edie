@@ -1,0 +1,195 @@
+{
+  "test_cases": [
+    {
+      "label": "test interpolated gps",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'",
+        "pipeline_execution_time": "'1970-01-01T00:00:17Z'"
+      },
+      "input_data": {
+        "objectstat_diffs.location": [
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 1000,
+            "distance": 10.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 3000,
+            "distance": 20.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 5000,
+            "distance": 60.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 7000,
+            "distance": 10.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 9000,
+            "distance": 10.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 10000,
+            "distance": 10.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-01",
+            "time": 11000,
+            "distance": 10.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-02",
+            "time": 15000,
+            "distance": 10.0
+          },
+          {
+            "org_id": 2,
+            "device_id": 1,
+            "date": "2020-01-02",
+            "time": 17000,
+            "distance": 10.0
+          }
+        ],
+        "kinesisstats_window.osdgpsdistance": [
+          {
+            "org_id": 2,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "value": { "double_value": 0.0, "time": 0 }
+          },
+          {
+            "org_id": 2,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "value": { "double_value": 90.0, "time": 8000 }
+          },
+          {
+            "org_id": 2,
+            "object_id": 1,
+            "date": "2020-01-01",
+            "value": { "double_value": 130.0, "time": 11000 }
+          },
+          {
+            "org_id": 2,
+            "object_id": 1,
+            "date": "2020-01-02",
+            "value": { "double_value": 200.0, "time": 17000 }
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 1000,
+          "gps_distance": 0.0,
+          "previous": {
+            "time_ms": 0,
+            "gps_distance": 0.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 3000,
+          "gps_distance": 20.0,
+          "previous": {
+            "time_ms": 1000,
+            "gps_distance": 0.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 5000,
+          "gps_distance": 80.0,
+          "previous": {
+            "time_ms": 3000,
+            "gps_distance": 20.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 7000,
+          "gps_distance": 90.0,
+          "previous": {
+            "time_ms": 5000,
+            "gps_distance": 80.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 8000,
+          "gps_distance": 90.0,
+          "previous": {
+            "time_ms": 7000,
+            "gps_distance": 90.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 9000,
+          "gps_distance": 90.0,
+          "previous": {
+            "time_ms": 8000,
+            "gps_distance": 90.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 10000,
+          "gps_distance": 110.0,
+          "previous": {
+            "time_ms": 9000,
+            "gps_distance": 90.0
+          }
+        },
+        {
+          "org_id": 2,
+          "device_id": 1,
+          "date": "2020-01-01",
+          "time_ms": 11000,
+          "gps_distance": 130.0,
+          "previous": {
+            "time_ms": 10000,
+            "gps_distance": 110.0
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "table": "telematics_issues",
+  "owner": "FirmwareVdp",
+  "description": "Table 'telematics_issues' generated from 'Dataweb Configurations.xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "market",
+      "type": "string"
+    },
+    {
+      "name": "make",
+      "type": "string"
+    },
+    {
+      "name": "model",
+      "type": "string"
+    },
+    {
+      "name": "year_start",
+      "type": "bigint"
+    },
+    {
+      "name": "year_end",
+      "type": "bigint"
+    },
+    {
+      "name": "engine_model",
+      "type": "string"
+    },
+    {
+      "name": "engine_type",
+      "type": "string"
+    },
+    {
+      "name": "fuel_type",
+      "type": "string"
+    },
+    {
+      "name": "wmi",
+      "type": "string"
+    },
+    {
+      "name": "label",
+      "type": "string"
+    },
+    {
+      "name": "contributor",
+      "type": "string"
+    },
+    {
+      "name": "research",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "table": "triage_state",
+  "owner": "DataEngineering",
+  "description": "Mappings for Triage State to its integer value (source: go/src/samsaradev.io/safety/infra/safetyeventtriagemodels/triage_event.proto).",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-data-eng-mapping-tables/databricks/s3tables/definitions/triage/triage_state.csv",
+    "eu-west-1": "s3://samsara-eu-data-eng-mapping-tables/databricks/s3tables/definitions/triage/triage_state.csv",
+    "ca-central-1": "s3://samsara-ca-data-eng-mapping-tables/databricks/s3tables/definitions/triage/triage_state.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "triage_state_id",
+      "type": "bigint",
+      "description": "The ID for the triage state"
+    },
+    {
+      "name": "triage_state",
+      "type": "string",
+      "description": "Triage state of the safety event"
+    }
+  ]
+}

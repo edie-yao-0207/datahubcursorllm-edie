@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dataweb job schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the job. The job name must match the name of the file that defines it."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner team of the job."
+    },
+    "assets": {
+      "type": "array",
+      "description": "A list of tags for selecting the assets to be included in the job. Asset tag values must conform to the format: 'region1|region2:database.table'.",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        "[ 'us-west-2|eu-west-1:datamodel_safety.backend_events', 'us-west-2|eu-west-1:datamodel_safety.firmware_events' ]",
+        "[ 'us-west-2:datamodel_safety.fct_safey_events', 'us-west-2:datamodel_safety.stg_safety_events', 'us-west-2:datamodel_safety.stg_activity_events' ]"
+      ]
+    },
+    "schedules": {
+      "type": "array",
+      "description": "A list of schedule definitions for executing the job.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A specifier for the specific schedule. This gets appended to the job name."
+          },
+          "cron": {
+            "type": "string",
+            "description": "Cron expression for run schedule."
+          },
+          "backfill_window": {
+            "type": "integer",
+            "description": "The number of primary partitions to backfill on each execution starting from latest partition key. If an asset is multi-partitioned, all secondary partitions will be backfilled for each targeted primary partition.",
+            "default": 0
+          },
+          "backfill_batch_size": {
+            "type": "integer",
+            "description": "The number of primary partitions to backfill on each execution starting from latest partition key. If an asset is multi-partitioned, all secondary partitions will be backfilled for each targeted primary partition.",
+            "default": 1
+          },
+          "use_scheduled_hour_partition": {
+            "type": "boolean",
+            "description": "When true, use the scheduled execution hour as the secondary partition key instead of backfilling all secondary partitions. The cron schedule should align with partition keys (e.g., cron '0 */3 * * *' with partitions ['00', '03', ...]).",
+            "default": false
+          }
+        },
+        "required": ["name", "cron"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["owner", "assets"],
+  "additionalProperties": false
+}

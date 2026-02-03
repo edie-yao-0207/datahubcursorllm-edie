@@ -1,0 +1,218 @@
+{
+  "test_cases": [
+    {
+      "label": "only data in the [start_date, end_date) interval is included",
+      "parameters": {
+        "start_date": " '2020-12-30' ",
+        "end_date": " '2021-01-01' ",
+        "pipeline_execution_time": " '2021-01-01 12:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_2x_3x_linked_vgs": [
+          {
+            "org_id": 10,
+            "vg_device_id": 100,
+            "product_id": 24,
+            "linked_cm_id": 101,
+            "cm_product_id": 44,
+            "upper_camera_serial": "CXXX-XXX-XXX"
+          }
+        ],
+        "kinesisstats.osdpowerstate": [
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 100,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-11-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 150,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 200,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 250,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-30"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 500,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2021-01-01"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 10,
+          "device_id": 100,
+          "linked_cm_id": 101,
+          "start_ms": 200,
+          "end_ms": 250,
+          "has_power": true,
+          "date": "2020-12-30"
+        }
+      ]
+    },
+    {
+      "label": "intervals are adjacent and inclusive on both ends",
+      "parameters": {
+        "start_date": " '2020-12-29' ",
+        "end_date": " '2020-12-31' ",
+        "pipeline_execution_time": " '2021-01-01 12:00:00' "
+      },
+      "input_data": {
+        "cm_health_report.cm_2x_3x_linked_vgs": [
+          {
+            "org_id": 10,
+            "vg_device_id": 100,
+            "product_id": 24,
+            "linked_cm_id": 101,
+            "cm_product_id": 44,
+            "upper_camera_serial": "CXXX-XXX-XXX"
+          }
+        ],
+        "kinesisstats.osdpowerstate": [
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 150,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 200,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 250,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 500,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 550,
+            "value": {
+              "int_value": 1,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          },
+          {
+            "org_id": 10,
+            "object_id": 101,
+            "time": 600,
+            "value": {
+              "int_value": 0,
+              "is_databreak": false,
+              "is_end": false
+            },
+            "date": "2020-12-29"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 10,
+          "device_id": 100,
+          "linked_cm_id": 101,
+          "start_ms": 150,
+          "end_ms": 200,
+          "has_power": false,
+          "date": "2020-12-29"
+        },
+        {
+          "org_id": 10,
+          "device_id": 100,
+          "linked_cm_id": 101,
+          "start_ms": 200,
+          "end_ms": 250,
+          "has_power": true,
+          "date": "2020-12-29"
+        },
+        {
+          "org_id": 10,
+          "device_id": 100,
+          "linked_cm_id": 101,
+          "start_ms": 250,
+          "end_ms": 500,
+          "has_power": false,
+          "date": "2020-12-29"
+        },
+        {
+          "org_id": 10,
+          "device_id": 100,
+          "linked_cm_id": 101,
+          "start_ms": 500,
+          "end_ms": 600,
+          "has_power": true,
+          "date": "2020-12-29"
+        }
+      ]
+    }
+  ]
+}

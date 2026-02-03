@@ -1,0 +1,23 @@
+{
+  "view": "route_load_and_user_interaction_curves",
+  "owner": "OPX",
+  "description": "Static values of the route load and user interaction curves at various p95 values.",
+  "database": "perf_infra",
+  "schema": [
+    {
+      "name": "seconds",
+      "type": "double",
+      "description": "The second value."
+    },
+    {
+      "name": "rlc_score",
+      "type": "double",
+      "description": "The score of route load curve at the provided second value."
+    },
+    {
+      "name": "uic_score",
+      "type": "double",
+      "description": "The score of user interaction curve at the provided second value."
+    }
+  ]
+}

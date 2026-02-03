@@ -1,0 +1,13 @@
+{
+  "feature_flags": [
+    {
+      "key": "s3bigstats-backfill-enabled",
+      "custom_targeting_attributes": [
+        {
+          "name": "s3bigstat",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

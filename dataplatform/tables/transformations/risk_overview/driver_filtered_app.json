@@ -1,0 +1,44 @@
+{
+  "name": "risk_overview.driver_filtered_app",
+  "owner": "SafetyRisk",
+  "description": "Filters for drivers with app activity within 30 days.",
+  "backfill_start_date": "2025-05-10",
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "risk_overview",
+      "tablename": "driver_filtered",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datamodel_platform",
+      "tablename": "fct_driver_activity",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "risk_overview",
+    "tablename": "driver_filtered_app",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "id", "org_id"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "long"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      }
+    ]
+  }
+}

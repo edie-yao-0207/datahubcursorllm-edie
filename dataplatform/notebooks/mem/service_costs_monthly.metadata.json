@@ -1,0 +1,11 @@
+{
+  "owner": "MdmSdk",
+  "jobs": [
+    {
+      "name": "monthly-run",
+      "cron": "0 0 16 1 * ?",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

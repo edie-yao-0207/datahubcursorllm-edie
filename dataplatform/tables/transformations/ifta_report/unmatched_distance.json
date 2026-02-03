@@ -1,0 +1,88 @@
+{
+  "name": "ifta_report.unmatched_distance",
+  "owner": "IftaCore",
+  "description": "Standardized distance points that weren't matched with any location segment",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "helpers",
+      "tablename": "ignored_org_ids",
+      "type": "table"
+    },
+    {
+      "dbname": "ifta_report",
+      "tablename": "annotated_location_segments",
+      "type": "table"
+    },
+    {
+      "dbname": "canonical_distance",
+      "tablename": "total_distance",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2023-08-01",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "ifta_report",
+    "tablename": "unmatched_distance",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "time_ms"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "metadata": {
+          "comment": "The date of the `time_ms` column."
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The device ID of the vehicle that had standardized distance without an assigned location segment."
+        }
+      },
+      {
+        "name": "time_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The time in milliseconds of the standardized distance point."
+        }
+      },
+      {
+        "name": "distance",
+        "type": "double",
+        "metadata": {
+          "comment": "The standardized distance in meters."
+        }
+      },
+      {
+        "name": "interpolated",
+        "type": "integer",
+        "metadata": {
+          "comment": "Whether or not the standardized distance is interpolated. `1=true, 0=false`."
+        }
+      },
+      {
+        "name": "osd_odometer",
+        "type": "long",
+        "metadata": {
+          "comment": "The odometer distance in meters."
+        }
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  },
+  "disabled_regions": ["us-west-2", "eu-west-1", "ca-central-1"]
+}

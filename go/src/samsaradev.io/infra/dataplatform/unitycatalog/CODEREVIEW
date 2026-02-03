@@ -1,0 +1,32 @@
+{
+  "owners": [
+    "samsara-dev/data-platform"
+  ],
+  "onlyIfNoChildren": true,
+  "perFile": [
+    {
+      "filePattern": "share_registry.go",
+      "owners": [
+        "samsara-dev/data-platform"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/data-tools"
+      ],
+      "noParent": true,
+      "description": "Changes to share registry should be cleared with Data Engineering or Data Platform."
+    },
+    {
+      "filePattern": "recipient_registry.go",
+      "owners": [
+        "samsara-dev/data-platform"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/data-tools"
+      ],
+      "noParent": true,
+      "description": "Changes to recipient registry should be cleared with Data Engineering or Data Platform"
+    }
+  ]
+}

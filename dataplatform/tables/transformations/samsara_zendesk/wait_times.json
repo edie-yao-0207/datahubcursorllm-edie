@@ -1,0 +1,46 @@
+{
+  "name": "samsara_zendesk.wait_times",
+  "owner": "DataEngineering",
+  "nonproduction": true,
+  "description": "Get the wait times in calendar minutes for zendesk tickets",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "samsara_zendesk",
+      "tablename": "ticket_field_history",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2015-07-24",
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "samsara_zendesk",
+    "tablename": "wait_times",
+    "type": "table",
+    "primary_key": ["ticket_id"],
+    "schema": [
+      {
+        "name": "ticket_id",
+        "type": "long"
+      },
+      {
+        "name": "last_updated_at",
+        "type": "date"
+      },
+      {
+        "name": "agent_wait_time_in_calendar_minutes",
+        "type": "double"
+      },
+      {
+        "name": "requester_wait_time_in_calendar_minutes",
+        "type": "double"
+      },
+      {
+        "name": "on_hold_time_in_calendar_minutes",
+        "type": "double"
+      }
+    ],
+    "write_mode": "merge"
+  },
+  "disabled_regions": ["eu-west-1", "ca-central-1"]
+}

@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`uuid` STRING,
+`stream_id` BIGINT,
+`environment` BYTE,
+`angle` BYTE,
+`distance` BYTE,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

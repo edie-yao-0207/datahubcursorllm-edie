@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`promotion_uuid` STRING,
+`created_at_ms` BIGINT,
+`activity` SHORT,
+`stage` SHORT,
+`user_id` BIGINT,
+`comment` STRING,
+`exclusion_uuid` STRING,
+`date` STRING

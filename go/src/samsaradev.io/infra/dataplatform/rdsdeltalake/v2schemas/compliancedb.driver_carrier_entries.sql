@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`driver_id` BIGINT,
+`dot_number` BIGINT,
+`carrier_name` STRING,
+`carrier_address` STRING,
+`log_at_ms` BIGINT,
+`created_at_ms` BIGINT,
+`uuid` STRING,
+`date` STRING

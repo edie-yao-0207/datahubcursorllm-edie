@@ -1,0 +1,14 @@
+0,Configurable_Gasoline
+1,Configurable_Diesel
+2,Configurable_Biodiesel
+3,Configurable_FlexibleFuel_E85
+4,Configurable_Electricity
+5,Configurable_Ethanol_E100
+6,Configurable_RenewableDiesel
+7,Configurable_M100
+8,Configurable_CNG
+9,Configurable_LNG
+10,Configurable_LPG
+11,Configurable_RNG
+12,Configurable_FCEV
+99,Configurable_Unknown

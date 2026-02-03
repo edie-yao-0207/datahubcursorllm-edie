@@ -1,0 +1,85 @@
+{
+  "name": "time_on_site_report.report",
+  "owner": "AssetFoundations",
+  "description": "Computes the final report by joining site visits with distance and fuel diffs.",
+  "disabled_regions": ["eu-west-1", "us-west-2", "ca-central-1"],
+  "dependencies": [
+    {
+      "dbname": "time_on_site_report",
+      "tablename": "site_visit_hours",
+      "type": "table"
+    },
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "gps",
+      "type": "table"
+    },
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "fuel",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "spark_execution_environment": {
+    "spark_version": "6.4.x-scala2.11"
+  },
+  "output": {
+    "dbname": "time_on_site_report",
+    "tablename": "report",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "address_id", "start_ms"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "address_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp"
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp"
+      },
+      {
+        "name": "visit_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "visit_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      },
+      {
+        "name": "distance_m",
+        "type": "double"
+      },
+      {
+        "name": "fuel_consumed_ml",
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

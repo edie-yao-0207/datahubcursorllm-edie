@@ -1,0 +1,93 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal",
+    "enabled": true,
+    "placement": "below"
+  },
+  "xAxis": { "type": "-", "labels": { "enabled": true } },
+  "yAxis": [
+    { "type": "-", "title": { "text": "Recording Uptime" } },
+    { "type": "-", "opposite": true, "title": { "text": null } }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": { "type": "data", "visible": true },
+  "series": {
+    "stacking": null,
+    "error_y": { "type": "data", "visible": true }
+  },
+  "seriesOptions": {
+    "count(DISTINCT device_id)": { "yAxis": 0, "type": "line" },
+    "total_recording_uptime": { "yAxis": 0, "type": "line" },
+    "recording_uptime_p99": { "yAxis": 0, "type": "line" },
+    "recording_uptime_p001": { "yAxis": 0, "type": "line" },
+    "recording_uptime_p01": { "yAxis": 0, "type": "line" },
+    "recording_uptime_p10": { "yAxis": 0, "type": "line" },
+    "recording_uptime_median": { "yAxis": 0, "type": "line" },
+    "recording_uptime_p05": { "yAxis": 0, "type": "line" },
+    "recording_uptime_p005": { "yAxis": 0, "type": "line" },
+    "43, recording_uptime_p001": { "name": "CM32 p001" },
+    "43, recording_uptime_p005": { "name": "CM32 p005" },
+    "43, recording_uptime_p01": { "name": "CM32 p01" },
+    "43, recording_uptime_p05": { "name": "CM32 p05" },
+    "43, recording_uptime_p10": { "name": "CM32 p10" },
+    "43, total_recording_uptime": { "name": "CM32 Total" },
+    "44, recording_uptime_p001": { "name": "CM31 p001", "yAxis": 0 },
+    "44, recording_uptime_p005": { "name": "CM31 p005" },
+    "44, recording_uptime_p01": { "name": "CM31 p01" },
+    "44, recording_uptime_p05": { "name": "CM31 p05" },
+    "44, recording_uptime_p10": { "name": "CM31 p10" },
+    "44, total_recording_uptime": { "name": "CM31 Total" },
+    "155, recording_uptime_p001": { "name": "CM34 p001" },
+    "155, recording_uptime_p005": { "name": "CM34 p005" },
+    "155, recording_uptime_p01": { "name": "CM34 p01" },
+    "155, recording_uptime_p05": { "name": "CM34 p05" },
+    "155, recording_uptime_p10": { "name": "CM34 p10" },
+    "155, total_recording_uptime": { "name": "CM34 Total" },
+    "167, recording_uptime_p001": { "name": "CM33 p001" },
+    "167, recording_uptime_p005": { "name": "CM33 p005" },
+    "167, recording_uptime_p01": { "name": "CM33 p01" },
+    "167, recording_uptime_p05": { "name": "CM33 p05" },
+    "167, recording_uptime_p10": { "name": "CM33 p10" },
+    "167, total_recording_uptime": { "name": "CM33 Total" },
+    "recording_uptime_p15": { "yAxis": 0, "type": "line" },
+    "155, recording_uptime_p15": { "name": "CM34 p15" },
+    "167, recording_uptime_p15": { "name": "CM33 p15" },
+    "43, recording_uptime_p15": { "name": "CM32 p15" },
+    "44, recording_uptime_p15": { "name": "CM31 p15" }
+  },
+  "valuesOptions": {},
+  "direction": { "type": "counterclockwise" },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": { "column": "date", "id": "column_905d933627355" },
+    "y": [
+      { "id": "column_905d933627357", "column": "recording_uptime_p001" },
+      { "id": "column_905d933634784", "column": "recording_uptime_p01" },
+      { "id": "column_efb6947379231", "column": "recording_uptime_p10" },
+      { "id": "column_efb69473129233", "column": "recording_uptime_p05" },
+      {
+        "id": "column_efb69473145356",
+        "column": "recording_uptime_p005"
+      },
+      { "id": "column_16f9d4ee4672", "column": "total_recording_uptime" },
+      { "id": "column_3c0c4c9c4468", "column": "recording_uptime_p15" }
+    ],
+    "series": { "column": "cm_product_id", "id": "column_efb69473118914" }
+  },
+  "isAggregationOn": false,
+  "condensed": true,
+  "withRowNumber": true
+}

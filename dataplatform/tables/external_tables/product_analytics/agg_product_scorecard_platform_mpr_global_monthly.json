@@ -1,0 +1,148 @@
+{
+  "name": "agg_product_scorecard_platform_mpr_global_monthly",
+  "owner": "DataEngineering",
+  "description": "Monthly Platform MPR metrics for org groupings",
+  "database": "product_analytics",
+  "schema": [
+    {
+      "name": "date_month",
+      "type": "string"
+    },
+    {
+      "name": "period_start",
+      "type": "string"
+    },
+    {
+      "name": "period_end",
+      "type": "string"
+    },
+    {
+      "name": "cloud_region",
+      "type": "string"
+    },
+    {
+      "name": "region",
+      "type": "string"
+    },
+    {
+      "name": "account_size_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_arr_segment",
+      "type": "string"
+    },
+    {
+      "name": "account_industry",
+      "type": "string"
+    },
+    {
+      "name": "industry_vertical",
+      "type": "string"
+    },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "is_paid_stce_customer",
+      "type": "boolean"
+    },
+    {
+      "name": "full_admin_orgs",
+      "type": "long"
+    },
+    {
+      "name": "custom_role_orgs",
+      "type": "long"
+    },
+    {
+      "name": "total_orgs",
+      "type": "long"
+    },
+    {
+      "name": "device_attributes",
+      "type": "long"
+    },
+    {
+      "name": "device_attributes_orgs",
+      "type": "long"
+    },
+    {
+      "name": "device_tags",
+      "type": "long"
+    },
+    {
+      "name": "device_tags_orgs",
+      "type": "long"
+    },
+    {
+      "name": "device_tags_attributes",
+      "type": "long"
+    },
+    {
+      "name": "total_devices",
+      "type": "long"
+    },
+    {
+      "name": "total_device_orgs",
+      "type": "long"
+    },
+    {
+      "name": "driver_tags",
+      "type": "long"
+    },
+    {
+      "name": "driver_tags_orgs",
+      "type": "long"
+    },
+    {
+      "name": "driver_attributes",
+      "type": "long"
+    },
+    {
+      "name": "driver_attributes_orgs",
+      "type": "long"
+    },
+    {
+      "name": "driver_tags_attributes",
+      "type": "long"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long"
+    },
+    {
+      "name": "total_driver_orgs",
+      "type": "long"
+    },
+    {
+      "name": "csv_upload_failures",
+      "type": "long"
+    },
+    {
+      "name": "csv_uploads",
+      "type": "long"
+    },
+    {
+      "name": "average_row_error_rate",
+      "type": "decimal(38,20)"
+    },
+    {
+      "name": "active_cloud_dashboard_users",
+      "type": "long"
+    },
+    {
+      "name": "active_cloud_dashboard_orgs",
+      "type": "long"
+    },
+    {
+      "name": "total_possible_cloud_dashboard_users",
+      "type": "long"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-tools"
+  ],
+  "description": "Changes to datamodel_launchdarkly_bronze directory should be approved by data tools/data engineering",
+  "noParent": true
+}

@@ -1,0 +1,229 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": [],
+  "jobs": [],
+  "output": {
+    "dbname": "dataprep_safety",
+    "tablename": "cm_device_health_intervals",
+    "type": "table",
+    "schema": [
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "cm_device_id",
+        "type": "long"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "product_id",
+        "type": "long"
+      },
+      {
+        "name": "cm_product_id",
+        "type": "long"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      },
+      {
+        "name": "duration_ms",
+        "type": "long"
+      },
+      {
+        "name": "distance_meters",
+        "type": "double"
+      },
+      {
+        "name": "start_lat",
+        "type": "double"
+      },
+      {
+        "name": "start_lon",
+        "type": "double"
+      },
+      {
+        "name": "start_city",
+        "type": "string"
+      },
+      {
+        "name": "start_state",
+        "type": "string"
+      },
+      {
+        "name": "end_lat",
+        "type": "double"
+      },
+      {
+        "name": "end_lon",
+        "type": "double"
+      },
+      {
+        "name": "end_city",
+        "type": "string"
+      },
+      {
+        "name": "end_state",
+        "type": "string"
+      },
+      {
+        "name": "on_trip",
+        "type": "boolean"
+      },
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "cm_first_heartbeat_date",
+        "type": "string"
+      },
+      {
+        "name": "cm_first_heartbeat_ms",
+        "type": "long"
+      },
+      {
+        "name": "cm_last_heartbeat_date",
+        "type": "string"
+      },
+      {
+        "name": "cm_last_heartbeat_ms",
+        "type": "long"
+      },
+      {
+        "name": "vg_first_heartbeat_date",
+        "type": "string"
+      },
+      {
+        "name": "vg_first_heartbeat_ms",
+        "type": "long"
+      },
+      {
+        "name": "vg_last_heartbeat_date",
+        "type": "string"
+      },
+      {
+        "name": "vg_last_heartbeat_ms",
+        "type": "long"
+      },
+      {
+        "name": "cm_build",
+        "type": "string"
+      },
+      {
+        "name": "cm_bootcount",
+        "type": "integer"
+      },
+      {
+        "name": "vg_build",
+        "type": "string"
+      },
+      {
+        "name": "vg_bootcount",
+        "type": "integer"
+      },
+      {
+        "name": "cm_total_anomalies",
+        "type": "long"
+      },
+      {
+        "name": "cm_anomaly_event_service_count",
+        "type": "long"
+      },
+      {
+        "name": "cm_runtime_errors",
+        "type": "long"
+      },
+      {
+        "name": "cm_kernel_errors",
+        "type": "long"
+      },
+      {
+        "name": "cm_negative_one_errors",
+        "type": "long"
+      },
+      {
+        "name": "msm_max_temp_celsius",
+        "type": "double"
+      },
+      {
+        "name": "msm_avg_temp_celsius",
+        "type": "double"
+      },
+      {
+        "name": "cpu_gold_max_temp_celsius",
+        "type": "double"
+      },
+      {
+        "name": "cpu_gold_avg_temp_celsius",
+        "type": "double"
+      },
+      {
+        "name": "vg_max_temp_celsius",
+        "type": "double"
+      },
+      {
+        "name": "vg_avg_temp_celsius",
+        "type": "double"
+      },
+      {
+        "name": "grace_recording_duration",
+        "type": "long"
+      },
+      {
+        "name": "interval_connected_duration",
+        "type": "long"
+      },
+      {
+        "name": "recording_duration_ms",
+        "type": "long"
+      },
+      {
+        "name": "harsh_event_count",
+        "type": "long"
+      },
+      {
+        "name": "successful_file_upload_count",
+        "type": "long"
+      },
+      {
+        "name": "overheated_duration_ms",
+        "type": "long"
+      },
+      {
+        "name": "overheated_count",
+        "type": "long"
+      },
+      {
+        "name": "safe_mode_duration_ms",
+        "type": "long"
+      },
+      {
+        "name": "safe_mode_count",
+        "type": "long"
+      },
+      {
+        "name": "speed_limit_available_duration_ms",
+        "type": "long"
+      }
+    ],
+    "primary_key": ["device_id", "org_id", "cm_device_id", "date"]
+  }
+}

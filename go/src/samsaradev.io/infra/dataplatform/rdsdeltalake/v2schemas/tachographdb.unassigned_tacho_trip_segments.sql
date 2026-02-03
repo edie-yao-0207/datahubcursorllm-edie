@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`vehicle_file_uploaded_at_ms` BIGINT,
+`start_time` TIMESTAMP,
+`end_time` TIMESTAMP,
+`is_derived_from_activity_info` BYTE,
+`annotation` STRING,
+`date` STRING

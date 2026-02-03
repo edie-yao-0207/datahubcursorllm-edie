@@ -1,0 +1,11 @@
+{
+  "owner": "DataScience",
+  "email_notifications": ["datascience@samsara.com"],
+  "jobs": [
+    {
+      "name": "dim_osm_ways",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "table": "harshevent_report",
+  "owner": "DataEngineering",
+  "description": "Table for precomputed harsh event counts",
+  "database": "report_staging",
+  "schema": [
+    { "name": "org_id", "type": "long", "description": "This Internal ID for the customer's Samsara Org" },
+    {
+      "name": "object_id",
+      "type": "long",
+      "description": "The driver_id or the device_id depending on the object_type"
+    },
+    { "name": "object_type", "type": "integer", "description": "1 = device, 5 = driver" },
+    {
+      "name": "interval_start",
+      "type": "timestamp",
+      "description": "The hourly start interval corresponding to the trip end"
+    },
+    { "name": "other_harsh_event_count", "type": "integer", "description": "Dummy field set to zero" },
+    {
+      "name": "acceleration_count",
+      "type": "integer",
+      "description": "Count of harsh acceleration events during the trip"
+    },
+    {
+      "name": "braking_count",
+      "type": "integer",
+      "description": "Count of harsh braking events during the trip"
+    },
+    { "name": "harsh_turn_count", "type": "integer", "description": "Count of harsh turn events during the trip" },
+    {
+      "name": "crash_count",
+      "type": "integer",
+      "description": "Count of crash events during the trip"
+    },
+    {
+      "name": "rolling_stop_count",
+      "type": "integer",
+      "description": "Count of rolking stop events during the trip"
+    },
+    {
+      "name": "rollover_protection_count",
+      "type": "integer",
+      "description": "Count of rollover protection events during the trip"
+    },
+    {
+      "name": "yaw_control_count",
+      "type": "integer",
+      "description": "Count of yaw control events during the trip"
+    },
+    {
+      "name": "harsh_event_trigger_count",
+      "type": "long",
+      "description": "Count of harsh events excluding ADAS events during the trip"
+    },
+    {
+      "name": "edge_distracted_driving_count",
+      "type": "integer",
+      "description": "Count of edge (real time camera analysis) distracted driving events during the trip"
+    },
+    {
+      "name": "edge_tailgating_count",
+      "type": "integer",
+      "description": "Count of edge (real time camera analysis) tailgating events during the trip"
+    },
+    {
+      "name": "edge_forward_collision_warning_count",
+      "type": "integer",
+      "description": "Count of edge (real time camera analysis) forward collision events during the trip"
+    },
+    {
+      "name": "generic_distraction_count",
+      "type": "integer",
+      "description": "Count of generic distraction events during the trip"
+    },
+    {
+      "name": "drowsy_count",
+      "type": "integer",
+      "description": "Count of drowsy events during the trip"
+    },
+    {
+      "name": "late_response_count",
+      "type": "integer",
+      "description": "Count of late response events during the trip"
+    },
+    {
+      "name": "mobile_usage_count",
+      "type": "integer",
+      "description": "Count of mobile usage events during the trip"
+    },
+    {
+      "name": "no_seat_belt_count",
+      "type": "integer",
+      "description": "Count of no seat belt events during the trip"
+    },
+    {
+      "name": "did_not_yield_count",
+      "type": "integer",
+      "description": "Count of did not yield events during the trip"
+    },
+    {
+      "name": "near_collision_count",
+      "type": "integer",
+      "description": "Count of near collision events during the trip"
+    },
+    {
+      "name": "ran_red_light_count",
+      "type": "integer",
+      "description": "Count of red light run events during the trip"
+    },
+    {
+      "name": "speeding_count",
+      "type": "integer",
+      "description": "Count of speeding events during the trip"
+    },
+    {
+      "name": "following_distance_severe_count",
+      "type": "integer",
+      "description": "Count of severe following distance events during the trip"
+    },
+    {
+      "name": "following_distance_moderate_count",
+      "type": "integer",
+      "description": "Count of moderate following distance events during the trip"
+    },
+    {
+      "name": "generic_tailgating_count",
+      "type": "integer",
+      "description": "Count of generic tailgating events during the trip"
+    },
+    {
+      "name": "defensive_driving_count",
+      "type": "integer",
+      "description": "Count of defensive driving events during the trip"
+    },
+    {
+      "name": "obstructed_camera_count",
+      "type": "integer",
+      "description": "Count of camera obstruction events during the trip"
+    },
+    {
+      "name": "lane_departure_count",
+      "type": "integer",
+      "description": "Count of lane departure events during the trip"
+    },
+    {
+      "name": "smoking_count",
+      "type": "integer",
+      "description": "Count of smoking events during the trip"
+    },
+    {
+      "name": "aggressive_driving_count",
+      "type": "integer",
+      "description": "Count of aggressive driving events during the trip"
+    },
+    {
+      "name": "eating_drinking_count",
+      "type": "integer",
+      "description": "Count of eating or drinking events during the trip"
+    },
+    {
+      "name": "inclement_weather_count",
+      "type": "integer",
+      "description": "Count of inclement weather events during the trip"
+    },
+    {
+      "name": "distance_meters",
+      "type": "double",
+      "description": "Distance covered during the trip"
+    },
+    {
+      "name": "engine_idle_ms",
+      "type": "long",
+      "description": "How long the engine was idle during the trip"
+    },
+    {
+      "name": "driving_time_ms",
+      "type": "long",
+      "description": "Driving time for the trip"
+    },
+    {
+      "name": "seatbelt_reporting_present_ms",
+      "type": "long",
+      "description": "How long the seatbelt reporting was present during the trip"
+    },
+    {
+      "name": "seatbelt_unbuckled_ms",
+      "type": "long",
+      "description": "How long the seatbelt was unbuckled during the trip"
+    },
+    {
+      "name": "harsh_event_identifiers",
+      "type": "string",
+      "description": "collection of event timestamps and the device_ids during the trip"
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "description": "The date corresponding to the interval when these counts were captured"
+    },
+    {
+      "name": "deleted_at",
+      "type": "timestamp",
+      "description": ""
+    }
+  ]
+}

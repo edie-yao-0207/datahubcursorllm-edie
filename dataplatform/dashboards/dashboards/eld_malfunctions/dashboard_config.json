@@ -1,0 +1,650 @@
+{
+  "dashboard": {
+    "name": "ELD Malfunctions Dashboard",
+    "default_date_range": "90d"
+  },
+  "parameters": {
+    "make": {
+      "type": "string",
+      "default": ""
+    },
+    "model": {
+      "type": "string",
+      "default": ""
+    },
+    "year": {
+      "type": "string",
+      "default": ""
+    },
+    "cable_name": {
+      "type": "string",
+      "default": ""
+    },
+    "product_name": {
+      "type": "string",
+      "default": ""
+    },
+    "obd_value_name": {
+      "type": "multi_select",
+      "default": "OBD_VALUE_ODOMETER_HIGH_RES_METERS"
+    },
+    "device_id": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "datasets": {
+    "lookup_obd_value_name": "queries/lookups/obd_value_name.sql"
+  },
+  "global_filters": [
+    {
+      "name": "date",
+      "type": "date_range",
+      "title": "Date Range",
+      "width": 2,
+      "default": { "min": "-90d", "max": "today" }
+    },
+    {
+      "type": "field_multi_select",
+      "field": "make",
+      "title": "Make",
+      "default": [],
+      "disallow_all": false,
+      "width": 2,
+      "datasets": [
+        "comparison",
+        "signal_cache_sources_by_obd_value",
+        "source_comparison_by_device",
+        "population_behavior_by_mmyef_cable_product"
+      ]
+    },
+    {
+      "type": "field_multi_select",
+      "field": "model",
+      "title": "Model",
+      "default": [],
+      "disallow_all": false,
+      "width": 2,
+      "datasets": [
+        "comparison",
+        "signal_cache_sources_by_obd_value",
+        "source_comparison_by_device",
+        "population_behavior_by_mmyef_cable_product"
+      ]
+    },
+    {
+      "type": "field_multi_select",
+      "field": "year",
+      "title": "Year",
+      "default": [],
+      "disallow_all": false,
+      "width": 2,
+      "datasets": [
+        "comparison",
+        "signal_cache_sources_by_obd_value",
+        "source_comparison_by_device",
+        "population_behavior_by_mmyef_cable_product"
+      ]
+    },
+    {
+      "type": "field_multi_select",
+      "field": "cable_name",
+      "title": "Cable",
+      "default": [],
+      "disallow_all": false,
+      "width": 2,
+      "datasets": [
+        "comparison",
+        "signal_cache_sources_by_obd_value",
+        "source_comparison_by_device",
+        "population_behavior_by_mmyef_cable_product"
+      ]
+    },
+    {
+      "type": "field_multi_select",
+      "field": "product_name",
+      "title": "Product",
+      "default": [],
+      "disallow_all": false,
+      "width": 2,
+      "datasets": [
+        "comparison",
+        "signal_cache_sources_by_obd_value",
+        "source_comparison_by_device",
+        "population_behavior_by_mmyef_cable_product"
+      ]
+    },
+    {
+      "type": "field_multi_select",
+      "field": "malfunction_type",
+      "title": "Malfunction Type",
+      "default": [],
+      "disallow_all": false,
+      "width": 2,
+      "datasets": ["malfunctions_by_type_and_dimension", "malfunction_trend_by_type"]
+    },
+    {
+      "type": "parameter",
+      "name": "obd_value_name",
+      "title": "OBD Signal Value",
+      "lookup_dataset": "lookup_obd_value_name",
+      "lookup_field": "name",
+      "width": 2,
+      "datasets": [
+        "signal_cache_sources_by_obd_value",
+        "source_comparison_by_device",
+        "population_behavior_by_mmyef_cable_product"
+      ]
+    },
+    {
+      "type": "parameter",
+      "name": "device_id",
+      "title": "Device ID",
+      "width": 2,
+      "datasets": ["signal_cache_sources_by_obd_value", "source_comparison_by_device"]
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Overview",
+      "description": "High-level summary of ELD malfunctions",
+      "widgets": [
+        {
+          "type": "text",
+          "content": "## ELD Malfunctions Overview\n\nThis section shows high-level statistics about ELD (Electronic Logging Device) malfunctions across your fleet. Use the filters above to narrow down by vehicle make, model, year, cable type, or product.",
+          "width": 6,
+          "height": 2
+        },
+        {
+          "sql": "queries/overview/malfunction_summary.sql",
+          "type": "counter",
+          "title": "Total Malfunctions (90-Day)",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "total_malfunctions"
+          }
+        },
+        {
+          "sql": "queries/overview/malfunction_by_type.sql",
+          "type": "bar",
+          "title": "Malfunctions by Type",
+          "description": "Breakdown of malfunctions by diagnostic/malfunction code",
+          "width": 4,
+          "height": 6,
+          "config": {
+            "x_axis": "malfunction_type",
+            "y_fields": ["malfunction_count"],
+            "y_label": "Malfunction Count"
+          }
+        },
+        {
+          "sql": "queries/overview/daily_malfunction_trend.sql",
+          "type": "line",
+          "title": "Daily Malfunction Trend",
+          "description": "Daily count of malfunctions over time",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["daily_malfunction_count"],
+            "y_label": "Daily Malfunction Count"
+          }
+        },
+        {
+          "type": "text",
+          "content": "## Signal Source Disagreement Metrics\n\n**What is Disagreement?**\n\nDisagreement occurs when a device has multiple sources (different bus/ECU combinations) providing the same OBD signal, and those sources report different values. A device can only have disagreement if it has multiple sources (source_count > 1).\n\n**Disagreement Criteria:**\nA device is marked as having disagreement if it has multiple sources AND any of:\n- **CV > 0.01**: Coefficient of variation > 1% (normalized spread)\n- **Agreement Score < 95%**: Less than 95% of sources are within ±5% of the median value\n- **Max Divergence > 10%**: Maximum difference between any two sources exceeds 10% of the mean (when mean is not near zero)\n\n**Understanding the Percentages:**\n- **% Multi-Source Devices with Disagreement**: Percentage of devices that have multiple sources AND show disagreement (e.g., 95% of multi-source devices)\n- **% All Devices with Disagreement**: Percentage of ALL devices (including single-source) that have disagreement (e.g., 4.9% of all devices)\n\nNote: If only 5% of devices are multi-source and 95% of those have disagreement, then 4.75% of all devices have disagreement.",
+          "width": 6,
+          "height": 4
+        },
+        {
+          "sql": "queries/overview/device_multi_source_prevalence.sql",
+          "type": "counter",
+          "title": "% Devices with Multi-Source Signals",
+          "description": "Percentage of devices that have at least one signal with multiple sources",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "pct_devices_with_multi_source",
+            "format": "percentage",
+            "decimals": 1
+          }
+        },
+        {
+          "sql": "queries/overview/device_multi_source_prevalence.sql",
+          "type": "counter",
+          "title": "Avg % Signals with Multi-Source per Device",
+          "description": "Average percentage of signals per device that have multiple sources",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "avg_pct_signals_multi_source_per_device",
+            "format": "percentage",
+            "decimals": 1
+          }
+        },
+        {
+          "sql": "queries/overview/device_multi_source_prevalence.sql",
+          "type": "counter",
+          "title": "Avg % Signals with Disagreement per Device",
+          "description": "Average percentage of signals per device that have disagreement",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "avg_pct_signals_disagreement_per_device",
+            "format": "percentage",
+            "decimals": 1
+          }
+        },
+        {
+          "sql": "queries/overview/device_disagreement_distribution.sql",
+          "type": "bar",
+          "title": "Devices by % Signals with Disagreement",
+          "description": "Distribution of devices by the percentage of their signals that have disagreement",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "x_axis": "disagreement_bucket",
+            "y_fields": ["device_count"],
+            "y_label": "Device Count"
+          }
+        },
+        {
+          "sql": "queries/signals/overall_disagreement_stats.sql",
+          "type": "counter",
+          "title": "% Devices with Disagreement",
+          "description": "Percentage of devices with multiple sources that have disagreement (CV > 0.01, agreement < 95%, or high max divergence)",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "pct_devices_with_disagreement",
+            "format": "percentage",
+            "decimals": 1
+          }
+        },
+        {
+          "sql": "queries/signals/overall_disagreement_stats.sql",
+          "type": "counter",
+          "title": "Devices with Disagreement",
+          "description": "Total number of devices with multiple sources that have disagreement",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "devices_with_disagreement"
+          }
+        },
+        {
+          "sql": "queries/signals/overall_disagreement_stats.sql",
+          "type": "counter",
+          "title": "% Signals with Disagreement",
+          "description": "Percentage of signals with multiple sources that have at least one device with disagreement",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "pct_signals_with_disagreement",
+            "format": "percentage",
+            "decimals": 1
+          }
+        },
+        {
+          "sql": "queries/signals/overall_disagreement_stats.sql",
+          "type": "counter",
+          "title": "Avg Agreement Score",
+          "description": "Average agreement score across all signals (percentage of sources within ±5% of median)",
+          "width": 2,
+          "height": 2,
+          "config": {
+            "value_field": "avg_agreement_score_all_signals",
+            "format": "percentage",
+            "decimals": 1
+          }
+        },
+        {
+          "sql": "queries/signals/signals_ranked_by_disagreement.sql",
+          "type": "bar",
+          "title": "Signals Ranked by Disagreement",
+          "description": "Top 30 signals ranked by coefficient of variation (CV). Higher CV indicates more disagreement between sources.",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "x_axis": "obd_value_name",
+            "y_fields": ["avg_cv"],
+            "y_label": "Average CV (Coefficient of Variation)"
+          }
+        },
+        {
+          "type": "text",
+          "content": "## Signal Disagreement Summary Table\n\nThis table shows per-signal disagreement metrics. Key columns:\n\n**Device Counts:**\n- **device_count**: Total number of devices reporting this signal\n- **multi_source_device_count**: Number of devices with multiple sources for this signal\n- **multi_source_pct**: Percentage of all devices that have multiple sources (e.g., 5.13% means 5.13% of all devices have multiple sources)\n\n**Disagreement Metrics:**\n- **devices_with_disagreement**: Count of devices where sources disagree\n- **pct_multi_source_devices_with_disagreement**: Percentage of MULTI-SOURCE devices that have disagreement (e.g., 95.3% means 95.3% of devices with multiple sources show disagreement)\n- **pct_all_devices_with_disagreement**: Percentage of ALL devices (including single-source) that have disagreement (e.g., 4.89% means 4.89% of all devices have disagreement)\n\n**Statistical Metrics:**\n- **CV (Coefficient of Variation)**: Normalized spread metric (std_dev / mean). Higher values indicate more disagreement.\n- **Agreement Score**: Percentage of sources within ±5% of median value. Lower values indicate more disagreement.\n- **Max Divergence %**: Maximum difference between any two sources as percentage of mean. Very high values (e.g., >1000%) may indicate legitimate differences (different sensors, timing, units) rather than errors.",
+          "width": 6,
+          "height": 3
+        },
+        {
+          "sql": "queries/signals/signal_disagreement_summary.sql",
+          "type": "table",
+          "title": "Signal Disagreement Summary",
+          "description": "Per-signal aggregated disagreement metrics across all devices. Shows device counts, multi-source prevalence, average CV, agreement scores, and high disagreement counts.",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "obd_value_name": {
+                "format": "text",
+                "description": "OBD signal name"
+              },
+              "device_count": {
+                "format": "number",
+                "decimals": 0,
+                "description": "Total number of devices reporting this signal"
+              },
+              "multi_source_device_count": {
+                "format": "number",
+                "decimals": 0,
+                "description": "Number of devices with multiple sources for this signal"
+              },
+              "multi_source_pct": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Percentage of ALL devices that have multiple sources (e.g., 5.13% means 5.13% of all devices)"
+              },
+              "devices_with_disagreement": {
+                "format": "number",
+                "decimals": 0,
+                "description": "Count of devices where multiple sources disagree"
+              },
+              "pct_multi_source_devices_with_disagreement": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Percentage of MULTI-SOURCE devices that have disagreement (e.g., 95.3% means 95.3% of devices with multiple sources show disagreement)"
+              },
+              "pct_all_devices_with_disagreement": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Percentage of ALL devices (including single-source) that have disagreement (e.g., 4.89% means 4.89% of all devices)"
+              },
+              "avg_cv": {
+                "format": "number",
+                "decimals": 4,
+                "description": "Average coefficient of variation (std_dev / mean) across multi-source devices. Higher = more disagreement."
+              },
+              "median_cv": {
+                "format": "number",
+                "decimals": 4,
+                "description": "Median CV across multi-source devices"
+              },
+              "p95_cv": {
+                "format": "number",
+                "decimals": 4,
+                "description": "95th percentile CV - shows worst-case disagreement"
+              },
+              "avg_agreement_score": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Average agreement score (% of sources within ±5% of median). Lower = more disagreement."
+              },
+              "median_agreement_score": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Median agreement score"
+              },
+              "p5_agreement_score": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "5th percentile agreement score - shows worst-case disagreement"
+              },
+              "avg_max_divergence_pct": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Average max divergence (% difference between sources). Very high values (>1000%) may indicate legitimate differences rather than errors."
+              },
+              "median_max_divergence_pct": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "Median max divergence"
+              },
+              "p95_max_divergence_pct": {
+                "format": "percentage",
+                "decimals": 1,
+                "description": "95th percentile max divergence - shows worst-case differences"
+              },
+              "high_disagreement_count": {
+                "format": "number",
+                "decimals": 0,
+                "description": "Count of devices with severe disagreement (CV > 0.1 or agreement < 80%)"
+              },
+              "devices_with_measurable_cv": {
+                "format": "number",
+                "decimals": 0,
+                "description": "Count of devices with CV > 0.01"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "By Dimension",
+      "description": "Breakdown of malfunctions by cable, product, and vehicle population",
+      "widgets": [
+        {
+          "sql": "queries/by_dimension/malfunctions_by_cable.sql",
+          "type": "bar",
+          "title": "Malfunctions by Cable",
+          "description": "Breakdown of malfunctions by cable_id with cable name translation",
+          "width": 3,
+          "height": 7,
+          "config": {
+            "x_axis": "cable_name",
+            "y_fields": ["malfunction_count"],
+            "y_label": "Malfunction Count"
+          }
+        },
+        {
+          "sql": "queries/by_dimension/malfunctions_by_product.sql",
+          "type": "bar",
+          "title": "Malfunctions by Product",
+          "description": "Breakdown of malfunctions by product with product name translation",
+          "width": 3,
+          "height": 7,
+          "config": {
+            "x_axis": "product_name",
+            "y_fields": ["malfunction_count"],
+            "y_label": "Malfunction Count"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Comparison",
+      "description": "Compare malfunctions across cable and product combinations",
+      "widgets": [
+        {
+          "sql": "queries/comparison/malfunctions_pivoted_by_mmy_cable_product.sql",
+          "type": "table",
+          "title": "Malfunction Rates by MMY + Cable + Product",
+          "description": "Pivoted table showing count of each malfunction type per MMY + cable + product combination. Use filters to find worst combinations.",
+          "width": 6,
+          "height": 10,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "power_malfunction_count": { "format": "number", "decimals": 0 },
+              "engine_sync_malfunction_count": { "format": "number", "decimals": 0 },
+              "timing_malfunction_count": { "format": "number", "decimals": 0 },
+              "positioning_malfunction_count": { "format": "number", "decimals": 0 },
+              "data_recording_malfunction_count": { "format": "number", "decimals": 0 },
+              "data_transfer_malfunction_count": { "format": "number", "decimals": 0 },
+              "other_eld_malfunction_count": { "format": "number", "decimals": 0 },
+              "power_diagnostic_count": { "format": "number", "decimals": 0 },
+              "engine_sync_diagnostic_count": { "format": "number", "decimals": 0 },
+              "missing_required_data_diagnostic_count": { "format": "number", "decimals": 0 },
+              "data_transfer_diagnostic_count": { "format": "number", "decimals": 0 },
+              "unidentified_driving_diagnostic_count": { "format": "number", "decimals": 0 },
+              "other_eld_diagnostic_count": { "format": "number", "decimals": 0 },
+              "total_malfunction_count": { "format": "number", "decimals": 0 },
+              "affected_device_count": { "format": "number", "decimals": 0 }
+            }
+          }
+        },
+        {
+          "sql": "queries/comparison/malfunctions_by_cable_and_product.sql",
+          "type": "table",
+          "title": "Malfunctions by Cable and Product",
+          "description": "Cross-tabulation of malfunctions by cable and product for comparison",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "malfunction_count": { "format": "number", "decimals": 0 },
+              "affected_device_count": { "format": "number", "decimals": 0 }
+            }
+          }
+        },
+        {
+          "sql": "queries/comparison/malfunctions_by_type_and_dimension.sql",
+          "type": "table",
+          "title": "Malfunctions by Type, Cable, and Product",
+          "description": "Detailed breakdown showing malfunction type across cable and product combinations",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "malfunction_count": { "format": "number", "decimals": 0 },
+              "affected_device_count": { "format": "number", "decimals": 0 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trends",
+      "description": "Time series trends of malfunctions",
+      "widgets": [
+        {
+          "sql": "queries/trends/malfunction_trend_by_type.sql",
+          "type": "line",
+          "title": "Malfunction Trend by Type",
+          "description": "Daily trend of malfunctions broken down by type",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["daily_malfunction_count"],
+            "y_label": "Daily Malfunction Count",
+            "color_by": "malfunction_type"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Signal Sources",
+      "description": "VDP signal cache sources and statistics by OBD value",
+      "widgets": [
+        {
+          "sql": "queries/signals/signal_cache_sources_by_obd_value.sql",
+          "type": "table",
+          "title": "Signal Cache Sources by OBD Value (Device-Level)",
+          "description": "Device-level view showing the complete signal cache sources map structure. Each row represents one device per day with the full map of OBD values to their sources, statistics, and timing. The obd_value_to_sources_map contains all sources, value statistics, and timing for each OBD signal. Use obd_value_name_map to translate OBD value IDs to names.",
+          "width": 6,
+          "height": 10,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "obd_value_name": { "format": "text" },
+              "bus_name": { "format": "text" },
+              "ecu_id": { "format": "number", "decimals": 0 },
+              "request_id": { "format": "number", "decimals": 0 },
+              "data_id": { "format": "number", "decimals": 0 },
+              "source_count": { "format": "number", "decimals": 0 },
+              "min_value": { "format": "number", "decimals": 2 },
+              "max_value": { "format": "number", "decimals": 2 },
+              "p25_value": { "format": "number", "decimals": 2 },
+              "p50_value": { "format": "number", "decimals": 2 },
+              "p75_value": { "format": "number", "decimals": 2 },
+              "mean_value": { "format": "number", "decimals": 2 },
+              "value_count": { "format": "number", "decimals": 0 },
+              "observation_count": { "format": "number", "decimals": 0 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Source Comparison",
+      "description": "Compare signal sources and analyze population behavior. Shows how different sources agree or differ for the same OBD signal, and how populations behave across MMYEF + cable + product groups.",
+      "widgets": [
+        {
+          "sql": "queries/signals/source_comparison_by_device.sql",
+          "type": "table",
+          "title": "Source Comparison by Device",
+          "description": "Device-level view showing source comparison metrics for each OBD signal. Shows how different sources agree or differ for the same signal on individual devices. Metrics include CV (coefficient of variation), range ratio, IQR, agreement score, and max divergence percentage. Only calculated when multiple sources exist (source_count > 1).",
+          "width": 6,
+          "height": 10,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "date": { "format": "date" },
+              "device_id": { "format": "number", "decimals": 0 },
+              "obd_value_name": { "format": "text" },
+              "source_count": { "format": "number", "decimals": 0 },
+              "cv": { "format": "number", "decimals": 4 },
+              "range_ratio": { "format": "number", "decimals": 4 },
+              "iqr": { "format": "number", "decimals": 2 },
+              "agreement_score": { "format": "number", "decimals": 2 },
+              "max_divergence_pct": { "format": "number", "decimals": 2 },
+              "mean_value": { "format": "number", "decimals": 2 },
+              "median_value": { "format": "number", "decimals": 2 },
+              "min_value": { "format": "number", "decimals": 2 },
+              "max_value": { "format": "number", "decimals": 2 },
+              "cable_name": { "format": "text" },
+              "product_name": { "format": "text" },
+              "make": { "format": "text" },
+              "model": { "format": "text" },
+              "year": { "format": "number", "decimals": 0 },
+              "powertrain_name": { "format": "text" },
+              "fuel_group_name": { "format": "text" }
+            }
+          }
+        },
+        {
+          "sql": "queries/signals/population_behavior_by_mmyef_cable_product.sql",
+          "type": "table",
+          "title": "Population Behavior by MMYEF + Cable + Product",
+          "description": "Population-level summary showing how signal sources behave across devices within the same MMYEF + cable + product group. Since cable type and platform influence source availability, this groups devices with similar source capabilities. Shows average source comparison metrics, multi-source prevalence, source diversity, and population consistency.",
+          "width": 6,
+          "height": 10,
+          "config": {
+            "items_per_page": 50,
+            "columns": {
+              "date": { "format": "date" },
+              "mmyef_id": { "format": "number", "decimals": 0 },
+              "make": { "format": "text" },
+              "model": { "format": "text" },
+              "year": { "format": "number", "decimals": 0 },
+              "engine_model": { "format": "text" },
+              "powertrain_name": { "format": "text" },
+              "fuel_group_name": { "format": "text" },
+              "cable_id": { "format": "number", "decimals": 0 },
+              "cable_name": { "format": "text" },
+              "product_id": { "format": "number", "decimals": 0 },
+              "product_name": { "format": "text" },
+              "obd_value_name": { "format": "text" },
+              "device_count": { "format": "number", "decimals": 0 },
+              "avg_cv": { "format": "number", "decimals": 4 },
+              "avg_source_count": { "format": "number", "decimals": 2 },
+              "multi_source_pct": { "format": "number", "decimals": 2 },
+              "population_cv": { "format": "number", "decimals": 4 },
+              "source_diversity_index": { "format": "number", "decimals": 2 },
+              "avg_mean_value": { "format": "number", "decimals": 2 },
+              "avg_median_value": { "format": "number", "decimals": 2 },
+              "min_device_median": { "format": "number", "decimals": 2 },
+              "max_device_median": { "format": "number", "decimals": 2 }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

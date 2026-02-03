@@ -1,0 +1,67 @@
+{
+  "name": "dispatch_routes_report.route_vehicle_assignments",
+  "owner": "Routing",
+  "description": "A list of vehicle assignments for each route for planned versus actual reports. This node removes any overlapping vehicle assignments. Assignment start and end timestamps can be indirectly modified by user action in the dashboard, but that should not affect report output.",
+  "dependencies": [
+    {
+      "dbname": "dispatch_routes_report",
+      "tablename": "actual_route_times",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "compliancedb_shards",
+      "tablename": "driver_hos_vehicle_assignments",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "dispatch_routes_report",
+    "tablename": "route_vehicle_assignments",
+    "type": "table",
+    "partition": ["route_scheduled_or_updated_date"],
+    "primary_key": [
+      "route_scheduled_or_updated_date",
+      "org_id",
+      "route_id",
+      "vehicle_id",
+      "scheduled_start_ms",
+      "assignment_start_ms",
+      "assignment_end_ms"
+    ],
+    "schema": [
+      {
+        "name": "route_id",
+        "type": "long"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "vehicle_id",
+        "type": "long"
+      },
+      {
+        "name": "scheduled_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "route_scheduled_or_updated_date",
+        "type": "date"
+      },
+      {
+        "name": "assignment_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "assignment_end_ms",
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  },
+  "nonproduction": true,
+  "disabled_regions": ["us-west-2", "eu-west-1", "ca-central-1"]
+}

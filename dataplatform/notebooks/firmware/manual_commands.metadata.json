@@ -1,0 +1,15 @@
+{
+  "owner": "Firmware",
+  "email_notifications": [],
+  "jobs": [
+    {
+      "name": "manual",
+      "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+      "timeout_seconds": 172800,
+      "driver_node_type_id": "rd-fleet.4xlarge",
+      "node_type_id": "rd-fleet.4xlarge",
+      "max_workers": 16,
+      "spark_version": "default"
+    }
+  ]
+}

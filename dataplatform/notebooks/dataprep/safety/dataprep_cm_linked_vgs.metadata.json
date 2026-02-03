@@ -1,0 +1,42 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": [],
+  "jobs": [],
+  "output": {
+    "external": true,
+    "dbname": "dataprep_safety",
+    "tablename": "cm_linked_vgs",
+    "type": "table",
+    "primary_key": ["org_id", "vg_device_id", "linked_cm_id"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "vg_device_id",
+        "type": "long"
+      },
+      {
+        "name": "product_id",
+        "type": "long"
+      },
+      {
+        "name": "linked_cm_id",
+        "type": "long"
+      },
+      {
+        "name": "org_name",
+        "type": "string"
+      },
+      {
+        "name": "org_type",
+        "type": "string"
+      },
+      {
+        "name": "cm_product_id",
+        "type": "long"
+      }
+    ]
+  }
+}

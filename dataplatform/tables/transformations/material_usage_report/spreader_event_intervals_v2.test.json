@@ -1,0 +1,201 @@
+{
+  "test_cases": [
+    {
+      "label": "should merge multiple on events into one spreader event interval",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "kinesisstats.osdsaltspreaderstateactivelyspreading": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923191000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 1, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923192000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 1, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923198000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923199000,
+            "date": "2020-01-01"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923192000,
+          "spreader_end_ms": 1577923199000,
+          "mode": 0,
+          "date": "2020-01-01"
+        }
+      ]
+    },
+    {
+      "label": "spreader event that has no end time given end_date boundary should have end time set to ${end_date}",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "kinesisstats.osdsaltspreaderstateactivelyspreading": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923191000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 1, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923192000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923196000,
+            "date": "2020-01-02"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923192000,
+          "spreader_end_ms": 1577923200000,
+          "mode": 0,
+          "date": "2020-01-01"
+        }
+      ]
+    },
+    {
+      "label": "spreader interval should be ended on invalid object stats",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "kinesisstats.osdsaltspreaderstateactivelyspreading": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 1, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923196100,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": true, "is_start": false, "is_end": false },
+            "time": 1577923197000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923198000,
+            "date": "2020-01-01"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923196100,
+          "spreader_end_ms": 1577923197000,
+          "mode": 0,
+          "date": "2020-01-01"
+        }
+      ]
+    },
+    {
+      "label": "two 1 oscillations in spreader state should produce two spreader intervals",
+      "parameters": {
+        "start_date": "'2020-01-01'",
+        "end_date": "'2020-01-02'"
+      },
+      "input_data": {
+        "kinesisstats.osdsaltspreaderstateactivelyspreading": [
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 1, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923192000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923198000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923199000,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 1, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923199100,
+            "date": "2020-01-01"
+          },
+          {
+            "org_id": 1,
+            "object_id": 1,
+            "value": { "int_value": 0, "is_databreak": false, "is_start": false, "is_end": false },
+            "time": 1577923199400,
+            "date": "2020-01-01"
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923192000,
+          "spreader_end_ms": 1577923198000,
+          "mode": 0,
+          "date": "2020-01-01"
+        },
+        {
+          "org_id": 1,
+          "device_id": 1,
+          "spreader_start_ms": 1577923199100,
+          "spreader_end_ms": 1577923199400,
+          "mode": 0,
+          "date": "2020-01-01"
+        }
+      ]
+    }
+  ]
+}

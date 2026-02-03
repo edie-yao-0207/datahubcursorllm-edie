@@ -1,0 +1,78 @@
+{
+  "view": "exchange_history",
+  "owner": "PlatformOperations",
+  "description": "This view is only accessible by PlatOps. Please use finopsdb.exchanges. This view gathers exchange history data from netsuite that is processed and ingested into finopsdb.exchanges",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "transaction_id", "type": "long" },
+    { "name": "transaction_type", "type": "string" },
+    { "name": "transaction_line_id", "type": "integer" },
+    { "name": "status", "type": "string" },
+    { "name": "return_number", "type": "string" },
+    { "name": "order_number", "type": "string" },
+    { "name": "sam_number", "type": "string" },
+    { "name": "sku_product_returned", "type": "string" },
+    { "name": "name_product_returned", "type": "string" },
+    { "name": "sku_product_received", "type": "string" },
+    { "name": "name_product_received", "type": "string" },
+    { "name": "initial_quantity", "type": "double" },
+    { "name": "refunded_quantity", "type": "double" },
+    { "name": "received_quantity", "type": "double" },
+    { "name": "serial_number", "type": "string" },
+    { "name": "return_serial_list_returned", "type": "string" },
+    { "name": "delivery_carrier", "type": "string" },
+    { "name": "shipping_contact", "type": "string" },
+    { "name": "shipping_contact_email_address", "type": "string" },
+    { "name": "requested_by_email", "type": "string" },
+    { "name": "exchange_created_at", "type": "timestamp" },
+    { "name": "ship_city", "type": "string" },
+    { "name": "ship_country", "type": "string" },
+    { "name": "ship_state", "type": "string" },
+    { "name": "ship_zip", "type": "string" },
+    { "name": "ship_address_line_1", "type": "string" },
+    { "name": "ship_address_line_2", "type": "string" },
+    { "name": "ship_address_line_3", "type": "string" },
+    { "name": "_fivetran_synced", "type": "timestamp" },
+    { "name": "_fivetran_deleted", "type": "boolean" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transactions",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transaction_line",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transaction_inventory_numbers",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "item_product_group",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "netsuite_customer",
+      "type": "table",
+      "external": true
+    },
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "transaction_address",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

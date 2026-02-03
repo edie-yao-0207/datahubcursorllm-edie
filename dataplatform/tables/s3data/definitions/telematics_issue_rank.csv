@@ -1,0 +1,31 @@
+None,no_issue_detected,0,Device has full coverage,No Issue Detected,None,True,Positive - Has Coverage,None
+Hardware,power_only_cable,1,Power-only cable used,Power Only Cable,Customer,False,Not eligible - Diagnostics Exclusion,None
+Unsupported,older_vehicle,2,Older vehicle with unknown diagnostics support / outdated protocol,Older Vehicle,Customer,False,Not eligible - Diagnostics Exclusion,None
+Unsupported,legacy_network,3,Supports J1850 or K-Line and is unsupported by Samsara hardware,Legacy Network,None,False,Engineering - Legacy Network,Engineering
+Feature Flag Interference,has_impacting_feature_flag,4,Feature flag may be impacting operation of the VG,Has Impacting FF,Automotive,False,Not eligible - Diagnostics Exclusion,None
+Connectivity,india_mfg,5,"Vehicle has an India spec'd OBDII, requires further investigation",India Standard,Automotive,False,Regional Gap / Not Targeted,None
+Connectivity,japan_mfg,6,"Vehicle has a Japan spec'd OBDII, requires further investigation",Japanese Standard,Automotive,False,Regional Gap / Not Targeted,None
+Connectivity,contactless_can,7,New cable type required for diagnostics,Contactless CAN,Hardware,True,Hardware - PM Owns,HW / GTM
+Hardware,hw_upgrade_opportunity,8,"A hardware upgrade is recommended when there is a known installation that gives higher P0 diagnostic coverage for a given market. In this case, we will recommend a swap in order to increase our P0 diagnostics in a given region for a given powertrain.",HW Upgrade Possible,Operations,True,Hardware - GTM Ops,HW / GTM
+Hardware,chgv_or_fms_cet,9,"CHGV or FMS cable required, further investigation needed.",CHGV / FMS Swap,Operations,True,Hardware - GTM Ops,HW / GTM
+Hardware,vm_cable_required,10,"Volvo-Mack Cable required, CET updates.",VM Swap,Operations,True,Hardware - GTM Ops,HW / GTM
+Hardware,protocol_detection,11,VDP protocol detection needs to be enabled on OBD cable,Protocol Detection Required,VDP,True,Engineering - VDP Owns,Engineering
+Vehicle,vehicle_configuration_required,12,"Vehicle is required to be configured for interoperation with third party telematics devices, including the VG. Customer must be notified to setup their vehicle correctly. This is currently required for Tesla vehicles",Vehicle Configuration Required,Customer,True,Engineering - Configuration Needed,Engineering
+VIN,missing_vin_possible_license_plate,13,VIN missing but user entered license plate. May have fallback for lookup. See MX https://www2.repuve.gob.mx:8443/ciudadania/ or NHTSA in US,License Plate without VIN,Automotive,True,Needs VIN / Vehicle Info Fix,None
+Connectivity,no_can_connection,14,Vehicle not connected,No CAN Connection,Automotive,True,Engineering - VDP Owns,Engineering
+Connectivity,no_engine_state,15,Engine state unavailable,No Engine State,Automotive,False,Positive - Not blocking,None
+VIN,missing_vin,16,VIN does not exist and we do not know what the vehicle is.,No VIN,Automotive,True,Needs VIN / Vehicle Info Fix,None
+VIN,malformed_ecm_vin,17,VIN exists from ECM but does not adhere to ISO 3779 format.,Malformed ECM VIN,Automotive,True,Data Quality Issue,None
+VIN,malformed_user_vin,18,VIN exists from user entry but does not adhere to ISO 3779 format.,Malformed Customer VIN,Customer,True,Data Quality Issue,None
+VIN,incomplete_decode_low_wmi_vds,19,VIN exists but decoding is incomplete and the WMI/VDS group is too small to consider for reverse engineering the VIN itself. We require at least 10 vehicles with the same properties to consider for reverse engineering.,Incomplete VIN Won't Investigate,None,True,Data Quality Issue,None
+VIN,missing_make,20,VIN decode missing vehicle make,Missing Vehicle Make,Automotive,False,Not eligible - MM Clean-up KTLO,None
+VIN,missing_model,21,VIN decode missing vehicle model,Missing Vehicle Model,Automotive,False,Not eligible - MM Clean-up KTLO,None
+VIN,missing_year,22,VIN decode missing vehicle year,Missing Vehicle Year,Automotive,False,Not eligible - MM Clean-up KTLO,None
+VIN,invalid_year,23,VIN decoded year is invalid or not possible. Must be from 1981 to the current year + 10 years,Invalid Vehicle Year,Automotive,False,Not eligible - MM Clean-up KTLO,None
+VIN,missing_engine_type,24,"Engine type missing (ie. ICE, BEV, etc)",Missing Engine Type,Automotive,False,Not eligible - MM Clean-up KTLO,None
+VIN,missing_fuel_type,25,"Fuel type missing (ie. Diesel, Gasoline, etc)",Missing Fuel Type,Automotive,True,Data Quality Issue,None
+Incomplete,not_available_unable_to_calculate,26,Vehicle is unable to calculate a derived signal and does not support it natively,Derived Calculation Not Possible,Automotive,False,Engineering - Data Missing,Engineering
+Hardware,not_available_tech_limitation,27,Vehicle unable to report data and invesitgation already complete by automotive. No known solution,Vehicle Technical Limitation,Automotive,False,Not eligible - Technology Limitation,None
+Hardware,no_can_fuel,28,"No fuel level available on the vehicle, requires alternative hardware.",Alternative Hardware,Hardware,True,Hardware - GTM Ops,HW / GTM
+Reverse Engineering,p0_diagnostic_gap_minimal_mm,29,Not enough make models to consider reverse engineering. At least 30 of the same make/model combinations must exist in customer fleets for us to consider a vehicle for reverse engineering.,Limited MM Volume,None,True,Engineering - MM Clean-up,Engineering
+Reverse Engineering,p0_diagnostic_gap,30,Detected missing diagnostics on valid installation,Reverse Engineering Required,Automotive,True,Engineering - Review Needed,Engineering

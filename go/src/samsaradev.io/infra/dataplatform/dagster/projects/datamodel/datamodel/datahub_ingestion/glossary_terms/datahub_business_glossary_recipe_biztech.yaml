@@ -1,0 +1,2058 @@
+version: 1
+
+owners:
+  groups:
+    - biztechenterprisedataadmin
+nodes:
+- name: F&S
+  description: A set of business terms related to F&S
+  terms:
+  - name: ACV
+    description: Annualized contract value of all active licenses excluding hardware
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Amount, Start Date, End Date, Customer Name, SFDC ID, Order
+        Number
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: ARR
+    description: Annualized revenue value of all active licenses with a valid revenue
+      arrangement
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Amount, Start Date, End Date, Customer Name, SFDC ID, Order
+        Number
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: GRR
+    description: Proportion of ARR that Samsara churns out on a quarterly basis
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ARR, Customer Name
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: NRR
+    description: Multiple of ARR for customers that have been with Samsara at least
+      1 year as of the reporting period
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ARR, Customer Name (we dont have the customer name.. we just
+        have numbe of customers)
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Customer Count
+    description: Count of customers with a given ARR value in a specific period (i.e.
+      >$100k)
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ARR, Customer Name, SFDC ID
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: Accounting
+  description: A set of business terms related to Accounting
+  terms:
+  - name: Revenue - License Start Date
+    description: SFDC opportunity field indicating when the license term of a customer's
+      contract starts
+    custom_properties:
+      Business Team: Revenue Accounting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: License Start Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Revenue - License End Date
+    description: SFDC opportunity field indicating when the license term of a customer's
+      contract ends
+    custom_properties:
+      Business Team: Revenue Accounting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: License End Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Revenue - Close Date
+    description: SFDC opportunity field indicating when the order form has been executed
+      and a. delivery has been completed or b. the renewal term commences (day after
+      the prior term ends)
+    custom_properties:
+      Business Team: Revenue Accounting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Close Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Revenue - Amount
+    description: SFDC opportunity field indicating the transaction price agreed upon
+      by the customer
+    custom_properties:
+      Business Team: Revenue Accounting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Amount
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Revenue - License Term
+    description: SFDC opportunity field indicating the duration of the contract term,
+      being License End Date minus License Start Date, expressed in months
+    custom_properties:
+      Business Team: Revenue Accounting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: License Term
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Revenue - Renewal License Start Date
+    description: SFDC opportunity where Revenue should be informed when there is a
+      gap between initial license end date & renewal license start date
+    custom_properties:
+      Business Team: Revenue Accounting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): Y
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Renewal License Start Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: F/S Presentation
+    description: NS hierarchy structure containing cost center heirarchies and general
+      ledger accounts
+    custom_properties:
+      Business Team: SEC Reporting
+      Business process: Record to Report
+      Business Usage: Financial Reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Chart of Accounts
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: J/E Accuracy
+    description: US Accounting should be informed of how POs > $X are coded and exception
+      reporting where invoice coding does not match PO coding
+    custom_properties:
+      Business Team: US Accounting
+      Business process: Record to Report
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: PO Coding
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Key Report Changes
+    description: Notification of changes to key reports / saved searches used to execute
+      key SOX controls
+    custom_properties:
+      Business Team: SOX Compliance
+      Business process: SOX Compliance
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Key Reports
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: Billing & Invoicing
+  description: A set of business terms related to Billing & Invoicing
+  terms:
+  - name: Open AR
+    description: Amount open and remaining to be paid
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal and External)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: NetSuite
+      Customer Data (Y/N): Y
+      PII (Y/N): TBD
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Invoice Amount
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Open CMs
+    description: Credit memos issued to a customer internal and external.  Subsidy,
+      Free Months, Remorse, Delinquent, Stand Alone
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: NetSuite
+      Customer Data (Y/N): Y
+      PII (Y/N): ''
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Credit Memo Amount
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Unapplied Payments
+    description: Amount paid by customer yet to be applied to any open balance.
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: NetSuite
+      Customer Data (Y/N): Y
+      PII (Y/N): ''
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Payments Amount (Cash, Checks, Stripe, Auto Debit)
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Journals
+    description: Entries made to any AR GL (Dr. or Cr.)
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal and External)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: NetSuite
+      Customer Data (Y/N): Y
+      PII (Y/N): ''
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Journal Entries
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Payment Terms - Payment terms invoice level
+    description: Invoice date minus the invoice due date
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: Salesforce
+      Customer Data (Y/N): Y
+      PII (Y/N): ''
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Payment terms invoice level
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Payment Terms - Payment terms sales order level
+    description: Terms created by the sales order from SFDC
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: Salesforce
+      Customer Data (Y/N): Y
+      PII (Y/N): ''
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Payment terms sales order level
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Payment Terms - Payment terms account level
+    description: Terms set by O2C
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: Financial reporting (Internal)
+      Impact: All Customers
+      System of Record: NetSuite
+      System Store: Salesforce
+      Customer Data (Y/N): Y
+      PII (Y/N): ''
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Payment terms account level
+      Dependency (Are any other teams dependent on this data element?): F&S, Accounting,
+        Revenue.
+  - name: Metrics - Data Attribute
+    description: Business Definition
+    custom_properties:
+      Business Team: Business Team
+      Business process: Business Process
+      Business Usage: Business Usage
+      Impact: Impact
+      System of Record: System of record
+      System Store: System Store
+      Customer Data (Y/N): Customer Data (Y/N)
+      PII (Y/N): PII (Y/N)
+      Confidential (Y/N): Confidential (Y/N)
+      Need Approval for Access (Y/N): Need approval for access (Y/N)
+      Data Attribute: Data Attribute
+      Dependency (Are any other teams dependent on this data element?): Dependency
+        (Are any other teams dependent on this data element?)
+  - name: Missing POs
+    description: P.O. provided upon deal execution
+    custom_properties:
+      Business Team: O2C
+      Business process: NetSuite Reporting
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: P.O. Number
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Metrics - Data Attribute
+    description: Business Definition
+    custom_properties:
+      Business Team: Business Team
+      Business process: Business Process
+      Business Usage: Business Usage
+      Impact: Impact
+      System of Record: System of record
+      System Store: System Store
+      Customer Data (Y/N): Customer Data (Y/N)
+      PII (Y/N): PII (Y/N)
+      Confidential (Y/N): Confidential (Y/N)
+      Need Approval for Access (Y/N): Need approval for access (Y/N)
+      Data Attribute: Data Attribute
+      Dependency (Are any other teams dependent on this data element?): Dependency
+        (Are any other teams dependent on this data element?)
+  - name: Collector on the account
+    description: Collector Assigned to the Account
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: AR Rep
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Transaction Type
+    description: Invoice, CM, Payment, Journal.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Type
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Invoice Date
+    description: Date invoice generated
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Invoice Due Date
+    description: Date invoice is due
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Due Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Cusotmer Dispute Code
+    description: Ongoing cusotmer disputes
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Drop Down Selection
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Promise to Pay Amount
+    description: Promise to Pay amount
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Amount Field
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Promise to Pay Date
+    description: Promise to pay date
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Date Field
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Invoice Collection Notes
+    description: Invoice level notes
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Free text
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Delinquency Status
+    description: Determines if the customer is past due and where the account is in
+      the collections process
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Account Delinquency
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Delinquency Override
+    description: Manually set to remove customer from auto write off
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Delinquency Override Reason
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Forecast Deactivation Date
+    description: Set automatically and manually by collections for deactivatiing accounts
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Date Field
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Date Deactivation Approved
+    description: To record proprer procedures were followed prior to deactivation
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Date Field
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Forecast Write off Date
+    description: Ensure write off date is populated and accurate
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Date Field
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Writeoff Amount
+    description: Captures amount written off by each customer
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Amount Field
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: New Cusotmer Billing Process (NBP
+    description: Cusotmer account is enrolled in NBP (auto debit)
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: NBP Checkbox
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: Sales
+  description: A set of business terms related to Sales
+  terms:
+  - name: ACV
+    description: ''
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: SalesOps
+  description: A set of business terms related to SalesOps
+  terms:
+  - name: ACV
+    description: ''
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: Supply-Chain
+  description: A set of business terms related to Supply-Chain
+  terms:
+  - name: NNACV
+    description: Only account for new customers of the year - critical input for hardware
+      demand planning
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Contra ACV
+    description: Offset that reduces Gross New ACV due to buyouts, subsidies, remorse
+      refunds, or delinquencies
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: HW2B
+    description: ''
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: ASP
+    description: ''
+    custom_properties:
+      Business Team: F&S
+      Business process: Finance Analytics
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Telecom - Cellular Spend
+    description: Quarterly Cellular Spend from AT&T and Vodafone invocies
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Vendor API/Web Portal
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Cellular Spend
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Telecom - Cellular Data Usage
+    description: Quarterly Cellular Data Usage in MB by country
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Vendor API/Web Portal
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Cellular Data Usage
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Telecom - Active Device
+    description: Count the number of devices with a heartbeat by region, month and
+      SKU
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Cloud Database
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Active Device
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Telecom - Cost Per Mega Bytes
+    description: Quarterly cellular costs per MB for AT&T and Vodafone, split between
+      North America and Rest of the World
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Vendor API/Web Portal
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Cost Per Mega Bytes
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Telecom - Rebate SIMS
+    description: Monthly rebate amount and SIM cards eligible for rebate
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Vendor API/Web Portal
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Rebate SIMS
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Forecast Accuracy - Forecasted Units Shipped
+    description: Represents the total quantity value of the Forecasted units in the
+      demand planning process
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: E2open, SFDC
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Forecasted Units Shipped
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Forecast Accuracy - Actual Units Shipped
+    description: Represents the total quantity value of the Actual units in the demand
+      planning process
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Actual Units Shipped
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Forecast Accuracy - Stats Units Shipped
+    description: Represents the total quantity value of the Statistical units (E2open
+      data) in the demand planning process
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Stats Units Shipped
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - Samsara Inventory Value
+    description: Represents the total monetary value of inventory owned by Samsara,
+      calculated using standard costs. Provides insights into the financial resources
+      invested in inventory and can be used to identify trends, potential overstocking,
+      or opportunities for optimization.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Samsara Inventory Value
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - VMI Inventory Value
+    description: Represents the total monetary value of inventory under VMI, calculated
+      using standard costs. Provides insights into the financial resources invested
+      in inventory and can be used to identify trends, potential overstocking, or
+      opportunities for optimization.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: VMI Inventory Value
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - % Inventory Split
+    description: Displays how total inventory is distributed across different warehouses
+      or storage locations. This could be useful for balancing inventory levels, managing
+      risk, analyzing efficiency, and improving customer service by ensuring the right
+      products are available in the right locations.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: '% Inventory Split'
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - Aging Serialized & Nonserialized Inventory
+    description: Details the quantity and value of inventory items that have surpassed
+      their shelf life, or are approaching their shelf life.  This report highlights
+      both the current financial risk associated with these aged goods and the potential
+      financial exposure from inventory nearing its expiration date.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Aging Serialized & Nonserialized Inventory
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - Shelf Life
+    description: Show in conjunction with aging inventory. Show distribution of how
+      many is over/approaching to shelf life
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Shelf Life
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - Available Inventory vs. In-Transit Inventory
+    description: Compares the value or quantity of inventory readily available for
+      sale or use against inventory that is currently being shipped or transported.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Available Inventory vs. In-Transit Inventory
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inventory - Inventory Turns
+    description: Measures the number of times a company's inventory is sold and replaced
+      over a period of time. It is an indicator of how efficiently a company is managing
+      its inventory. A higher inventory turnover ratio generally indicates strong
+      sales and efficient inventory management, while a lower ratio may suggest weak
+      sales, overstocking, or obsolescence.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Inventory Turns
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - On Time Delivery %
+    description: Measures the percentage of orders received from vendors by the promised
+      delivery date. Identify trends of delays between carriers and evaluate potential
+      adjustments needed for shipment lead-time
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Milestone Report
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: On Time Delivery %
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Transit Time
+    description: Measures the average door-to-door lead time from vendors to Samsara
+      warehouses. Identify trends in transit time for planning
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Milestone Report
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Transit Time
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Number of shipments
+    description: Identifies the number of shipments in a given lane to monitor and
+      assess potential risk exposure by lane/mode
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Milestone Report
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Number of shipments
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Number of days late
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Milestone Report
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Number of days late
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Cost per Kg
+    description: Identifies trends in shipping cost, based on Kg shipped. Could show
+      opportunities to optimize packaging & shipment consolidation opportunities
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite, E2Open
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Cost per Kg
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Cost per Unit
+    description: Identifies trends in shipping cost, based on units shipped. Could
+      show opportunities to optimize packaging & shipment consolidation opportunities
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite, E2Open
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Cost per Unit
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Units Received
+    description: Shows overall unit volume received over a period by specific origin/destination/mode/shipper
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Units Received
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Kg Received
+    description: Shows overall kg volume received over a period by specific origin/destination/mode/shipper
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Kg Received
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Inbound Freight - Sea ship %
+    description: Shows performance of our shipment optimization
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite, E2Open
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Sea ship %
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Cashflow
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite, PLM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Outbound Freight - Freight Spend
+    description: Indication of inventory availability and frequency of expedited customer
+      shipments
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Freight Spend
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Outbound Freight - Kg Shipped
+    description: Indicates total weight of the items shipped out by 5 different shipping
+      methods
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, AWS S3
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Kg Shipped
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Outbound Freight - Average Lead Time
+    description: Indicates average of Ground /3-Day Select/ Next-day Air lead times
+      from the distribution center to the customer
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: AWS S3
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Average Lead Time
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Outbound Freight - Freight Rate
+    description: Indicates percentage of total outbound shipping weight for each outbound
+      shipping method
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Freight Rate
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - LCA (Lifecycle Analysis)
+    description: Calculate the carbon footprint of each unit of Samsara's hardware
+      products; across all cradle-to-grave life cycle stages from baseline FY23
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: LCA (Lifecycle Analysis)
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - Sourcing Emissions
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Sourcing Emissions
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - Production Emissions
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Production Emissions
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - Upstream Transportation Emissions
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Upstream Transportation Emissions
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - Downstream Transportation Emissions
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Downstream Transportation Emissions
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - Product Use-Phase Emissions
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Product Use-Phase Emissions
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Sustainablilty - End-Of-Life Emissions
+    description: ''
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: SFDC, E2Open, Gsheet, JDM
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: End-Of-Life Emissions
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Ops Pulse
+    description: Open purchase order liability at the end of the period being analyzed.
+      As an example, an order for 1000 units was placed, 100 units were shipped out,
+      and the OPO is 900 units.
+    custom_properties:
+      Business Team: ''
+      Business process: ''
+      Business Usage: ''
+      Impact: ''
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Open Purchase Orders
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: Customer Success
+  description: A set of business terms related to Customer Success
+  terms:
+  - name: Field - IC
+    description: Impementation consultant assigned to the account
+    custom_properties:
+      Business Team: ' '
+      Business process: CS RTB account assignment
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: IC
+      Dependency (Are any other teams dependent on this data element?): Lifecycle
+        Marketing
+  - name: Field - CSM
+    description: Customer Success Manager assigned to the account
+    custom_properties:
+      Business Team: ' '
+      Business process: CS RTB account assignment
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: CSM
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - SIS
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: CS RTB account assignment
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: SIS
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - BVS
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: CS RTB account assignment
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: BVS
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - CS status
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data - lifecycle stage
+      Business Usage: Account management
+      Impact: Medium -- all of CS, workaround avail
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: CS status
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - Onboarding start date
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data - lifecycle stage
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Onboarding start date
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - Onboarding end date
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data - lifecycle stage
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Onboarding end date
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - Expected onboarding end date
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data - lifecycle stage
+      Business Usage: Account management
+      Impact: Medium -- all of CS, workaround avail
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Expected onboarding end date
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - CS sentiment
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data - manual sentiment
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: CS sentiment
+      Dependency (Are any other teams dependent on this data element?): Sales, Support
+  - name: Field - CS sentiment notes
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data - manual sentiment
+      Business Usage: Account management
+      Impact: Large -- all of CS
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: CS sentiment notes
+      Dependency (Are any other teams dependent on this data element?): Sales, Support
+  - name: Field - Health Score
+    description: Gainsight healthscore calculation
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data
+      Business Usage: Account management
+      Impact: Medium -- all of CS, workaround avail
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Health Score
+      Dependency (Are any other teams dependent on this data element?): 'No'
+  - name: Field - CS tier
+    description: What CS service level does the customer fall into
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data
+      Business Usage: Account management
+      Impact: X-large -- multiple departments
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: CS tier
+      Dependency (Are any other teams dependent on this data element?): Lifecycle,
+        Sales, Support
+  - name: Field - KVP
+    description: Key value point - the customer's reason for purchase
+    custom_properties:
+      Business Team: ' '
+      Business process: Key CS data
+      Business Usage: Account management
+      Impact: X-large -- multiple departments, key value workflow
+      System of Record: Gainsight/SFDC
+      System Store: SFDC
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): ''
+      Data Attribute: KVP
+      Dependency (Are any other teams dependent on this data element?): Lifecycle,
+        Sales
+- name: Customer Support
+  description: A set of business terms related to Customer Support
+  terms:
+  - name: Full resolution time
+    description: Time to full resolution for Zendesk ticket
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Customer Success
+        (health score), Finance L2/L3(O2C)
+  - name: First resolution time
+    description: Time to first resolution for Zendesk ticket
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Customer Success
+        (health score), Finance L2/L3(O2C)
+  - name: First reply time
+    description: Time to first public reply for Zendesk ticket
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Customer Success
+        (health score), Finance L2/L3(O2C)
+  - name: Call wait time
+    description: Call wait time before answered by agent
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Call talk time
+    description: Call talk time during ticket interaction
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Call hold time
+    description: Call hold time during ticket interaction
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Call wrap up time
+    description: Call wrap up time after ticket interaction
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: First response SLA %
+    description: '% of tickets that meet SLA threshold'
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Customer Success
+        (health score)
+  - name: CSAT
+    description: Customer satisfation survey score
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: StellaConnect
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: QA scores
+    description: QA scores based on QA scorecards in StellaConnect
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: StellaConnect
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): --
+  - name: Ticket ID
+    description: Ticket unique identifier (Zendesk)
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: id
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket Status
+    description: Status of ticket
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: status
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket created at
+    description: Ticket created at timestamp
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: created_at
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket group
+    description: Ticket group
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: group_id
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket organization
+    description: Customer name
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: organization_id
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket assignee
+    description: Ticket assignee
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): Y
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: assignee_id
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket updated at
+    description: Ticket updated at timestamp
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: updated_at
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+  - name: Ticket geo
+    description: Customer on ticket region
+    custom_properties:
+      Business Team: ' '
+      Business process: Zendesk Reporting
+      Business Usage: Customer Support reporting
+      Impact: Large -- all of Support
+      System of Record: Zendesk
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): N
+      Need Approval for Access (Y/N): Y
+      Data Attribute: custom_global_geography_org_
+      Dependency (Are any other teams dependent on this data element?): Finance L2/L3(O2C)
+- name: Product Data
+  description: A set of business terms related to Product Data
+  terms:
+  - name: ACV
+    description: ''
+    custom_properties:
+      Business Team: ' '
+      Business process: Finance Analytics
+      Business Usage: Financial reporting (Public, Internal)
+      Impact: Large -- all of Samsara impact
+      System of Record: Netsuite
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): N
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: ''
+      Dependency (Are any other teams dependent on this data element?): ''
+- name: People Data
+  description: A set of business terms related to People Data
+  terms:
+  - name: Termination Rate - Hire Date
+    description: The rate of employees leaving Samsara.
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Intervene if too high or too low
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): Y
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Hire Date
+      Dependency (Are any other teams dependent on this data element?): F&S
+  - name: Termination Rate - Termination Date
+    description: The rate of employees leaving Samsara.
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Intervene if too high or too low
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): Y
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Termination Date
+      Dependency (Are any other teams dependent on this data element?): F&S
+  - name: Termination Rate - Termination Reason
+    description: The rate of employees leaving Samsara.
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Intervene if too high or too low
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): Y
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Termination Reason
+      Dependency (Are any other teams dependent on this data element?): F&S
+  - name: Termination Rate - Start Date of Time Period
+    description: The rate of employees leaving Samsara.
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Intervene if too high or too low
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Start Date of Time Period
+      Dependency (Are any other teams dependent on this data element?): F&S
+  - name: Termination Rate - End Date of Time Period
+    description: The rate of employees leaving Samsara.
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Intervene if too high or too low
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: End Date of Time Period
+      Dependency (Are any other teams dependent on this data element?): F&S
+  - name: Termination Rate - Length of Time Period
+    description: The rate of employees leaving Samsara.
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Intervene if too high or too low
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Length of Time Period
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Office Distance Group (Segment) - Employee Home Zip Codes
+    description: How far employees are to the nearest Samsara office
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Identify gaps in employee experience
+      Impact: Medium -- all of People Team impact
+      System of Record: Workday + Intranet
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): Y
+      Confidential (Y/N): Y
+      Need Approval for Access (Y/N): Y
+      Data Attribute: Employee Home Zip Codes
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Office Distance Group (Segment) - Samsara Office Zip Codes
+    description: How far employees are to the nearest Samsara office
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Identify gaps in employee experience
+      Impact: Medium -- all of People Team impact
+      System of Record: Workday + Intranet
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Samsara Office Zip Codes
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Level Group (Segment) - Management Level
+    description: The management level range a Samsarian falls in
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Identify gaps in employee experience
+      Impact: Medium -- all of People Team impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Management Level
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Level Group (Segment) - Level Track
+    description: The management level range a Samsarian falls in
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Identify gaps in employee experience
+      Impact: Medium -- all of People Team impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Level Track
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Span Group (Segment) - Number of direct reports
+    description: How many direct reports a manager has
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Identify poor org design
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Number of direct reports
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Span Group (Segment) - Manager Status
+    description: How many direct reports a manager has
+    custom_properties:
+      Business Team: ' '
+      Business process: People Reporting
+      Business Usage: Identify poor org design
+      Impact: Large -- all of Samsara impact
+      System of Record: Workday
+      System Store: Databricks
+      Customer Data (Y/N): N
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Manager Status
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Offer Acceptance Rate - Offer Resolved Date
+    description: The rate of candidates accepting an extended offer
+    custom_properties:
+      Business Team: ' '
+      Business process: Talent Acquisition Reporting
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Offer Resolved Date
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Offer Acceptance Rate - Offer Employment Type
+    description: The rate of candidates accepting an extended offer
+    custom_properties:
+      Business Team: ' '
+      Business process: Talent Acquisition Reporting
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Offer Employment Type
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Offer Acceptance Rate - Offer Status
+    description: The rate of candidates accepting an extended offer
+    custom_properties:
+      Business Team: ' '
+      Business process: Talent Acquisition Reporting
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Offer Status
+      Dependency (Are any other teams dependent on this data element?): ''
+  - name: Offer Acceptance Rate - Offer Change Reason
+    description: The rate of candidates accepting an extended offer
+    custom_properties:
+      Business Team: ' '
+      Business process: Talent Acquisition Reporting
+      Business Usage: ''
+      Impact: ''
+      System of Record: ''
+      System Store: ''
+      Customer Data (Y/N): ''
+      PII (Y/N): ''
+      Confidential (Y/N): ''
+      Need Approval for Access (Y/N): ''
+      Data Attribute: Offer Change Reason
+      Dependency (Are any other teams dependent on this data element?): ''

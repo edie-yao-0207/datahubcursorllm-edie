@@ -1,0 +1,88 @@
+{
+  "name": "time_on_site_report.site_visit_hours",
+  "owner": "AssetFoundations",
+  "description": "Calculates a list of all site visits, broken up by hour intervals.",
+  "disabled_regions": ["eu-west-1", "us-west-2", "ca-central-1"],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "groups",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "clouddb",
+      "tablename": "addresses",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "location",
+      "type": "table"
+    },
+    {
+      "dbname": "kinesisstats_window",
+      "tablename": "location",
+      "type": "table"
+    }
+  ],
+  "spark_execution_environment": {
+    "spark_version": "6.4.x-scala2.11",
+    "libraries": ["geospark"]
+  },
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "time_on_site_report",
+    "tablename": "site_visit_hours",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "device_id", "address_id", "start_ms"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "address_id",
+        "type": "long"
+      },
+      {
+        "name": "interval_start",
+        "nullable": false,
+        "type": "timestamp"
+      },
+      {
+        "name": "interval_end",
+        "nullable": false,
+        "type": "timestamp"
+      },
+      {
+        "name": "visit_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "visit_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

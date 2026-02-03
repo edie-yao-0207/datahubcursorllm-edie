@@ -1,0 +1,10 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`gateway_id` BIGINT,
+`product_id` BIGINT,
+`rule_name` STRING,
+`valid` BOOLEAN,
+`reason` STRING,
+`rule_output_context` MAP<STRING, STRING>,
+`date` DATE

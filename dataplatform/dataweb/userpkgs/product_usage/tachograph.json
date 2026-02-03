@@ -1,0 +1,71 @@
+{
+  "feature_name": "Tachograph",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/4500370/Tachograph+FW",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "licenses": {
+        "skus": [
+          "LIC-VG-COMPLIANCE",
+          "LIC-VG-ESS-PLTFM-PREM",
+          "LIC-VG-ESS-PLUS-PLTFM-PREM",
+          "LIC-VG-ESS-PLTFM-ESS",
+          "LIC-VG-ESS-PLUS-PLTFM-ESS",
+          "LIC-VG-ENT",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PREM-PLTFM-ESS",
+          "LIC-VG-PREM-PLTFM-PREM",
+          "LIC-VG-PREMIER-PLTFM-ESS",
+          "LIC-VG-PREMIER-PLTFM-PREM",
+          "LIC-VG-PS"
+        ],
+        "license_required": true
+      },
+      "release_phase": "GA",
+      "locales": ["eu_all_locales"]
+    },
+    {
+      "effective_date": "2026-01-09",
+      "licenses": {
+        "skus": [
+          "LIC-VG-COMPLIANCE",
+          "LIC-VG-ESS-PLTFM-PREM",
+          "LIC-VG-ESS-PLUS-PLTFM-PREM",
+          "LIC-VG-ESS-PLTFM-ESS",
+          "LIC-VG-ESS-PLUS-PLTFM-ESS",
+          "LIC-VG-ENT",
+          "LIC-VG-ENT-PLTFM-ESS",
+          "LIC-VG-ENT-PLTFM-PREM",
+          "LIC-VG-EXPRESS",
+          "LIC-VG-LD",
+          "LIC-VG-NOELD",
+          "LIC-VG-PREM-PLTFM-ESS",
+          "LIC-VG-PREM-PLTFM-PREM",
+          "LIC-VG-PREMIER-PLTFM-ESS",
+          "LIC-VG-PREMIER-PLTFM-PREM",
+          "LIC-VG-PS",
+          "LIC-VG-TACHO"
+        ],
+        "license_required": true
+      },
+      "release_phase": "GA",
+      "locales": ["eu_all_locales"]
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "tachograph.sql",
+        "eu_sql_file": "tachograph_eu.sql",
+        "usage_field": "device_id",
+        "has_user_id_field": false,
+        "filter_internal_usage": false
+      }
+    }
+  ]
+}

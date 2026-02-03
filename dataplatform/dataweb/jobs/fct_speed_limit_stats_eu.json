@@ -1,0 +1,13 @@
+{
+  "name": "fct_speed_limit_stats_eu",
+  "owner": "DataEngineering",
+  "assets": ["eu-west-1:product_analytics.fct_speed_limit_stats"],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 10 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 3
+    }
+  ]
+}

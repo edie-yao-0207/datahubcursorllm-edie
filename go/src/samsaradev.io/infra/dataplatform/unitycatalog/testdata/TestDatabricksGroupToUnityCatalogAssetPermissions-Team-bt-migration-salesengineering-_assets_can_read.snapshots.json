@@ -1,0 +1,24 @@
+[
+  {
+    "Name": "bt-migration-salesengineering: assets can read",
+    "Values": [
+      {
+        "databaseRegions": {
+          "default.biztech_edw_silver": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ],
+          "default.solutions_integration_services": [
+            "ca-central-1",
+            "eu-west-1",
+            "us-west-2"
+          ]
+        }
+      },
+      {
+        "tables": []
+      }
+    ]
+  }
+]

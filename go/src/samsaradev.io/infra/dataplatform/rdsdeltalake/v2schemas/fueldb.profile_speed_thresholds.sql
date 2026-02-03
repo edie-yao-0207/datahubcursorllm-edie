@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`profile_id` STRING,
+`meters_per_second` FLOAT,
+`created_at` BIGINT,
+`created_by` BIGINT,
+`partition` STRING

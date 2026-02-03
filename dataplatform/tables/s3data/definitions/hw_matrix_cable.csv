@@ -1,0 +1,39 @@
+CBL-VG-BJ1939 OR CBL-VG-BIZU,1,False,BUS_CAN1_J1939_9PIN_PINS_C_D,,,,,False,False,NONE,False,True,True,False,False,False,False,False
+CBL-VG-BFMS OR ACC-BJ1939-Y1,2,False,BUS_CAN1_J1939_TYPE_1_CABLES,,,,,True,False,NONE,False,True,True,False,False,False,False,False
+CBL-VG-BJ1708 WITH USB (9-PIN OR 6-PIN),3,False,,,,,BUS_J1708_J1587_MULTIPLE_CABLE_IDS,False,False,NONE,False,True,False,False,False,False,False,False
+CBL-VG-BOBDII,4,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,,,,,False,False,NONE,False,True,True,False,False,False,False,False
+CBL-VG-BJ1939-VM,5,False,BUS_CAN1_J1939_VM_PINS_3_11,,,,,False,False,NONE,False,True,True,False,False,False,False,False
+CBL-VG-B1226,6,False,BUS_CAN1_J1939_RP1226_PINS_2_9,,,,,False,False,NONE,False,True,True,False,False,False,False,False
+CBL-VG-BHGV,7,False,BUS_CAN1_J1939_HGV_PINS_A4_A8,,,,,False,False,NONE,False,True,True,False,False,False,False,False
+CBL-VG-CPC Power Only,8,False,,,,,,False,False,NONE,True,False,False,True,True,True,True,True
+CBL-VG-CJ1708,9,False,,,,,BUS_J1708_6PIN_PINS_A_B,False,False,NONE,False,False,False,True,False,True,True,False
+CBL-VG-CJ1939,10,False,BUS_CAN1_J1939_9PIN_PINS_C_D,BUS_CAN2_J1939_9PIN_PINS_H_J,BUS_CAN3_J1939_9PIN_PINS_F_G,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CJ1939-VM,11,False,BUS_CAN1_J1939_VM_PINS_3_11,,,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CRP1226,12,False,BUS_CAN1_J1939_RP1226_PINS_2_9,BUS_CAN2_J1939_RP1226_PINS_4_11,,,BUS_J1708_RP1226_PINS_6_13,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-COBDII-Y1,13,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_EV_CAN_OBD2_PINS_12_13,BUS_SINGLE_WIRE_CAN_OBD2_PIN_1,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CHGV,14,False,BUS_CAN1_J1939_HGV_PINS_A4_A8,BUS_CAN2_J1939_HGV_PINS_C5_C7,,,,True,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CFMS,15,False,BUS_CAN1_J1939_FMS_PINS_6_9,BUS_CAN2_J1939_FMS_PINS_5_8,,,,True,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-COBDII-Y2,16,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_TERTIARY_CAN_OBD2_PINS_1_9,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CIZU,17,False,BUS_CAN1_J1939_IZU_PINS_6_15,BUS_CAN2_J1939_IZU_PINS_9_18,,,,False,False,ISUZU,False,False,False,True,True,True,True,True
+CBL-VG-COBDII-Y0,18,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_EV_CAN_OBD2_PINS_12_13,BUS_SINGLE_WIRE_CAN_OBD2_PIN_1,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-COBDII-Y3,19,True,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_EV_CAN_OBD2_PINS_12_13,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-COBDII-Y1S,20,True,BUS_PRIMARY_CAN_OBD2_PINS_6_14,,,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CPWR,21,False,,,,,,False,False,NONE,True,False,False,True,True,True,True,True
+CBL-VG-CTSLA3Y-19,22,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,,,,,False,False,TESLA,False,False,False,True,True,True,True,True
+CBL-VG-COBDII-Y0S,23,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_TERTIARY_CAN_OBD2_PINS_1_9,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CTSLAXS-18,24,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_CAN2_J1939_HGV_PINS_C5_C7,,,,False,False,TESLA,False,False,False,True,True,True,True,True
+CBL-VG-CTDC-Y0,25,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_TERTIARY_CAN_ISO16844_CAN_C,,,True,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-HJ1939-PAC,26,False,BUS_CAN1_J1939_PACCAR_PINS_F_G,,,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CCIG Power Only,27,False,,,,,,False,False,NONE,True,False,False,True,True,True,True,True
+CBL-VG-CCT9,28,False,BUS_CAN1_CAT_9PIN_PINS_F_G,BUS_CAN2_CAT_9PIN_PINS_D_E,,,BUS_J1708_CAT_9PIN_PINS_H_J,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CCT14,29,False,BUS_CAN1_CAT_14PIN_PINS_C_D,BUS_CAN2_CAT_14PIN_PINS_H_J,,,BUS_J1708_CAT_14PIN_PINS_F_G,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-COPEN,30,False,BUS_CAN1_COPEN_FLYING_LEADS,BUS_CAN2_COPEN_FLYING_LEADS,,,BUS_J1708_COPEN_FLYING_LEADS,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-CKM12,31,False,BUS_CAN1_KOMATSU_12PIN_PINS_3_10,,,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-DTDC-Y0,32,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_SECONDARY_CAN_OBD2_PINS_3_11,BUS_TERTIARY_CAN_ISO16844_CAN_C,,,True,True,NONE,False,False,False,False,True,False,False,True
+CBL-VG-DFMS,33,False,BUS_CAN1_J1939_FMS_PINS_6_9,BUS_CAN2_J1939_FMS_PINS_5_8,,,,True,True,NONE,False,False,False,False,True,False,False,True
+CBL-VG-DHGV,34,False,BUS_CAN1_J1939_HGV_PINS_A4_A8,BUS_CAN2_J1939_HGV_PINS_C5_C7,,,,True,True,NONE,False,False,False,False,True,False,False,True
+CBL-VG-DTSLA3-24,35,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,,,,,False,False,TESLA,False,False,False,True,True,True,True,True
+CBL-VG-DIZU,36,False,BUS_PRIMARY_CAN_OBD2_PINS_6_14,BUS_J1962_SECONDARY_J1939,,,,False,False,ISUZU,False,False,False,True,True,False,True,True
+CBL-VG-DJ1939-VM,37,False,BUS_CAN1_DJ1939_VM_PINS_6_14,BUS_CAN2_DJ1939_VM_PINS_3_11,,,,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-DJ1939-JOE,38,False,BUS_CAN1_DJ1939_JOE_9PIN_PINS_C_D,BUS_CAN2_DJ1939_JOE_9PIN_PINS_H_J,BUS_CAN3_DJ1939_JOE_9PIN_PINS_F_G,,BUS_J1708_DJ1939_JOE_9PIN_PINS_F_G,False,False,NONE,False,False,False,True,True,True,True,True
+CBL-VG-DJ1939-VOE,39,False,BUS_CAN1_DJ1939_VOE_PINS_6_14,BUS_CAN2_DJ1939_VOE_PINS_3_11,,,,False,False,NONE,False,False,False,True,True,True,True,True

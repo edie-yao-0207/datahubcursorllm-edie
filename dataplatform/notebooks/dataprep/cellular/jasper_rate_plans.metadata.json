@@ -1,0 +1,52 @@
+{
+  "owner": "CoreServices",
+  "email_notifications": [
+    "alerts-ingestion-aaaad7ndq3nzakgbegyy7z6xwi@samsara.org.slack.com",
+    "jasper-etl-databricks-notebook-job@samsara.pagerduty.com"
+  ],
+  "jobs": [
+    {
+      "name": "dataprep_cellular.jasper_job",
+      "cron": "0 0 13 ? * * *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 18000,
+      "spark_version": "default"
+    }
+  ],
+  "output": {
+    "external": true,
+    "dbname": "dataprep_cellular",
+    "tablename": "att_daily_usage",
+    "type": "table",
+    "schema": [
+      {
+        "name": "att_daily_usage",
+        "type": "date"
+      },
+      {
+        "name": "iccid",
+        "type": "string"
+      },
+      {
+        "name": "tap_code",
+        "type": "string"
+      },
+      {
+        "name": "call_technology_type",
+        "type": "long"
+      },
+      {
+        "name": "operator_network",
+        "type": "long"
+      },
+      {
+        "name": "data_usage",
+        "type": "long"
+      },
+      {
+        "name": "record_received_date",
+        "type": "date"
+      }
+    ]
+  }
+}

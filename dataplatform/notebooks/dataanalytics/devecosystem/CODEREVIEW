@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/api"
+  ],
+  "description": "Changes are recommended to be cleared with Developer Ecosystem, find us in #ask-dev-ecosystem",
+  "additionalReviewers": [
+    "samsara-dev/dev"
+  ]
+}

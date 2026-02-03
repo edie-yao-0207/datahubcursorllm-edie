@@ -1,0 +1,318 @@
+{
+  "name": "data_analytics.baxter_health_daily",
+  "owner": "DataAnalytics",
+  "description": "This table contains ID data for Baxter devices that have been connected in the last two weeks from execution date",
+  "nonproduction": true,
+  "disabled_regions": ["eu-west-1", "ca-central-1"],
+  "dependencies": [
+    {
+      "dbname": "data_analytics",
+      "tablename": "baxter_health_daily_metadata",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "data_analytics_from_eu_west_1",
+      "tablename": "baxter_health_daily_metadata",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "output": {
+    "dbname": "data_analytics",
+    "tablename": "baxter_health_daily",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["date", "org_id", "vg_device_id", "cm_device_id"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "string",
+        "metadata": {
+          "comment": "The date on which the data was recorded."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Internal ID for the customer's Samsara Org."
+        }
+      },
+      {
+        "name": "product_id",
+        "type": "long",
+        "metadata": {
+          "comment": "Device product ID."
+        }
+      },
+      {
+        "name": "vg_device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The ID of the vehicle gateway the Baxter device is connected to."
+        }
+      },
+      {
+        "name": "last_reported_vg_build",
+        "type": "string",
+        "metadata": {
+          "comment": "The last reported build version of the vehicle gateway the Baxter device is connected to."
+        }
+      },
+      {
+        "name": "cm_product_id",
+        "type": "long",
+        "metadata": {
+          "comment": "CM product ID."
+        }
+      },
+      {
+        "name": "cm_device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The ID of the camera the Baxter device is connected to."
+        }
+      },
+      {
+        "name": "last_reported_cm_build",
+        "type": "string",
+        "metadata": {
+          "comment": "The last reported build version of the camera the Baxter device is connected to."
+        }
+      },
+      {
+        "name": "date_baxter_first_connected",
+        "type": "string",
+        "metadata": {
+          "comment": "Date Baxter device was first connected."
+        }
+      },
+      {
+        "name": "attribute_created_at_ts",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "Timestamp Baxter device attribute was added."
+        }
+      },
+      {
+        "name": "attribute_type",
+        "type": "string",
+        "metadata": {
+          "comment": "Baxter attribute type (Ignition On, Reverse Only)."
+        }
+      },
+      {
+        "name": "daily_trip_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Total duration of trips on given day, in milliseconds."
+        }
+      },
+      {
+        "name": "cm3x_daily_connected_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Total time CM was connected to VG on given day, in milliseconds."
+        }
+      },
+      {
+        "name": "cm3x_daily_recording_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Total CM recording time on given day, in milliseconds"
+        }
+      },
+      {
+        "name": "cm3x_daily_connected_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "Total connected time divided by total trip duration."
+        }
+      },
+      {
+        "name": "cm3x_daily_recording_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_cm3x_trip_connected_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_cm3x_trip_recording_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "baxter_daily_connected_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "baxter_daily_recording_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "baxter_daily_grace_recording_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "baxter_daily_connected_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "baxter_daily_recording_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "baxter_daily_grace_recording_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_baxter_trip_connected_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_baxter_trip_recording_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_baxter_trip_grace_recording_uptime_percentage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "daily_forward_framerate",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "daily_inward_framerate",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "daily_rear_framerate",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "total_cm_bootcount",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "total_cm_anomalies",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "cm_daily_max_cpu_gold_temp_celsius",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "cm_daily_avg_cpu_gold_temp_celsius",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "cm_total_overheated_count",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "cm_total_safe_mode_count",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "cm_total_connected_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "cm_total_grace_recording_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_vg_total_cpu_usage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "avg_cm_total_cpu_usage",
+        "type": "double",
+        "metadata": {
+          "comment": "..."
+        }
+      },
+      {
+        "name": "usb_restart_count",
+        "type": "long",
+        "metadata": {
+          "comment": "..."
+        }
+      }
+    ],
+    "write_mode": "overwrite"
+  }
+}

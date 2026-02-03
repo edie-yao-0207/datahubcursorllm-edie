@@ -1,0 +1,101 @@
+{
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "legend": {
+    "traceorder": "normal"
+  },
+  "xAxis": {
+    "type": "-",
+    "labels": {
+      "enabled": true
+    }
+  },
+  "yAxis": [
+    {
+      "type": "-"
+    },
+    {
+      "type": "-",
+      "opposite": true
+    }
+  ],
+  "alignYAxesAtZero": true,
+  "error_y": {
+    "type": "data",
+    "visible": true
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "type": "data",
+      "visible": true
+    }
+  },
+  "seriesOptions": {
+    "column_af118ab53989": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "recall_p01"
+    },
+    "column_af118ab53992": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "recall_p05"
+    },
+    "column_af118ab53995": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "recall_p10"
+    },
+    "column_af118ab53998": {
+      "yAxis": 0,
+      "type": "line",
+      "name": "recall_p20"
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0.[00000]",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "YYYY-MM-DD HH:mm",
+  "showDataLabels": false,
+  "columnConfigurationMap": {
+    "x": {
+      "column": "date",
+      "id": "column_af118ab53986"
+    },
+    "y": [
+      {
+        "id": "column_af118ab53989",
+        "column": "recall_p01",
+        "transform": "AVG"
+      },
+      {
+        "id": "column_af118ab53992",
+        "column": "recall_p05",
+        "transform": "AVG"
+      },
+      {
+        "id": "column_af118ab53995",
+        "column": "recall_p10",
+        "transform": "AVG"
+      },
+      {
+        "id": "column_af118ab53998",
+        "column": "recall_p20",
+        "transform": "AVG"
+      }
+    ]
+  },
+  "isAggregationOn": false
+}

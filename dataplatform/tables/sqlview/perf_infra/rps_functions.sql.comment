@@ -1,0 +1,13 @@
+we added the following functions to databricks manually, but are committing this file for anyone in search of their definitions, or wanting to re-run this manual command
+
+CREATE OR REPLACE FUNCTION perf_infra.tas(x double) RETURNS double LANGUAGE SQL
+  RETURN 1 / (1 + (0.3275911 * ABS(x)));
+
+CREATE OR REPLACE FUNCTION perf_infra.erf(x double) RETURNS double LANGUAGE SQL
+  RETURN sign(x) * (1 - (((((1.061405429 * perf_infra.tas(x) - 1.453152027) * perf_infra.tas(x)) + 1.421413741) * perf_infra.tas(x) - 0.284496736) * perf_infra.tas(x) + 0.254829592) * perf_infra.tas(x) * exp(-(x * x)));
+
+CREATE OR REPLACE FUNCTION perf_infra.rlc(s double) RETURNS double LANGUAGE SQL
+  RETURN IF(s = 0, 100, 50 - 50 * perf_infra.erf((ln(s * 1000) - 8.51719319142) / (sqrt(2) * 0.540865618829)));
+
+CREATE OR REPLACE FUNCTION perf_infra.uic(s double) RETURNS double LANGUAGE SQL
+  RETURN IF(s = 0, 100, 50 - 50 * perf_infra.erf((ln(s * 1000) - 7.60090245954) / (sqrt(2) * 1.08173123766)));

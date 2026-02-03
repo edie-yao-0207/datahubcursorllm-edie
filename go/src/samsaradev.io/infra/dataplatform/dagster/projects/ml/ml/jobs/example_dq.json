@@ -1,0 +1,7 @@
+{
+  "name": "example_dq",
+  "owner": "DataEngineering",
+  "regions": ["us-west-2"],
+  "description": "Example job demonstrating DQ check usage patterns",
+  "ops": ["simple_dq_example"]
+}

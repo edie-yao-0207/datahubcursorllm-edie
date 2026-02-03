@@ -1,0 +1,10 @@
+`org_id` BIGINT,
+`gateway_id` BIGINT,
+`device_id` BIGINT,
+`iccid` STRING,
+`sms_send_successful` BOOLEAN,
+`sms_sent_at` TIMESTAMP,
+`vodafone_details_updated_at` TIMESTAMP,
+`vodafone_device_registration_status` STRING,
+`timestamp` TIMESTAMP,
+`date` DATE

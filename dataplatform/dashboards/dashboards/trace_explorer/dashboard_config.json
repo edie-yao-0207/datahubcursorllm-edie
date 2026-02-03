@@ -1,0 +1,364 @@
+{
+  "dashboard": {
+    "name": "VDP Trace Explorer"
+  },
+  "global_filters": [
+    {
+      "name": "date",
+      "type": "date_range",
+      "title": "Date Range",
+      "default": { "min": "-30d", "max": "today" }
+    }
+  ],
+  "parameters": {
+    "trace_uuid": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "tabs": [
+    {
+      "name": "Overview",
+      "widgets": [
+        {
+          "type": "text",
+          "content": "## Trace Collection Program\n\nOur goal is to collect a **representative dataset of CAN traces** that cover each unique vehicle population (Make, Model, Year, Engine, Fuel Type, Powertrain).\n\nThis enables us to:\n- Provide a **reference trace per customer vehicle** for diagnostics and support\n- **Enable further development** of signal decoding and reverse engineering\n- **Validate signal promotions** across diverse vehicle configurations\n\nThe charts below track our progress toward comprehensive population coverage.",
+          "width": 6,
+          "height": 3
+        },
+        {
+          "sql": "queries/diversity/trace_stats.sql",
+          "type": "counter",
+          "title": "Traces & Populations Covered",
+          "width": 2,
+          "height": 4,
+          "config": {
+            "value_field": "count_traces",
+            "target_field": "count_mmyefs"
+          }
+        },
+        {
+          "sql": "queries/diversity/daily_trace_counts.sql",
+          "type": "bar",
+          "title": "Traces Pulled Per Day",
+          "width": 4,
+          "height": 4,
+          "config": {
+            "x_axis": "date",
+            "y_field": "count_traces",
+            "color_scheme": "spectral",
+            "color_reverse": true
+          }
+        },
+        {
+          "sql": "queries/diversity/trace_distribution.sql",
+          "type": "histogram",
+          "title": "Histogram of Traces per Population",
+          "width": 6,
+          "height": 4,
+          "config": {
+            "x_field": "trace_cnt"
+          }
+        },
+        {
+          "sql": "queries/diversity/aggregate_populations.sql",
+          "type": "line",
+          "title": "Percent Coverage Cumulative",
+          "width": 3,
+          "height": 6,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["cum_mmyef_coverage_pct", "cum_device_coverage_pct"],
+            "y_label": "Coverage %",
+            "y_format": "percent"
+          }
+        },
+        {
+          "sql": "queries/diversity/aggregate_populations.sql",
+          "type": "line",
+          "title": "Total Populations Covered Cumulative",
+          "width": 3,
+          "height": 6,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["cum_mmyefs_with_traces", "total_mmyef_population"],
+            "y_label": "Count"
+          }
+        },
+        {
+          "sql": "queries/diversity/aggregate_populations.sql",
+          "type": "line",
+          "title": "Traces Pulled Cumulative",
+          "width": 6,
+          "height": 6,
+          "config": {
+            "x_axis": "date",
+            "y_fields": ["cum_traces_device", "cum_unique_devices_with_traces", "cum_mmyefs_with_traces"],
+            "y_label": "Count"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Traces",
+      "row_width": 6,
+      "filters": [
+        {
+          "type": "field_select",
+          "field": "make",
+          "title": "Make",
+          "width": 1,
+          "disallow_all": false,
+          "datasets": ["trace_uuids"]
+        },
+        {
+          "type": "field_select",
+          "field": "model",
+          "title": "Model",
+          "width": 1,
+          "disallow_all": false,
+          "datasets": ["trace_uuids"]
+        },
+        {
+          "type": "field_select",
+          "field": "year",
+          "title": "Year",
+          "width": 1,
+          "disallow_all": false,
+          "datasets": ["trace_uuids"]
+        },
+        {
+          "type": "field_select",
+          "field": "powertrain",
+          "title": "Powertrain",
+          "width": 1,
+          "disallow_all": false,
+          "datasets": ["trace_uuids"]
+        },
+        {
+          "type": "field_select",
+          "field": "fuel_group",
+          "title": "Fuel Group",
+          "width": 1,
+          "disallow_all": false,
+          "datasets": ["trace_uuids"]
+        },
+        {
+          "type": "field_select",
+          "field": "engine_model",
+          "title": "Engine",
+          "width": 1,
+          "disallow_all": false,
+          "datasets": ["trace_uuids"]
+        },
+        {
+          "type": "select",
+          "name": "trace_uuid",
+          "title": "Trace UUID",
+          "width": 6,
+          "filter_row": 1,
+          "datasets": ["trace_uuids", "decoded_traces", "signal_summary"]
+        },
+        {
+          "type": "field_multi_select",
+          "field": "obd_value_name",
+          "title": "Signal",
+          "width": 3,
+          "filter_row": 1,
+          "disallow_all": false,
+          "datasets": ["decoded_traces", "signal_summary"]
+        },
+        {
+          "type": "field_select",
+          "field": "source_address",
+          "title": "ECU",
+          "width": 3,
+          "filter_row": 1,
+          "disallow_all": false,
+          "datasets": ["decoded_traces", "signal_summary"]
+        }
+      ],
+      "widgets": [
+        {
+          "sql": "queries/traces/trace_uuids.sql",
+          "type": "table",
+          "title": "Available Traces",
+          "description": "Find a trace using the filters above, then select it in the Trace UUID dropdown below.",
+          "width": 6,
+          "height": 5,
+          "config": {
+            "items_per_page": 10
+          }
+        },
+        {
+          "sql": "queries/traces/decoded_traces.sql",
+          "type": "line",
+          "title": "Signal Timeline",
+          "description": "Decoded signal values over time for the selected trace.",
+          "width": 6,
+          "height": 8,
+          "config": {
+            "x_axis": "timestamp",
+            "y_fields": ["decoded_value"],
+            "color_by": "label"
+          }
+        },
+        {
+          "sql": "queries/traces/signal_summary.sql",
+          "type": "table",
+          "title": "Signal Statistics",
+          "description": "Aggregate stats per signal in the selected trace.",
+          "width": 6,
+          "height": 4,
+          "config": {
+            "items_per_page": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "Signal Catalog",
+      "filters": [
+        {
+          "type": "field_select",
+          "field": "make",
+          "title": "Make",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "model",
+          "title": "Model",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "year",
+          "title": "Year",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "powertrain_name",
+          "title": "Powertrain",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "fuel_group_name",
+          "title": "Fuel Group",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "obd_value_name",
+          "title": "Signal",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "data_source_name",
+          "title": "Data Source",
+          "width": 3,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "is_standard",
+          "title": "Standard",
+          "width": 3,
+          "disallow_all": false
+        }
+      ],
+      "widgets": [
+        {
+          "type": "text",
+          "content": "# Signal Catalog\n\nSearch for promotions across all supported data sources. This includes the backend global\\_obd\\_configuration, SPS, J1939-DA, J1979-DA, and AI generated promotions.",
+          "width": 6,
+          "height": 2
+        },
+        {
+          "sql": "queries/catalog/signal_catalog.sql",
+          "type": "table",
+          "title": "Signal Catalog",
+          "width": 6,
+          "height": 10,
+          "config": {
+            "items_per_page": 50
+          }
+        }
+      ]
+    },
+    {
+      "name": "ASC Files",
+      "filters": [
+        {
+          "type": "field_select",
+          "field": "make",
+          "title": "Make",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "model",
+          "title": "Model",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "year",
+          "title": "Year",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "fuel_group",
+          "title": "Fuel Group",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "powertrain",
+          "title": "Powertrain",
+          "width": 1,
+          "disallow_all": false
+        },
+        {
+          "type": "field_select",
+          "field": "engine_model",
+          "title": "Engine",
+          "width": 1,
+          "disallow_all": false
+        }
+      ],
+      "widgets": [
+        {
+          "type": "text",
+          "content": "**Trace Search** — Find related traces and pull from S3 using: `aws s3 cp s3://bucket/path/trace.asc ./trace.asc`",
+          "width": 6,
+          "height": 1
+        },
+        {
+          "sql": "queries/asc_files/asc_traces.sql",
+          "type": "table",
+          "title": "ASC Traces",
+          "width": 6,
+          "height": 10,
+          "config": {
+            "items_per_page": 25
+          }
+        }
+      ]
+    }
+  ]
+}

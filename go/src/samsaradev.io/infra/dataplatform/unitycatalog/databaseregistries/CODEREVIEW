@@ -1,0 +1,396 @@
+{
+  "owners": [
+    "samsara-dev/data-platform"
+  ],
+  "description": "Database additions and removals should go through Data Platform, and are monitored via a snapshot. Database permission changes should be managed by the owning team.",
+  "perFile": [
+    {
+      "filePattern": "apptelematics.go",
+      "owners": [
+        "samsara-dev/apptelematics"
+      ],
+      "description": "Changes to AppTelematics databases should be cleared with AppTelematics"
+    },
+    {
+      "filePattern": "biztechenterprisedata.go",
+      "owners": [
+        "samsara-dev/biztechenterprisedata"
+      ],
+      "description": "Changes to BizTechEnterpriseData databases should be cleared with BizTechEnterpriseData"
+    },
+    {
+      "filePattern": "businesssystems.go",
+      "owners": [
+        "samsara-dev/businesssystems"
+      ],
+      "description": "Changes to BusinessSystems databases should be cleared with BusinessSystems"
+    },
+    {
+      "filePattern": "businesssystemsrecruiting.go",
+      "owners": [
+        "samsara-dev/businesssystemsrecruiting"
+      ],
+      "description": "Changes to BusinessSystemsRecruiting databases should be cleared with BusinessSystemsRecruiting"
+    },
+    {
+      "filePattern": "cloud.go",
+      "owners": [
+        "samsara-dev/cloud"
+      ],
+      "description": "Changes to Cloud databases should be cleared with Cloud"
+    },
+    {
+      "filePattern": "compliance.go",
+      "owners": [
+        "samsara-dev/compliance"
+      ],
+      "description": "Changes to Compliance databases should be cleared with Compliance"
+    },
+    {
+      "filePattern": "connectedequipment.go",
+      "owners": [
+        "samsara-dev/connectedequipment"
+      ],
+      "description": "Changes to ConnectedEquipment databases should be cleared with ConnectedEquipment"
+    },
+    {
+      "filePattern": "connectedworker.go",
+      "owners": [
+        "samsara-dev/connectedworker"
+      ],
+      "description": "Changes to ConnectedWorker databases should be cleared with ConnectedWorker"
+    },
+    {
+      "filePattern": "customersuccessoperations.go",
+      "owners": [
+        "samsara-dev/customersuccessoperations"
+      ],
+      "description": "Changes to CustomerSuccessOperations databases should be cleared with CustomerSuccessOperations"
+    },
+    {
+      "filePattern": "dataanalytics.go",
+      "owners": [
+        "samsara-dev/data-analytics"
+      ],
+      "description": "Changes to DataAnalytics databases should be cleared with DataAnalytics"
+    },
+    {
+      "filePattern": "dataengineering.go",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to DataEngineering databases should be cleared with DataEngineering"
+    },
+    {
+      "filePattern": "dataplatform.go",
+      "owners": [
+        "samsara-dev/data-platform"
+      ],
+      "description": "Changes to DataPlatform databases should be cleared with DataPlatform"
+    },
+    {
+      "filePattern": "datascience.go",
+      "owners": [
+        "samsara-dev/data-science"
+      ],
+      "description": "Changes to DataScience databases should be cleared with DataScience"
+    },
+    {
+      "filePattern": "devecosystem.go",
+      "owners": [
+        "samsara-dev/api"
+      ],
+      "description": "Changes to DevEcosystem databases should be cleared with DevEcosystem"
+    },
+    {
+      "filePattern": "developerexperience.go",
+      "owners": [
+        "samsara-dev/developer-experience"
+      ],
+      "description": "Changes to DeveloperExperience databases should be cleared with DeveloperExperience"
+    },
+    {
+      "filePattern": "diagnosticstools.go",
+      "owners": [
+        "samsara-dev/diagnosticstools"
+      ],
+      "description": "Changes to DiagnosticTools databases should be cleared with DiagnosticTools"
+    },
+    {
+      "filePattern": "drivermanagement.go",
+      "owners": [
+        "samsara-dev/driver-management"
+      ],
+      "description": "Changes to DriverManagement databases should be cleared with the DriverManagement team"
+    },
+    {
+      "filePattern": "epofinance.go",
+      "owners": [
+        "samsara-dev/epofinance"
+      ],
+      "description": "Changes to EpoFinance databases should be cleared with EpoFinance"
+    },
+    {
+      "filePattern": "financialoperations.go",
+      "owners": [
+        "samsara-dev/financialoperations"
+      ],
+      "description": "Changes to FinancialOperations databases should be cleared with FinancialOperations"
+    },
+    {
+      "filePattern": "firmware.go",
+      "owners": [
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to Firmware databases should be cleared with Firmware"
+    },
+    {
+      "filePattern": "gtms.go",
+      "owners": [
+        "samsara-dev/gtms"
+      ],
+      "description": "Changes to GTMS databases should be cleared with GTMS"
+    },
+    {
+      "filePattern": "growth.go",
+      "owners": [
+        "samsara-dev/growth"
+      ],
+      "description": "Changes to Growth databases should be cleared with Growth"
+    },
+    {
+      "filePattern": "hardware.go",
+      "owners": [
+        "samsara-dev/hardware"
+      ],
+      "description": "Changes to Hardware databases should be cleared with Hardware"
+    },
+    {
+      "filePattern": "ingestion.go",
+      "owners": [
+        "samsara-dev/timeseries"
+      ],
+      "description": "Changes to TimeSeries databases should be cleared with TimeSeries"
+    },
+    {
+      "filePattern": "mlcv.go",
+      "owners": [
+        "samsara-dev/mlcv"
+      ],
+      "description": "Changes to MLCV databases should be cleared with MLCV"
+    },
+    {
+      "filePattern": "mlinfra.go",
+      "owners": [
+        "samsara-dev/mlinfra"
+      ],
+      "description": "Changes to MLInfra databases should be cleared with MLInfra"
+    },
+    {
+      "filePattern": "marketingdataanalytics.go",
+      "owners": [
+        "samsara-dev/marketingdataanalytics"
+      ],
+      "description": "Changes to MarketingDataAnalytics databases should be cleared with MarketingDataAnalytics"
+    },
+    {
+      "filePattern": "mdmsdk.go",
+      "owners": [
+        "samsara-dev/mdmsdk"
+      ],
+      "description": "Changes to MdmSdk databases should be cleared with MdmSdk"
+    },
+    {
+      "filePattern": "mediaexperience.go",
+      "owners": [
+        "samsara-dev/media-experience"
+      ],
+      "description": "Changes to MediaExperience databases should be cleared with MediaExperience"
+    },
+    {
+      "filePattern": "mobile.go",
+      "owners": [
+        "samsara-dev/mobile"
+      ],
+      "description": "Changes to Mobile databases should be cleared with Mobile"
+    },
+    {
+      "filePattern": "opx.go",
+      "owners": [
+        "samsara-dev/opx"
+      ],
+      "description": "Changes to OPX databases should be cleared with OPX"
+    },
+    {
+      "filePattern": "oem.go",
+      "owners": [
+        "samsara-dev/telematics-data"
+      ],
+      "description": "Changes to Oem databases should be cleared with TelematicsData"
+    },
+    {
+      "filePattern": "platformadminops.go",
+      "owners": [
+        "samsara-dev/platformadminops"
+      ],
+      "description": "Changes to PlatformAdminOps databases should be cleared with PlatformAdminOps"
+    },
+    {
+      "filePattern": "platformoperations.go",
+      "owners": [
+        "samsara-dev/platform-operations"
+      ],
+      "description": "Changes to PlatformOperations databases should be cleared with PlatformOperations"
+    },
+    {
+      "filePattern": "platformreports.go",
+      "owners": [
+        "samsara-dev/platform-reports"
+      ],
+      "description": "Changes to PlatformReports databases should be cleared with PlatformReports"
+    },
+    {
+      "filePattern": "releasemanagement.go",
+      "owners": [
+        "samsara-dev/release-management"
+      ],
+      "description": "Changes to ReleaseManagement databases should be cleared with ReleaseManagement"
+    },
+    {
+      "filePattern": "routing.go",
+      "owners": [
+        "samsara-dev/routing"
+      ],
+      "description": "Changes to Routing databases should be cleared with Routing"
+    },
+    {
+      "filePattern": "safetyadas.go",
+      "owners": [
+        "samsara-dev/safetyeventdetection"
+      ],
+      "description": "Changes to SafetyADAS databases should be cleared with SafetyEventDetection"
+    },
+    {
+      "filePattern": "safetycameraplatform.go",
+      "owners": [
+        "samsara-dev/safetycameraplatform"
+      ],
+      "description": "Changes to SafetyCameraPlatform databases should be cleared with SafetyCameraPlatform"
+    },
+    {
+      "filePattern": "safetyeventingestionandfiltering.go",
+      "owners": [
+        "samsara-dev/safetygeodetection"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/safetydetectionprecision"
+      ],
+      "description": "Changes to SafetyEventIngestionAndFiltering databases should be cleared with Safety Geo Detection or Safety Detection Precision teams"
+    },
+    {
+      "filePattern": "safetyeventreviewdev.go",
+      "owners": [
+        "samsara-dev/safetydetectionprecision"
+      ],
+      "description": "Changes to SafetyEventReviewDev databases should be cleared with Safety Detection Precision team"
+    },
+    {
+      "filePattern": "safetyplatform.go",
+      "owners": [
+        "samsara-dev/safetyplatform"
+      ],
+      "description": "Changes to SafetyPlatform databases should be cleared with SafetyPlatform"
+    },
+    {
+      "filePattern": "safetyscoringinsights.go",
+      "owners": [
+        "samsara-dev/safetyscoringinsights"
+      ],
+      "description": "Changes to SafetyScoringInsights databases should be cleared with SafetyScoringInsights"
+    },
+    {
+      "filePattern": "salesdataanalytics.go",
+      "owners": [
+        "samsara-dev/salesdataanalytics"
+      ],
+      "description": "Changes to SalesDataAnalytics databases should be cleared with SalesDataAnalytics"
+    },
+    {
+      "filePattern": "solutionsintegrationservices.go",
+      "owners": [
+        "samsara-dev/solutionsintegrationservices"
+      ],
+      "description": "Changes to SolutionsIntegrationServices databases should be cleared with SolutionsIntegrationServices"
+    },
+    {
+      "filePattern": "sre.go",
+      "owners": [
+        "samsara-dev/sre"
+      ],
+      "description": "Changes to SRE databases should be cleared with SRE"
+    },
+    {
+      "filePattern": "supplychain.go",
+      "owners": [
+        "samsara-dev/supplychain"
+      ],
+      "description": "Changes to SupplyChain databases should be cleared with SupplyChain"
+    },
+    {
+      "filePattern": "support.go",
+      "owners": [
+        "samsara-dev/support"
+      ],
+      "description": "Changes to Support databases should be cleared with Support"
+    },
+    {
+      "filePattern": "supportops.go",
+      "owners": [
+        "samsara-dev/supportops"
+      ],
+      "description": "Changes to SupportOps databases should be cleared with SupportOps"
+    },
+    {
+      "filePattern": "sustainability.go",
+      "owners": [
+        "samsara-dev/sustainability"
+      ],
+      "description": "Changes to Sustainability databases should be cleared with Sustainability"
+    },
+    {
+      "filePattern": "tpm.go",
+      "owners": [
+        "samsara-dev/tpm"
+      ],
+      "description": "Changes to TPM databases should be cleared with TPM"
+    },
+    {
+      "filePattern": "telematicsdata.go",
+      "owners": [
+        "samsara-dev/telematics-data"
+      ],
+      "description": "Changes to TelematicsData databases should be cleared with TelematicsData"
+    },
+    {
+      "filePattern": "testautomation.go",
+      "owners": [
+        "samsara-dev/testautomation"
+      ],
+      "description": "Changes to Test Automation databases should be cleared with Test Automation"
+    },
+    {
+      "filePattern": "maps.go",
+      "owners": [
+        "samsara-dev/maps"
+      ],
+      "description": "Changes to Test Automation databases should be cleared with the Maps team"
+    },
+    {
+      "filePattern": "fleetsec.go",
+      "owners": [
+        "samsara-dev/fleet-sec"
+      ],
+      "description": "Changes to FleetSec databases should be cleared with Fleet Security team. Contact us on #ask-fleet-sec."
+    }
+  ]
+}

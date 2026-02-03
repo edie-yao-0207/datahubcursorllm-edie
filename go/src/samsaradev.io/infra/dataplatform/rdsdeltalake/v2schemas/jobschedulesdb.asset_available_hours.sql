@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`weekly_availability_ms` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`partition` STRING

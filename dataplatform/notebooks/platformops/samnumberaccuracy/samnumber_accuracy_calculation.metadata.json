@@ -1,0 +1,17 @@
+{
+  "owner": "PlatformOperations",
+  "email_notifications": ["platops-notebook-aler-aaaad6yplk2cd33xw6iwfq3kxi@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "samnumber-accuracy-calc",
+      "cron": "0 20 0 * * ? *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "driver_node_type_id": "rd-fleet.2xlarge",
+      "timeout_seconds": 10800,
+      "spark_version": "default",
+      "unity_catalog_setting": {
+        "data_security_mode": "USER_ISOLATION"
+      }
+    }
+  ]
+}

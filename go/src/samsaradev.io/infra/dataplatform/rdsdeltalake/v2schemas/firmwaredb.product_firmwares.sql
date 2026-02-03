@@ -1,0 +1,13 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`id` BIGINT,
+`product_id` BIGINT,
+`name` STRING,
+`version_major` SHORT,
+`version_minor` SHORT,
+`build` STRING,
+`description` STRING,
+`approval_state` SHORT,
+`partition` STRING

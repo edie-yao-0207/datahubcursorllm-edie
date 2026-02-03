@@ -1,0 +1,72 @@
+{
+  "name": "engine_state_report.engine_state_fuel_intervals",
+  "owner": "Sustainability",
+  "description": "Combines engine states with fuel intervals.",
+  "dependencies": [
+    {
+      "dbname": "engine_state_report",
+      "tablename": "fuel_intervals",
+      "type": "table"
+    },
+    {
+      "dbname": "engine_state",
+      "tablename": "intervals",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-10-01",
+  "output": {
+    "dbname": "engine_state_report",
+    "tablename": "engine_state_fuel_intervals",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "object_id", "start_ms"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "object_id",
+        "type": "long"
+      },
+      {
+        "name": "start_ms",
+        "type": "long"
+      },
+      {
+        "name": "end_ms",
+        "type": "long"
+      },
+      {
+        "name": "fuel_consumed_ml",
+        "type": "double"
+      },
+      {
+        "name": "engine_state",
+        "type": "string",
+        "nullable": false
+      },
+      {
+        "name": "original_engine_state_interval_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds of the original engine state interval from which this interval is derived."
+        }
+      },
+      {
+        "name": "original_fuel_interval_duration_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "The duration in milliseconds of the original fuel interval from which this interval is derived."
+        }
+      }
+    ]
+  }
+}

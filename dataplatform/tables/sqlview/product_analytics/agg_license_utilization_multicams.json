@@ -1,0 +1,67 @@
+{
+  "view": "agg_license_utilization_multicams",
+  "owner": "DataEngineering",
+  "description": "This view aggregates multicam license utilization metrics by SAM number, including active licenses, installed devices in the last 365 days, and active multicams in the last 30 days.",
+  "database": "product_analytics",
+  "regions": ["us-west-2"],
+  "schema": [
+    {
+      "name": "sam_number",
+      "type": "string",
+      "description": "SAM number is a unique ID that ties customer accounts together in Netsuite, Salesforce, and Samsara cloud dashboard"
+    },
+    {
+      "name": "active_licenses",
+      "type": "long",
+      "description": "Total count of active LIC-MC-AIM4 licenses for the account"
+    },
+    {
+      "name": "installed_devices",
+      "type": "long",
+      "description": "Count of distinct multicam devices (HW-MC-AIM4) installed and active within the last 365 days"
+    },
+    {
+      "name": "active_multicams",
+      "type": "long",
+      "description": "Count of active multicam (AIM4) devices with recording data in the last 30 days"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "edw.silver",
+      "tablename": "fct_license_orders",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datamodel_core",
+      "tablename": "dim_product_variants",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datamodel_core",
+      "tablename": "dim_devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datamodel_core",
+      "tablename": "dim_organizations",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datamodel_core",
+      "tablename": "lifetime_device_online",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "dataprep_firmware",
+      "tablename": "cm_final_uptime",
+      "type": "table"
+    }
+  ]
+}

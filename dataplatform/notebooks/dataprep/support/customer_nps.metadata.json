@@ -1,0 +1,96 @@
+{
+  "owner": "DataEngineering",
+  "email_notifications": ["kalyan.vejalla@samsara.com", "steven.matson@samsara.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 0/3 * * ?",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ],
+  "output": {
+    "dbname": "dataprep",
+    "tablename": "customer_nps",
+    "type": "table",
+    "schema": [
+      {
+        "name": "timestamp",
+        "type": "timestamp"
+      },
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "name": "delighted_id",
+        "type": "long"
+      },
+      {
+        "name": "raw_score",
+        "type": "long"
+      },
+      {
+        "name": "nps_score",
+        "type": "long"
+      },
+      {
+        "name": "comment",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "sam_number",
+        "type": "string"
+      },
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "hos_user",
+        "type": "string"
+      },
+      {
+        "name": "delighted_properties",
+        "type": "string"
+      },
+      {
+        "name": "delighted_role",
+        "type": "string"
+      },
+      {
+        "name": "locale",
+        "type": "string"
+      },
+      {
+        "name": "delighted_account_id",
+        "type": "string"
+      },
+      {
+        "name": "delighted_contact_id",
+        "type": "string"
+      },
+      {
+        "name": "theme",
+        "type": "string"
+      },
+      {
+        "name": "bucket",
+        "type": "string"
+      },
+      {
+        "name": "subcategory",
+        "type": "string"
+      },
+      {
+        "name": "pg",
+        "type": "string"
+      }
+    ],
+    "primary_key": ["org_id"]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "table": "passenger_standard_emitter_signals",
+  "owner": "FirmwareVdp",
+  "description": "Passenger standard emitter signals from firmware passenger/standard_emitters.go",
+  "database": "definitions",
+  "datatype": "csv",
+  "csv": {
+    "header": true
+  },
+  "schema": [
+    {
+      "name": "data_identifier",
+      "type": "bigint"
+    },
+    {
+      "name": "bit_start",
+      "type": "bigint"
+    },
+    {
+      "name": "bit_length",
+      "type": "bigint"
+    },
+    {
+      "name": "endian",
+      "type": "bigint"
+    },
+    {
+      "name": "scale",
+      "type": "double"
+    },
+    {
+      "name": "sign",
+      "type": "bigint"
+    },
+    {
+      "name": "offset",
+      "type": "double"
+    },
+    {
+      "name": "minimum",
+      "type": "double"
+    },
+    {
+      "name": "maximum",
+      "type": "double"
+    },
+    {
+      "name": "internal_scaling",
+      "type": "double"
+    },
+    {
+      "name": "obd_value",
+      "type": "bigint"
+    },
+    {
+      "name": "comment",
+      "type": "string"
+    }
+  ]
+}

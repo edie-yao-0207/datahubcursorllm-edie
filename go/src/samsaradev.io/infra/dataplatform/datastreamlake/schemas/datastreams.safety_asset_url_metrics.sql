@@ -1,0 +1,12 @@
+`org_id` BIGINT,
+`user_id` BIGINT,
+`device_id` BIGINT,
+`filename` STRING,
+`s3_key` STRING,
+`asset_ms` BIGINT,
+`asset_type` STRING,
+`source_url` STRING,
+`url_type` BIGINT,
+`is_empty` BOOLEAN,
+`is_blurred` BOOLEAN,
+`date` DATE

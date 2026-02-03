@@ -1,0 +1,10 @@
+`timestamp` TIMESTAMP,
+`org_id` BIGINT,
+`workflow_uuid` STRING,
+`workflow_occurred_at_time` TIMESTAMP,
+`alert_id` BIGINT,
+`alert_occurred_at_time` TIMESTAMP,
+`object_type` STRING,
+`object_type` STRING,
+`trigger_type` STRING,
+`date` DATE

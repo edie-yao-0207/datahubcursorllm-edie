@@ -1,0 +1,19 @@
+{
+  "table": "web_event_route_map",
+  "owner": "DataEngineering",
+  "description": "This table contains mappings of mixpanel web routes to named features to support pricing and packaging.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "routename",
+      "type": "string",
+      "description": "Routename of mixpanel event."
+    },
+    {
+      "name": "feature",
+      "type": "string",
+      "description": "Name of pricing and packaging feature."
+    }
+  ]
+}

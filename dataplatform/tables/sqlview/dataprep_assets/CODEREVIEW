@@ -1,0 +1,6 @@
+{
+  "owners": [
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to Dataprep_Assets SQL views should be cleared with Data Engineering."
+}

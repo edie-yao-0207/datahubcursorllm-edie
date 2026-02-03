@@ -1,0 +1,13 @@
+{
+  "name": "vehicle_diagnostics_funnel_us",
+  "owner": "DataEngineering",
+  "assets": ["us-west-2:dataengineering.vehicle_diagnostics_funnel"],
+  "schedules": [
+    {
+      "name": "monthly",
+      "cron": "0 10 1 * *",
+      "backfill_window": 1,
+      "backfill_batch_size": 1
+    }
+  ]
+}

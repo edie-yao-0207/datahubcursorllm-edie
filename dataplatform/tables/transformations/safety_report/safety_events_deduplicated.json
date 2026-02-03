@@ -1,0 +1,126 @@
+{
+  "name": "safety_report.safety_events_deduplicated",
+  "owner": "SafetyScoringInsights",
+  "nonproduction": false,
+  "description": "Deduplicates safety events to ensure we track one of each event irregardless of the source.",
+  "dependencies": [
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "safety_events_v1",
+      "type": "table"
+    },
+    {
+      "external": false,
+      "dbname": "safety_report",
+      "tablename": "triage_safety_events",
+      "type": "table"
+    }
+  ],
+  "backfill_start_date": "2018-01-01",
+  "parameters": ["start_date", "end_date"],
+  "unsharded_backfills": true,
+  "output": {
+    "dbname": "safety_report",
+    "tablename": "safety_events_deduplicated",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["org_id", "device_id", "event_ms", "event_id", "trip_version"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "device_id",
+        "nullable": true,
+        "type": "long",
+        "metadata": {
+          "comment": "$device_id_default_description"
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$driver_id_default_description"
+        }
+      },
+      {
+        "name": "event_ms",
+        "type": "long"
+      },
+      {
+        "name": "event_duration",
+        "type": "long"
+      },
+      {
+        "name": "trip_start_ms",
+        "type": "long"
+      },
+      {
+        "name": "trip_end_ms",
+        "type": "long"
+      },
+      {
+        "name": "trip_version",
+        "type": "integer"
+      },
+      {
+        "name": "additional_labels",
+        "type": {
+          "containsNull": true,
+          "type": "array",
+          "elementType": {
+            "type": "struct",
+            "fields": [
+              { "name": "label_type", "type": "integer", "nullable": true, "metadata": {} },
+              { "name": "label_source", "type": "integer", "nullable": true, "metadata": {} },
+              { "name": "last_added_ms", "type": "long", "nullable": true, "metadata": {} },
+              { "name": "user_id", "type": "long", "nullable": true, "metadata": {} }
+            ]
+          }
+        }
+      },
+      {
+        "name": "in_dismissed_states",
+        "type": "byte"
+      },
+      {
+        "name": "in_recognition_states",
+        "type": "byte"
+      },
+      {
+        "name": "in_coaching_states",
+        "type": "byte"
+      },
+      {
+        "name": "in_triage_states",
+        "type": "byte"
+      },
+      {
+        "name": "release_stage",
+        "type": "short"
+      },
+      {
+        "name": "event_id",
+        "type": "long"
+      },
+      {
+        "name": "triage_uuid",
+        "type": "string"
+      },
+      {
+        "name": "date",
+        "type": "date"
+      }
+    ]
+  },
+  "expectation": {
+    "batch_mode": "FAIL_ALL"
+  }
+}

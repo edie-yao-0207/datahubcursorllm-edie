@@ -1,0 +1,91 @@
+{
+  "view": "elite_org_gql_query_loads",
+  "owner": "OPX",
+  "description": "All GraphQL query executions performed while loading routes by Elite Orgs.",
+  "database": "perf_infra",
+  "schema": [
+    {
+      "name": "date",
+      "type": "date",
+      "description": "The date the query was executed on."
+    },
+    {
+      "name": "timestamp",
+      "type": "timestamp",
+      "description": "The timestamp the query was executed on."
+    },
+    {
+      "name": "org_id",
+      "type": "long",
+      "description": "The org for this route, joinable with clouddb.organizations."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The name of the org that this route was loaded for."
+    },
+    {
+      "name": "user_id",
+      "type": "long",
+      "description": "The user id of the user who loaded the page."
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "description": "The email of the user who loaded the page."
+    },
+    {
+      "name": "rl_duration_ms",
+      "type": "long",
+      "description": "The duration, in milliseconds, that the route took to load."
+    },
+    {
+      "name": "raw_url",
+      "type": "string",
+      "description": "Full URL of the page visit including query parameters."
+    },
+    {
+      "name": "resource",
+      "type": "string",
+      "description": "Stripped down name of the route minus org and query params."
+    },
+    {
+      "name": "owner",
+      "type": "string",
+      "description": "Team that owns and maintains this route."
+    },
+    {
+      "name": "slo_grouping",
+      "type": "string",
+      "description": "The SLO grouping that this page rolls up to."
+    },
+    {
+      "name": "query_name",
+      "type": "string",
+      "description": "The name of the GraphQL query, as defined in the TS client."
+    },
+    {
+      "name": "protocol",
+      "type": "string",
+      "description": "The protocol used to execute the GraphQL query, typically one of {http/1.1, h2}"
+    },
+    {
+      "name": "gql_duration_ms",
+      "type": "long",
+      "description": "The duration, in milliseconds, of how long the GQL query took."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "perf_infra",
+      "tablename": "elite_org_route_loads",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "datastreams",
+      "tablename": "gql_query_load",
+      "type": "table"
+    }
+  ]
+}

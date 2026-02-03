@@ -1,0 +1,9 @@
+`overdue_count` BIGINT,
+`zero_to_one_hours_left_count` BIGINT,
+`one_to_three_hours_left_count` BIGINT,
+`three_to_eight_hours_left_count` BIGINT,
+`eight_to_twelve_hours_left_count` BIGINT,
+`more_than_twelve_hours_left_count` BIGINT,
+`crash_events_at_risk_count` BIGINT,
+`timestamp_ms` BIGINT,
+`date` DATE

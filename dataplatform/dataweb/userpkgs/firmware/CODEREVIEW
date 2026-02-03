@@ -1,0 +1,11 @@
+{
+  "owners": [
+    "samsara-dev/firmware-vdp"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-tools",
+    "samsara-dev/data-engineering"
+  ],
+  "description": "Changes to dataweb/userpkgs/firmware directory must be approved by DataTools, DataEngineering, or FirmwareVDP teams.",
+  "noParent": true
+}

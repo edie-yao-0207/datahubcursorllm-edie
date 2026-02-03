@@ -1,0 +1,15 @@
+{
+  "owner": "Firmware",
+  "email_notifications": [],
+  "jobs": [
+    {
+      "name": "rollout_stage_rebalance_for_default_program",
+      "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+      "parameters": {
+        "product_name": "e.g. VG54-NA, VG34-EU",
+        "reassign_all_devices": "True/False, typically False"
+      },
+      "spark_version": "default"
+    }
+  ]
+}

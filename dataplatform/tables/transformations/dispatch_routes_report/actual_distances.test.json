@@ -1,0 +1,140 @@
+{
+  "test_cases": [
+    {
+      "label": "multiple routes and multiple vehicles per route",
+      "parameters": {
+        "start_date": " '2020-08-15' ",
+        "end_date": " '2020-08-16' "
+      },
+      "input_data": {
+        "kinesisstats.location": [
+          {
+            "device_id": 111111111111111,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498200000,
+            "value": {
+              "latitude": 47.4489,
+              "longitude": -122.3094
+            }
+          },
+          {
+            "device_id": 111111111111111,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498260000,
+            "value": {
+              "latitude": 37.6160933,
+              "longitude": -122.3924223
+            }
+          },
+          {
+            "device_id": 111111111111111,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498320000,
+            "value": {
+              "latitude": 37.60363,
+              "longitude": -122.3972
+            }
+          },
+          {
+            "device_id": 111111111111112,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498380000,
+            "value": {
+              "latitude": 37.33508,
+              "longitude": -121.89286
+            }
+          },
+          {
+            "device_id": 111111111111112,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498440000,
+            "value": {
+              "latitude": 34.046638,
+              "longitude": -118.25206
+            }
+          },
+          {
+            "device_id": 111111111111112,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498500000,
+            "value": {
+              "latitude": 32.713631,
+              "longitude": -117.155602
+            }
+          },
+          {
+            "device_id": 111111111111112,
+            "date": "2020-08-15",
+            "org_id": 1,
+            "time": 1597498560000,
+            "value": {
+              "latitude": 30.34816,
+              "longitude": -81.643349
+            }
+          }
+        ],
+        "dispatch_routes_report.route_vehicle_assignments": [
+          {
+            "route_id": 1234,
+            "org_id": 1,
+            "vehicle_id": 111111111111111,
+            "scheduled_start_ms": 1597492800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "assignment_start_ms": 1597498200000,
+            "assignment_end_ms": 1597498320000
+          },
+          {
+            "route_id": 1234,
+            "org_id": 1,
+            "vehicle_id": 111111111111112,
+            "scheduled_start_ms": 1597492800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "assignment_start_ms": 1597498380000,
+            "assignment_end_ms": 1597498440000
+          },
+          {
+            "route_id": 1235,
+            "org_id": 1,
+            "vehicle_id": 111111111111112,
+            "scheduled_start_ms": 1597492800000,
+            "route_scheduled_or_updated_date": "2020-08-15",
+            "assignment_start_ms": 1597498500000,
+            "assignment_end_ms": 1597498560000
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "route_id": 1234,
+          "org_id": 1,
+          "vehicle_id": 111111111111111,
+          "actual_meters": 1095171.2384809416,
+          "scheduled_start_ms": 1597492800000,
+          "route_scheduled_or_updated_date": "2020-08-15"
+        },
+        {
+          "route_id": 1234,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "actual_meters": 491812.22778583766,
+          "scheduled_start_ms": 1597492800000,
+          "route_scheduled_or_updated_date": "2020-08-15"
+        },
+        {
+          "route_id": 1235,
+          "org_id": 1,
+          "vehicle_id": 111111111111112,
+          "actual_meters": 3361493.0010386487,
+          "scheduled_start_ms": 1597492800000,
+          "route_scheduled_or_updated_date": "2020-08-15"
+        }
+      ]
+    }
+  ]
+}

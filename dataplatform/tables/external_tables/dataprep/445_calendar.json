@@ -1,0 +1,43 @@
+{
+  "table": "445_calendar",
+  "owner": "DataEngineering",
+  "description": "This table contains the 4-4-5 calendar with all dates until 2031 and associated fiscal year and quarter information",
+  "database": "dataprep",
+  "schema": [
+    {
+      "name": "date",
+      "type": "date",
+      "metadata": {
+        "comment": "The field which partitions the table, in 'YYYY-mm-dd' format."
+      }
+    },
+    {
+      "name": "eom",
+      "type": "date",
+      "metadata": {
+        "comment": "End of month date"
+      }
+    },
+    {
+      "name": "fiscal_year",
+      "type": "string",
+      "metadata": {
+        "comment": "Year which date belongs to"
+      }
+    },
+    {
+      "name": "quarter",
+      "type": "string",
+      "metadata": {
+        "comment": "Quarter which date belongs to"
+      }
+    },
+    {
+      "name": "eoq",
+      "type": "date",
+      "metadata": {
+        "comment": "Date at end of quarter in question"
+      }
+    }
+  ]
+}

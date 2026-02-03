@@ -1,0 +1,9 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`behavior_type` BIGINT,
+`behavior_value` BIGINT,
+`course_uuid` STRING,
+`partition` STRING

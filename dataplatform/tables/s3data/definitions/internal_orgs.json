@@ -1,0 +1,14 @@
+{
+  "table": "internal_orgs",
+  "owner": "DataPlatform",
+  "description": "Internal org ids that are ignored in all reports and elsewhere",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "org_id",
+      "type": "bigint",
+      "description": "$org_id_default_description"
+    }
+  ]
+}

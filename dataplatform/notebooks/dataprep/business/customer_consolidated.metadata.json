@@ -1,0 +1,11 @@
+{
+  "owner": "DataEngineering",
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 0 ? * * *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "spark_version": "default"
+    }
+  ]
+}

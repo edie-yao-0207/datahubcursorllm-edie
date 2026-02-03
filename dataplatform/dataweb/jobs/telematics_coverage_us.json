@@ -1,0 +1,40 @@
+{
+  "name": "telematics_coverage_us",
+  "owner": "FirmwareVDP",
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 20 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": -1
+    }
+  ],
+  "assets": [
+    "us-west-2:product_analytics_staging.fct_telematics_coverage_dimensions",
+    "us-west-2:product_analytics_staging.fct_telematics_coverage_rollup",
+    "us-west-2:product_analytics_staging.fct_telematics_ff_impacted_devices",
+    "us-west-2:product_analytics_staging.fct_telematics_issue_classifier",
+    "us-west-2:product_analytics_staging.fct_telematics_issue_classifier_smoothed",
+    "us-west-2:product_analytics_staging.agg_telematics_actual_coverage",
+    "us-west-2:product_analytics_staging.agg_telematics_issue_ranking",
+    "us-west-2:product_analytics_staging.agg_telematics_mmyef_promotion_gaps",
+    "us-west-2:product_analytics_staging.agg_telematics_population_issues",
+    "us-west-2:product_analytics_staging.agg_telematics_populations",
+    "us-west-2:product_analytics_staging.agg_telematics_preferred_install",
+    "us-west-2:product_analytics_staging.agg_telematics_actual_coverage_normalized",
+    "us-west-2:product_analytics_staging.agg_telematics_coverage_summary",
+    "us-west-2:product_analytics_staging.fct_telematics_coverage_summary",
+    "us-west-2:product_analytics_staging.fct_osddiagnosticmessagesseen_classified",
+    "us-west-2:product_analytics_staging.fct_vehicle_architecture",
+    "us-west-2:product_analytics_staging.agg_telematics_priorities",
+    "us-west-2:product_analytics_staging.fct_telematics_vin_gaps",
+    "us-west-2:product_analytics_staging.fct_telematics_vin_issues",
+    "us-west-2:product_analytics_staging.fct_telematics_coverage_rollup_full",
+    "us-west-2:product_analytics_staging.dim_telematics_coverage_full",
+    "us-west-2:product_analytics_staging.fct_telematics_coverage_qoq",
+    "us-west-2:product_analytics_staging.agg_telematics_coverage_qoq",
+    "us-west-2:product_analytics_staging.agg_telematics_coverage_qoq_normalized",
+    "us-west-2:product_analytics_staging.fct_telematics_install_recommendations",
+    "us-west-2:product_analytics_staging.agg_telematics_install_recommendations"
+  ]
+}

@@ -1,0 +1,4 @@
+acryl-datahub==0.15.0.1
+acryl-datahub[sql-queries]==0.15.0.1
+acryl-datahub[unity-catalog]==0.15.0.1
+acryl-datahub[tableau]==0.15.0.1

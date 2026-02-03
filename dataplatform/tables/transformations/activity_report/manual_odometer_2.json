@@ -1,0 +1,56 @@
+{
+  "name": "activity_report.manual_odometer_2",
+  "owner": "AssetFoundations",
+  "description": "Selects the time and last osdderivedgpsdistance value for any devices that have recently updated manual odometers.",
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "productsdb",
+      "tablename": "devices",
+      "type": "table"
+    },
+    {
+      "external": true,
+      "dbname": "kinesisstats",
+      "tablename": "osdderivedgpsdistance",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2016-10-10",
+  "output": {
+    "dbname": "activity_report",
+    "tablename": "manual_odometer_2",
+    "type": "table",
+    "partition": ["date"],
+    "primary_key": ["org_id", "device_id", "date"],
+    "schema": [
+      {
+        "name": "org_id",
+        "type": "long"
+      },
+      {
+        "name": "device_id",
+        "type": "long"
+      },
+      {
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "name": "manual_odometer_meters",
+        "type": "long"
+      },
+      {
+        "name": "manual_odometer_updated_at",
+        "type": "timestamp"
+      },
+      {
+        "name": "gps_distance_at_manual_update",
+        "nullable": false,
+        "type": "long"
+      }
+    ],
+    "write_mode": "merge"
+  }
+}

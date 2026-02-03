@@ -1,0 +1,131 @@
+{
+  "test_cases": [
+    {
+      "label": "should find closest mobile log to trip start",
+      "parameters": {
+        "start_date": "'2020-01-02'",
+        "end_date": "'2020-01-03'"
+      },
+      "input_data": {
+        "trips2db_shards.trips": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "driver_id": 42,
+            "start_ms": 12345000,
+            "date": "2020-01-02",
+            "version": 101
+          }
+        ],
+        "datastreams.mobile_logs": [
+          {
+            "date": "2020-01-01",
+            "json_params": {
+              "deviceId": 1,
+              "driverDd": 42,
+              "orgId": 1
+            },
+            "event_type": "DRIVER_TELEMATICS_LOCATION_TRACKING_STARTED",
+            "platform": "ios",
+            "os_version": "88",
+            "app_info": {
+              "bundleVersion": "2220.100"
+            },
+            "timestamp": 12343
+          },
+          {
+            "date": "2020-01-01",
+            "json_params": {
+              "deviceId": 1,
+              "driverId": 42,
+              "orgId": 1
+            },
+            "event_type": "DRIVER_TELEMATICS_LOCATION_TRACKING_STARTED",
+            "platform": "android",
+            "os_version": "88",
+            "app_info": {
+              "bundleVersion": "2220.101"
+            },
+            "timestamp": 12344
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-02",
+          "trip_start_ms": 12345000,
+          "org_id": 1,
+          "device_id": 1,
+          "driver_id": 42,
+          "mobile_platform": "android",
+          "mobile_os_version": "88",
+          "mobile_bundle_version": "2220.101",
+          "mobile_log_timestamp": 12344
+        }
+      ]
+    },
+    {
+      "label": "should find closest mobile log to trip start even without driver id in trip",
+      "parameters": {
+        "start_date": "'2020-01-02'",
+        "end_date": "'2020-01-03'"
+      },
+      "input_data": {
+        "trips2db_shards.trips": [
+          {
+            "org_id": 1,
+            "device_id": 1,
+            "start_ms": 12345000,
+            "date": "2020-01-02",
+            "version": 101
+          }
+        ],
+        "datastreams.mobile_logs": [
+          {
+            "date": "2020-01-01",
+            "json_params": {
+              "deviceId": 1,
+              "driverDd": 42,
+              "orgId": 1
+            },
+            "event_type": "DRIVER_TELEMATICS_LOCATION_TRACKING_STARTED",
+            "platform": "ios",
+            "os_version": "88",
+            "app_info": {
+              "bundleVersion": "2220.100"
+            },
+            "timestamp": 12343
+          },
+          {
+            "date": "2020-01-01",
+            "json_params": {
+              "deviceId": 1,
+              "driverId": 42,
+              "orgId": 1
+            },
+            "event_type": "DRIVER_TELEMATICS_LOCATION_TRACKING_STARTED",
+            "platform": "android",
+            "os_version": "88",
+            "app_info": {
+              "bundleVersion": "2220.101"
+            },
+            "timestamp": 12344
+          }
+        ]
+      },
+      "expected_data": [
+        {
+          "date": "2020-01-02",
+          "trip_start_ms": 12345000,
+          "org_id": 1,
+          "device_id": 1,
+          "driver_id": null,
+          "mobile_platform": "android",
+          "mobile_os_version": "88",
+          "mobile_bundle_version": "2220.101",
+          "mobile_log_timestamp": 12344
+        }
+      ]
+    }
+  ]
+}

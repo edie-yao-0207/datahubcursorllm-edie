@@ -1,0 +1,10 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`edit_proposal_id` STRING,
+`edit_record_id` STRING,
+`relationship` BYTE,
+`entity_type` BYTE,
+`partition` STRING

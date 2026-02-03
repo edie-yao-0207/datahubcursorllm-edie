@@ -1,0 +1,13 @@
+{
+  "name": "population_stats_ca",
+  "owner": "FirmwareVDP",
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "00 19 * * *",
+      "backfill_window": 1,
+      "backfill_batch_size": -1
+    }
+  ],
+  "assets": ["ca-central-1:product_analytics.agg_population_metrics"]
+}

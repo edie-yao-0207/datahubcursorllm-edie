@@ -1,0 +1,11 @@
+const config: any = {
+    mixpanel: {
+        token: '81f04dbeb4db7ff80420f5b348506aa7',
+    },
+    logging: true,
+    datahub: {
+        enabled: true,
+    },
+};
+
+export default config;

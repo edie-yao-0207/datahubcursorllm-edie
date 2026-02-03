@@ -1,0 +1,23 @@
+{
+  "owner": "PlatformOperations",
+  "email_notifications": ["platops-notebook-aler-aaaad6yplk2cd33xw6iwfq3kxi@samsara.org.slack.com"],
+  "jobs": [
+    {
+      "name": "uat-netsuite-invoice-csv-generation",
+      "cron": "0 */10 * * * ?",
+      "parameters": {
+        "NOTEBOOK_NAME": "uat_invoice",
+        "NETSUITE_CHILD_INVOICES_VIEW": "netsuite_data.transformed_uat_netsuite_child_invoices",
+        "NETSUITE_CONSOLIDATED_INVOICES_VIEW": "netsuite_data.transformed_uat_netsuite_consolidated_invoices",
+        "CONSOLIDATED_INVOICES_MAP_VIEW": "netsuite_data.transformed_uat_consolidated_invoices_map",
+        "LATEST_ROW_SYNCED_KEY": "uat_latest_row_synced.timestamp",
+        "LATEST_SUCCESSFULLY_UPDATE_KEY": "uat_last_updated.txt",
+        "CONSOLIDATED_INVOICE_MAP_CSV_KEY": "uat_ci_map.csv"
+      },
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 18000,
+      "driver_node_type_id": "rd-fleet.2xlarge",
+      "spark_version": "default"
+    }
+  ]
+}

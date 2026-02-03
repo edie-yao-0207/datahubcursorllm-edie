@@ -1,0 +1,84 @@
+{
+  "table": "sql_query_history",
+  "owner": "DataPlatform",
+  "description": "SQL query history exported from https://docs.databricks.com/sql/api/query-history.html by databricksqueryhistorylogger",
+  "database": "billing",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-databricks-sql-query-history/"
+  },
+  "datatype": "json",
+  "schema": [
+    {
+      "name": "query_id",
+      "type": "string",
+      "description": "Unique uuid string of query."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "The status of the query, one of (CANCELLED, FAILED, FINISHED, RUNNING)."
+    },
+    {
+      "name": "query_text",
+      "type": "string",
+      "description": "Full SQL text of the query."
+    },
+    {
+      "name": "query_start_time_ms",
+      "type": "bigint",
+      "description": "Start time of the query in epoch milliseconds."
+    },
+    {
+      "name": "execution_end_time_ms",
+      "type": "bigint",
+      "description": "Execution end time of the query in epoch milliseconds. Excludes internal queueing, data upload, and data download time."
+    },
+    {
+      "name": "query_end_time_ms",
+      "type": "bigint",
+      "description": "End time of the query in epoch milliseconds."
+    },
+    {
+      "name": "user_id",
+      "type": "bigint",
+      "description": "Databricks user id as an integer."
+    },
+    {
+      "name": "user_name",
+      "type": "string",
+      "description": "Email address of the databricks user."
+    },
+    {
+      "name": "spark_ui_url",
+      "type": "string",
+      "description": "URL of Spark UI session if used.."
+    },
+    {
+      "name": "endpoint_id",
+      "type": "string",
+      "description": "String uuid of Databricks API endpoint."
+    },
+    {
+      "name": "error_message",
+      "type": "string",
+      "description": "String error message of query for FAILED and CANCELLED query statuses."
+    },
+    {
+      "name": "rows_produced",
+      "type": "integer",
+      "description": "Number of rows produced from the query if the query is in FINISHED status."
+    }
+  ],
+  "partitions": [
+    {
+      "name": "workspaceId",
+      "type": "string",
+      "description": "Partition field of the Databricks workspace ID that this usage comes from."
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "description": "Partition field of the date (YYYY-MM-DD) of the query in UTC time."
+    }
+  ]
+}

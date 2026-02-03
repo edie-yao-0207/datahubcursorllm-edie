@@ -1,0 +1,61 @@
+{
+  "name": "Low Bridge Strike Warning Event Count Per Trip Mile",
+  "description": "Line chart showing the count of low bridge strike warning events per trip mile over time",
+  "version": 2,
+  "globalSeriesType": "line",
+  "sortX": true,
+  "sortY": true,
+  "yAxis": [
+    {
+      "type": "linear",
+      "opposite": false,
+      "title": {
+        "text": "Count Per Trip Mile"
+      },
+      "min": 0
+    }
+  ],
+  "xAxis": {
+    "type": "datetime",
+    "labels": {
+      "enabled": true
+    },
+    "title": {
+      "text": "Date"
+    }
+  },
+  "seriesOptions": {},
+  "columnMapping": {
+    "date": "x",
+    "count_per_trip_mile": {
+      "type": "y",
+      "yAxis": 0
+    }
+  },
+  "showDataLabels": false,
+  "error_y": {
+    "visible": false,
+    "type": "data"
+  },
+  "series": {
+    "stacking": null,
+    "error_y": {
+      "visible": false
+    }
+  },
+  "valuesOptions": {},
+  "direction": {
+    "type": "counterclockwise"
+  },
+  "sizemode": "diameter",
+  "coefficient": 1,
+  "numberFormat": "0,0[.]00000",
+  "percentFormat": "0[.]00%",
+  "textFormat": "",
+  "missingValuesAsZero": true,
+  "useAggregationsUi": true,
+  "swappedAxes": false,
+  "dateTimeFormat": "DD/MM/YY HH:mm",
+  "showTooltips": true,
+  "isAggregationOn": false
+}

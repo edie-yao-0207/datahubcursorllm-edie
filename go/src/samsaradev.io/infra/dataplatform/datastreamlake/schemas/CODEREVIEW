@@ -1,0 +1,42 @@
+{
+  "owners": [
+    "samsara-dev/data-platform"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/dev"
+  ],
+  "perFile": [
+    {
+      "filePattern": "datastreams.mobile_logs.sql",
+      "owners": [
+        "samsara-dev/dev"
+      ],
+      "description": "Because datastreams.mobile_logs is upstream of the R&D Data Model, changes to the datastreams schema should be reviewed by the Data Engineering team. Data Engineers see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo",
+      "prComment": "This PR contains a schema change to datastreams.mobile_logs, which may affect the R&D Data Model. Tagging Data Engineers for visibility (they are also code owners): @samsara-dev/data-engineering. Data Engineers, see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo"
+    },
+    {
+      "filePattern": "datastreams.api_logs.sql",
+      "owners": [
+        "samsara-dev/dev"
+      ],
+      "description": "Because datastreams.api_logs is upstream of the R&D Data Model, changes to the datastreams schema should be reviewed by the Data Engineering team. Data Engineers see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo",
+      "prComment": "This PR contains a schema change to datastreams.api_logs, which may affect the R&D Data Model. Tagging Data Engineers for visibility (they are also code owners): @samsara-dev/data-engineering. Data Engineers, see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo"
+    },
+    {
+      "filePattern": "datastreams.mobile_nav_routing_events.sql",
+      "owners": [
+        "samsara-dev/dev"
+      ],
+      "description": "Because datastreams.mobile_nav_routing_events is upstream of the R&D Data Model, changes to the datastreams schema should be reviewed by the Data Engineering team. Data Engineers see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo",
+      "prComment": "This PR contains a schema change to datastreams.mobile_nav_routing_events, which may affect the R&D Data Model. Tagging Data Engineers for visibility (they are also code owners): @samsara-dev/data-engineering. Data Engineers, see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo"
+    },
+    {
+      "filePattern": "datastreams.dynamic_workflow_runs.sql",
+      "owners": [
+        "samsara-dev/dev"
+      ],
+      "description": "Because datastreams.dynamic_workflow_runs is upstream of the R&D Data Model, changes to the datastreams schema should be reviewed by the Data Engineering team. Data Engineers see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo",
+      "prComment": "This PR contains a schema change to datastreams.dynamic_workflow_runs, which may affect the R&D Data Model. Tagging Data Engineers for visibility (they are also code owners): @samsara-dev/data-engineering. Data Engineers, see this document for more details: https://samsaradev.atlassian.net/l/cp/RZd2o0Vo"
+    }
+  ]
+}

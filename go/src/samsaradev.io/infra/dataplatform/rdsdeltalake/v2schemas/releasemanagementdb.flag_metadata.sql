@@ -1,0 +1,11 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`flag_key` STRING,
+`created_by` BIGINT,
+`org_id` BIGINT,
+`created_at` TIMESTAMP,
+`updated_at` TIMESTAMP,
+`maintainer` BIGINT,
+`partition` STRING

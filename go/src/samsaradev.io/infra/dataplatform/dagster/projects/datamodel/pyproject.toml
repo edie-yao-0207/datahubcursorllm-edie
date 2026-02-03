@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "datamodel"
+
+[tool.black]
+exclude = '\/snapshots\/|_pb2\.py$|_pb2_grpc\.py$|\/generated\/'
+
+[tool.isort]
+atomic = true
+force_grid_wrap = 0
+force_sort_within_sections = true
+include_trailing_comma = true
+known_third_party = ["boto3", "botocore", "dagster", "dagster_aws", "dagster_databricks", "dagster_duckdb_pandas", "dagster_shell", "databricks", "datadog", "datahub", "delta", "numpy", "pandas", "pyspark", "pytest", "pytz", "scikit-learn", "sklearn", "scipy", "slack"]
+line_length = 88
+multi_line_output = 3
+not_skip = "__init__.py"
+order_by_type = true
+use_parentheses = true
+skip_glob = ["snapshots", "*_pb2.py", "*_pb2_grpc.py"]
+
+[tool.pytest.ini_options]
+norecursedirs = [
+    # Ignore tests which incorporate samsaraml by default to prevent import error
+    "samsaradev/ml/tests",
+    "samsaradev/pipelines/adas/tests",
+]

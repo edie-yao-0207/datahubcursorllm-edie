@@ -1,0 +1,11 @@
+{
+  "owner": "WorkflowsPlatform",
+  "jobs": [
+    {
+      "name": "weekly-run",
+      "cron": "0 0 16 ? * Tues",
+      "regions": ["us-west-2"],
+      "spark_version": "default"
+    }
+  ]
+}

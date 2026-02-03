@@ -1,0 +1,16 @@
+{
+  "name": "risk_insights_features",
+  "owner": "DataEngineering",
+  "assets": [
+    "us-west-2:feature_store.risk_insights_features",
+    "us-west-2:feature_store.risk_insights_features_quarantine"
+  ],
+  "schedules": [
+    {
+      "name": "daily",
+      "cron": "0 11,23 * * *",
+      "backfill_window": 7,
+      "backfill_batch_size": 1
+    }
+  ]
+}

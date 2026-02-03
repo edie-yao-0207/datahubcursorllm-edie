@@ -1,0 +1,23 @@
+{
+  "view": "map_org_sam_number_latest",
+  "owner": "DataEngineering",
+  "description": "This view contains the latest org_id to sam_number mapping sourced from datamodel_core.dim_organizations. The latest sam_number corresponding to an org_id should be referenced at all times to account for sam_number changes.",
+  "database": "product_analytics",
+  "regions": ["us-west-2", "eu-west-1", "ca-central-1"],
+  "schema": [
+    { "name": "org_id", "type": "long", "description": "The Samsara cloud dashboard ID that the data belongs to" },
+    {
+      "name": "sam_number",
+      "type": "string",
+      "description": "Samnumber is a unique id that ties customer accounts together in Netsuite, Salesforce, and Samsara cloud dashboard."
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "datamodel_core",
+      "tablename": "dim_organizations",
+      "type": "table"
+    }
+  ]
+}

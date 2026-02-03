@@ -1,0 +1,85 @@
+{
+  "name": "fuel_energy_efficiency_report.electric_distance_by_hour",
+  "owner": "Sustainability",
+  "description": "Tracks distance driven via electricity in an hour for each device.",
+  "tags": ["telematics", "fuel", "ev"],
+  "dependencies": [
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "odometer_ev_m",
+      "type": "table"
+    },
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "odometer_ev_km",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "driver_assignments",
+      "type": "table"
+    }
+  ],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2022-06-16",
+  "output": {
+    "dbname": "fuel_energy_efficiency_report",
+    "tablename": "electric_distance_by_hour",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "object_id", "driver_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "$org_id_default_description"
+        }
+      },
+      {
+        "name": "object_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The device id of this hour of aggregated data."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The driver id of this hour of aggregated data. This value comes from driver assignments derived from tripsdb."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The starting timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The ending timestamp of this hourly interval."
+        }
+      },
+      {
+        "name": "electric_distance_traveled_m_odo",
+        "type": "long",
+        "metadata": {
+          "comment": "The distance traveled in meters using electricity for this hour of aggregated data, as recorded by odometer."
+        }
+      }
+    ]
+  }
+}

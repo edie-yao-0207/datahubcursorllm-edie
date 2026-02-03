@@ -1,0 +1,32 @@
+{
+  "table": "ticket_field_history",
+  "owner": "DataEngineering",
+  "description": "Zendesk Ticket Field History Table from Fivetran",
+  "database": "samsara_zendesk",
+  "schema": [
+    {
+      "name": "field_name",
+      "type": "string"
+    },
+    {
+      "name": "ticket_id",
+      "type": "bigint"
+    },
+    {
+      "name": "updated",
+      "type": "timestamp"
+    },
+    {
+      "name": "user_id",
+      "type": "bigint"
+    },
+    {
+      "name": "value",
+      "type": "string"
+    },
+    {
+      "name": "_fivetran_synced",
+      "type": "timestamp"
+    }
+  ]
+}

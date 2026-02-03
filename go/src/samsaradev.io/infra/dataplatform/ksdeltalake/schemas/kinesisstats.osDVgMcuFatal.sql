@@ -1,0 +1,43 @@
+`date` STRING,
+`stat_type` INT,
+`org_id` BIGINT,
+`object_type` INT,
+`object_id` BIGINT,
+`time` BIGINT,
+`value` STRUCT<
+  `date`: STRING,
+  `time`: BIGINT,
+  `received_delta_seconds`: BIGINT,
+  `is_start`: BOOLEAN,
+  `is_end`: BOOLEAN,
+  `is_databreak`: BOOLEAN,
+  `int_value`: BIGINT,
+  `double_value`: DOUBLE,
+  `proto_value`: STRUCT<
+    `vg_mcu_fatal`: STRUCT<
+      `reason`: INT,
+      `fatal_mcu_time_ms`: BIGINT,
+      `vg_processed_time_utc_ms`: BIGINT,
+      `vg_fw_build`: STRING,
+      `mcu_fw_version`: STRING,
+      `boot_count`: BIGINT,
+      `r0`: BIGINT,
+      `r1`: BIGINT,
+      `r2`: BIGINT,
+      `r3`: BIGINT,
+      `ip`: BIGINT,
+      `lr`: BIGINT,
+      `pc`: BIGINT,
+      `xpsr`: BIGINT,
+      `task_index`: INT,
+      `task_name`: STRING,
+      `line_number`: BIGINT,
+      `file_hash`: BIGINT,
+      `serial_number`: BIGINT,
+      `imprecise_timestamp`: BOOLEAN,
+      `serial_number_string`: STRING
+    >
+  >
+>,
+`_filename` STRING,
+`_sort_key` STRING

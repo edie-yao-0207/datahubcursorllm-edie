@@ -1,0 +1,45 @@
+{
+  "view": "elite_org_example_loads",
+  "owner": "OPX",
+  "description": "Provides example URLs loaded by users in elite orgs across varying percentiles.",
+  "database": "perf_infra",
+  "schema": [
+    {
+      "name": "resource",
+      "type": "string",
+      "description": "Stripped down name of the route minus org and query params."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The name of the user interaction performed, or 'route.load' if a Route Load."
+    },
+    {
+      "name": "p50_url",
+      "type": "string",
+      "description": "A recent example URL which experienced a p50 duration."
+    },
+    {
+      "name": "p90_url",
+      "type": "string",
+      "description": "A recent example URL which experienced a p90 duration."
+    },
+    {
+      "name": "p95_url",
+      "type": "string",
+      "description": "A recent example URL which experienced a p95 duration."
+    },
+    {
+      "name": "p99_url",
+      "type": "string",
+      "description": "A recent example URL which experienced a p99 duration."
+    }
+  ],
+  "dependencies": [
+    {
+      "dbname": "perf_infra",
+      "tablename": "elite_org_combined_route_loads",
+      "type": "table"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`uuid` STRING,
+`args_proto` STRUCT<
+  `start_ms`: BIGINT,
+  `end_ms`: BIGINT,
+  `device_ids`: ARRAY<BIGINT>,
+  `operating_authorities`: ARRAY<BIGINT>
+>,
+`_raw_args_proto` STRING,
+`created_at` TIMESTAMP,
+`last_requested_at` TIMESTAMP,
+`started_at` TIMESTAMP,
+`completed_at` TIMESTAMP,
+`failed_at` TIMESTAMP,
+`error` STRING,
+`date` STRING

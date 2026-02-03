@@ -1,0 +1,17 @@
+{
+  "owner": "AssetsFirmware",
+  "email_notifications": ["connor.flynn@samsara.com"],
+  "jobs": [
+    {
+      "name": "update",
+      "cron": "0 0 0/4 ? * MON-FRI *",
+      "regions": ["us-west-2", "eu-west-1"],
+      "timeout_seconds": 10800,
+      "parameters": {
+        "end_date": "",
+        "start_date": ""
+      },
+      "spark_version": "default"
+    }
+  ]
+}

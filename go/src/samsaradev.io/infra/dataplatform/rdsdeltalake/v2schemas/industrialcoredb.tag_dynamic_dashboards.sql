@@ -1,0 +1,12 @@
+`_timestamp` TIMESTAMP,
+`_filename` STRING,
+`_rowid` STRING,
+`_op` STRING,
+`org_id` BIGINT,
+`tag_id` BIGINT,
+`dynamic_dashboard_uuid` STRING,
+`created_at` TIMESTAMP,
+`created_by` BIGINT,
+`updated_at` TIMESTAMP,
+`updated_by` BIGINT,
+`partition` STRING

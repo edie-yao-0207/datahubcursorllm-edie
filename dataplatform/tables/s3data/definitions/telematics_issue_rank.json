@@ -1,0 +1,45 @@
+{
+  "table": "telematics_issue_rank",
+  "owner": "FirmwareVdp",
+  "description": "Table 'telematics_issue_rank' generated from 'Dataweb Configurations.xlsx'.",
+  "database": "definitions",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "category",
+      "type": "string"
+    },
+    {
+      "name": "issue",
+      "type": "string"
+    },
+    {
+      "name": "rank",
+      "type": "bigint"
+    },
+    {
+      "name": "details",
+      "type": "string"
+    },
+    {
+      "name": "label",
+      "type": "string"
+    },
+    {
+      "name": "owner",
+      "type": "string"
+    },
+    {
+      "name": "is_coverage_eligible",
+      "type": "boolean"
+    },
+    {
+      "name": "resolution_category",
+      "type": "string"
+    },
+    {
+      "name": "team",
+      "type": "string"
+    }
+  ]
+}

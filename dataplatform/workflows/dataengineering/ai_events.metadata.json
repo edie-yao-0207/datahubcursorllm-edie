@@ -1,0 +1,18 @@
+{
+  "owner": "DataEngineering",
+  "description": "Runs updates for AI event tables: firmware_events, backend_events",
+  "admin_teams": ["DataAnalytics"],
+  "schedules": [
+    {
+      "name": "daily-eu",
+      "regions": ["eu-west-1"],
+      "timeout_seconds": 10800,
+      "cron": "0 0 12 * * ?",
+      "workflow_overrides": {
+        "webhook_notifications": {
+          "on_failure": [{ "id": "3b01bc53-8f0e-478d-8504-a576ed86bb1a" }]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "view": "org_name_to_samnumber",
+  "owner": "PlatformOperations",
+  "description": "A list of samnumbers and the org's name.",
+  "database": "netsuite_data",
+  "use_regional_values": true,
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "name", "type": "string" },
+    { "name": "sam_number", "type": "string" }
+  ],
+  "dependencies": [
+    {
+      "dbname": "edw.netsuite_sterling",
+      "tablename": "netsuite_customer",
+      "type": "table",
+      "external": true
+    }
+  ]
+}

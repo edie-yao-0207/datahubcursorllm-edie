@@ -1,0 +1,9 @@
+{
+  "owners": [
+    "samsara-dev/diagnosticstools"
+  ],
+  "additionalReviewers": [
+    "samsara-dev/data-platform"
+  ],
+  "description": "Changes to canonical distance logic should be cleared with the the above individuals or the data-platform team."
+}

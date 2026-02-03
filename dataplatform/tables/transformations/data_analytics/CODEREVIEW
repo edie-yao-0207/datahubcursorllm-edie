@@ -1,0 +1,19 @@
+{
+  "owners": [
+    "samsara-dev/data-analytics"
+  ],
+  "description": "Changes to pipeline query logic should be cleared by data-analytics. Tag an individual or see our codereview guidelines https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/5280508/FF+Code+Review+Guidelines",
+  "perFile": [
+    {
+      "owners": [
+        "samsara-dev/asset-foundations"
+      ],
+      "filePattern": "das*",
+      "description": "Changes to Driver Assignment Service should be cleared with a code owner.",
+      "additionalReviewers": [
+        "douglasboyle",
+        "elidykaar"
+      ]
+    }
+  ]
+}

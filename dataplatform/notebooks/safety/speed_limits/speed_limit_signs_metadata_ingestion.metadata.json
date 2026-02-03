@@ -1,0 +1,14 @@
+{
+  "owner": "SafetyPlatform",
+  "jobs": [
+    {
+      "name": "speed_limit_signs_metadata_ingestion",
+      "cron": "0 00 0 * * ? *",
+      "regions": ["us-west-2"],
+      "spark_version": "default",
+      "driver_node_type_id": "rd-fleet.8xlarge",
+      "node_type_id": "rd-fleet.8xlarge",
+      "max_workers": 128
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "table": "j1939_da_2023",
+  "owner": "FirmwareVdp",
+  "description": "Represents the J1939-DA 2023 edition. This contains all mappings for PGNs and SPNs found in standard SAE J1939-DA.",
+  "database": "definitions",
+  "region_to_location": {
+    "us-west-2": "s3://samsara-databricks-workspace/managed_tables/vdp/j1939_da_2023.csv",
+    "eu-west-1": "s3://samsara-eu-databricks-workspace/managed_tables/vdp/j1939_da_2023.csv"
+  },
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "revised",
+      "type": "string"
+    },
+    {
+      "name": "pg_revised",
+      "type": "string"
+    },
+    {
+      "name": "sp_revised",
+      "type": "string"
+    },
+    {
+      "name": "sp_to_pg_map_revised",
+      "type": "string"
+    },
+    {
+      "name": "pgn",
+      "type": "bigint"
+    },
+    {
+      "name": "pg_label",
+      "type": "string"
+    },
+    {
+      "name": "pg_acronym",
+      "type": "string"
+    },
+    {
+      "name": "pg_description",
+      "type": "string"
+    },
+    {
+      "name": "pdu_type",
+      "type": "string"
+    },
+    {
+      "name": "pgn_page",
+      "type": "string"
+    },
+    {
+      "name": "pg_data_length_class",
+      "type": "string"
+    },
+    {
+      "name": "pg_data_minimum_length",
+      "type": "bigint"
+    },
+    {
+      "name": "pg_data_length_constraint",
+      "type": "string"
+    },
+    {
+      "name": "pg_data_highest_assigned_byte",
+      "type": "bigint"
+    },
+    {
+      "name": "pgn_data_length",
+      "type": "bigint"
+    },
+    {
+      "name": "multipacket",
+      "type": "string"
+    },
+    {
+      "name": "transmission_rate",
+      "type": "string"
+    },
+    {
+      "name": "default_priority",
+      "type": "bigint"
+    },
+    {
+      "name": "pg_reference",
+      "type": "string"
+    },
+    {
+      "name": "sp_position_in_pg",
+      "type": "string"
+    },
+    {
+      "name": "sp_start_bit",
+      "type": "string"
+    },
+    {
+      "name": "spn",
+      "type": "bigint"
+    },
+    {
+      "name": "sp_label",
+      "type": "string"
+    },
+    {
+      "name": "sp_description",
+      "type": "string"
+    },
+    {
+      "name": "sp_length",
+      "type": "bigint"
+    },
+    {
+      "name": "scaling_text",
+      "type": "string"
+    },
+    {
+      "name": "offset_text",
+      "type": "string"
+    },
+    {
+      "name": "data_range",
+      "type": "string"
+    },
+    {
+      "name": "operational_range",
+      "type": "string"
+    },
+    {
+      "name": "unit",
+      "type": "string"
+    },
+    {
+      "name": "slot_identifier",
+      "type": "bigint"
+    },
+    {
+      "name": "slot_name",
+      "type": "string"
+    },
+    {
+      "name": "sp_type",
+      "type": "string"
+    },
+    {
+      "name": "sp_reference",
+      "type": "string"
+    },
+    {
+      "name": "scale_factor",
+      "type": "double"
+    },
+    {
+      "name": "offset_value",
+      "type": "double"
+    },
+    {
+      "name": "range_maximum",
+      "type": "double"
+    },
+    {
+      "name": "length_minimum_bits",
+      "type": "bigint"
+    },
+    {
+      "name": "length_maximum_bits",
+      "type": "bigint"
+    },
+    {
+      "name": "sp_document",
+      "type": "string"
+    },
+    {
+      "name": "pg_document",
+      "type": "string"
+    },
+    {
+      "name": "sp_created_or_modified",
+      "type": "string"
+    },
+    {
+      "name": "pg_created_or_modified",
+      "type": "string"
+    },
+    {
+      "name": "sp_to_pg_mapping_created_or_modified_date",
+      "type": "string"
+    },
+    {
+      "name": "row_pg_content",
+      "type": "string"
+    },
+    {
+      "name": "row_sp_content",
+      "type": "string"
+    }
+  ]
+}

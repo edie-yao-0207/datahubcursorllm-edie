@@ -1,0 +1,11 @@
+`gateway_id` BIGINT,
+`org_id` BIGINT,
+`device_id` BIGINT,
+`happened_at` BIGINT,
+`received_at` BIGINT,
+`service_uuid` STRING,
+`mac_address` STRING,
+`third_party_integration_id` BIGINT,
+`data` BINARY,
+`metadata` BINARY,
+`date` DATE

@@ -1,0 +1,465 @@
+/o//fleet/reports/safety_inbox,Coaching
+/o//fleet/reports/safety,Coaching
+/o//fleet/reports/safety/driver/,Coaching
+/o//fleet/reports/coaching,Coaching
+/o//fleet/reports/coaching_scripts/driver//events/,Coaching
+/o//fleet/reports/coaching_summary/,Coaching
+/o//config/sensors,Cold Chain Management
+/o//stat/temp,Cold Chain Management
+/o//fleet/reports/asset/reefer,Cold Chain Management
+/o//environment_report,Cold Chain Management
+/o//fleet/reports/asset/reefer/,Cold Chain Management
+/o//fleet/dispatch/v2/route/,Dispatch & Routing
+/o//fleet/dispatch/v2,Dispatch & Routing
+/o//fleet/dispatch/v2/map,Dispatch & Routing
+/o//fleet/dispatch/v2/route//edit,Dispatch & Routing
+/o//fleet/dispatch/v2/route//job/,Dispatch & Routing
+/o//fleet/dispatch/v2/route/create,Dispatch & Routing
+/o//fleet/reports/trips,Dispatch & Routing
+/o//fleet/dispatch/v2/route//copy,Dispatch & Routing
+/o//fleet/reports/route_runs,Dispatch & Routing
+/o//fleet/reports/routes/planned_vs_actual/2,Dispatch & Routing
+/o//fleet/viewer/route//,Dispatch & Routing
+/o//fleet/reports/route_runs/,Dispatch & Routing
+/o//fleet/reports/routes/planned_vs_actual/2/driver/,Dispatch & Routing
+/o//fleet/reports/routes/planned_vs_actual/2/vehicle/,Dispatch & Routing
+/o//fleet/reports/routes/planned_vs_actual/2/address/,Dispatch & Routing
+/o//fleet/reports/documents,Driver Productivity
+/o//fleet/reports/documents//,Driver Productivity
+/o//fleet/drivers//driver_record,Driver Productivity
+/o//fleet/reports/activity/report,Driver Productivity
+/o//fleet/reports/site,Driver Productivity
+/o//fleet/reports/site//show,Driver Productivity
+/o//fleet/reports/documents/type//edit,Driver Productivity
+/o//fleet/reports/documents/type/create,Driver Productivity
+/o//fleet/drivers/,Driver Productivity
+/o//fleet/drivers,Driver Productivity
+/o//fleet/reports/hos/driver/driver/,ELD/Tachograph
+/o//fleet/reports/hos/driver,ELD/Tachograph
+/o//fleet/reports/hos/unassigned/,ELD/Tachograph
+/o//fleet/reports/hos/unassigned,ELD/Tachograph
+/o//fleet/reports/hos/violations,ELD/Tachograph
+/o//fleet/reports/compliance_dashboard,ELD/Tachograph
+/o//fleet/reports/hos_audit/report,ELD/Tachograph
+/o//fleet/reports/hos_audit,ELD/Tachograph
+/o//fleet/reports/hos/status,ELD/Tachograph
+/o//config/hos_dvir_settings,ELD/Tachograph
+/o//fleet/reports/remote_tachograph,ELD/Tachograph
+/o//fleet/reports/drivers_hours,ELD/Tachograph
+/o//fleet/reports/remote_tachograph/driver/,ELD/Tachograph
+/o//fleet/reports/hos/driver_classic,ELD/Tachograph
+/o//fleet/reports/remote_tachograph/driver//analysis/,ELD/Tachograph
+/o//fleet/reports/remote_tachograph/vehicle/,ELD/Tachograph
+/o//driver/hos,ELD/Tachograph
+/o//fleet/reports/tachograph_explorer,ELD/Tachograph
+/o//fleet/reports/fuel,Fuel Management
+/o//fleet/reports/fuel_purchases,Fuel Management
+/o//fleet/reports/fuel_and_energy,Fuel Management
+/o//fleet/reports/ev_charging,Fuel Management
+/o//fleet/reports/ifta,IFTA Reporting
+/o//fleet/maintenance/dvir/,Maintenance
+/o//fleet/maintenance,Maintenance
+/o//fleet/maintenance/dvir,Maintenance
+/o//fleet/maintenance/upcoming,Maintenance
+/o//fleet/maintenance/schedule,Maintenance
+/o//fleet/maintenance/log,Maintenance
+/o//fleet/maintenance/dvir_templates/dvir_template_list,Maintenance
+/o//fleet/maintenance/dvir_templates//dvir_template_edit,Maintenance
+/o//fleet/maintenance/dvir_templates/dvir_template_create,Maintenance
+/o//fleet/maintenance/dvir_templates/dvir_template_create_from_template,Maintenance
+/o//fleet/messages,Messaging
+/o//fleet/messages/driver/,Messaging
+/o//fleet/list,Multiple: Fleet overview homepage
+/o//stat/product,Multiple: Homepage redirect
+/o//fleet/reports/index,Multiple: Reports homepage
+/o//fleet/reports/dashboard,Multiple: Reports homepage
+/o//config/drivers,Multiple: Settings
+/o//config,Multiple: Settings page
+/o//config/gateways,Multiple: Settings page
+/o//devices//vehicle,Multiple: Vehicle homepage
+/o//fleet/reports/dashcam//trip/,Safety Event Response
+/o//fleet/safety/event_review,Safety Event Response
+/o//fleet/reports/video_retrieval,Safety Event Response
+/o//fleet/reports/safety/vehicle//incident/,Safety Event Response
+/o//fleet/reports/visual_review,Safety Event Response
+/o//fleet/reports/dashcam/,Safety Event Response
+/o//fleet/reports/dashcam,Safety Event Response
+/o//fleet/proximity,Safety Event Response
+/o//fleet/reports/safety/vehicle/,Safety Event Response
+/o//config/safety_settings,Safety Event Response
+/o//fleet/safety/multicam//trip,Safety Event Response
+/o//fleet/reports/multicam/trip/,Safety Event Response
+/o//fleet/reports/multicam,Safety Event Response
+/o//fleet/reports/facial_recognition,Safety Event Response
+/o//fleet/safety,Safety Event Response
+/o//fleet/reports/safety/total_harsh_events,Safety Event Response
+/o//fleet/reports/safety/harsh_event/,Safety Event Response
+/o//fleet/asset,Utilization
+/o//fleet/reports/activity,Utilization
+/o//fleet/reports/digio,Utilization
+/o//fleet/reports/asset/dormancy,Utilization
+/o//fleet/reports/asset/inventory,Utilization
+/o//fleet/reports/asset/utilization,Utilization
+/o//fleet/reports/asset/detention,Utilization
+/o/:org_id/fleet/reports/safety_inbox,Coaching
+/o/:org_id/fleet/reports/safety/driver/:driverId,Coaching
+/o/:org_id/fleet/reports/coaching,Coaching
+/o/:org_id/fleet/reports/coaching_scripts/driver/:driverId/events/:eventIdentifiers,Coaching
+/o/:org_id/fleet/reports/coaching_summary/:uuid,Coaching
+/o/:org_id/config/sensors,Cold Chain Management
+/o/:org_id/stat/temp,Cold Chain Management
+/o/:org_id/fleet/reports/asset/reefer,Cold Chain Management
+/o/:org_id/environment_report,Cold Chain Management
+/o/:org_id/fleet/reports/asset/reefer/:deviceId,Cold Chain Management
+/o/:org_id/fleet/dispatch/v2/route/:routeId,Dispatch & Routing
+/o/:org_id/fleet/dispatch/v2,Dispatch & Routing
+/o/:org_id/fleet/dispatch/v2/map,Dispatch & Routing
+/o/:org_id/fleet/dispatch/v2/route/:routeId/edit,Dispatch & Routing
+/o/:org_id/fleet/dispatch/v2/route/:routeId/job/:jobId,Dispatch & Routing
+/o/:org_id/fleet/dispatch/v2/route/create,Dispatch & Routing
+/o/:org_id/fleet/reports/trips,Dispatch & Routing
+/o/:org_id/fleet/dispatch/v2/route/:routeId/copy,Dispatch & Routing
+/o/:org_id/fleet/reports/route_runs,Dispatch & Routing
+/o/:org_id/fleet/reports/routes/planned_vs_actual/2,Dispatch & Routing
+/o/:org_id/fleet/viewer/route/:orgId/:token,Dispatch & Routing
+/o/:org_id/fleet/reports/route_runs/:recurringRouteId,Dispatch & Routing
+/o/:org_id/fleet/reports/routes/planned_vs_actual/2/driver/:driverId,Dispatch & Routing
+/o/:org_id/fleet/reports/routes/planned_vs_actual/2/vehicle/:vehicleId,Dispatch & Routing
+/o/:org_id/fleet/reports/routes/planned_vs_actual/2/address/:addressId,Dispatch & Routing
+/o/:org_id/fleet/reports/documents,Driver Productivity
+/o/:org_id/fleet/reports/documents/:driverId/:driverCreatedAtMs,Driver Productivity
+/o/:org_id/fleet/drivers/:driverId/driver_record,Driver Productivity
+/o/:org_id/fleet/reports/activity/report,Driver Productivity
+/o/:org_id/fleet/reports/site,Driver Productivity
+/o/:org_id/fleet/reports/site/:addressId/show,Driver Productivity
+/o/:org_id/fleet/reports/documents/type/:uuid/edit,Driver Productivity
+/o/:org_id/fleet/reports/documents/type/create,Driver Productivity
+/o/:org_id/fleet/drivers/:driverId,Driver Productivity
+/o/:org_id/fleet/drivers,Driver Productivity
+/o/:org_id/fleet/reports/hos/driver/driver/:driver_id,ELD/Tachograph
+/o/:org_id/fleet/reports/hos/driver,ELD/Tachograph
+/o/:org_id/fleet/reports/hos/unassigned/:vehicleId,ELD/Tachograph
+/o/:org_id/fleet/reports/hos/unassigned,ELD/Tachograph
+/o/:org_id/fleet/reports/hos/violations,ELD/Tachograph
+/o/:org_id/fleet/reports/compliance_dashboard,ELD/Tachograph
+/o/:org_id/fleet/reports/hos_audit/report,ELD/Tachograph
+/o/:org_id/fleet/reports/hos_audit,ELD/Tachograph
+/o/:org_id/fleet/reports/hos/status,ELD/Tachograph
+/o/:org_id/config/hos_dvir_settings,ELD/Tachograph
+/o/:org_id/fleet/reports/remote_tachograph,ELD/Tachograph
+/o/:org_id/fleet/reports/drivers_hours,ELD/Tachograph
+/o/:org_id/fleet/reports/remote_tachograph/driver/:cardNumber,ELD/Tachograph
+/o/:org_id/fleet/reports/hos/driver_classic,ELD/Tachograph
+/o/:org_id/fleet/reports/remote_tachograph/driver/:cardNumber/analysis/:timestamp,ELD/Tachograph
+/o/:org_id/fleet/reports/remote_tachograph/vehicle/:deviceId,ELD/Tachograph
+/o/:org_id/driver/hos,ELD/Tachograph
+/o/:org_id/fleet/reports/tachograph_explorer,ELD/Tachograph
+/o/:org_id/fleet/reports/fuel,Fuel Management
+/o/:org_id/fleet/reports/fuel_purchases,Fuel Management
+/o/:org_id/fleet/reports/fuel_and_energy,Fuel Management
+/o/:org_id/fleet/reports/ev_charging,Fuel Management
+/o/:org_id/fleet/reports/ifta,IFTA Reporting
+/o/:org_id/fleet/maintenance/dvir/:dvir_id,Maintenance
+/o/:org_id/fleet/maintenance,Maintenance
+/o/:org_id/fleet/maintenance/dvir,Maintenance
+/o/:org_id/fleet/maintenance/upcoming,Maintenance
+/o/:org_id/fleet/maintenance/schedule,Maintenance
+/o/:org_id/fleet/maintenance/log,Maintenance
+/o/:org_id/fleet/maintenance/dvir_templates/dvir_template_list,Maintenance
+/o/:org_id/fleet/maintenance/dvir_templates/:uuid/dvir_template_edit,Maintenance
+/o/:org_id/fleet/maintenance/dvir_templates/dvir_template_create,Maintenance
+/o/:org_id/fleet/maintenance/dvir_templates/dvir_template_create_from_template,Maintenance
+/o/:org_id/fleet/messages,Messaging
+/o/:org_id/fleet/messages/driver/:driverId,Messaging
+/o/:org_id/fleet/list,Multiple: Fleet overview homepage
+/o/:org_id/stat/product,Multiple: Homepage redirect
+/o/:org_id/fleet/reports/index,Multiple: Reports homepage
+/o/:org_id/fleet/reports/dashboard,Multiple: Reports homepage
+/o/:org_id/config/drivers,Multiple: Settings
+/o/:org_id/config,Multiple: Settings page
+/o/:org_id/config/gateways,Multiple: Settings page
+/o/:org_id/devices/:device_id/vehicle,Multiple: Vehicle homepage
+/o/:org_id/fleet/reports/dashcam/:deviceId/trip/:startMs,Safety Event Response
+/o/:org_id/fleet/safety/event_review,Safety Event Response
+/o/:org_id/fleet/reports/video_retrieval,Safety Event Response
+/o/:org_id/fleet/reports/safety/vehicle/:vehicleId/incident/:atMs,Safety Event Response
+/o/:org_id/fleet/reports/visual_review,Safety Event Response
+/o/:org_id/fleet/reports/dashcam/:deviceId,Safety Event Response
+/o/:org_id/fleet/reports/dashcam,Safety Event Response
+/o/:org_id/fleet/proximity,Safety Event Response
+/o/:org_id/fleet/reports/safety/vehicle/:vehicleId,Safety Event Response
+/o/:org_id/config/safety_settings,Safety Event Response
+/o/:org_id/fleet/safety/multicam/:deviceId/trip,Safety Event Response
+/o/:org_id/fleet/reports/multicam/trip/:deviceId,Safety Event Response
+/o/:org_id/fleet/reports/multicam,Safety Event Response
+/o/:org_id/fleet/reports/facial_recognition,Safety Event Response
+/o/:org_id/fleet/safety,Safety Event Response
+/o/:org_id/fleet/reports/safety/total_harsh_events,Safety Event Response
+/o/:org_id/fleet/reports/safety/harsh_event/:harshEventLabel,Safety Event Response
+/o/:org_id/fleet/asset,Utilization
+/o/:org_id/fleet/reports/activity,Utilization
+/o/:org_id/fleet/reports/digio,Utilization
+/o/:org_id/fleet/reports/asset/dormancy,Utilization
+/o/:org_id/fleet/reports/asset/inventory,Utilization
+/o/:org_id/fleet/reports/asset/utilization,Utilization
+/o/:org_id/fleet/reports/asset/detention,Utilization
+/*,Unassigned
+/o/:org_id/alerts/incidents,Unassigned
+/o/:org_id/fleet/viewer/:token,Unassigned
+/o/:org_id/alerts/incidents/v2/:alert_id/:object_type/:object_id/:started_at,Unassigned
+/o/:org_id/activate,Unassigned
+/o/:org_id/config/admin,Unassigned
+/o/:org_id/alerts/incidents/v2/:alert_id/:object_type/:object_id/:started_at/:output_key,Unassigned
+/o/:org_id/fleet/config,Unassigned
+/o/:org_id/alerts/config/:alert_id,Unassigned
+/o/:org_id/alerts/config,Unassigned
+/o/:org_id/config/addresses,Unassigned
+/o/:org_id/config/tags,Unassigned
+/o/:org_id/config/scheduled_report_plans,Unassigned
+/o/:org_id/config/contacts,Unassigned
+/o/:org_id/config/role_list,Unassigned
+/o/:org_id/fleet/config/gateways,Unassigned
+/o/:org_id/config/fleet_viewer_tokens,Unassigned
+/o/:org_id/stat/:stat_type_key,Unassigned
+/o/:org_id/fleet/config/drivers,Unassigned
+/o/:org_id/config/trailer_list,Unassigned
+/o/:org_id/config/billing,Unassigned
+/o/:org_id/config/org_config_routing,Unassigned
+/o/:org_id/fleet/reports,Unassigned
+/o/:org_id/config/notifications,Unassigned
+/o/:org_id/config/activity,Unassigned
+/o/:org_id/fleet/home,Unassigned
+/o/:org_id/config/fuel,Unassigned
+/o/:org_id/fleet/config/fleet_viewer_tokens,Unassigned
+/o/:org_id/config/assets_settings,Unassigned
+/o/:org_id/fleet/reports/site/vehicle/:deviceId/show,Unassigned
+/o/:org_id/fleet/config/admin,Unassigned
+/o/:org_id/industrial/overview,Unassigned
+/o/:org_id/config/:uuid/role_edit,Unassigned
+/o/:org_id/fleet/config/addresses,Unassigned
+/o/:org_id/config/api_tokens,Unassigned
+/o/:org_id/fleet/config/tags,Unassigned
+/o/:org_id/fleet/reports/asset/schedule,Unassigned
+/o/:org_id/fleet/config/safety_settings,Unassigned
+/o/:org_id/fleet/viewer/job/:token,Unassigned
+/o/:org_id/config/apps,Unassigned
+/o/:org_id/config/data_retention,Unassigned
+/o/:org_id/config/role_create,Unassigned
+/o/:org_id/fleet/reports/site/vehicle,Unassigned
+/o/:org_id/fleet/config/contacts,Unassigned
+/o/:org_id/fleet/reports/drivers_hours/:driverId,Unassigned
+/o/:org_id/config/webhooks,Unassigned
+/o/:org_id/fleet/config/sensors,Unassigned
+/o/:org_id/fleet/config/scheduled_report_plans,Unassigned
+/o/:org_id/fleet/config/role_list,Unassigned
+/o/:org_id/fleet/reports/site/unknown,Unassigned
+/o/:org_id/fleet/reports/site/address,Unassigned
+/o/:org_id/workforce,Unassigned
+/o/:org_id/fleet/reports/infringement,Unassigned
+/o/:org_id/fleet/config/trailer_list,Unassigned
+/o/:org_id/fleet/config/hos_dvir_settings,Unassigned
+/o/:org_id/config/camera_health,Unassigned
+/o/:org_id/workforce/device/:deviceId,Unassigned
+/o/:org_id/fleet/reports/digio/report,Unassigned
+/o/:org_id/config/map_overlays,Unassigned
+/o/:org_id/fleet/speeding/devices/:device_id/trip/:trip_id,Unassigned
+/o/:org_id/fleet/config/billing,Unassigned
+/o/:org_id/config/vehicle_sensitivity,Unassigned
+/o/:org_id/fleet/config/notifications,Unassigned
+/o/:org_id/fleet/config/org_config_routing,Unassigned
+/o/:org_id/industrial/assets,Unassigned
+/o/:org_id/fleet/config/fuel,Unassigned
+/o/:org_id/fleet/config/activity,Unassigned
+/o/:org_id/workforce/cameras,Unassigned
+/o/:org_id/fleet,Unassigned
+/o/:org_id/fleet/config/apps,Unassigned
+/o/:orgId/signin,Unassigned
+/o/:org_id/fleet/config/api_tokens,Unassigned
+/o/:org_id/fleet/reports/asset/inventory/:siteAddressId/show,Unassigned
+/o/:org_id/alert,Unassigned
+/o/:org_id/invite,Unassigned
+/o/:org_id/workforce/device/:deviceId/stream/:cameraDeviceUuid/:streamUid,Unassigned
+/o/:org_id/driver,Unassigned
+/o/:org_id/fleet/config/assets_settings,Unassigned
+/o/:org_id/devices/:device_id/security/panic_button_event_review,Unassigned
+/o/:org_id/fleet/config/apps/slack,Unassigned
+/o/:org_id/alerts/incidents_v1,Unassigned
+/o/:org_id/industrial/assets/dashboards,Unassigned
+/o/:org_id/fleet/config/data_retention,Unassigned
+/o/:org_id/installer,Unassigned
+/o/:org_id/fleet/reports/asset/inventory/search,Unassigned
+/o/:org_id/industrial/reports,Unassigned
+/o/:org_id/fleet/viewer/address/:token,Unassigned
+/o/:org_id/industrial/dashboards,Unassigned
+/o/:org_id/fleet/config/webhooks,Unassigned
+/o/:org_id/industrial/program/gateways/navigate,Unassigned
+/o/:org_id/config/safety_score_settings,Unassigned
+/o/:org_id/fleet/reports/infringement/:driverId,Unassigned
+/o/:org_id/fleet/config/camera_health,Unassigned
+/o/:org_id/industrial/assets/io,Unassigned
+/o/:org_id/fleet/config/apps/transfinder,Unassigned
+/o/:org_id/fleet/reports/asset/detention/site,Unassigned
+/o/:org_id/fleet/reports/asset/billing,Unassigned
+/o/:org_id/config/apps/slack,Unassigned
+/o/:org_id/config/student_list,Unassigned
+/o/:org_id/fleet/reports/edu/rides,Unassigned
+/o/:org_id/industrial/assets/uuid/:industrialAssetUuid,Unassigned
+/o/:org_id/industrial/assets/reports/assets,Unassigned
+/o/:org_id/fleet/reports/asset/inventory/search/report,Unassigned
+/o/:org_id/fleet/config/map_overlays,Unassigned
+/o/:org_id/devices/:device_id/show,Unassigned
+/o/:org_id/industrial/dashboard_graphical/show/:dashboardId,Unassigned
+/o/:org_id/industrial/dashboard_grid,Unassigned
+/o/:org_id/fleet/reports/ecodriving,Unassigned
+/o/:org_id/workforce/device/:deviceId/view/:viewUuid,Unassigned
+/o/:org_id/industrial/dashboard_grid/show/:dashboardId,Unassigned
+/o/:org_id/config/safety_settings/configure_region_of_interest,Unassigned
+/o/:org_id/industrial/assets/analysis,Unassigned
+/o/:org_id/devices/:device_id/product,Unassigned
+/o/:org_id/config/data_inputs,Unassigned
+/o/:org_id/fleet/config/apps/john_deere,Unassigned
+/o/:org_id/config/single_sign_on,Unassigned
+/o/:org_id/config/machines,Unassigned
+/o/:org_id/config/apps/transfinder,Unassigned
+/o/:org_id/industrial/assets/reports/data_inputs,Unassigned
+/o/:org_id/industrial/program/files,Unassigned
+/o/:org_id/config/industrial_settings,Unassigned
+/o/:org_id/fleet/config/gateway_health,Unassigned
+/o/:org_id/fleet/reports/asset/billing/site,Unassigned
+/o/:org_id/fleet/config/single_sign_on,Unassigned
+/o/:org_id/config/third_party_devices,Unassigned
+/o/:org_id/fleet/reports/vehicle_timesheet,Unassigned
+/o/:org_id/industrial/reports/data_inputs_report_graphs,Unassigned
+/o/:org_id/industrial/reports/data_inputs,Unassigned
+/o/:org_id/industrial/program/gateways/:deviceId/program_summary,Unassigned
+/o/:org_id/industrial/dashboards/show/:dashboardId,Unassigned
+/o/:org_id/industrial/assets/reports/data_inputs/:uuid,Unassigned
+/o/:org_id/fleet/reports/trips_v1,Unassigned
+/o/:org_id/industrial/reports/assets,Unassigned
+/o/:org_id/config/gateways/:deviceId/configure,Unassigned
+/o/:org_id/config/data_outputs,Unassigned
+/o/:org_id/machinevision/overview,Unassigned
+/o/:org_id/industrial/reports/machines,Unassigned
+/o/:org_id/industrial/reports/im_report,Unassigned
+/o/:org_id/industrial/dashboards/edit/:dashboardId,Unassigned
+/o/:org_id/industrial/assets/reports/assets/add,Unassigned
+/o/:org_id/config/apps/john_deere,Unassigned
+/o/:org_id/alert/edit,Unassigned
+/o/:org_id/alert/:view,Unassigned
+/o/:org_id/fleet/reports/ev_efficiency,Unassigned
+/o/:org_id/fleet/reports/asset/diagnostics,Unassigned
+/o/:org_id/config/travel_expenses,Unassigned
+/o/:org_id/config/third_party_devices/:thirdPartyDeviceId,Unassigned
+/o/:org_id/config/machines/:machineId/edit,Unassigned
+/zendesk,Unassigned
+/vehicle_diagnostics,Unassigned
+/user_profile,Unassigned
+/signup,Unassigned
+/signout,Unassigned
+/signin_driver,Unassigned
+/signin,Unassigned
+/setup,Unassigned
+/passwordreset,Unassigned
+/passwordchange/:email/:token,Unassigned
+/organizations/list,Unassigned
+/orders/claim/:token,Unassigned
+/o/:org_id/workforce/views,Unassigned
+/o/:org_id/widgets/:widget_id/show,Unassigned
+/o/:org_id/mes/work_orders,Unassigned
+/o/:org_id/mes/summary,Unassigned
+/o/:org_id/mes/shift_schedules/new,Unassigned
+/o/:org_id/mes/shift_schedules/:scheduleId/edit,Unassigned
+/o/:org_id/mes/shift_schedules,Unassigned
+/o/:org_id/mes/runs/:lineId/:startedAtMs,Unassigned
+/o/:org_id/mes/runs,Unassigned
+/o/:org_id/mes/reports/shifts,Unassigned
+/o/:org_id/mes/reports/runs/:lineId/:startedAtMs,Unassigned
+/o/:org_id/mes/reports/runs,Unassigned
+/o/:org_id/mes/reports/products,Unassigned
+/o/:org_id/mes/reports/lines,Unassigned
+/o/:org_id/mes/recipes,Unassigned
+/o/:org_id/mes/overview,Unassigned
+/o/:org_id/mes/lines/:lineId/show,Unassigned
+/o/:org_id/mes/lines/:lineId/quality,Unassigned
+/o/:org_id/mes/lines/:lineId/performance,Unassigned
+/o/:org_id/mes/lines/:lineId/overview,Unassigned
+/o/:org_id/mes/lines/:lineId/availability,Unassigned
+/o/:org_id/mes/lines,Unassigned
+/o/:org_id/mes/efficiency,Unassigned
+/o/:org_id/mes/config/work_orders,Unassigned
+/o/:org_id/mes/config/shift_schedules/:scheduleId/edit,Unassigned
+/o/:org_id/mes/config/shift_schedules,Unassigned
+/o/:org_id/mes/config/recipes,Unassigned
+/o/:org_id/mes/config/lines,Unassigned
+/o/:org_id/mes/config/downtime_reason_sets,Unassigned
+/o/:org_id/mes/config,Unassigned
+/o/:org_id/mes,Unassigned
+/o/:org_id/machinevision/sync,Unassigned
+/o/:org_id/machinevision/run_history,Unassigned
+/o/:org_id/machinevision/reports/runs,Unassigned
+/o/:org_id/machinevision/reports,Unassigned
+/o/:org_id/machinevision/overview/:deviceId/settings,Unassigned
+/o/:org_id/machinevision/overview/:deviceId/runs/:programId/:startedAtMs,Unassigned
+/o/:org_id/machinevision/overview/:deviceId/runs,Unassigned
+/o/:org_id/machinevision/overview/:deviceId/programs,Unassigned
+/o/:org_id/machinevision/overview/:deviceId/hmi_and_camera,Unassigned
+/o/:org_id/machinevision/overview/:deviceId/:page,Unassigned
+/o/:org_id/machinevision/alerts/incidents,Unassigned
+/o/:org_id/machinevision/:deviceId/programs/:programId,Unassigned
+/o/:org_id/industrial/reports/machines/add,Unassigned
+/o/:org_id/industrial/reports/machines/:uuid,Unassigned
+/o/:org_id/industrial/reports/machine_health_report,Unassigned
+/o/:org_id/industrial/reports/data_inputs/add,Unassigned
+/o/:org_id/industrial/reports/data_inputs/:uuid,Unassigned
+/o/:org_id/industrial/reports/assets/add,Unassigned
+/o/:org_id/industrial/program/gateways/edit/:deviceId,Unassigned
+/o/:org_id/industrial/machine/:machineId/show/manual_entry,Unassigned
+/o/:org_id/industrial/machine/:machineId/show/analysis,Unassigned
+/o/:org_id/industrial/machine/:machineId/show,Unassigned
+/o/:org_id/industrial/machine/:machineId/edit,Unassigned
+/o/:org_id/industrial/assets/reports/data_inputs/add,Unassigned
+/o/:org_id/industrial/assets/reports/ah_device_debug_report,Unassigned
+/o/:org_id/fleet/reports/trips_v2,Unassigned
+/o/:org_id/fleet/reports/travel_expenses/:driverId,Unassigned
+/o/:org_id/fleet/reports/travel_expenses,Unassigned
+/o/:org_id/fleet/reports/hos_transfer,Unassigned
+/o/:org_id/fleet/reports/ev_charging/vehicle,Unassigned
+/o/:org_id/fleet/reports/edu/rides/vehicles,Unassigned
+/o/:org_id/fleet/reports/edu/rides/students,Unassigned
+/o/:org_id/fleet/reports/edu/rides/scans,Unassigned
+/o/:org_id/fleet/reports/edu/rides/routes,Unassigned
+/o/:org_id/fleet/reports/coaching/driver/:driverId/events/:eventIdentifiers,Unassigned
+/o/:org_id/fleet/config/student_list,Unassigned
+/o/:org_id/fleet/config/role_create,Unassigned
+/o/:org_id/fleet/config/integrations,Unassigned
+/o/:org_id/fleet/config/gateways/:deviceId/configure,Unassigned
+/o/:org_id/fleet/config/apps/john_deere/authorize,Unassigned
+/o/:org_id/fleet/config/apps/caterpillar_visionlink,Unassigned
+/o/:org_id/fleet/config/:uuid/role_edit,Unassigned
+/o/:org_id/devices/manufacturers/:device_id/debug,Unassigned
+/o/:org_id/devices/:deviceId/camera_debug,Unassigned
+/o/:org_id/devices/:device_id/local_config,Unassigned
+/o/:org_id/device_check,Unassigned
+/o/:org_id/developer,Unassigned
+/o/:org_id/config/vision_settings,Unassigned
+/o/:org_id/config/rfid,Unassigned
+/o/:org_id/config/integrations,Unassigned
+/o/:org_id/config/gateway_health,Unassigned
+/o/:org_id/config/features,Unassigned
+/o/:org_id/config/developers,Unassigned
+/o/:org_id/config/data_imports,Unassigned
+/o/:org_id/config/apps/john_deere/authorize,Unassigned
+/o/:org_id/config/:deviceId/connections/:dataType/:ioName/:ioId,Unassigned
+/o/:org_id/alert/incident_details/:alert_id/:object_type/:object_id/:started_at/:output_key/:asset_uuid?,Unassigned
+/o/:org_id/alert/incident_details/:alert_id/:object_type/:object_id/:started_at,Unassigned
+/o/:org_id/alert/incident_details_v2/:alert_id/:object_type/:object_id/:started_at,Unassigned
+/o/:org_id/alert/edit/:alert_id,Unassigned
+/new_features,Unassigned
+/invite,Unassigned
+/internal/reference-customers/:businessVertical,Unassigned
+/installer,Unassigned
+/feedback/:feedback_id/show,Unassigned
+/features/list,Unassigned
+/app_marketplace/apps/:appId,Unassigned
+/activate,Unassigned
+/,Unassigned

@@ -1,0 +1,25 @@
+{
+  "feature_name": "Marketplace Integrations",
+  "product_truth": "https://samsara.atlassian-us-gov-mod.net/wiki/spaces/PROD/pages/17781034/App+Marketplace",
+  "enablement_array": [
+    {
+      "effective_date": "2024-01-01",
+      "serves_all": true,
+      "release_phase": "GA"
+    }
+  ],
+  "usage_array": [
+    {
+      "effective_date": "2024-01-01",
+      "custom_query": {
+        "sql_file": "marketplace_integrations.sql",
+        "eu_sql_file": "marketplace_integrations_eu.sql",
+        "has_user_id_field": false,
+        "filter_internal_usage": false,
+        "usage_field": "app_uuid",
+        "binary_query": true,
+        "date_filter": false
+      }
+    }
+  ]
+}

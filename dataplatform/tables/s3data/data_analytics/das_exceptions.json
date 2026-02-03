@@ -1,0 +1,79 @@
+{
+  "table": "das_exceptions",
+  "owner": "DataAnalytics",
+  "description": "Table that includes make model year engine type combos that should be excluded from swap action logic. This is currently pulling from a google sheet that our Product Support Engineering team owns. This table if referenced in the Diagnostics Available Service (DAS) pipeline.",
+  "database": "data_analytics",
+  "datatype": "csv",
+  "schema": [
+    {
+      "name": "make",
+      "type": "string",
+      "metadata": {
+        "comment": "Vehicle make."
+      }
+    },
+    {
+      "name": "model",
+      "type": "string",
+      "metadata": {
+        "comment": "Vehicle model."
+      }
+    },
+    {
+      "name": "year",
+      "type": "bigint",
+      "metadata": {
+        "comment": "Vehicle year."
+      }
+    },
+    {
+      "name": "engine_manufacturer",
+      "type": "string",
+      "metadata": {
+        "comment": "Vehicle Engine Manufacturer."
+      }
+    },
+    {
+      "name": "engine_model",
+      "type": "string",
+      "metadata": {
+        "comment": "Vehicle engine model."
+      }
+    },
+    {
+      "name": "primary_fuel_type",
+      "type": "string",
+      "metadata": {
+        "comment": "The primary fuel type of the vehicle (ie gasoline, diesel, etc.)"
+      }
+    },
+    {
+      "name": "region",
+      "type": "string",
+      "metadata": {
+        "comment": "The region (NA or EU) where this exception applies."
+      }
+    },
+    {
+      "name": "vg34_cable_sku",
+      "type": "string",
+      "metadata": {
+        "comment": "Desired VG34 cable SKU."
+      }
+    },
+    {
+      "name": "vg54_cable_sku",
+      "type": "string",
+      "metadata": {
+        "comment": "Desired VG54 cable SKU"
+      }
+    },
+    {
+      "name": "vg54h_cable_sku",
+      "type": "string",
+      "metadata": {
+        "comment": "Desired VG54H cable SKU."
+      }
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "owners": [
+    "*"
+  ],
+  "onlyIfNoChildren": true,
+  "perFile": [
+    {
+      "filePattern": "445_calendar.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to 445_calendar data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "alert_types.*",
+      "owners": [
+        "samsara-dev/platform-alerts-workflows"
+      ],
+      "description": "Changes to Alert Types data assets should be cleared with Platform Alerts."
+    },
+    {
+      "filePattern": "cable_type_mapping.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to cable_type_mapping data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "canonical_distance_excluded_mmys.*",
+      "owners": [
+        "samsara-dev/diagnosticstools"
+      ],
+      "description": "Changes to excluded mmy list should be cleared with a code owner."
+    },
+    {
+      "filePattern": "coaching_state_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to coaching_state_enums data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "customer_success_value_area.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to customer_success_value_area data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "driver_risk_factor_map.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to driver_risk_factor_map data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "harsh_accel_type_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to harsh_accel_type_enums data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "products.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to Product data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "obd_value.*",
+      "owners": [
+        "samsara-dev/firmware-vdp"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to obd_value data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "firmware_platform_variant.*",
+      "owners": [
+        "samsara-dev/firmwarecore"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to firmware_platform_variant data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "vehicle_fuel_types.*",
+      "owners": [
+        "samsara-dev/firmware-vdp"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to fuel_type assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "j1939_txid_to_source.*",
+      "owners": [
+        "samsara-dev/firmware-vdp"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to j1939_txid_to_source should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "organization_internal_types.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to organization_internal_types should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "object_stat_limits.*",
+      "owners": [
+        "samsara-dev/firmware-vdp"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/firmware"
+      ],
+      "description": "Changes to object_stat_limits should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "alert_action_types.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to alert_action_types should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "alert_trigger_types.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to alert_trigger_types should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "behavior_label_type_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to behavior_label_type_enums should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "location_speed_limit_source_type_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to location_speed_limit_source_type_enums should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "map_matching_method_type_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to map_matching_method_type_enums should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "oem_type_name.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to oem_type_name should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "safety_activity_type_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to safety_activity_type_enums should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "triage_state.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to triage_state should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "anomaly_patterns.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to anomaly_patterns should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "coachable_item_status_enums.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to coachable_item_status_enums should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "coachable_item_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to coachable_item_type should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "coachable_item_backing_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to coachable_item_backing_type should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "behavior_label_to_coachable_item_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to behavior_label_to_coachable_item_type should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "behavior_label_to_detection_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to behavior_label_to_detection_type should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "detection_type_to_audio_alert_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to detection_type_to_audio_alert_type should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "detection_types.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to detection_types should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "audio_alert_types.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to audio_alert_types should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "detection_type_to_harsh_accel_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to detection_type_to_harsh_accel_type should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "customer_facing_filter_reason.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to customer_facing_filter_reason should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "survey_not_useful_reason.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to survey_not_useful_reason should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "driver_assignment_source.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to driver_assignment_source should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "driver_streak_type.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to driver_streak_type data assets should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "trip_end_reason.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to trip_end_reason should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "equipment_cable_id.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to equipment_cable_id should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "built_in_roles_permissions.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to built_in_roles_permissions should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "permission_actions.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to permission_actions should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "sku_bundles.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to sku_bundles should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "bundle_features.*",
+      "owners": [
+        "samsara-dev/data-engineering"
+      ],
+      "description": "Changes to bundle_features should be cleared with Data Engineering."
+    },
+    {
+      "filePattern": "firmware_metric_*",
+      "owners": [
+        "samsara-dev/firmwarecore"
+      ],
+      "additionalReviewers": [
+        "samsara-dev/data-engineering",
+        "samsara-dev/firmware"
+      ]
+    }
+  ]
+}

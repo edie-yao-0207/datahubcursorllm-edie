@@ -1,0 +1,15 @@
+{
+  "owner": "DataPlatform",
+  "jobs": [
+    {
+      "name": "vacuum and optimize",
+      "cron": "0 0 9 * * ? *",
+      "timeout_seconds": 14400,
+      "regions": ["us-west-2", "eu-west-1"],
+      "max_workers": 16,
+      "spark_version": "default",
+      "driver_node_type_id": "rd-fleet.xlarge",
+      "node_type_id": "rd-fleet.xlarge"
+    }
+  ]
+}

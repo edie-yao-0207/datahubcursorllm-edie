@@ -1,0 +1,155 @@
+{
+  "view": "agg_product_scorecard_telematics_mpr_global",
+  "owner": "DataEngineering",
+  "description": "This view contains all telematics MPR metrics data",
+  "database": "product_analytics",
+  "regions": ["us-west-2"],
+  "schema": [
+    { "name": "date", "type": "string", "description": "Date partition" },
+    { "name": "period_start", "type": "string", "description": "Start of period" },
+    { "name": "period_end", "type": "string", "description": "End of period" },
+    { "name": "sam_number", "type": "string", "description": "SAM number for set of orgs" },
+    { "name": "account_size_segment", "type": "string", "description": "Account size segment of grouping" },
+    { "name": "account_arr_segment", "type": "string", "description": "Account ARR segment of grouping" },
+    { "name": "account_billing_country", "type": "string", "description": "Billing country of the account" },
+    { "name": "account_industry", "type": "string", "description": "Account industry of grouping" },
+    { "name": "industry_vertical", "type": "string", "description": "Industry vertical of grouping" },
+    {
+      "name": "is_paid_safety_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Safety licenses or not"
+    },
+    {
+      "name": "is_paid_telematics_customer",
+      "type": "boolean",
+      "description": "Whether the SAM has Telematics licenses or not"
+    },
+    { "name": "is_paid_stce_customer", "type": "boolean", "description": "Whether the SAM has STCE licenses or not" },
+    { "name": "account_csm_email", "type": "string", "description": "CSM email of the account" },
+    { "name": "account_name", "type": "string", "description": "Name of the account" },
+    { "name": "account_id", "type": "string", "description": "ID of the account" },
+    {
+      "name": "account_renewal_12mo",
+      "type": "boolean",
+      "description": "Whether account has 50% of their licenses up for renewal within the next 12 months or not"
+    },
+    {
+      "name": "routes",
+      "type": "long",
+      "description": "Total number of routes that were dispatched in the account during the month"
+    },
+    {
+      "name": "completed_routes",
+      "type": "long",
+      "description": "Total number of routes that were completed during the month"
+    },
+    {
+      "name": "vg_trips",
+      "type": "long",
+      "description": "Total number of trips that were done by VG devices during the month"
+    },
+    {
+      "name": "active_vgs",
+      "type": "long",
+      "description": "Total number of VGs denoted as active (heartbeat + trip) during the last 28 days"
+    },
+    {
+      "name": "idle_duration_ms",
+      "type": "long",
+      "description": "Total number of milliseconds that engines were idling during the month"
+    },
+    {
+      "name": "on_duration_ms",
+      "type": "long",
+      "description": "Total number of milliseconds that engines were on during the month"
+    },
+    {
+      "name": "unproductive_idle_duration_ms",
+      "type": "long",
+      "description": "Total number of milliseconds that engines were unproductive idling during the month"
+    },
+    {
+      "name": "total_drivers",
+      "type": "long",
+      "description": "Total number of drivers in the account"
+    },
+    {
+      "name": "total_drivers_using_app_month",
+      "type": "long",
+      "description": "Total number of drivers who have used the Mobile App in the last month"
+    },
+    {
+      "name": "total_drivers_using_app",
+      "type": "long",
+      "description": "Total number of drivers who have used the Mobile App"
+    },
+    {
+      "name": "violation_duration_ms",
+      "type": "long",
+      "description": "Total number of time covered by HoS violations during the month"
+    },
+    {
+      "name": "possible_driver_ms",
+      "type": "long",
+      "description": "Total number of possible driver time for drivers during the month"
+    },
+    {
+      "name": "unassigned_driver_time_hours",
+      "type": "decimal(38,7)",
+      "description": "Total number of time covered by unassigned driver time during the month"
+    },
+    {
+      "name": "assigned_driver_time_hours",
+      "type": "decimal(38,7)",
+      "description": "Total number of time covered by assigned driver time during the month"
+    },
+    {
+      "name": "driver_time_hours",
+      "type": "decimal(38,6)",
+      "description": "Sum of unassigned and assigned driver time during the month"
+    },
+    {
+      "name": "p50_mpg",
+      "type": "double",
+      "description": "Median MPG of the vehicles in the account for the month"
+    },
+    {
+      "name": "vehicles_ev",
+      "type": "long",
+      "description": "Total number of EVs in the account for the month"
+    },
+    {
+      "name": "vehicles_ice",
+      "type": "long",
+      "description": "Total number of ICE vehicles in the account for the month"
+    },
+    {
+      "name": "vehicles_hybrid",
+      "type": "long",
+      "description": "Total number of hybrid vehicles in the account for the month"
+    },
+    {
+      "name": "sleeper_berth_split_violations",
+      "type": "long",
+      "description": "Total number of sleeper berth split violations in the account for the month"
+    },
+    {
+      "name": "yard_move_miles",
+      "type": "double",
+      "description": "Total number of yard move miles driven in the account for the month"
+    },
+    {
+      "name": "total_miles",
+      "type": "double",
+      "description": "Total number of miles driven in the account for the month"
+    }
+  ],
+  "dependencies": [
+    {
+      "external": true,
+      "dbname": "product_analytics",
+      "tablename": "agg_product_scorecard_telematics_mpr_global_monthly",
+      "type": "table"
+    }
+  ]
+}

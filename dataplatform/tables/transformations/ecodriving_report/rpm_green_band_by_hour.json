@@ -1,0 +1,80 @@
+{
+  "name": "ecodriving_report.rpm_green_band_by_hour",
+  "owner": "Sustainability",
+  "description": "Green band diffs bucketed by hour and joined with driver assignments.",
+  "dependencies": [
+    {
+      "dbname": "objectstat_diffs",
+      "tablename": "rpm_green_band",
+      "type": "table"
+    },
+    {
+      "dbname": "fuel_energy_efficiency_report",
+      "tablename": "driver_assignments",
+      "type": "table"
+    }
+  ],
+  "tags": ["ecodriving"],
+  "parameters": ["start_date", "end_date"],
+  "backfill_start_date": "2024-08-01",
+  "output": {
+    "dbname": "ecodriving_report",
+    "tablename": "rpm_green_band_by_hour",
+    "type": "table",
+    "partition": ["date"],
+    "write_mode": "overwrite",
+    "primary_key": ["date", "org_id", "device_id", "driver_id", "interval_start"],
+    "schema": [
+      {
+        "name": "date",
+        "type": "date",
+        "metadata": {
+          "comment": "The date of the hourly interval."
+        }
+      },
+      {
+        "name": "org_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Samsara ID of the organization that the data, device and driver belong to."
+        }
+      },
+      {
+        "name": "device_id",
+        "type": "long",
+        "metadata": {
+          "comment": "The Samsara ID of the device that green band was recorded against."
+        }
+      },
+      {
+        "name": "driver_id",
+        "type": "long",
+        "nullable": false,
+        "metadata": {
+          "comment": "The Samsara ID of the driver associated with the device at this time."
+        }
+      },
+      {
+        "name": "interval_start",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The timestamp at the beginning of this hourly bucket."
+        }
+      },
+      {
+        "name": "interval_end",
+        "type": "timestamp",
+        "metadata": {
+          "comment": "The timestamp at the end of this hourly bucket."
+        }
+      },
+      {
+        "name": "rpm_green_band_ms",
+        "type": "long",
+        "metadata": {
+          "comment": "Sum of the millisecond duration spent in green band during this hourly interval for a device and driver."
+        }
+      }
+    ]
+  }
+}
