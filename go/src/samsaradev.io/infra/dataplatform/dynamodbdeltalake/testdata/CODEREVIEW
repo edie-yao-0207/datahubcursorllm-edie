@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/data-platform"
-  ],
-  "description": "Data Platform owns test snapshots for DynamoDB Delta Lake registry. Changes to snapshots should be reviewed carefully."
-}

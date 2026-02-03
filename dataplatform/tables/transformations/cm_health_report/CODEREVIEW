@@ -1,9 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/media-experience"
-  ],
-  "description": "Changes to the CM Health Report Pipeline should be cleared with Media Experience team",
-  "additionalReviewers": [
-    "mahsu"
-  ]
-}

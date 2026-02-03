@@ -1,4 +1,0 @@
-{
-  "owners": ["samsara-dev/data-platform"],
-  "description": "This folder contains an example query meant to show users how to structure a managed SQL query and metadata"
-}

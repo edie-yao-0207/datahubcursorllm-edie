@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/data-platform"
-  ],
-	"description": "This directory/files are code-gen'd from 'infra/dataplatform/datastreamlake/genfirehosewriters.go' and changes to it require Data Platform approval."
-}

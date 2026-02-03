@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`feature_id` BIGINT,
-`organization_id` BIGINT,
-`activated_at_ms` BIGINT,
-`expire_at_ms` BIGINT,
-`partition` STRING

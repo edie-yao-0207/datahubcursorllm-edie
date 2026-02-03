@@ -1,9 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/data-platform"
-  ],
-  "additionalReviewers": [
-    "samsara-dev/release-management"
-  ],
-  "description": "Release Management may periodically mass re-generate all generated feature config source files."
-}

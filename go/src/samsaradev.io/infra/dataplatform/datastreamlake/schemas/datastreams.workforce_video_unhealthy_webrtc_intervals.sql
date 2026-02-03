@@ -1,9 +1,0 @@
-`livestream_uuid` STRING,
-`stream_page_session_uuid` STRING,
-`org_id` BIGINT,
-`user_id` BIGINT,
-`stream_id` BIGINT,
-`start_ms` BIGINT,
-`duration_ms` BIGINT,
-`frames_decoded_per_second` ARRAY<BIGINT>,
-`date` DATE

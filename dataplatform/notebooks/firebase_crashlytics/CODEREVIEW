@@ -1,9 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/mobile"
-  ],
-  "description": "Changes to the firebase crashlytics scheduled notebooks should be cleared with the mobile team",
-  "additionalReviewers": [
-    "samsara-dev/apptelematics"
-  ]
-}

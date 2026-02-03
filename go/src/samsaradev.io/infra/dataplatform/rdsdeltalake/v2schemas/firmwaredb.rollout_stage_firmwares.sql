@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`rollout_stage` SHORT,
-`product_id` BIGINT,
-`product_firmware_id` BIGINT,
-`product_program_id` SHORT,
-`partition` STRING

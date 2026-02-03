@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/dev"
-  ],
-  "description": "Databricks SQL Queries. Teams should add their own subdirectory and specify a CODEREVIEW file to gate changes for their queries."
-}

@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`org_id` BIGINT,
-`association_id` BIGINT,
-`wizard_type` STRING,
-`wizard_uuid` STRING,
-`partition` STRING

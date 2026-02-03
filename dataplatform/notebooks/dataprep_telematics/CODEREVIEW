@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/data-engineering"
-  ],
-  "description": "Changes to dataprep_telematics notebooks should be cleared with Data Engineering."
-}

@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`tag_id` BIGINT,
-`address_id` BIGINT,
-`created_at` TIMESTAMP,
-`created_by` BIGINT,
-`partition` STRING

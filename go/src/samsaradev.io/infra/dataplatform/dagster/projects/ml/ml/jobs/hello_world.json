@@ -1,6 +1,0 @@
-{
-  "name": "hello_world",
-  "owner": "DataEngineering",
-  "regions": ["us-west-2"],
-  "ops": ["hello_world", "hello_world2"]
-}

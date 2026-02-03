@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/safetyeventdetection"
-  ],
-  "description": "Databricks SQL Queries. All changes in eventdetection must be cleared with the event detection team"
-}

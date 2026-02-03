@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`uuid` STRING,
-`license_type` STRING,
-`product_id` BIGINT,
-`created_at` TIMESTAMP,
-`date` STRING

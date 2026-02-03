@@ -1,9 +1,0 @@
-`timestamp` TIMESTAMP,
-`org_id` BIGINT,
-`device_id` BIGINT,
-`event_id` STRING,
-`origin_service` STRING,
-`model_version` STRING,
-`inference_request` STRING,
-`inference_output` STRING,
-`date` DATE

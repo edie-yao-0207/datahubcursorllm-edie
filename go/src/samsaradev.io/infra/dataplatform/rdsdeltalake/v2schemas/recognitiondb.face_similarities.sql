@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`org_id` BIGINT,
-`rekognition_id` STRING,
-`match_rekognition_id` STRING,
-`similarity` DOUBLE,
-`partition` STRING

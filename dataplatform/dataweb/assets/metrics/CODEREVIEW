@@ -1,5 +1,0 @@
-{
-  "owners": ["samsara-dev/data-engineering"],
-  "description": "Changes to dataweb metrics must be approved by DataEngineering",
-  "noParent": true
-}

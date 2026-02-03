@@ -1,9 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/safetygeodetection"
-  ],
-  "additionalReviewers": [
-    "samsara-dev/safetyproductgroup"
-  ],
-  "description": "Scheduled jobs for safety geo detection."
-}

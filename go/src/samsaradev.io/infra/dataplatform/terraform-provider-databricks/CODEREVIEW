@@ -1,9 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/sre"
-  ],
-  "additionalReviewers": [
-    "samsara-dev/data-platform"
-  ],
-  "prComment": "## \u26a0\ufe0f Custom Databricks Terraform Provider Changed\n\nThis PR modifies the custom databricks terraform provider.\n\n**You must regenerate the plugin binaries and commit them:**\n\n```bash\ntaskrunner gen/terraform-plugins\n```\n\nThis step is not automated in CI because Go builds are not deterministic across systems.\n\nSee [Confluence](https://samsara.atlassian-us-gov-mod.net/wiki/spaces/RD/pages/6020758/Databricks+Terraform) for more details."
-}

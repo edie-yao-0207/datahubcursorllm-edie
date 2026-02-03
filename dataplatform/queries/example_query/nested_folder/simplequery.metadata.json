@@ -1,8 +1,0 @@
-{
-  "owner": "data-platform-group",
-  "region": ["us-west-2", "eu-west-1"],
-  "sql_warehouse": "aianddata",
-  "name": "simplequery",
-  "description": "query in a nested folder",
-  "run_as_role": "viewer"
-}

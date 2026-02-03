@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`org_id` BIGINT,
-`dvir_template_uuid` STRING,
-`dvir_defect_type_uuid` STRING,
-`created_at` TIMESTAMP,
-`partition` STRING

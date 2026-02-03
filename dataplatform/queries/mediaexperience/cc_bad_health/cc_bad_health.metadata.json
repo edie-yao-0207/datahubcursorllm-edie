@@ -1,8 +1,0 @@
-{
-  "owner": "media-experience-group",
-  "region": ["us-west-2", "eu-west-1"],
-  "sql_warehouse": "safetyproductgroup",
-  "name": "cc_bad_health",
-  "description": "cc_bad_health",
-  "run_as_role": "owner"
-}

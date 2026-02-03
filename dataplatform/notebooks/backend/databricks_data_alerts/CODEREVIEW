@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/data-engineering"
-  ],
-  "description": "Changes to the Databricks Alerting System should be cleared with Data Engineering and Data Platform."
-}

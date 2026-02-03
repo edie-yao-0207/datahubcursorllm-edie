@@ -1,9 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/safetyeventdetection"
-  ],
-  "description": "Changes to the Speeding Incident Report Pipeline should be cleared with Safety Event Detection",
-  "additionalReviewers": [
-    "salilgupta1"
-  ]
-}

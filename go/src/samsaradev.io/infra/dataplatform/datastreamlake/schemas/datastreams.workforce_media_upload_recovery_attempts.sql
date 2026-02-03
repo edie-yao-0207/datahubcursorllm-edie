@@ -1,9 +1,0 @@
-`org_id` BIGINT,
-`media_source_uuid` STRING,
-`job_start_time_ms` BIGINT,
-`recovery_range_start_ms` BIGINT,
-`recovery_range_duration_ms` BIGINT,
-`run_count` BIGINT,
-`missing_footage_duration_ms` BIGINT,
-`error_code` STRING,
-`date` DATE

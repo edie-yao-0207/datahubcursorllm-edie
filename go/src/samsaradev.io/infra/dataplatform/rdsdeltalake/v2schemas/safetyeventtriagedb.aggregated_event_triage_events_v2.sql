@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`org_id` BIGINT,
-`aggregated_event_uuid` STRING,
-`triage_event_uuid` STRING,
-`created_at_ms` BIGINT,
-`date` STRING

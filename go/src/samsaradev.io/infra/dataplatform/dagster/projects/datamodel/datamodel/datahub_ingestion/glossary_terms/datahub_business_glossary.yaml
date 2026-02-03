@@ -1,4 +1,0 @@
-source:
-  type: "datahub-business-glossary"
-  config:
-    file: "/datamodel/datamodel/datahub_ingestion/glossary_terms/datahub_business_glossary_recipe_biztech.yaml"

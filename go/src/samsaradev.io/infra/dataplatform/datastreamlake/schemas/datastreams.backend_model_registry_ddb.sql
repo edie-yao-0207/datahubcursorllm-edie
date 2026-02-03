@@ -1,9 +1,0 @@
-`timestamp` TIMESTAMP,
-`registry_key` STRING,
-`model_type` INT,
-`model_description` STRING,
-`documentation_url` STRING,
-`user_id` BIGINT,
-`user_email` STRING,
-`action` STRING,
-`date` DATE

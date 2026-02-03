@@ -1,6 +1,0 @@
-{
-  "owners": [
-    "samsara-dev/dev"
-  ],
-  "description": "Scheduled jobs used with Databricks Notebooks. Code written in SQL or Python. Teams should add their own subdirectory and specify a CODEREVIEW file to gate changes for their notebooks."
-}

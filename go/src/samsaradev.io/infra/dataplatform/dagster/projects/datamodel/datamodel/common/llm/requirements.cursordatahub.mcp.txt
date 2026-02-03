@@ -1,8 +1,0 @@
-# MCP dependencies
-mcp
-fastapi
-uvicorn
-sse-starlette
-pydantic
-ipinfo
-python-dotenv

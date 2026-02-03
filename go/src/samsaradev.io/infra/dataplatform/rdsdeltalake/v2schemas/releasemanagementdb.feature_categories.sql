@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`feature_package_uuid` STRING,
-`org_id` BIGINT,
-`category_id` BIGINT,
-`created_at` TIMESTAMP,
-`partition` STRING

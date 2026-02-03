@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`org_id` BIGINT,
-`updated_at` BIGINT,
-`fuel_cost` FLOAT,
-`updated_by` BIGINT,
-`partition` STRING

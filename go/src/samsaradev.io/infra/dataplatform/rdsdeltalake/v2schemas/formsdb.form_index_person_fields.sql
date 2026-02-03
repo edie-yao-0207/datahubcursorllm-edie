@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`org_id` BIGINT,
-`field_key` STRING,
-`polymorphic_user_id` STRING,
-`form_submission_uuid` STRING,
-`partition` STRING

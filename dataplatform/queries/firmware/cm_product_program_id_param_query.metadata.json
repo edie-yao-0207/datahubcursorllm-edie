@@ -1,8 +1,0 @@
-{
-  "owner": "firmware-group",
-  "region": ["us-west-2", "eu-west-1"],
-  "sql_warehouse": "safetyproductgroup",
-  "name": "cm_product_program_id_param_query",
-  "description": "List of CM program IDs for filtering",
-  "run_as_role": "owner"
-}

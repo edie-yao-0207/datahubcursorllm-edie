@@ -1,8 +1,0 @@
-{
-  "owner": "firmware-group",
-  "region": ["us-west-2", "eu-west-1"],
-  "sql_warehouse": "safetyproductgroup",
-  "name": "cm_firmware_build_param_query",
-  "description": "List of CM firmware versions for filtering",
-  "run_as_role": "owner"
-}

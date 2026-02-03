@@ -1,8 +1,0 @@
-{
-  "owner": "media-experience-group",
-  "region": ["us-west-2", "eu-west-1"],
-  "sql_warehouse": "safetyproductgroup",
-  "name": "sg_hdd_anomalies",
-  "description": "sg_hdd_anomalies",
-  "run_as_role": "owner"
-}

@@ -1,9 +1,0 @@
-`_timestamp` TIMESTAMP,
-`_filename` STRING,
-`_rowid` STRING,
-`_op` STRING,
-`organization_id` BIGINT,
-`product_id` BIGINT,
-`item_id` BIGINT,
-`product_firmware_id` BIGINT,
-`partition` STRING

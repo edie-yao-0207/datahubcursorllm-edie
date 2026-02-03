@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "datahub local sse": {
-      "url": "http://localhost:9876/sse",
-      "_comment": "Port 9876 chosen to avoid conflicts with common dev ports (3000, 5000, 8000, 8080)"
-    }
-  }
-}
