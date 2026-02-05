@@ -2,7 +2,8 @@
 
 **Date:** February 4, 2026  
 **Author:** Data Analytics  
-**Status:** Draft
+**Status:** Draft  
+**Updated:** February 5, 2026 (corrected join to include all drivers)
 
 ---
 
@@ -38,23 +39,35 @@ Determine what a "healthy" level of coaching touchpoints looks like by comparing
 
 ## Summary Results
 
-**Total drivers with coaching touchpoints:** 45,008
+### Population Overview
 
-### ARR < 100k (15,501 drivers)
+| Metric | Count | % |
+|--------|-------|---|
+| **Total drivers with risk classification** | 733,163 | 100% |
+| **Drivers with any coaching (monthly)** | 44,674 | 6.1% |
+| **Drivers with zero coaching** | 688,489 | 93.9% |
 
-| Risk Level | N Drivers | % of Segment | p50 Monthly | p90 Monthly | Mean Monthly |
-|------------|-----------|--------------|-------------|-------------|--------------|
-| LOW | 304 | 2.0% | 1.0 | 8 | 4.9 |
-| MEDIUM | 2,103 | 13.6% | 2.0 | 10 | 5.1 |
-| HIGH | 13,094 | 84.5% | 2.0 | 21 | 9.4 |
+### % of Drivers Receiving Any Coaching by Risk Level & ARR Segment
 
-### ARR >= 100k (29,507 drivers)
+| ARR Segment | Risk Level | Total Drivers | Drivers Coached | % Coached |
+|-------------|------------|---------------|-----------------|-----------|
+| ARR < 100k | LOW | 25,564 | 299 | 1.2% |
+| ARR < 100k | MEDIUM | 64,351 | 2,070 | 3.2% |
+| ARR < 100k | HIGH | 179,372 | 13,032 | 7.3% |
+| ARR >= 100k | LOW | 53,009 | 454 | 0.9% |
+| ARR >= 100k | MEDIUM | 136,290 | 3,933 | 2.9% |
+| ARR >= 100k | HIGH | 274,577 | 24,886 | 9.1% |
 
-| Risk Level | N Drivers | % of Segment | p50 Monthly | p90 Monthly | Mean Monthly |
-|------------|-----------|--------------|-------------|-------------|--------------|
-| LOW | 464 | 1.6% | 1.0 | 4 | 2.2 |
-| MEDIUM | 3,976 | 13.5% | 1.0 | 7 | 4.0 |
-| HIGH | 25,067 | 85.0% | 2.0 | 14 | 7.9 |
+### Monthly Touchpoints (All Drivers, Including Zeros)
+
+| ARR Segment | Risk Level | N Drivers | p50 | p90 | p99 | Mean |
+|-------------|------------|-----------|-----|-----|-----|------|
+| ARR < 100k | LOW | 25,564 | 0 | 0 | 1 | 0.06 |
+| ARR < 100k | MEDIUM | 64,351 | 0 | 0 | 3 | 0.17 |
+| ARR < 100k | HIGH | 179,372 | 0 | 0 | 15 | 0.68 |
+| ARR >= 100k | LOW | 53,009 | 0 | 0 | 0 | 0.02 |
+| ARR >= 100k | MEDIUM | 136,290 | 0 | 0 | 2 | 0.12 |
+| ARR >= 100k | HIGH | 274,577 | 0 | 0 | 13 | 0.72 |
 
 ---
 
@@ -62,34 +75,48 @@ Determine what a "healthy" level of coaching touchpoints looks like by comparing
 
 ![Coaching Analysis Charts](coaching_analysis_charts.png)
 
-**Left chart:** Monthly coaching touchpoints by risk level and ARR segment, with mean (blue diamond) and p90 (purple triangle) markers.
+**Left chart:** Monthly coaching touchpoints for drivers who received coaching, by risk level and ARR segment, with mean (blue diamond) and p90 (purple triangle) markers.
 
-**Right chart:** Distribution of drivers by risk level within each ARR segment, with driver counts labeled.
+**Right chart:** Percentage of drivers receiving any coaching touchpoint by risk level within each ARR segment.
 
 ---
 
 ## Key Takeaways
 
-### 1. Typical vs High Coaching by Risk Group
+### 1. Most Drivers Receive No Coaching
 
-- **HIGH-risk drivers** receive the most coaching: p50 = 2 monthly, p90 = 14-21 monthly
-- **LOW-risk drivers** have minimal coaching: p50 = 1 monthly, p90 = 4-8 monthly
-- **Benchmark for HIGH-risk:** 2+ monthly touchpoints at median, 14-21+ at p90 indicates a high-performing coaching program
+- **93.9% of drivers** had zero coaching touchpoints in January 2026
+- Only **6.1%** received any coaching (self-review or manager-led)
+- This is consistent across both ARR segments
 
-### 2. ARR Segment Differences
+### 2. Coaching is Risk-Aligned
 
-- **ARR < 100k customers coach more intensively:** HIGH-risk drivers receive ~1.2x more monthly touchpoints (mean 9.4 vs 7.9) compared to ARR >= 100k
-- This may indicate smaller customers have more concentrated driver pools or more hands-on coaching programs
+- **HIGH-risk drivers** are most likely to receive coaching:
+  - ARR < 100k: 7.3% of HIGH vs 1.2% of LOW
+  - ARR >= 100k: 9.1% of HIGH vs 0.9% of LOW
+- HIGH-risk drivers receive **6-10x higher coaching rates** than LOW-risk drivers
 
-### 3. Risk Distribution is Consistent
+### 3. Larger Customers (ARR >= 100k) Coach Slightly More
 
-- ~85% HIGH, ~13.5% MEDIUM, ~2% LOW across both ARR segments
-- The risk classification model applies uniformly regardless of customer size
+- HIGH-risk coaching rate: 9.1% (ARR >= 100k) vs 7.3% (ARR < 100k)
+- This may reflect more mature safety programs at larger organizations
 
-### 4. Coaching is Risk-Aligned
+### 4. When Drivers Are Coached, Volume is Similar
 
-- HIGH-risk drivers receive 2-3x more coaching touchpoints than LOW-risk drivers
-- This is a healthy signal that coaching efforts are appropriately targeting higher-risk populations
+- Among coached drivers, mean monthly touchpoints are similar across ARR segments
+- HIGH-risk coached drivers: ~7-9 touchpoints/month on average
+
+---
+
+## Benchmarks
+
+Based on this analysis, here are suggested coaching benchmarks:
+
+| Metric | Current State | Suggested Benchmark |
+|--------|---------------|---------------------|
+| % of HIGH-risk drivers coached | 7-9% | Target 15-20% |
+| Monthly touchpoints for coached HIGH-risk | 7-9 mean | Maintain or increase |
+| % of LOW-risk drivers coached | ~1% | Acceptable (focus on HIGH) |
 
 ---
 
@@ -137,23 +164,21 @@ org_arr AS (
     AND is_paid_customer = TRUE
 )
 SELECT 
+  rc.driver_id,
+  rc.org_id,
   rc.driver_risk_category,
-  oa.org_arr_segment,
-  COUNT(*) AS n_drivers,
-  ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY oa.org_arr_segment), 2) AS pct_within_arr_segment,
-  ROUND(PERCENTILE(ct.touchpoints_monthly, 0.50), 2) AS p50_monthly,
-  ROUND(PERCENTILE(ct.touchpoints_monthly, 0.90), 2) AS p90_monthly,
-  ROUND(AVG(ct.touchpoints_monthly), 2) AS mean_monthly
-FROM coaching_touchpoints ct
-LEFT JOIN risk_classification rc 
-  ON ct.org_id = rc.org_id AND ct.driver_id = rc.driver_id
+  COALESCE(ct.touchpoints_weekly, 0) AS touchpoints_weekly,
+  COALESCE(ct.touchpoints_monthly, 0) AS touchpoints_monthly,
+  oa.org_arr_segment
+FROM risk_classification rc
+LEFT JOIN coaching_touchpoints ct 
+  ON rc.org_id = ct.org_id AND rc.driver_id = ct.driver_id
 LEFT JOIN org_arr oa 
-  ON ct.org_id = oa.org_id
-WHERE rc.driver_risk_category IS NOT NULL 
-  AND oa.org_arr_segment IS NOT NULL
-GROUP BY rc.driver_risk_category, oa.org_arr_segment
-ORDER BY oa.org_arr_segment, rc.driver_risk_category
+  ON rc.org_id = oa.org_id
+WHERE oa.org_arr_segment IS NOT NULL
 ```
+
+**Note:** The key change from the initial analysis is using `risk_classification LEFT JOIN coaching_touchpoints` instead of the reverse. This ensures ALL drivers with a risk classification are included, not just those who received coaching.
 
 ---
 
@@ -161,7 +186,7 @@ ORDER BY oa.org_arr_segment, rc.driver_risk_category
 
 | File | Description |
 |------|-------------|
-| `coaching_analysis_data.csv` | Driver-level data (45,008 rows) |
+| `coaching_analysis_data.csv` | Driver-level data (733,163 rows) |
 | `coaching_analysis_charts.png` | Visualization charts |
 | `coaching_touchpoints_benchmark_analysis.md` | This document |
 
