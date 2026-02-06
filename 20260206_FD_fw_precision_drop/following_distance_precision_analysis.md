@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Following Distance firmware precision dropped from **83.8% in Dec 2025** to **77.9% in Jan 2026** (a **-5.9pp decline**). This analysis breaks down the drop by daily trends, model registry key, product name, industry, account size segment, and a fixed device cohort. Key findings:
+Following Distance firmware precision dropped from **84.3% in Dec 2025** to **77.9% in Jan 2026** (a **-6.3pp raw decline**). After correcting for sampling bias via population-weighting by CM product and weekday/weekend, the decline is **-4.1pp** (84.1% → 80.0%). This analysis breaks down the drop by daily trends, model registry key, product name, industry, account size segment, fixed device cohort, and sample representativeness. Key findings:
 
 1. **Not a single-day outlier** — the drop is spread across multiple days in January, with the worst days being Jan 10 (66.0%), Jan 20 (67.4%), and Jan 21 (69.6%).
 2. **`outward-mtl_cm_v0.3.7` model is the worst performer** — precision fell from 73.5% to 62.6% (-10.9pp), and it carries significant volume (354 → 438 events).
@@ -298,7 +298,82 @@ The sampling biases cut in **two directions**:
 - **Amplifying factors**: Over-sampling of Enterprise in Jan, over-sampling of `cm_v0.3.7` (worst model), and over-sampling of Transportation (which declined)
 - **Dampening factors**: Under-sampling of CM34 (most stable product) means the sample misses the "dilution" effect of CM34's stability
 
-**Bottom line**: The measured -5.9pp precision drop is likely **slightly overstated** relative to the true population precision change due to these sampling biases, but the directional decline is real (confirmed by the fixed cohort analysis).
+**Bottom line**: The measured precision drop is likely **overstated** relative to the true population precision change due to these sampling biases, but the directional decline is real (confirmed by the fixed cohort analysis). See Section 9 for the corrected weighted estimate.
+
+---
+
+## 9. Stratified Chi-Squared Tests & Population-Weighted Precision
+
+Since the sampler uses **stratified sampling by camera product** (intentionally sampling ~25% from each of CM31–CM34), the product-level bias identified in Section 8 is by design. The correct approach is to test representativeness **within each product stratum** on other dimensions, and then compute a **population-weighted precision** to correct for the known biases.
+
+![Weighted Precision](following_distance_weighted_precision.png)
+
+### 9a. Stratified Chi-Squared Tests (within each CM product)
+
+We test whether the sample's **size segment x weekday/weekend** distribution within each product matches the population. All tests use chi-squared goodness-of-fit against the population proportions from `dojo.ai_events`.
+
+| Month | Product | n | Chi² | df | p-value | Representative? |
+|-------|---------|---|------|-----|---------|-----------------|
+| Dec 2025 | CM31 | 422 | 102.68 | 7 | <0.001 | **NO** |
+| Dec 2025 | CM32 | 442 | 278.24 | 7 | <0.001 | **NO** |
+| Dec 2025 | CM33 | 442 | 220.50 | 7 | <0.001 | **NO** |
+| Dec 2025 | CM34 | 484 | 198.24 | 7 | <0.001 | **NO** |
+| Jan 2026 | CM31 | 505 | 99.53 | 7 | <0.001 | **NO** |
+| Jan 2026 | CM32 | 512 | 230.81 | 7 | <0.001 | **NO** |
+| Jan 2026 | CM33 | 536 | 127.31 | 7 | <0.001 | **NO** |
+| Jan 2026 | CM34 | 556 | 136.90 | 7 | <0.001 | **NO** |
+
+**Even within each product stratum, the sample is not representative.** The dominant bias is:
+
+### 9b. Weekend Over-Sampling (~2x population rate)
+
+| Product | Sample Weekend % | Population Weekend % | Over-sampling |
+|---------|-----------------|---------------------|---------------|
+| CM31 | 33.6% | 16.0% | **+17.6pp** |
+| CM32 | 33.5% | 15.5% | **+18.0pp** |
+| CM33 | 32.1% | 16.7% | **+15.4pp** |
+| CM34 | 32.8% | 14.6% | **+18.2pp** |
+
+The sample contains **~33% weekend events vs ~16% in the population** — weekends are over-sampled by roughly 2x across all products. This matters because weekend and weekday precision can differ.
+
+### 9c. Population-Weighted Precision
+
+To correct for the known biases (product distribution and weekday/weekend), we weight each stratum's sample precision by the population's event share in that stratum.
+
+**Weight = (population events in stratum) / (total population events in month)**
+
+| Prod | Day Type | Dec Prec | Jan Prec | Jan Pop Weight |
+|------|----------|----------|----------|---------------|
+| CM31 | weekday | 81.6% | 72.5% | 13.3% |
+| CM31 | weekend | 74.7% | 75.0% | 2.3% |
+| CM32 | weekday | 80.4% | 72.9% | 18.3% |
+| CM32 | weekend | 75.6% | 69.1% | 3.2% |
+| CM33 | weekday | 91.8% | 79.7% | 15.3% |
+| CM33 | weekend | 90.7% | 77.8% | 2.8% |
+| CM34 | weekday | 83.0% | 86.4% | 38.7% |
+| CM34 | weekend | 95.2% | 87.4% | 6.1% |
+
+**Note:** CM34 weekday carries by far the largest weight (38.7%) in the population. CM34 has relatively high and stable precision, which pulls the weighted estimate up.
+
+### 9d. Final Comparison: Raw vs Weighted
+
+| Metric | Dec 2025 | Jan 2026 | Change |
+|--------|----------|----------|--------|
+| **Raw (unweighted) precision** | 84.25% | 77.90% | **-6.34pp** |
+| **Weighted precision (CM x day_type)** | 84.09% | 80.04% | **-4.06pp** |
+
+| | |
+|---|---|
+| **Raw Dec→Jan drop** | -6.34pp |
+| **Weighted Dec→Jan drop** | -4.06pp |
+| **Bias correction effect** | +2.29pp |
+
+### Key Findings — Weighted Precision
+
+1. **The raw precision overstates the decline by ~2.3pp.** After weighting by population CM x weekday/weekend distribution, the Dec→Jan drop shrinks from **-6.3pp to -4.1pp**.
+2. The correction is primarily driven by **CM34's under-sampling** — CM34 accounts for ~45% of population events but only ~27% of the sample, and CM34 is the most stable product (Jan precision: 86.4% weekday, 87.4% weekend).
+3. **Weekend over-sampling** also contributes — weekends have slightly different precision patterns and are 2x over-represented.
+4. **The -4.1pp weighted decline is still meaningful** and confirms a real precision regression, but it is less dramatic than the raw -6.3pp suggests.
 
 ---
 
