@@ -9,13 +9,14 @@
 
 ## Executive Summary
 
-Following Distance firmware precision dropped from **84.3% in Dec 2025** to **77.9% in Jan 2026** (a **-6.3pp raw decline**). After correcting for sampling bias via population-weighting by CM product and weekday/weekend, the decline is **-4.1pp** (84.1% → 80.0%). This analysis breaks down the drop by daily trends, model registry key, product name, industry, account size segment, fixed device cohort, and sample representativeness. Key findings:
+Following Distance firmware precision dropped from **84.3% in Dec 2025** to **77.9% in Jan 2026** (a **-6.3pp raw decline**). After correcting for sampling bias via population-weighting by CM product and weekday/weekend, the decline is **-4.1pp** (84.1% → 80.0%). This analysis breaks down the drop by daily trends, model registry key, product name, industry, account size segment, fixed device cohort, sample representativeness, and config threshold distribution. Key findings:
 
 1. **Not a single-day outlier** — the drop is spread across multiple days in January, with the worst days being Jan 10 (66.0%), Jan 20 (67.4%), and Jan 21 (69.6%).
 2. **`outward-mtl_cm_v0.3.7` model is the worst performer** — precision fell from 73.5% to 62.6% (-10.9pp), and it carries significant volume (354 → 438 events).
 3. **CM33 saw the largest product-level decline** — precision dropped from 91.4% to 79.2% (-12.2pp), driven by the `brigid_v0.3.7` model. CM32 also dropped -6.3pp, while CM34 was stable (-0.6pp).
 4. **Enterprise segment drove the most volume increase** with a large precision drop — from 79.5% to 71.2% (-8.3pp) on 694 → 1,022 events.
 5. **Fixed cohort analysis confirms the drop is real** — among devices enabled in both months, precision went from 83.9% to 77.2% (-6.7pp).
+6. **Config threshold shift toward >1.2s** — the >1.2s bucket grew from 38.4% to 47.1% of events (+8.7pp), dragging the mix toward lower-precision configs. However, the within-bucket precision decline (~5.9pp) dominates the mix shift effect (~0.9pp).
 
 ---
 
@@ -176,6 +177,47 @@ Even among the **same set of devices** present in both months, firmware precisio
 
 ---
 
+## 10. Config Threshold Analysis (`dev_cfg_mlapp_fd_unsafe_following_distance_seconds`)
+
+The `dev_cfg_mlapp_fd_unsafe_following_distance_seconds` config determines the threshold (in seconds) at which a following distance event triggers. Different threshold values produce events of varying difficulty for the model. We bucketed events by their config value and compared the distribution and within-bucket precision between December and January.
+
+![Config Analysis Chart](following_distance_config_analysis.png)
+
+### Config Distribution & Precision by Bucket
+
+| Config Bucket | Dec n (%) | Dec Precision | Jan n (%) | Jan Precision | Δ Share | Δ Precision |
+|---|---|---|---|---|---|---|
+| ≤0.5s | 73 (8.2%) | 82.2% | 62 (5.8%) | 74.2% | -2.4pp | -8.0pp |
+| 0.5–0.6s | 4 (0.5%) | 75.0% | 6 (0.6%) | 66.7% | — | — |
+| 0.6–0.7s | 5 (0.6%) | 100.0% | 7 (0.7%) | 100.0% | — | — |
+| 0.7–0.8s | 5 (0.6%) | 80.0% | 0 (0%) | — | — | — |
+| **0.8–0.9s** | 222 (25.1%) | **83.3%** | 253 (23.9%) | **72.7%** | -1.2pp | **-10.6pp** |
+| **0.9–1.0s** | 227 (25.6%) | **93.8%** | 224 (21.1%) | **91.1%** | **-4.5pp** | -2.7pp |
+| 1.0–1.2s | 10 (1.1%) | 70.0% | 9 (0.9%) | 100.0% | — | — (tiny n) |
+| **>1.2s** | 340 (38.4%) | **78.2%** | 500 (47.1%) | **73.6%** | **+8.7pp** | **-4.6pp** |
+
+### Decomposition: Mix Shift vs Within-Bucket Precision Change
+
+Using the four major buckets (≤0.5s, 0.8–0.9s, 0.9–1.0s, >1.2s which cover ~97% of events), we decomposed the precision drop into:
+
+| Component | Effect |
+|---|---|
+| **Mix shift effect** (Dec precision at Jan config mix) | **-0.9pp** |
+| **Within-bucket effect** (precision decline within same configs) | **-5.9pp** |
+| **Total** | **-6.8pp** |
+
+### Key Findings — Config Threshold
+
+1. **Mix shift toward >1.2s configs** — This bucket grew from 38.4% to **47.1%** of all sampled events (+8.7pp). Events with higher thresholds are more borderline/ambiguous, and have the **lowest base precision** (~78% → 74%). More events in this bucket mechanically drags down the overall average.
+
+2. **The 0.9–1.0s bucket shrank** from 25.6% to 21.1% (-4.5pp). This is the **highest-precision bucket** (93.8%), so losing share from the best bucket further hurts the overall metric.
+
+3. **Within-bucket precision also dropped** — especially the **0.8–0.9s bucket** which fell **-10.6pp** (83.3% → 72.7%), and >1.2s fell -4.6pp. So it's not purely a mix shift; the model is also performing worse within the same config ranges.
+
+4. **The within-bucket effect (~5.9pp) dominates the mix shift effect (~0.9pp)**, meaning the majority of the decline comes from the model performing worse on events at the same config thresholds, not just from a shift toward harder configs.
+
+---
+
 ## Summary of Root Cause Hypotheses
 
 Based on the breakdowns above, the following factors are likely contributing to the Dec → Jan precision drop:
@@ -185,6 +227,8 @@ Based on the breakdowns above, the following factors are likely contributing to 
 | **`outward-mtl_cm_v0.3.7` model degradation on CM31** | -15.6pp on CM31 (78.8% → 63.2%) | High — largest single model x product swing |
 | **`outward-mtl_brigid_v0.3.7` model regression on CM33** | -12.2pp on CM33 (89.8% → 77.6%) | High — largest volume model x product combo |
 | **CM33 product-level drop** | -12.2pp overall (91.4% → 79.2%) | High — steepest product-level decline |
+| **Config threshold mix shift toward >1.2s** | >1.2s bucket grew +8.7pp (38.4% → 47.1%), lowest precision bucket | Medium — mix shift accounts for ~0.9pp of total drop |
+| **Within-bucket precision decline (esp. 0.8–0.9s)** | 0.8–0.9s bucket dropped -10.6pp (83.3% → 72.7%) | High — within-bucket effect accounts for ~5.9pp |
 | **Enterprise segment growth + lower precision** | Enterprise grew 47% in volume, precision -8.3pp | Medium-High — composition shift amplifies drop |
 | **Industry mix: small but volatile segments** | Consumer Products -27.5pp, Mining -37.5pp | Low-Medium — small sample sizes, but signal of broader FP issues |
 | **Fixed cohort confirms real model/environment change** | -6.7pp on same devices | Confirms this is not a fleet composition artifact |
@@ -195,7 +239,8 @@ Based on the breakdowns above, the following factors are likely contributing to 
 2. **Investigate `outward-mtl_brigid_v0.3.7` on CM33** — as the highest-volume combo, its -12.2pp regression is the largest absolute contributor to the overall drop.
 3. **Review the Jan 10–11 and Jan 20–21 spikes in FP events** — these days contributed disproportionately to the monthly drop. Check if there were environmental factors (weather, holidays) or batch processing issues.
 4. **Examine Enterprise orgs driving the volume increase** — identify if specific large Enterprise accounts are generating more FP events in January.
-5. **Review labeling consistency** — confirm that annotation quality/labeler behavior did not change between Dec and Jan batches.
+5. **Investigate what's driving the shift toward >1.2s configs** — determine whether specific orgs/products are disproportionately adopting higher thresholds in January, and why precision within the 0.8–0.9s bucket dropped -10.6pp.
+6. **Review labeling consistency** — confirm that annotation quality/labeler behavior did not change between Dec and Jan batches.
 
 ---
 
@@ -388,3 +433,4 @@ To correct for the known biases (product distribution and weekday/weekend), we w
 - **Organizations:** `datamodel_core.dim_organizations`
 - **Devices:** `datamodel_core.dim_devices`
 - **Population events (representativeness analysis):** `dojo.ai_events` (harsh_event_type = 'haTailgating', is_paid_customer = true, no SHADOW, CM31–CM34, US/CA/MX)
+- **Config threshold analysis:** `dev_cfg_mlapp_fd_unsafe_following_distance_seconds` from `dojo.metrics_std_tailgating`, bucketed into ≤0.5, 0.5–0.6, 0.6–0.7, 0.7–0.8, 0.8–0.9, 0.9–1.0, 1.0–1.2, >1.2 second ranges

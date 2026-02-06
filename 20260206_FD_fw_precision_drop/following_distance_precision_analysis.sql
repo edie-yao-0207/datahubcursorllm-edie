@@ -70,3 +70,52 @@ SELECT
 FROM enriched
 GROUP BY date
 ORDER BY date;
+
+-- Analysis 10: Config threshold (dev_cfg_mlapp_fd_unsafe_following_distance_seconds) distribution & precision
+WITH all_precision_results AS (
+  SELECT
+    date,
+    dev_cfg_mlapp_fd_unsafe_following_distance_seconds AS cfg,
+    is_tp,
+    sample_class
+  FROM dojo.metrics_std_tailgating
+  WHERE date BETWEEN CAST('2025-12-01' AS DATE) AND CAST('2026-01-31' AS DATE)
+    AND ai_release_stage = 'GA'
+    AND is_tp IS NOT NULL
+    AND dev_cfg_mlapp_fd_unsafe_following_distance_seconds >= 0.1
+    AND dataset_name = 'na_std_precision'
+    AND is_inbox_event IS NOT NULL
+    AND ai_release_stage <> 'SHADOW'
+    AND sample_class = 'firmware_sample'
+),
+agg AS (
+  SELECT
+    DATE_FORMAT(DATE_TRUNC('month', date), 'yyyy-MM') AS month,
+    CASE
+      WHEN cfg <= 0.5 THEN 'a_le_0.5'
+      WHEN cfg <= 0.6 THEN 'b_0.5-0.6'
+      WHEN cfg <= 0.7 THEN 'c_0.6-0.7'
+      WHEN cfg <= 0.8 THEN 'd_0.7-0.8'
+      WHEN cfg <= 0.9 THEN 'e_0.8-0.9'
+      WHEN cfg <= 1.0 THEN 'f_0.9-1.0'
+      WHEN cfg <= 1.2 THEN 'g_1.0-1.2'
+      ELSE 'h_gt_1.2'
+    END AS cfg_bucket,
+    COUNT(*) AS n,
+    SUM(CASE WHEN is_tp = 1 THEN 1 ELSE 0 END) AS tp
+  FROM all_precision_results
+  GROUP BY 1, 2
+),
+totals AS (
+  SELECT month, SUM(n) AS total FROM agg GROUP BY 1
+)
+SELECT
+  a.month,
+  a.cfg_bucket,
+  a.n,
+  ROUND(a.n * 100.0 / t.total, 2) AS pct,
+  a.tp,
+  ROUND(a.tp * 1.0 / a.n, 4) AS precision
+FROM agg a
+JOIN totals t ON a.month = t.month
+ORDER BY 1, 2;
